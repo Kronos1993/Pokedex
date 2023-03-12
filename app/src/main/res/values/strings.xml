@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+    <string name="title_activity_main">POKEDEX</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">POKEDEX</string>
+    <string name="nav_header_subtitle">Demo app</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="loading_dialog_text">Loading</string>
+
+    <string name="menu_pokemon_list">Pokemons</string>
+    <string name="menu_pokemon_detail">Pokemon Detail</string>
+    <string name="menu_move_list">Moves</string>
+    <string name="menu_nature_list">Natures</string>
+    <string name="no_pokemon">NO POKEMON FOUND</string>
+    <string name="unknown">Unknown</string>
+    <string name="no_moves">No Moves</string>
+</resources>

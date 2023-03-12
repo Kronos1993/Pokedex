@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hp">HP</string>
+    <string name="attack">ATK</string>
+    <string name="defense">DEF</string>
+    <string name="special_attack">S-ATK</string>
+    <string name="special_defense">S-DEF</string>
+    <string name="speed">SPD</string>
+</resources>

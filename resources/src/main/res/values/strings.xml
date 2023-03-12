@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="required_field">This field is required</string>
+    <string name="permission_dialog_message">Storage permission required</string>
+    <string name="permission_dialog_title">Permissions required</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+</resources>

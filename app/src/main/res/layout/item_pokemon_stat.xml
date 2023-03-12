@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="pokemonStat"
+            type="com.kronos.pokedex.domian.model.stat.Stat" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewParcel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_5"
+        app:cardBackgroundColor="@color/backgroundCardColor"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="@dimen/cardview_default_elevation"
+        app:contentPadding="@dimen/margin_10">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStatsDivider"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".2" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewPokemonStatName"
+                style="@style/TextViewNormal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineStatsDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:set_stat_name="@{pokemonStat.statName}" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressIndicatorPokemonStatValue"
+                style="@style/Widget.PokemonStat.LinearProgressIndicator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:max="252"
+                android:progress="@{Integer.valueOf(String.valueOf(pokemonStat.baseStat))}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonStatName"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineStatsEffortStart"
+                app:layout_constraintStart_toStartOf="@+id/guidelineStatsDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewPokemonStatName"
+                app:set_progress_color="@{pokemonStat.statName}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewStatValue"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_5"
+                android:layout_marginEnd="@dimen/margin_5"
+                android:text="@{String.valueOf(pokemonStat.baseStat)}"
+                app:layout_constraintBottom_toBottomOf="@+id/progressIndicatorPokemonStatValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/progressIndicatorPokemonStatValue"
+                app:layout_constraintTop_toTopOf="@+id/progressIndicatorPokemonStatValue" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="textViewStatValue,textViewPokemonStatName,progressIndicatorPokemonStatValue"/>
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStatsEffortStart"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".80" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStatsEffortDivider"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".9" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEffort"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_5"
+                android:layout_marginEnd="@dimen/margin_5"
+                android:text="EV:"
+                app:handle_visibility="@{pokemonStat.statEffort>0}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineStatsEffortDivider"
+                app:layout_constraintStart_toStartOf="@+id/guidelineStatsEffortStart"
+                app:layout_constraintTop_toBottomOf="@+id/barrier" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEffortValue"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_5"
+                android:layout_marginEnd="@dimen/margin_5"
+                android:text="@{String.valueOf(pokemonStat.statEffort)}"
+                app:handle_visibility="@{pokemonStat.statEffort>0}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEffort"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guidelineStatsEffortDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEffort" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
