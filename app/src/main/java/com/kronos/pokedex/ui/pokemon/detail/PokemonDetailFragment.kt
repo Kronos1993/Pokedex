@@ -128,7 +128,7 @@ class PokemonDetailFragment : Fragment() {
         binding.textViewPokemonMoveLink.setOnClickListener{
             val bundle = Bundle()
             bundle.putSerializable(CURRENT_POKEMON_MOVES, viewModel.pokemonInfo.value)
-            findNavController().navigate(R.id.action_nav_pokemon_detail_to_nav_moves_by_pokemon_dialog,)
+            findNavController().navigate(R.id.action_nav_pokemon_detail_to_nav_moves_by_pokemon_dialog,bundle)
         }
     }
 

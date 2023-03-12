@@ -27,13 +27,13 @@ class MoveByPokemonDialogViewModel @Inject constructor(
     var logger: ILogger
 ) : ParentViewModel() {
 
-    private val _pokemonMoveList = MutableLiveData<MutableList<MoveList>>()
+    private val _pokemonMoveList = MutableLiveData<List<MoveList>>()
     val pokemonMoveList = _pokemonMoveList.asLiveData()
 
     var moveByPokemonAdapter: WeakReference<PokemonMoveListAdapter?> = WeakReference(PokemonMoveListAdapter())
 
     fun postPokemonMove(list: List<MoveList>) {
-        _pokemonMoveList.postValue(list as MutableList<MoveList>?)
+        _pokemonMoveList.postValue(list)
         loading.postValue(false)
     }
 

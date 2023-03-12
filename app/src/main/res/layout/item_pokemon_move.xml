@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -14,9 +15,9 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewPokemonType"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/backgroundCardColor"
-        android:layout_marginRight="@dimen/margin_3"
+        android:layout_margin="@dimen/margin_3"
         app:cardCornerRadius="@dimen/card_radius"
         app:cardElevation="@dimen/cardview_default_elevation">
 
@@ -26,26 +27,29 @@
             android:background="@color/transparent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/imageViewType"
+                android:id="@+id/textViewPokemonMoveLevel"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Level ` + pokemonMoveLevelLearned}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textViewPokemonMoveName"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewPokemonMoveName"
+                style="@style/TextViewNormal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
                 android:text="@{pokemonMove.move.name}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonMoveLevel" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewPokemonItemName"
-                style="@style/TextViewSmall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_5"
-                android:text="@{`Level ` + pokemonMoveLevelLearned}"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewType" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

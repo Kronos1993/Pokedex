@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
@@ -62,8 +63,11 @@ class MoveByPokemonDialogFragment : BottomSheetDialogFragment() {
         viewModel.pokemonMoveList.observe(this.viewLifecycleOwner, ::handlePokemonMoves)
     }
 
-    private fun handlePokemonMoves(list: MutableList<MoveList>?) {
+    private fun handlePokemonMoves(list: List<MoveList>?) {
         viewModel.moveByPokemonAdapter.get()?.submitList(list)
+        binding.layoutMove.run {
+            moves = list
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,8 +85,8 @@ class MoveByPokemonDialogFragment : BottomSheetDialogFragment() {
     private fun setUpDialog() {
         this.isCancelable = true
         val bundle = arguments
-        if (bundle?.get(CURRENT_POKEMON) != null) {
-            viewModel.postPokemonMove((bundle.get(CURRENT_POKEMON) as PokemonInfo).moves)
+        if (bundle?.get(CURRENT_POKEMON_MOVES) != null) {
+            viewModel.postPokemonMove((bundle.get(CURRENT_POKEMON_MOVES) as PokemonInfo).moves)
         } else {
             findNavController().popBackStack()
         }
@@ -90,7 +94,7 @@ class MoveByPokemonDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun initRecyclerPokemonMoves() {
-        binding.layoutMove.recyclerViewMoves.layoutManager = GridLayoutManager(context, 2)
+        binding.layoutMove.recyclerViewMoves.layoutManager = LinearLayoutManager(context)
         binding.layoutMove.recyclerViewMoves.setHasFixedSize(false)
         if (viewModel.moveByPokemonAdapter.get() == null)
             viewModel.moveByPokemonAdapter = WeakReference(PokemonMoveListAdapter())
