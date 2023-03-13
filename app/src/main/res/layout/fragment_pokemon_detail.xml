@@ -400,7 +400,6 @@
                             app:layout_constraintStart_toStartOf="@+id/guidelineAbility2"
                             app:layout_constraintTop_toTopOf="parent" />
 
-
                         <include
                             android:id="@+id/layoutAbilities"
                             layout="@layout/layout_abilities"

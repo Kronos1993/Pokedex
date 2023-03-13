@@ -94,7 +94,7 @@ class MoveByPokemonDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun initRecyclerPokemonMoves() {
-        binding.layoutMove.recyclerViewMoves.layoutManager = LinearLayoutManager(context)
+        binding.layoutMove.recyclerViewMoves.layoutManager = GridLayoutManager(context,2)
         binding.layoutMove.recyclerViewMoves.setHasFixedSize(false)
         if (viewModel.moveByPokemonAdapter.get() == null)
             viewModel.moveByPokemonAdapter = WeakReference(PokemonMoveListAdapter())
