@@ -59,7 +59,7 @@ fun setPokemonType(view: TextView, specie: SpecieInfo?) {
 fun setPokemonGrowthRate(view: TextView,growthRate : String?) {
     view.run {
         if(growthRate!=null){
-            var growthRateMod = growthRate.replace("-","")
+            var growthRateMod = growthRate.replace(Regex("-")," ")
             if(growthRateMod.length>1){
                 view.text = growthRateMod.substring(0, 1).uppercase() + growthRateMod.substring(1).lowercase()
             }else{
@@ -73,9 +73,23 @@ fun setPokemonGrowthRate(view: TextView,growthRate : String?) {
 fun setPokemonHabitat(view: TextView, habitat: String?) {
     view.run {
         if(habitat!=null){
-            var habitatMod = habitat.replace("-"," ")
+            var habitatMod = habitat.replace(Regex("-")," ")
             if(habitatMod.length>1){
                 view.text = habitatMod.substring(0, 1).uppercase() + habitatMod.substring(1).lowercase()
+            }else{
+                view.text = view.context.getString(R.string.unknown)
+            }
+        }
+    }
+}
+
+@BindingAdapter("app:handle_pokemon_move_name")
+fun setPokemonMoveName(view: TextView, moveName: String?) {
+    view.run {
+        if(moveName!=null){
+            var move = moveName.replace(Regex("-")," ")
+            if(move.length>1){
+                view.text = move.substring(0, 1).uppercase() + move.substring(1).lowercase()
             }else{
                 view.text = view.context.getString(R.string.unknown)
             }

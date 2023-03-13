@@ -25,7 +25,7 @@ class PokemonMoveListAdapter : ListAdapter<MoveList, PokemonMoveListAdapter.Poke
 
     override fun onBindViewHolder(holder: PokemonMoveListViewHolder, position: Int) {
         val currentPokemon = getItemAt(position)
-        holder.bind(currentPokemon, position)
+        holder.bind(currentPokemon)
     }
 
     private fun getItemAt(adapterPosition: Int): MoveList = getItem(adapterPosition)
@@ -34,10 +34,10 @@ class PokemonMoveListAdapter : ListAdapter<MoveList, PokemonMoveListAdapter.Poke
         var binding: ItemPokemonMoveBinding,
         var clickListener: AdapterItemClickListener<MoveList>?
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(move: MoveList, position: Int) {
-            var level = move.moveDetails.run {
-                if(this.isNotEmpty())
-                    this[0].levelLearned
+        fun bind(move: MoveList) {
+            var level = move.moveDetails.let {
+                if(it.isNotEmpty())
+                    it[0].levelLearned
                 else{
                     0
                 }
@@ -46,7 +46,7 @@ class PokemonMoveListAdapter : ListAdapter<MoveList, PokemonMoveListAdapter.Poke
                 pokemonMove = move
                 pokemonMoveLevelLearned = level
                 root.setOnClickListener {
-                    clickListener?.onItemClick(pokemonMove, adapterPosition)
+                    clickListener?.onItemClick(move, adapterPosition)
                 }
             }
         }

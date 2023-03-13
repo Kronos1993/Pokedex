@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
 import android.view.Menu
+import androidx.activity.viewModels
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.kronos.core.extensions.binding.activityBinding
 import com.kronos.core.util.validatePermission
 import com.kronos.pokedex.databinding.ActivityMainBinding
+import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

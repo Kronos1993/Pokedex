@@ -13,6 +13,7 @@ import com.kronos.pokedex.domian.model.specie.SpecieInfo
 import com.kronos.pokedex.domian.repository.PokemonRemoteRepository
 import com.kronos.pokedex.domian.repository.SpecieRemoteRepository
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
+import com.kronos.pokedex.ui.move.list.PokemonMoveListAdapter
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
 import com.kronos.pokedex.ui.tms.PokemonStatsAdapter
 import com.kronos.pokedex.ui.types.PokemonTypeAdapter
@@ -45,6 +46,10 @@ class PokemonDetailViewModel  @Inject constructor(
     var pokemonStatAdapter: WeakReference<PokemonStatsAdapter?> = WeakReference(PokemonStatsAdapter())
 
     var pokemonSpriteAdapter: WeakReference<PokemonSpriteAdapter?> = WeakReference(PokemonSpriteAdapter())
+
+    var moveByPokemonAdapter: WeakReference<PokemonMoveListAdapter?> = WeakReference(
+        PokemonMoveListAdapter()
+    )
 
     var statsTotal = ObservableField<Int?>()
     var pokemonDescription = ObservableField<String?>()
