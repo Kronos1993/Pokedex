@@ -8,15 +8,9 @@ import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.LoggerType
 import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.move.MoveList
-import com.kronos.pokedex.domian.model.pokemon.PokemonList
-import com.kronos.pokedex.domian.repository.PokemonRemoteRepository
 import com.kronos.pokedex.ui.move.list.PokemonMoveListAdapter
-import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
-import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 import javax.inject.Inject
@@ -30,10 +24,13 @@ class MoveByPokemonDialogViewModel @Inject constructor(
     private val _pokemonMoveList = MutableLiveData<List<MoveList>>()
     val pokemonMoveList = _pokemonMoveList.asLiveData()
 
-    var moveByPokemonAdapter: WeakReference<PokemonMoveListAdapter?> = WeakReference(PokemonMoveListAdapter())
+    var moveByPokemonAdapter: WeakReference<PokemonMoveListAdapter?> =
+        WeakReference(PokemonMoveListAdapter())
 
     fun postPokemonMove(list: List<MoveList>) {
-        _pokemonMoveList.postValue(list)
+        _pokemonMoveList.postValue(list.sortedBy {
+            it.order
+        })
         loading.postValue(false)
     }
 

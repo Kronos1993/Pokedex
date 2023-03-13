@@ -8,5 +8,12 @@ fun MoveListDto.toMoveList(): MoveList =
         move = move.toMove(),
         moveDetails = moveDetails.map {
             it.toMoveDetail()
+        },
+        order = moveDetails.let {
+            if (!it.isNullOrEmpty()){
+                it[0].levelLearned
+            }else{
+                0
+            }
         }
     )
