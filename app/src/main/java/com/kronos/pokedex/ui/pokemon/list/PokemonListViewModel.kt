@@ -7,7 +7,9 @@ import com.kronos.core.extensions.asLiveData
 import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.LoggerType
 import com.kronos.logger.interfaces.ILogger
+import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.domian.model.pokemon.PokemonList
+import com.kronos.pokedex.domian.repository.PokedexRemoteRepository
 import com.kronos.pokedex.domian.repository.PokemonRemoteRepository
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,12 +24,12 @@ import javax.inject.Inject
 @HiltViewModel
 class PokemonListViewModel @Inject constructor(
     @ApplicationContext val context: Context,
-    private var pokemonRemoteRepository: PokemonRemoteRepository,
+    private var pokedexRemoteRepository: PokedexRemoteRepository,
     var urlProvider: UrlProvider,
     var logger: ILogger,
 ) : ParentViewModel() {
 
-    private val _pokemonList = MutableLiveData<MutableList<PokemonList>>()
+    private val _pokemonList = MutableLiveData<MutableList<PokemonDexEntry>>()
     val pokemonList = _pokemonList.asLiveData()
 
     private val _limit = MutableLiveData<Int>()
@@ -44,7 +46,7 @@ class PokemonListViewModel @Inject constructor(
 
     var pokemonListAdapter: WeakReference<PokemonListAdapter?> = WeakReference(PokemonListAdapter())
 
-    private fun postPokemonList(list: List<PokemonList>) {
+    private fun postPokemonList(list: List<PokemonDexEntry>) {
         if(_pokemonList.value!=null){
             var pokelist = _pokemonList.value!!
             list.forEach {
@@ -52,31 +54,21 @@ class PokemonListViewModel @Inject constructor(
                     pokelist.add(it)
                 }
             }
-            _pokemonList.postValue(pokelist as MutableList<PokemonList>?)
+            _pokemonList.postValue(pokelist as MutableList<PokemonDexEntry>?)
         }else {
-            _pokemonList.postValue(list as MutableList<PokemonList>?)
+            _pokemonList.postValue(list as MutableList<PokemonDexEntry>?)
         }
         loading.postValue(false)
     }
 
-    fun getPokemons() {
+    fun getPokemons(pokedex:String) {
         loading.value = true
         viewModelScope.launch(Dispatchers.IO) {
            var call  = async {
-               val responseList = pokemonRemoteRepository.listPokemon(limit.value!!,offset.value!!)
-               _total.postValue(responseList.count)
-               postPokemonList(responseList.results)
+               val responseList = pokedexRemoteRepository.getPokedex(pokedex)
+               postPokemonList(responseList.pokemons)
            }
            call.await()
-        }
-    }
-
-    fun getMorePokemons() {
-        viewModelScope.launch {
-            if (offset.value!! <= _total.value!!) {
-                setOffset(offset.value!! + limit.value!!)
-                getPokemons()
-            }
         }
     }
 
@@ -84,14 +76,6 @@ class PokemonListViewModel @Inject constructor(
         viewModelScope.launch {
             logger.write(this::class.java.name, LoggerType.INFO,item)
         }
-    }
-
-    fun setLimit(i: Int) {
-        _limit.value = i
-    }
-
-    fun setOffset(i: Int) {
-        _offset.value = i
     }
 
     fun setRecyclerLastPosition(i: Int) {

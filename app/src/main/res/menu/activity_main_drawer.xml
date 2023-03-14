@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_pokedex"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_pokedex" />
+        <item
             android:id="@+id/nav_pokemon_list"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_pokemon_list" />

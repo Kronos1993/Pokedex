@@ -1,4 +1,4 @@
-package com.kronos.pokedex.ui.pokemon.list
+package com.kronos.pokedex.ui.pokedex
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,33 +14,28 @@ import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.core.util.LoadingDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
-import com.kronos.pokedex.databinding.FragmentPokemonListBinding
+import com.kronos.pokedex.databinding.FragmentPokedexBinding
 import com.kronos.pokedex.domian.model.ResponseListItem
-import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
-import com.kronos.pokedex.domian.model.pokemon.PokemonList
-import com.kronos.pokedex.ui.pokedex.CURRENT_POKEDEX
+import com.kronos.pokedex.ui.ItemListAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import java.lang.ref.WeakReference
 import java.util.*
 
-const val CURRENT_POKEMON = "current_pokemon"
+const val CURRENT_POKEDEX = "current_pokedex"
 
 @AndroidEntryPoint
-class PokemonListFragment : Fragment() {
+class PokedexFragment : Fragment() {
+    private val binding by fragmentBinding<FragmentPokedexBinding>(R.layout.fragment_pokedex)
 
-    private val binding by fragmentBinding<FragmentPokemonListBinding>(R.layout.fragment_pokemon_list)
-
-    private val viewModel by viewModels<PokemonListViewModel>()
+    private val viewModel by viewModels<PokedexViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = binding.run {
-        viewModel = this@PokemonListFragment.viewModel
-        lifecycleOwner = this@PokemonListFragment.viewLifecycleOwner
+        viewModel = this@PokedexFragment.viewModel
+        lifecycleOwner = this@PokedexFragment.viewLifecycleOwner
         root
     }
 
@@ -56,7 +51,7 @@ class PokemonListFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.pokemonList.observe(this.viewLifecycleOwner, ::handlePokemonList)
+        viewModel.pokedexList.observe(this.viewLifecycleOwner, ::handlePokedexList)
         viewModel.loading.observe(this.viewLifecycleOwner, ::handleLoading)
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
@@ -66,14 +61,14 @@ class PokemonListFragment : Fragment() {
         if (hashtable["error"] != null) {
             if (hashtable["error"]!!.isNotEmpty()) {
                 show(
-                    binding.recyclerViewPokemonList,
+                    binding.recyclerViewPokedexList,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_error_background
                 )
             } else {
                 show(
-                    binding.recyclerViewPokemonList,
+                    binding.recyclerViewPokedexList,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_success_background
@@ -98,40 +93,45 @@ class PokemonListFragment : Fragment() {
         }
     }
 
-    private fun handlePokemonList(list: List<PokemonDexEntry>) {
-        viewModel.pokemonListAdapter.get()?.submitList(list)
-        viewModel.pokemonListAdapter.get()?.notifyDataSetChanged()
+    private fun handlePokedexList(list: List<ResponseListItem>) {
+        viewModel.pokedexListAdapter.get()?.submitList(list)
+        viewModel.pokedexListAdapter.get()?.notifyDataSetChanged()
     }
 
     private fun initViews() {
-        binding.recyclerViewPokemonList.layoutManager = GridLayoutManager(context,2)
-        binding.recyclerViewPokemonList.setHasFixedSize(false)
-        if (viewModel.pokemonListAdapter.get() == null)
-            viewModel.pokemonListAdapter = WeakReference(PokemonListAdapter())
-        viewModel.pokemonListAdapter.get()?.setUrlProvider(viewModel.urlProvider)
-        binding.recyclerViewPokemonList.adapter = viewModel.pokemonListAdapter.get()
-        viewModel.pokemonListAdapter.get()?.setAdapterItemClick(object :
-            AdapterItemClickListener<PokemonDexEntry> {
-            override fun onItemClick(t: PokemonDexEntry, pos: Int) {
+        binding.recyclerViewPokedexList.layoutManager = LinearLayoutManager(context)
+        binding.recyclerViewPokedexList.setHasFixedSize(false)
+        if (viewModel.pokedexListAdapter.get() == null)
+            viewModel.pokedexListAdapter = WeakReference(ItemListAdapter())
+        binding.recyclerViewPokedexList.adapter = viewModel.pokedexListAdapter.get()
+        viewModel.pokedexListAdapter.get()?.setAdapterItemClick(object :
+            AdapterItemClickListener<ResponseListItem> {
+            override fun onItemClick(t: ResponseListItem, pos: Int) {
                 val bundle = Bundle()
-                bundle.putSerializable(CURRENT_POKEMON, t.pokemon)
-                viewModel.setRecyclerLastPosition(pos)
-                findNavController().navigate(R.id.action_nav_pokemon_list_to_nav_pokemon_detail, bundle)
+                bundle.putSerializable(CURRENT_POKEDEX, t)
+                findNavController().navigate(R.id.action_nav_pokedex_to_nav_pokemon_list, bundle)
             }
-
         })
-        binding.recyclerViewPokemonList.postDelayed({
-            binding.recyclerViewPokemonList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let{ it ?: 0 })
-        }, 50)
+
+        binding.recyclerViewPokedexList.addOnScrollListener(object :
+            RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val visibleItemCount: Int = (recyclerView.layoutManager as LinearLayoutManager).childCount
+                val totalItemCount: Int = (recyclerView.layoutManager as LinearLayoutManager).itemCount
+                val firstVisibleItemPosition: Int = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                if (!viewModel.loading.value!!) {
+                    if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0)
+                        viewModel.getMorePokedex()
+                }
+            }
+        })
     }
 
     private fun initViewModel() {
-        val bundle = arguments
-        if (bundle?.get(CURRENT_POKEDEX) != null) {
-            viewModel.getPokemons((bundle.get(CURRENT_POKEDEX) as ResponseListItem).name)
-        } else {
-            findNavController().popBackStack()
-        }
+        viewModel.setLimit(viewModel.limit.value.let{ it ?: resources.getInteger(R.integer.def_limit)})
+        viewModel.setOffset(viewModel.offset.value.let{ it ?: resources.getInteger(R.integer.def_offset)})
+        if (viewModel.pokedexList.value.isNullOrEmpty())
+            viewModel.getPokedex()
     }
 
     override fun onDestroyView() {

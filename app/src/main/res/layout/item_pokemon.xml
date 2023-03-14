@@ -3,13 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="pokedexNumber"
-            type="Integer" />
 
         <variable
-            name="pokemonListModel"
-            type="com.kronos.pokedex.domian.model.pokemon.PokemonList" />
+            name="pokemonDexEntryModel"
+            type="com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -42,7 +39,7 @@
                 style="@style/TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{`#` + String.valueOf(pokedexNumber)}"
+                android:text="@{`#` + String.valueOf(pokemonDexEntryModel.dexEntry)}"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewPokemonItem"
@@ -53,8 +50,8 @@
                 style="@style/TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{pokemonListModel.name.substring(0, 1).toUpperCase() + pokemonListModel.name.substring(1).toLowerCase()}"
                 android:textStyle="bold"
+                app:handle_pokemon_name="@{pokemonDexEntryModel.pokemon.name.substring(0, 1).toUpperCase() + pokemonDexEntryModel.pokemon.name.substring(1).toLowerCase()}"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewPokemonItem"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewPokemonItem"
