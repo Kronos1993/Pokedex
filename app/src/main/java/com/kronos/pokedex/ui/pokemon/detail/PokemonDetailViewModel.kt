@@ -7,20 +7,21 @@ import androidx.lifecycle.viewModelScope
 import com.kronos.core.extensions.asLiveData
 import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.interfaces.ILogger
+import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonList
-import com.kronos.pokedex.domian.model.specie.SpecieInfo
+import com.kronos.pokedex.domian.model.stat.Stat
 import com.kronos.pokedex.domian.repository.PokemonRemoteRepository
 import com.kronos.pokedex.domian.repository.SpecieRemoteRepository
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import com.kronos.pokedex.ui.move.list.PokemonMoveListAdapter
-import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
 import com.kronos.pokedex.ui.tms.PokemonStatsAdapter
 import com.kronos.pokedex.ui.types.PokemonTypeAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 import javax.inject.Inject
@@ -36,8 +37,17 @@ class PokemonDetailViewModel  @Inject constructor(
     private val _pokemonInfo = MutableLiveData<PokemonInfo>()
     val pokemonInfo = _pokemonInfo.asLiveData()
 
+    private val _pokemonStats = MutableLiveData<List<Stat>>()
+    val pokemonStats = _pokemonStats.asLiveData()
+
+    private val _pokemonMoves = MutableLiveData<List<MoveList>>()
+    val pokemonMoves = _pokemonMoves.asLiveData()
+
+
     private val _pokemonSpritesUrl = MutableLiveData<List<String>>()
     val pokemonSpritesUrl = _pokemonSpritesUrl.asLiveData()
+
+    var pokemonInfoPageAdapter: WeakReference<PokemonInfoPageAdapter?> = WeakReference(null)
 
     var pokemonTypeAdapter: WeakReference<PokemonTypeAdapter?> = WeakReference(PokemonTypeAdapter())
 
@@ -45,17 +55,32 @@ class PokemonDetailViewModel  @Inject constructor(
 
     var pokemonStatAdapter: WeakReference<PokemonStatsAdapter?> = WeakReference(PokemonStatsAdapter())
 
-    var pokemonSpriteAdapter: WeakReference<PokemonSpriteAdapter?> = WeakReference(PokemonSpriteAdapter())
+    var pokemonSpriteAdapter: WeakReference<PokemonSpriteAdapter?> = WeakReference(
+        PokemonSpriteAdapter()
+    )
 
     var moveByPokemonAdapter: WeakReference<PokemonMoveListAdapter?> = WeakReference(
         PokemonMoveListAdapter()
     )
 
     var statsTotal = ObservableField<Int?>()
+
     var pokemonDescription = ObservableField<String?>()
 
     private fun postPokemonInfo(pokemonInfo: PokemonInfo) {
         _pokemonInfo.postValue(pokemonInfo)
+        postPokemonMoves(pokemonInfo.moves)
+        postPokemonStats(pokemonInfo.stats)
+    }
+
+    private fun postPokemonStats(stats: List<Stat>) {
+        _pokemonStats.postValue(stats)
+    }
+
+    private fun postPokemonMoves(moves: List<MoveList>) {
+        _pokemonMoves.postValue(moves.sortedBy {
+            it.order
+        })
     }
 
     private fun postPokemonSprites(pokemonSprites: List<String>) {

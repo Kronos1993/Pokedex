@@ -6,19 +6,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_pokedex"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_pokedex"
             android:title="@string/menu_pokedex" />
         <item
-            android:id="@+id/nav_pokemon_list"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_pokemon_list" />
-        <item
             android:id="@+id/nav_move_list"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_pokeball"
             android:title="@string/menu_move_list" />
         <item
             android:id="@+id/nav_nature_list"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_pokeball"
             android:title="@string/menu_nature_list" />
     </group>
 </menu>

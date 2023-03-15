@@ -31,15 +31,8 @@
         android:name="com.kronos.pokedex.ui.pokemon.detail.PokemonDetailFragment"
         android:label="@string/menu_pokemon_detail"
         tools:layout="@layout/fragment_pokemon_detail" >
-        <action
-            android:id="@+id/action_nav_pokemon_detail_to_nav_moves_by_pokemon_dialog"
-            app:destination="@id/nav_moves_by_pokemon_dialog" />
     </fragment>
 
-    <dialog
-        android:id="@+id/nav_moves_by_pokemon_dialog"
-        android:name="com.kronos.pokedex.ui.move.dialog.MoveByPokemonDialogFragment"
-        tools:layout="@layout/fragment_dialog_move_by_pokemon" />
 
     <fragment
         android:id="@+id/nav_move_list"

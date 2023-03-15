@@ -99,7 +99,7 @@ class PokedexFragment : Fragment() {
     }
 
     private fun initViews() {
-        binding.recyclerViewPokedexList.layoutManager = LinearLayoutManager(context)
+        binding.recyclerViewPokedexList.layoutManager = GridLayoutManager(context,2)
         binding.recyclerViewPokedexList.setHasFixedSize(false)
         if (viewModel.pokedexListAdapter.get() == null)
             viewModel.pokedexListAdapter = WeakReference(ItemListAdapter())
@@ -116,9 +116,9 @@ class PokedexFragment : Fragment() {
         binding.recyclerViewPokedexList.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val visibleItemCount: Int = (recyclerView.layoutManager as LinearLayoutManager).childCount
-                val totalItemCount: Int = (recyclerView.layoutManager as LinearLayoutManager).itemCount
-                val firstVisibleItemPosition: Int = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                val visibleItemCount: Int = (recyclerView.layoutManager as GridLayoutManager).childCount
+                val totalItemCount: Int = (recyclerView.layoutManager as GridLayoutManager).itemCount
+                val firstVisibleItemPosition: Int = (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
                 if (!viewModel.loading.value!!) {
                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0)
                         viewModel.getMorePokedex()
