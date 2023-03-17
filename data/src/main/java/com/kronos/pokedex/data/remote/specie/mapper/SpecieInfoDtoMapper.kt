@@ -1,8 +1,8 @@
 package com.kronos.pokedex.data.remote.specie.mapper
 
 import com.kronos.pokedex.data.remote.description.mapper.toDescription
+import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
 import com.kronos.pokedex.data.remote.specie.dto.SpecieInfoDto
-import com.kronos.pokedex.domian.model.evolution_chain.EvolutionChain
 import com.kronos.pokedex.domian.model.specie.SpecieInfo
 
 fun SpecieInfoDto.toSpecieInfo(): SpecieInfo =
@@ -10,20 +10,20 @@ fun SpecieInfoDto.toSpecieInfo(): SpecieInfo =
         name = name,
         baseHappiness = baseHappiness,
         captureRate = captureRate,
-        evolutionChain = EvolutionChain(),
+        evolutionChain = evolutionChain,
         evolvesFrom = evolvesFrom.let{
             if(evolvesFrom!=null)
-                evolvesFrom.toSpecie()
+                evolvesFrom.toNamedResource()
             else
                 null
         },
         description = description.map {
             it.toDescription()
         },
-        growthRate = growthRate.toSpecieGrowthRate(),
+        growthRate = growthRate.toNamedResource(),
         habitat = habitat.let{
             if(habitat!=null)
-                habitat.toSpecieHabitat()
+                habitat.toNamedResource()
             else
                 null
         },

@@ -2,7 +2,8 @@ package com.kronos.pokedex.data.remote.specie.dto
 
 import com.google.gson.annotations.SerializedName
 import com.kronos.pokedex.data.remote.description.DescriptionDto
-import com.kronos.pokedex.domian.model.evolution_chain.EvolutionChain
+import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
+import com.kronos.pokedex.domian.model.ResourceApi
 
 data class SpecieInfoDto(
     @SerializedName("base_happiness")
@@ -10,15 +11,15 @@ data class SpecieInfoDto(
     @SerializedName("capture_rate")
     var captureRate:Int = 0,
     @SerializedName("evolution_chain")
-    var evolutionChain: EvolutionChain = EvolutionChain(),
+    var evolutionChain: ResourceApi = ResourceApi(),
     @SerializedName("evolves_from_species")
-    var evolvesFrom:SpecieDto = SpecieDto(),
+    var evolvesFrom:NamedResourceApiDto = NamedResourceApiDto(),
     @SerializedName("flavor_text_entries")
     var description:List<DescriptionDto> = listOf(),
     @SerializedName("growth_rate")
-    var growthRate:SpecieGrowthRateDto = SpecieGrowthRateDto(),
+    var growthRate:NamedResourceApiDto = NamedResourceApiDto(),
     @SerializedName("habitat")
-    var habitat:SpecieHabitatDto = SpecieHabitatDto(),
+    var habitat:NamedResourceApiDto = NamedResourceApiDto(),
     @SerializedName("has_gender_differences")
     var hasGenderDifferences:Boolean = false,
     @SerializedName("is_baby")

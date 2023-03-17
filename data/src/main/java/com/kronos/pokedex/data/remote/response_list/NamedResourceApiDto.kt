@@ -1,8 +1,8 @@
-package com.kronos.pokedex.data.remote.specie.dto
+package com.kronos.pokedex.data.remote.response_list
 
 import com.google.gson.annotations.SerializedName
 
-data class SpecieGrowthRateDto(
+data class NamedResourceApiDto(
     @SerializedName("name")
     var name:String = "",
     @SerializedName("url")
