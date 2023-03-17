@@ -7,21 +7,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.core.util.LoadingDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonListBinding
-import com.kronos.pokedex.domian.model.ResponseListItem
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
-import com.kronos.pokedex.domian.model.pokemon.PokemonList
 import com.kronos.pokedex.ui.pokedex.CURRENT_POKEDEX
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -133,7 +128,7 @@ class PokemonListFragment : Fragment() {
     private fun initViewModel() {
         val bundle = arguments
         if (bundle?.get(CURRENT_POKEDEX) != null) {
-            viewModel.getPokemons((bundle.get(CURRENT_POKEDEX) as ResponseListItem).name)
+            viewModel.getPokemons((bundle.get(CURRENT_POKEDEX) as NamedResourceApi).name)
         } else {
             findNavController().popBackStack()
         }

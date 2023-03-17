@@ -11,11 +11,12 @@ import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonEvolutionBinding
-import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
+import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
 import com.kronos.pokedex.domian.model.stat.Stat
 import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
-import com.kronos.pokedex.ui.tms.PokemonStatsAdapter
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEvolutionChainAdapter
+import com.kronos.pokedex.ui.stats.PokemonStatsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 
@@ -42,12 +43,34 @@ class PokemonEvolutionFragment : Fragment() {
     }
 
     private fun observeViewModel() {
+        viewModel.pokemonEvolutionList.observe(this.viewLifecycleOwner, ::handlePokemonEvolution)
+    }
+
+    private fun handlePokemonEvolution(list: List<ChainLink>) {
+        viewModel.evolutionPokemonAdapter.get()?.submitList(list)
+        viewModel.evolutionPokemonAdapter.get()?.notifyDataSetChanged()
     }
 
     private fun initViews() {
+        initRecyclerPokemonEvolution()
     }
 
-    private fun initRecyclerPokemonStats() {
+    private fun initRecyclerPokemonEvolution() {
+        binding.recyclerViewPokemonEvolution.layoutManager = LinearLayoutManager(context)
+        binding.recyclerViewPokemonEvolution.setHasFixedSize(false)
+        if (viewModel.evolutionPokemonAdapter.get() == null)
+            viewModel.evolutionPokemonAdapter = WeakReference(PokemonEvolutionChainAdapter())
+        viewModel.evolutionPokemonAdapter.get()?.setUrlProvider(viewModel.urlProvider)
+        binding.recyclerViewPokemonEvolution.adapter = viewModel.evolutionPokemonAdapter.get()
+        viewModel.evolutionPokemonAdapter.get()?.setAdapterItemClick(object :
+            AdapterItemClickListener<ChainLink> {
+            override fun onItemClick(t: ChainLink, pos: Int) {
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_TYPE, t)
+                Toast.makeText(requireContext(), t.species.name, Toast.LENGTH_SHORT).show()
+                //findNavController().navigate(R.id.action_nav_pokemon_list_to_nav_pokemon_detail, bundle)
+            }
+        })
 
     }
 

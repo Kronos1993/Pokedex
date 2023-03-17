@@ -15,13 +15,11 @@ import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonInfoBinding
 import com.kronos.pokedex.domian.model.ability.Ability
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
-import com.kronos.pokedex.domian.model.stat.Stat
 import com.kronos.pokedex.domian.model.type.Type
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
-import com.kronos.pokedex.ui.tms.PokemonStatsAdapter
 import com.kronos.pokedex.ui.types.PokemonTypeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
@@ -63,16 +61,22 @@ class PokemonInfoFragment : Fragment() {
                     it.frontDefault
             }
         ).into(binding.imageViewPokemon)
+
         viewModel.pokemonTypeAdapter.get()?.submitList(pokemonInfo.types)
+        viewModel.pokemonTypeAdapter.get()?.notifyDataSetChanged()
+
         viewModel.pokemonAbilityAdapter.get()?.submitList(pokemonInfo.abilities)
+        viewModel.pokemonAbilityAdapter.get()?.notifyDataSetChanged()
+
         if (pokemonInfo.abilities.size > 1)
             binding.layoutAbilities.recyclerViewPokemonAbilities.layoutManager =
                 GridLayoutManager(context, 2)
 
     }
 
-    private fun handlePokemonSprites(sprites: List<String>) {
+    private fun handlePokemonSprites(sprites: List<Pair<String,String>>) {
         viewModel.pokemonSpriteAdapter.get()?.submitList(sprites)
+        viewModel.pokemonSpriteAdapter.get()?.notifyDataSetChanged()
     }
 
     private fun initViews() {

@@ -11,11 +11,10 @@ import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonStatsBinding
-import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.model.stat.Stat
 import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
-import com.kronos.pokedex.ui.tms.PokemonStatsAdapter
+import com.kronos.pokedex.ui.stats.PokemonStatsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 
@@ -49,6 +48,7 @@ class PokemonStatsFragment : Fragment() {
 
     private fun handlePokemonStats(pokemonStats: List<Stat>) {
         viewModel.pokemonStatAdapter.get()?.submitList(pokemonStats)
+        viewModel.pokemonStatAdapter.get()?.notifyDataSetChanged()
     }
 
     private fun initViews() {

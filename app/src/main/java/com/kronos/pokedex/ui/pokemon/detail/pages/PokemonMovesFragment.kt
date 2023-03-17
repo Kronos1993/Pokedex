@@ -49,6 +49,7 @@ class PokemonMovesFragment : Fragment() {
 
     private fun handlePokemonMoves(pokemonMoves: List<MoveList>) {
         viewModel.moveByPokemonAdapter.get()?.submitList(pokemonMoves)
+        viewModel.moveByPokemonAdapter.get()?.notifyDataSetChanged()
         binding.layoutMove.run {
             moves = pokemonMoves
         }

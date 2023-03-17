@@ -8,9 +8,7 @@ import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.LoggerType
 import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
-import com.kronos.pokedex.domian.model.pokemon.PokemonList
 import com.kronos.pokedex.domian.repository.PokedexRemoteRepository
-import com.kronos.pokedex.domian.repository.PokemonRemoteRepository
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext

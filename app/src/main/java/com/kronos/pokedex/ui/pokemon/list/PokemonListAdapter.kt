@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.adapters.diff.GeneralDiffCallback
+import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.ItemPokemonBinding
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
-import com.kronos.pokedex.domian.model.pokemon.PokemonList
 import com.kronos.webclient.UrlProvider
 
 class PokemonListAdapter : ListAdapter<PokemonDexEntry, PokemonListAdapter.PokemonListViewHolder>(GeneralDiffCallback<PokemonDexEntry>()) {
@@ -34,7 +34,7 @@ class PokemonListAdapter : ListAdapter<PokemonDexEntry, PokemonListAdapter.Pokem
         val currentPokemon = getItemAt(position)
         holder.bind(currentPokemon,position)
         val dexNumber = currentPokemon.pokemon.url.replace("https://pokeapi.co/api/v2/pokemon-species/","").replace("/","")
-        Glide.with(holder.binding.imageViewPokemonItem).load(urlProvider.getImageUrl(Integer.valueOf(dexNumber))).into(holder.binding.imageViewPokemonItem)
+        Glide.with(holder.binding.imageViewPokemonItem).load(urlProvider.getImageUrl(Integer.valueOf(dexNumber))).placeholder(R.drawable.ic_pokeball).into(holder.binding.imageViewPokemonItem)
     }
 
     private fun getItemAt(adapterPosition: Int): PokemonDexEntry = getItem(adapterPosition)

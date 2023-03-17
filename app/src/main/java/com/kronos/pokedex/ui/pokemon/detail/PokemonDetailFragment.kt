@@ -13,10 +13,8 @@ import com.kronos.core.util.LoadingDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonDetailBinding
-import com.kronos.pokedex.domian.model.ResponseListItem
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
-import com.kronos.pokedex.domian.model.pokemon.PokemonList
-import com.kronos.pokedex.ui.pokedex.CURRENT_POKEDEX
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonEvolutionFragment
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonInfoFragment
@@ -101,47 +99,31 @@ class PokemonDetailFragment : Fragment() {
     }
 
     private fun initViews() {
+        var pageInfo = Triple("Info",PokemonInfoFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_info))
+        var pageEvo = Triple("Evolution",PokemonEvolutionFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_evolution))
+        var pageStats = Triple("Stats",PokemonStatsFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_stats))
+        var pageMoves = Triple("Moves",PokemonMovesFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_move))
+
         viewModel.pokemonInfoPageAdapter = WeakReference(
             PokemonInfoPageAdapter(
-                requireActivity(),
-                mutableListOf<Fragment>(
-                    PokemonInfoFragment(),
-                    PokemonEvolutionFragment(),
-                    PokemonStatsFragment(),
-                    PokemonMovesFragment(),
-                ),
-                mutableListOf<String>(
-                    "Info",
-                    "Evolution",
-                    "Stats",
-                    "Moves"
+                childFragmentManager,
+                lifecycle,
+                mutableListOf(
+                    pageInfo,pageEvo,pageStats,pageMoves
                 )
             )
         )
         binding.viewPagerPokemonInfo.adapter = viewModel.pokemonInfoPageAdapter.get()
         TabLayoutMediator(binding.tabPokemonData, binding.viewPagerPokemonInfo) { tab, index ->
             tab.text = viewModel.pokemonInfoPageAdapter.get()!!.getPageTitle(index)
-            tab.icon = when (index) {
-                0 -> {
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_info)
-                }
-                1 -> {
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_evolution)
-                }
-                2 -> {
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_stats)
-                }
-                else -> {
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_move)
-                }
-            }
+            tab.icon = viewModel.pokemonInfoPageAdapter.get()!!.getPageIcon(index)
         }.attach()
     }
 
     private fun initViewModel() {
         val bundle = arguments
         if (bundle?.get(CURRENT_POKEMON) != null) {
-            viewModel.loadPokemonInfo(bundle.get(CURRENT_POKEMON) as PokemonList)
+            viewModel.loadPokemonInfo(bundle.get(CURRENT_POKEMON) as NamedResourceApi)
         } else {
             findNavController().popBackStack()
         }
@@ -154,6 +136,14 @@ class PokemonDetailFragment : Fragment() {
 
     override fun onPause() {
         binding.unbind()
+        viewModel.pokemonInfoPageAdapter = WeakReference(null)
+        viewModel.pokemonAbilityAdapter = WeakReference(null)
+        viewModel.pokemonSpriteAdapter = WeakReference(null)
+        viewModel.pokemonStatAdapter = WeakReference(null)
+        viewModel.pokemonTypeAdapter = WeakReference(null)
+        viewModel.postPokemonInfo(PokemonInfo())
+        viewModel.postPokemonMoves(listOf())
+        viewModel.postPokemonStats(listOf())
         super.onPause()
     }
 

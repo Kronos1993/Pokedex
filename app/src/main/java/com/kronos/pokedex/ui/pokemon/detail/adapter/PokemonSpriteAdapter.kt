@@ -8,7 +8,7 @@ import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.adapters.diff.GeneralDiffCallback
 import com.kronos.pokedex.databinding.ItemPokemonSpriteBinding
 
-class PokemonSpriteAdapter : ListAdapter<String, PokemonSpriteAdapter.PokemonSpriteViewHolder>(GeneralDiffCallback<String>()) {
+class PokemonSpriteAdapter : ListAdapter<Pair<String,String>, PokemonSpriteAdapter.PokemonSpriteViewHolder>(GeneralDiffCallback<Pair<String,String>>()) {
 
     private var adapterItemClickListener:AdapterItemClickListener<String>?=null
 
@@ -26,14 +26,14 @@ class PokemonSpriteAdapter : ListAdapter<String, PokemonSpriteAdapter.PokemonSpr
         holder.bind(currentPokemonType)
     }
 
-    private fun getItemAt(adapterPosition: Int): String = getItem(adapterPosition)
+    private fun getItemAt(adapterPosition: Int): Pair<String,String> = getItem(adapterPosition)
 
     class PokemonSpriteViewHolder(var binding:ItemPokemonSpriteBinding, var clickListener:AdapterItemClickListener<String>?) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(spriteUrl: String){
+        fun bind(sprite: Pair<String,String>){
             binding.run {
-                pokemonSpriteUrl = spriteUrl
+                pokemonSprite = sprite
                 root.setOnClickListener {
-                    clickListener?.onItemClick(spriteUrl,adapterPosition)
+                    clickListener?.onItemClick(sprite.first,adapterPosition)
                 }
             }
         }
