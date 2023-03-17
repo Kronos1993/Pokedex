@@ -23,7 +23,9 @@
         tools:layout="@layout/fragment_pokemon_list" >
         <action
             android:id="@+id/action_nav_pokemon_list_to_nav_pokemon_detail"
-            app:destination="@id/nav_pokemon_detail" />
+            app:destination="@id/nav_pokemon_detail"
+            app:popUpTo="@id/nav_pokemon_list"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -31,6 +33,11 @@
         android:name="com.kronos.pokedex.ui.pokemon.detail.PokemonDetailFragment"
         android:label="@string/menu_pokemon_detail"
         tools:layout="@layout/fragment_pokemon_detail" >
+        <action
+            android:id="@+id/action_nav_pokemon_detail_self"
+            app:destination="@id/nav_pokemon_detail"
+            app:popUpTo="@id/nav_pokemon_list"
+            app:popUpToInclusive="false" />
     </fragment>
 
 

@@ -64,6 +64,9 @@ class PokemonInfoFragment : Fragment() {
 
         viewModel.pokemonTypeAdapter.get()?.submitList(pokemonInfo.types)
         viewModel.pokemonTypeAdapter.get()?.notifyDataSetChanged()
+        if (pokemonInfo.types.size > 1)
+            binding.layoutTypes.recyclerViewPokemonType.layoutManager =
+                GridLayoutManager(context, 2)
 
         viewModel.pokemonAbilityAdapter.get()?.submitList(pokemonInfo.abilities)
         viewModel.pokemonAbilityAdapter.get()?.notifyDataSetChanged()
@@ -86,7 +89,7 @@ class PokemonInfoFragment : Fragment() {
     }
 
     private fun initRecyclerPokemonTypes() {
-        binding.layoutTypes.recyclerViewPokemonType.layoutManager = GridLayoutManager(context, 2)
+        binding.layoutTypes.recyclerViewPokemonType.layoutManager = LinearLayoutManager(context)
         binding.layoutTypes.recyclerViewPokemonType.setHasFixedSize(false)
         if (viewModel.pokemonTypeAdapter.get() == null)
             viewModel.pokemonTypeAdapter = WeakReference(PokemonTypeAdapter())

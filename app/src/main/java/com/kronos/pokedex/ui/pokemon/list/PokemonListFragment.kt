@@ -29,6 +29,8 @@ class PokemonListFragment : Fragment() {
 
     private val viewModel by viewModels<PokemonListViewModel>()
 
+    lateinit var searchView: SearchView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -114,6 +116,8 @@ class PokemonListFragment : Fragment() {
         viewModel.pokemonListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<PokemonDexEntry> {
             override fun onItemClick(t: PokemonDexEntry, pos: Int) {
+                if(searchView!=null) searchView.clearFocus()
+                viewModel.filterPokemon("")
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_POKEMON, t.pokemon)
                 viewModel.setRecyclerLastPosition(pos)
@@ -141,7 +145,7 @@ class PokemonListFragment : Fragment() {
         val searchItem: MenuItem = menu.findItem(R.id.action_search)
 
         // getting search view of our item.
-        val searchView: SearchView = searchItem.actionView as SearchView
+        searchView = searchItem.actionView as SearchView
 
         // below line is to call set on query text listener method.
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,

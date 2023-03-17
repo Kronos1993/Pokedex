@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -15,6 +15,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
         tools:context=".ui.pokemon.detail.pages.PokemonInfoFragment">
 
         <androidx.core.widget.NestedScrollView
@@ -42,9 +43,9 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardViewPokemonDetailBaseDetail"
+                    style="@style/Widget.Pokedex.CardView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Pokedex.CardView"
                     android:layout_marginTop="@dimen/margin_10"
                     app:layout_constraintEnd_toStartOf="@+id/guideline9"
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
@@ -116,20 +117,20 @@
                             android:layout_marginEnd="@dimen/margin_8"
                             app:layout_constraintBottom_toTopOf="@+id/textViewPokemonType"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35"/>
+                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewPokemonType"
                             style="@style/TextViewSmall"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            app:pokemon_type="@{viewModel.pokemonInfo.specie}"
-                            android:textStyle="bold"
                             android:layout_marginStart="@dimen/margin_8"
                             android:layout_marginEnd="@dimen/margin_8"
+                            android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/imageViewPokemon"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
+                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35"
+                            app:pokemon_type="@{viewModel.pokemonInfo.specie}" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewPokemonDescription"
@@ -137,10 +138,10 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_8"
-                            android:text="@{viewModel.pokemonDescription.replaceAll(`\n`,` `)}"
-                            android:textStyle="bold"
                             android:maxLines="15"
                             android:singleLine="false"
+                            android:text="@{viewModel.pokemonDescription.replaceAll(`\n`,` `)}"
+                            android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase1"
@@ -149,222 +150,226 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardViewPokemonBasicInfoTypes"
-                    android:layout_width="0dp"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/containerBasicInfo"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Pokedex.CardView"
-                    android:layout_marginTop="@dimen/margin_10"
+                    android:orientation="vertical"
                     app:layout_constraintEnd_toStartOf="@+id/guideline9"
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toBottomOf="@+id/cardViewPokemonDetailBaseDetail">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewPokemonBasicInfoHeader"
+                        style="@style/TextViewNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_10"
+                        android:text="INFO"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardViewPokemonDetailBaseInfo"
+                        style="@style/Widget.Pokedex.CardView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_10"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                        app:layout_constraintStart_toStartOf="@+id/guideline1"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineInfo1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".05" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guidelineInfo1"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".05" />
 
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineInfo45"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".45" />
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guidelineInfo45"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".45" />
 
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineInfo9"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".95" />
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guidelineInfo9"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".95" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonBasicInfoHeader"
-                            style="@style/TextViewNormal"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_10"
-                            android:text="INFO"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewPokemonBaseExpLabel"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_10"
+                                android:text="Base Exp."
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonBaseExpLabel"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_10"
-                            android:text="Base Exp."
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
-                            app:layout_constraintTop_toBottomOf="@+id/textViewPokemonBasicInfoHeader" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewPokemonBaseExp"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="@{String.valueOf(viewModel.pokemonInfo.baseExperience)}"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonBaseExpLabel"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintTop_toTopOf="@+id/textViewPokemonBaseExpLabel" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonBaseExp"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="@{String.valueOf(viewModel.pokemonInfo.baseExperience)}"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonBaseExpLabel"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
-                            app:layout_constraintTop_toTopOf="@+id/textViewPokemonBaseExpLabel" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewPokemonHeightLabel"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Height:"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonBaseExpLabel" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonHeightLabel"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Height:"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
-                            app:layout_constraintTop_toBottomOf="@+id/textViewPokemonBaseExpLabel" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewPokemonHeight"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="@{String.valueOf(viewModel.pokemonInfo.height)}"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonHeightLabel"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintTop_toTopOf="@+id/textViewPokemonHeightLabel" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonHeight"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="@{String.valueOf(viewModel.pokemonInfo.height)}"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonHeightLabel"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
-                            app:layout_constraintTop_toTopOf="@+id/textViewPokemonHeightLabel" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewPokemonWeightLabel"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Weight:"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonHeightLabel" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonWeightLabel"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Weight:"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
-                            app:layout_constraintTop_toBottomOf="@+id/textViewPokemonHeightLabel" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewPokemonWeight"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="@{String.valueOf(viewModel.pokemonInfo.weight)}"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonWeightLabel"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintTop_toTopOf="@+id/textViewPokemonWeightLabel" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonWeight"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="@{String.valueOf(viewModel.pokemonInfo.weight)}"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonWeightLabel"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
-                            app:layout_constraintTop_toTopOf="@+id/textViewPokemonWeightLabel" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewPokemonHappinessLabel"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Base Happiness:"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonWeightLabel" />
 
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewPokemonHappiness"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="@{String.valueOf(viewModel.pokemonInfo.specie.baseHappiness)}"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonHappinessLabel"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintTop_toTopOf="@+id/textViewPokemonHappinessLabel" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonHappinessLabel"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Base Happiness:"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
-                            app:layout_constraintTop_toBottomOf="@+id/textViewPokemonWeightLabel" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewPokemonGrowthRateLabel"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="Growth Rate:"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonHappinessLabel" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonHappiness"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="@{String.valueOf(viewModel.pokemonInfo.specie.baseHappiness)}"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonHappinessLabel"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
-                            app:layout_constraintTop_toTopOf="@+id/textViewPokemonHappinessLabel" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewPokemonGrowthRate"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                app:handle_pokemon_growth_rate="@{viewModel.pokemonInfo.specie.growthRate.name}"
+                                app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonGrowthRateLabel"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintTop_toTopOf="@+id/textViewPokemonGrowthRateLabel" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonGrowthRateLabel"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Growth Rate:"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
-                            app:layout_constraintTop_toBottomOf="@+id/textViewPokemonHappinessLabel" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewPokemonHabitatLabel"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/margin_10"
+                                android:text="Habitat:"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonGrowthRateLabel" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonGrowthRate"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            app:handle_pokemon_growth_rate="@{viewModel.pokemonInfo.specie.growthRate.name}"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonGrowthRateLabel"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
-                            app:layout_constraintTop_toTopOf="@+id/textViewPokemonGrowthRateLabel" />
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewPokemonHabitat"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                app:handle_pokemon_habitat="@{viewModel.pokemonInfo.specie.habitat.name}"
+                                app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonHabitatLabel"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintTop_toTopOf="@+id/textViewPokemonHabitatLabel" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonHabitatLabel"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/margin_10"
-                            android:text="Habitat:"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
-                            app:layout_constraintTop_toBottomOf="@+id/textViewPokemonGrowthRateLabel" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonHabitat"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            app:handle_pokemon_habitat="@{viewModel.pokemonInfo.specie.habitat.name}"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonHabitatLabel"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
-                            app:layout_constraintTop_toTopOf="@+id/textViewPokemonHabitatLabel" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardViewPokemonAbilities"
-                    android:layout_width="0dp"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/containerAbility"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Pokedex.CardView"
-                    android:layout_marginTop="@dimen/margin_10"
+                    android:orientation="vertical"
                     app:layout_constraintEnd_toStartOf="@+id/guideline9"
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
-                    app:layout_constraintTop_toBottomOf="@+id/cardViewPokemonBasicInfoTypes">
+                    app:layout_constraintTop_toBottomOf="@id/containerBasicInfo">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewPokemonAbilityHeader"
+                        style="@style/TextViewNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_10"
+                        android:text="ABILITIES"
+                        android:textStyle="bold" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineAbility2"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".05" />
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guidelineAbility1"
@@ -380,25 +385,6 @@
                             android:orientation="vertical"
                             app:layout_constraintGuide_percent=".99" />
 
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineAbility8"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".8" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonAbilityHeader"
-                            style="@style/TextViewNormal"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_10"
-                            android:text="ABILITIES"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineAbility8"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineAbility2"
-                            app:layout_constraintTop_toTopOf="parent" />
-
                         <include
                             android:id="@+id/layoutAbilities"
                             layout="@layout/layout_abilities"
@@ -407,23 +393,29 @@
                             android:layout_marginBottom="@dimen/margin_10"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineAbility9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineAbility1"
-                            app:layout_constraintTop_toBottomOf="@+id/textViewPokemonAbilityHeader"/>
+                            app:layout_constraintStart_toStartOf="@+id/guidelineAbility1" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardViewPokemonSprite"
-                    android:layout_width="0dp"
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/containerSprites"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Pokedex.CardView"
-                    android:layout_marginTop="@dimen/margin_10"
-                    android:layout_marginBottom="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:orientation="vertical"
                     app:layout_constraintEnd_toStartOf="@+id/guideline9"
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
-                    app:layout_constraintTop_toBottomOf="@+id/cardViewPokemonAbilities">
+                    app:layout_constraintTop_toBottomOf="@id/containerAbility">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewPokemonSpriteHeader"
+                        style="@style/TextViewNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_10"
+                        android:text="SPRITES"
+                        android:textStyle="bold" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -437,30 +429,11 @@
                             app:layout_constraintGuide_percent=".01" />
 
                         <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineSprite8"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".7" />
-
-                        <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guidelineSprite9"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
                             app:layout_constraintGuide_percent=".99" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonSpriteHeader"
-                            style="@style/TextViewNormal"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_10"
-                            android:text="SPRITES"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineSprite8"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineSprite2"
-                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewPokemonSprites"
@@ -470,12 +443,13 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineSprite9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineSprite2"
-                            app:layout_constraintTop_toBottomOf="@+id/textViewPokemonSpriteHeader"
+                            app:layout_constraintTop_toTopOf="parent"
                             tools:itemCount="3"
                             tools:listitem="@layout/item_pokemon_sprite" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
