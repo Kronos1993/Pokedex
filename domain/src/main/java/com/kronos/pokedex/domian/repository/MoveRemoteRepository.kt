@@ -1,10 +1,8 @@
 package com.kronos.pokedex.domian.repository
 
-import com.kronos.pokedex.domian.model.move.Move
-import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
-import com.kronos.pokedex.domian.model.pokemon.PokemonList
+import com.kronos.pokedex.domian.model.move.MoveList
 
 
 interface MoveRemoteRepository {
-    suspend fun list(): List<Move>
+    suspend fun list(): List<MoveList>
 }

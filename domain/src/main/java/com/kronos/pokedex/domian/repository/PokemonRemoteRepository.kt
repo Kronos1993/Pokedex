@@ -1,12 +1,12 @@
 package com.kronos.pokedex.domian.repository
 
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ResponseList
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
-import com.kronos.pokedex.domian.model.pokemon.PokemonList
 
 
 interface PokemonRemoteRepository {
-    suspend fun listPokemon(limit:Int,offset:Int): ResponseList<PokemonList>
+    suspend fun listPokemon(limit:Int,offset:Int): ResponseList<NamedResourceApi>
 
     fun getPokemonInfo(pokemonId: Int,callback:Any)
 
