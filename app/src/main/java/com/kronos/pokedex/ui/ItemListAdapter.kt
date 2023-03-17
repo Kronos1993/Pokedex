@@ -7,16 +7,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.adapters.diff.GeneralDiffCallback
 import com.kronos.pokedex.databinding.ItemPokedexBinding
-import com.kronos.pokedex.domian.model.ResponseListItem
-import com.kronos.pokedex.domian.model.pokedex.Pokedex
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.webclient.UrlProvider
 
-class ItemListAdapter : ListAdapter<ResponseListItem, ItemListAdapter.ListItemViewHolder>(GeneralDiffCallback<ResponseListItem>()) {
+class ItemListAdapter : ListAdapter<NamedResourceApi, ItemListAdapter.ListItemViewHolder>(GeneralDiffCallback<NamedResourceApi>()) {
 
-    private var adapterItemClickListener:AdapterItemClickListener<ResponseListItem>?=null
+    private var adapterItemClickListener:AdapterItemClickListener<NamedResourceApi>?=null
     private lateinit var urlProvider: UrlProvider
 
-    fun setAdapterItemClick(adapterItemClickListener:AdapterItemClickListener<ResponseListItem>?){
+    fun setAdapterItemClick(adapterItemClickListener:AdapterItemClickListener<NamedResourceApi>?){
         this.adapterItemClickListener = adapterItemClickListener
     }
 
@@ -34,10 +33,10 @@ class ItemListAdapter : ListAdapter<ResponseListItem, ItemListAdapter.ListItemVi
         holder.bind(currentPokemon,position)
     }
 
-    private fun getItemAt(adapterPosition: Int): ResponseListItem = getItem(adapterPosition)
+    private fun getItemAt(adapterPosition: Int): NamedResourceApi = getItem(adapterPosition)
 
-    class ListItemViewHolder(var binding:ItemPokedexBinding, var clickListener:AdapterItemClickListener<ResponseListItem>?) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(dex: ResponseListItem,position: Int){
+    class ListItemViewHolder(var binding:ItemPokedexBinding, var clickListener:AdapterItemClickListener<NamedResourceApi>?) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(dex: NamedResourceApi, position: Int){
             binding.run {
                 pokedex = dex
                 root.setOnClickListener {

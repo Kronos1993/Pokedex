@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
@@ -15,7 +14,7 @@ import com.kronos.core.util.LoadingDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokedexBinding
-import com.kronos.pokedex.domian.model.ResponseListItem
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.ui.ItemListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
@@ -93,7 +92,7 @@ class PokedexFragment : Fragment() {
         }
     }
 
-    private fun handlePokedexList(list: List<ResponseListItem>) {
+    private fun handlePokedexList(list: List<NamedResourceApi>) {
         viewModel.pokedexListAdapter.get()?.submitList(list)
         viewModel.pokedexListAdapter.get()?.notifyDataSetChanged()
     }
@@ -105,8 +104,8 @@ class PokedexFragment : Fragment() {
             viewModel.pokedexListAdapter = WeakReference(ItemListAdapter())
         binding.recyclerViewPokedexList.adapter = viewModel.pokedexListAdapter.get()
         viewModel.pokedexListAdapter.get()?.setAdapterItemClick(object :
-            AdapterItemClickListener<ResponseListItem> {
-            override fun onItemClick(t: ResponseListItem, pos: Int) {
+            AdapterItemClickListener<NamedResourceApi> {
+            override fun onItemClick(t: NamedResourceApi, pos: Int) {
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_POKEDEX, t)
                 findNavController().navigate(R.id.action_nav_pokedex_to_nav_pokemon_list, bundle)

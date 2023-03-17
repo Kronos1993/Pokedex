@@ -7,7 +7,7 @@ import com.kronos.core.extensions.asLiveData
 import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.LoggerType
 import com.kronos.logger.interfaces.ILogger
-import com.kronos.pokedex.domian.model.ResponseListItem
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.repository.PokedexRemoteRepository
 import com.kronos.pokedex.ui.ItemListAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,7 +25,7 @@ class PokedexViewModel  @Inject constructor(
     var logger: ILogger,
 ) : ParentViewModel() {
 
-    private val _pokedexList = MutableLiveData<MutableList<ResponseListItem>>()
+    private val _pokedexList = MutableLiveData<MutableList<NamedResourceApi>>()
     val pokedexList = _pokedexList.asLiveData()
 
     var pokedexListAdapter: WeakReference<ItemListAdapter?> = WeakReference(ItemListAdapter())
@@ -39,8 +39,8 @@ class PokedexViewModel  @Inject constructor(
     private var _total = MutableLiveData<Int>()
     val total = _total.asLiveData()
 
-    private fun postPokedex(list: List<ResponseListItem>) {
-        var pokelist = mutableListOf<ResponseListItem>()
+    private fun postPokedex(list: List<NamedResourceApi>) {
+        var pokelist = mutableListOf<NamedResourceApi>()
         if(_pokedexList.value!=null){
             pokelist = _pokedexList.value!!
         }
@@ -50,7 +50,7 @@ class PokedexViewModel  @Inject constructor(
                     pokelist.add(it)
             }
         }
-        _pokedexList.postValue(pokelist as MutableList<ResponseListItem>?)
+        _pokedexList.postValue(pokelist as MutableList<NamedResourceApi>?)
         loading.postValue(false)
     }
 

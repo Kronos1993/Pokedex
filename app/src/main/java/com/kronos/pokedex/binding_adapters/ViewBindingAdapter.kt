@@ -13,6 +13,11 @@ fun handleVisibility(view: View, enable: Boolean) = view.run {
     isVisible = enable
 }
 
+@BindingAdapter("handle_visibility")
+fun handleVisibility(view: View, enable: String) = view.run {
+    isVisible = !enable.isNullOrEmpty()
+}
+
 @BindingAdapter("is_hidden_ability")
 fun isHiddenAbility(view: MaterialCardView, hidden: Boolean) = view.run {
     if(hidden)
