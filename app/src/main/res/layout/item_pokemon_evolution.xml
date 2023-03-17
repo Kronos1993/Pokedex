@@ -9,10 +9,10 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardViewPokemonSprite"
-        style="@style/Widget.Pokedex.CardView"
+        android:id="@+id/cardViewPokemonEvolution"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:background="@color/transparent">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageViewSprite"
+                android:id="@+id/imageViewEvolutionSprite"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:layout_margin="@dimen/margin_5"
@@ -30,7 +30,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewSpriteType"
+                android:id="@+id/textViewEvolutionTrigger"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{pokemonSprite.second}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageViewEvolutionSprite" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionLevel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -38,7 +49,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageViewSprite" />
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionTrigger" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

@@ -10,12 +10,10 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewPokemonType"
+        style="@style/Widget.Pokedex.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/backgroundCardColor"
-        android:layout_marginRight="@dimen/margin_3"
-        app:cardCornerRadius="@dimen/card_radius"
-        app:cardElevation="@dimen/cardview_default_elevation">
+        android:layout_marginRight="@dimen/margin_3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

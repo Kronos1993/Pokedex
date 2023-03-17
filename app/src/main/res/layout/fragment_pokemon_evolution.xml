@@ -15,50 +15,24 @@
         android:layout_height="match_parent"
         tools:context=".ui.pokemon.detail.pages.PokemonEvolutionFragment">
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewPokemonEvolution"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:paddingBottom="@dimen/margin_10">
+                android:layout_margin="@dimen/margin_3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_pokemon_evolution_chain" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent=".02" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline9"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent=".98" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardViewPokemonEvolution"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="@dimen/cardview_default_radius"
-                    app:cardElevation="@dimen/cardview_default_elevation"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline9"
-                    app:layout_constraintStart_toStartOf="@+id/guideline1"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.core.widget.NestedScrollView>
     </FrameLayout>
 
 </layout>

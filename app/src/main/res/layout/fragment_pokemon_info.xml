@@ -44,9 +44,8 @@
                     android:id="@+id/cardViewPokemonDetailBaseDetail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.Pokedex.CardView"
                     android:layout_marginTop="@dimen/margin_10"
-                    app:cardCornerRadius="@dimen/cardview_default_radius"
-                    app:cardElevation="@dimen/cardview_default_elevation"
                     app:layout_constraintEnd_toStartOf="@+id/guideline9"
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toTopOf="parent">
@@ -155,9 +154,8 @@
                     android:id="@+id/cardViewPokemonBasicInfoTypes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.Pokedex.CardView"
                     android:layout_marginTop="@dimen/margin_10"
-                    app:cardCornerRadius="@dimen/cardview_default_radius"
-                    app:cardElevation="@dimen/cardview_default_elevation"
                     app:layout_constraintEnd_toStartOf="@+id/guideline9"
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toBottomOf="@+id/cardViewPokemonDetailBaseDetail">
@@ -351,9 +349,8 @@
                     android:id="@+id/cardViewPokemonAbilities"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.Pokedex.CardView"
                     android:layout_marginTop="@dimen/margin_10"
-                    app:cardCornerRadius="@dimen/cardview_default_radius"
-                    app:cardElevation="@dimen/cardview_default_elevation"
                     app:layout_constraintEnd_toStartOf="@+id/guideline9"
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toBottomOf="@+id/cardViewPokemonBasicInfoTypes">
@@ -417,176 +414,16 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardViewPokemonStats"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="@dimen/margin_10"
-                    app:cardCornerRadius="@dimen/cardview_default_radius"
-                    app:cardElevation="@dimen/cardview_default_elevation"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline9"
-                    app:layout_constraintStart_toStartOf="@+id/guideline1"
-                    app:layout_constraintTop_toBottomOf="@+id/cardViewPokemonAbilities">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineStats1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".01" />
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineStats2"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".05" />
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineStats8"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".8" />
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineStats6"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".6" />
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineStats9"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".99" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonStatsHeader"
-                            style="@style/TextViewNormal"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_10"
-                            android:text="STATS"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineStats2"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineStats8"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerViewPokemonStats"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_3"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineStats9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineStats1"
-                            app:layout_constraintTop_toBottomOf="@+id/textViewPokemonStatsHeader"
-                            tools:itemCount="3"
-                            tools:listitem="@layout/item_pokemon_stat" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewStatsTotal"
-                            style="@style/TextViewNormal"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="@dimen/margin_10"
-                            android:layout_marginBottom="10dp"
-                            android:text="@{`Total: ` + viewModel.statsTotal}"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineStats9"
-                            app:layout_constraintHorizontal_bias="0.0"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineStats6"
-                            app:layout_constraintTop_toBottomOf="@+id/recyclerViewPokemonStats" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/cardViewPokemonMoves"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="@dimen/margin_10"
-                    app:cardCornerRadius="@dimen/cardview_default_radius"
-                    app:cardElevation="@dimen/cardview_default_elevation"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline9"
-                    app:layout_constraintStart_toStartOf="@+id/guideline1"
-                    app:layout_constraintTop_toBottomOf="@+id/cardViewPokemonStats">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineMove2"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".05" />
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineMove8"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".7" />
-
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineMove9"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".99" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonMoveHeader"
-                            style="@style/TextViewNormal"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_10"
-                            android:text="MOVES"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineMove8"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineMove2"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/textViewPokemonMoveLink"
-                            style="@style/TextViewSmall"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/margin_10"
-                            android:text="Show Moves"
-                            android:textColor="@color/link"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonMoveHeader"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineMove9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineMove8"
-                            app:layout_constraintTop_toTopOf="@+id/textViewPokemonMoveHeader" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardViewPokemonSprite"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.Pokedex.CardView"
                     android:layout_marginTop="@dimen/margin_10"
                     android:layout_marginBottom="10dp"
-                    app:cardCornerRadius="@dimen/cardview_default_radius"
-                    app:cardElevation="@dimen/cardview_default_elevation"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline9"
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
-                    app:layout_constraintTop_toBottomOf="@+id/cardViewPokemonMoves">
+                    app:layout_constraintTop_toBottomOf="@+id/cardViewPokemonAbilities">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -597,7 +434,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".05" />
+                            app:layout_constraintGuide_percent=".01" />
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guidelineSprite8"

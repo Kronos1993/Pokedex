@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="evolutionSprite"
+            type="String" />
+
+        <variable
+            name="evolutionChain"
+            type="com.kronos.pokedex.domian.model.evolution_chain.ChainLink" />
+
+        <variable
+            name="evolutionDetail"
+            type="com.kronos.pokedex.domian.model.evolution_chain.EvolutionDetail" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardViewPokemonEvolutionChain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewEvolutionForm"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_margin="@dimen/margin_5"
+            app:handle_pokemon_sprite="@{evolutionSprite}"
+            app:layout_constraintBottom_toTopOf="@id/textViewEvolutionFormName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewEvolutionFormName"
+            style="@style/TextViewSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_5"
+            android:text="@{evolutionChain.species.name}"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@id/layoutEvolutionCondition"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layoutEvolutionCondition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:handle_visibility="@{evolutionChain.evolutionDetails.size()>0}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailTrigger"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Trigger:` + evolutionDetail.trigger.name}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.trigger!=null}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailLevel"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Level:` + evolutionDetail.minLevel}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.minLevel!=null}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailBeautyLevel"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Beauty:` + evolutionDetail.minBeauty}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.minBeauty!=null}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailGenderLevel"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Gender:` + evolutionDetail.gender}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.gender!=null}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailItemLevel"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Item:` + evolutionDetail.heldItem.name}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.heldItem.name}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailMoveKnow"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Move:` + evolutionDetail.knownMove.name}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.knownMove.name}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailKnowMoveType"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Move Type:` + evolutionDetail.knownMoveType.name}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.knownMoveType.name}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailLocation"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Location:` + evolutionDetail.location.name}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.location.name}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailAffection"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Affection:` + evolutionDetail.minAffection}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.minAffection!=null}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailHappiness"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Happiness:` + evolutionDetail.minHappiness}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.minHappiness!=null}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailRain"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Raining:` + evolutionDetail.needsOverworldRain}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.needsOverworldRain}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailPartyMember"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Party Member:` + evolutionDetail.partySpecies.name}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.partySpecies.name}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailPartyType"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Party Type:` + evolutionDetail.partyType.name}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.partyType.name}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailTimeOfDay"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Time of the day:` + evolutionDetail.timeOfDay}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.timeOfDay}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailTurnUpsideDown"
+                style="@style/TextViewSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{`Raining:` + evolutionDetail.turnUpsideDown}"
+                android:textAlignment="center"
+                app:handle_visibility="@{evolutionDetail.turnUpsideDown}" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
