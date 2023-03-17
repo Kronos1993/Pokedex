@@ -1,8 +1,8 @@
 package com.kronos.pokedex.ui.pokemon.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -36,6 +36,7 @@ class PokemonListFragment : Fragment() {
     ) = binding.run {
         viewModel = this@PokemonListFragment.viewModel
         lifecycleOwner = this@PokemonListFragment.viewLifecycleOwner
+        setHasOptionsMenu(true)
         root
     }
 
@@ -133,6 +134,32 @@ class PokemonListFragment : Fragment() {
             findNavController().popBackStack()
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        inflater.inflate(R.menu.pokemon_list_menu, menu)
+        val searchItem: MenuItem = menu.findItem(R.id.action_search)
+
+        // getting search view of our item.
+        val searchView: SearchView = searchItem.actionView as SearchView
+
+        // below line is to call set on query text listener method.
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(msg: String): Boolean {
+                // inside on query text change method we are
+                // calling a method to filter our recycler view.
+                viewModel.filterPokemon(msg)
+                return false
+            }
+        })
+    }
+
+
 
     override fun onDestroyView() {
         binding.unbind()

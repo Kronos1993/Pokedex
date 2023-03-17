@@ -16,7 +16,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
-import java.util.ArrayList
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,6 +28,9 @@ class PokemonListViewModel @Inject constructor(
 
     private val _pokemonList = MutableLiveData<MutableList<PokemonDexEntry>>()
     val pokemonList = _pokemonList.asLiveData()
+
+    private val _pokemonOriginalList = MutableLiveData<MutableList<PokemonDexEntry>>()
+    val pokemonOriginalList = _pokemonOriginalList.asLiveData()
 
     private val _limit = MutableLiveData<Int>()
     val limit = _limit.asLiveData()
@@ -45,34 +47,72 @@ class PokemonListViewModel @Inject constructor(
     var pokemonListAdapter: WeakReference<PokemonListAdapter?> = WeakReference(PokemonListAdapter())
 
     private fun postPokemonList(list: List<PokemonDexEntry>) {
-        if(_pokemonList.value!=null){
+        if (_pokemonList.value != null) {
             var pokelist = _pokemonList.value!!
             list.forEach {
-                if(!(pokelist as ArrayList).contains(it)){
+                if (!(pokelist as ArrayList).contains(it)) {
                     pokelist.add(it)
                 }
             }
             _pokemonList.postValue(pokelist as MutableList<PokemonDexEntry>?)
-        }else {
+        } else {
             _pokemonList.postValue(list as MutableList<PokemonDexEntry>?)
         }
         loading.postValue(false)
     }
 
-    fun getPokemons(pokedex:String) {
+    private fun postPokemonListFiltered(list: List<PokemonDexEntry>) {
+        _pokemonList.postValue(list as MutableList<PokemonDexEntry>?)
+    }
+
+    private fun postOriginalPokemonList(list: List<PokemonDexEntry>) {
+        if (_pokemonOriginalList.value != null) {
+            var pokelist = _pokemonOriginalList.value!!
+            list.forEach {
+                if (!(pokelist as ArrayList).contains(it)) {
+                    pokelist.add(it)
+                }
+            }
+            _pokemonOriginalList.postValue(pokelist as MutableList<PokemonDexEntry>?)
+        } else {
+            _pokemonOriginalList.postValue(list as MutableList<PokemonDexEntry>?)
+        }
+    }
+
+    fun getPokemons(pokedex: String) {
         loading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-           var call  = async {
-               val responseList = pokedexRemoteRepository.getPokedex(pokedex)
-               postPokemonList(responseList.pokemons)
-           }
-           call.await()
+            var call = async {
+                val responseList = pokedexRemoteRepository.getPokedex(pokedex)
+                postPokemonList(responseList.pokemons)
+                postOriginalPokemonList(responseList.pokemons)
+            }
+            call.await()
+        }
+    }
+
+    fun filterPokemon(pokemonName: String) {
+        if (pokemonName.isNotEmpty()) {
+            // creating a new array list to filter our data.
+            val filteredList: ArrayList<PokemonDexEntry> = ArrayList()
+            // running a for loop to compare elements.
+            for (item in _pokemonOriginalList.value!!) {
+                // checking if the entered string matched with any item of our recycler view.
+                if (item.pokemon.name.lowercase().contains(pokemonName.lowercase())) {
+                    // if the item is matched we are
+                    // adding it to our filtered list.
+                    filteredList.add(item)
+                }
+            }
+            postPokemonListFiltered(filteredList)
+        } else {
+            postPokemonListFiltered(_pokemonOriginalList.value!!)
         }
     }
 
     private fun log(item: String) {
         viewModelScope.launch {
-            logger.write(this::class.java.name, LoggerType.INFO,item)
+            logger.write(this::class.java.name, LoggerType.INFO, item)
         }
     }
 
