@@ -55,30 +55,18 @@ fun setPokemonType(view: TextView, specie: SpecieInfo?) {
     }
 }
 
-@BindingAdapter("app:handle_pokemon_growth_rate")
-fun setPokemonGrowthRate(view: TextView,growthRate : String?) {
+@BindingAdapter("app:handle_text")
+fun transformText(view: TextView,text : String?) {
     view.run {
-        if(growthRate!=null){
-            var growthRateMod = growthRate.replace(Regex("-")," ")
-            if(growthRateMod.length>1){
-                view.text = growthRateMod.substring(0, 1).uppercase() + growthRateMod.substring(1).lowercase()
+        if(text!=null){
+            var textMod = text.replace(Regex("-")," ")
+            if(textMod.length>1){
+                view.text = textMod.substring(0, 1).uppercase() + textMod.substring(1).lowercase()
             }else{
-                view.text = view.context.getString(R.string.unknown)
+                view.text = textMod
             }
-        }
-    }
-}
-
-@BindingAdapter("app:handle_pokemon_habitat")
-fun setPokemonHabitat(view: TextView, habitat: String?) {
-    view.run {
-        if(habitat!=null){
-            var habitatMod = habitat.replace(Regex("-")," ")
-            if(habitatMod.length>1){
-                view.text = habitatMod.substring(0, 1).uppercase() + habitatMod.substring(1).lowercase()
-            }else{
-                view.text = view.context.getString(R.string.unknown)
-            }
+        }else{
+            view.text = view.context.getString(R.string.unknown)
         }
     }
 }
@@ -121,6 +109,24 @@ fun setPokedexName(view: TextView, pokedexName: String?) {
             }else{
                 view.text = view.context.getString(R.string.unknown)
             }
+        }
+    }
+}
+
+@BindingAdapter("app:handle_pokemon_height")
+fun setPokemonHeight(view: TextView, height: Double?) {
+    view.run {
+        if(height!=null){
+            view.text = "${(height/10).toDouble()} mts"
+        }
+    }
+}
+
+@BindingAdapter("app:handle_pokemon_weight")
+fun setPokemonWeight(view: TextView, weight: Double?) {
+    view.run {
+        if(weight!=null){
+            view.text = "${(weight/10).toDouble()} kg"
         }
     }
 }
