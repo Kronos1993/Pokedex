@@ -28,9 +28,9 @@ data class PokemonInfoDto(
     @SerializedName("forms")
     val forms:List<NamedResourceApi> = listOf(),
     @SerializedName("height")
-    val height:Int = 0,
+    val height:Double = 0.0,
     @SerializedName("weight")
-    val weight:Int = 0,
+    val weight:Double = 0.0,
     @SerializedName("types")
     val types:List<TypeDto> = listOf(),
     @SerializedName("stats")
