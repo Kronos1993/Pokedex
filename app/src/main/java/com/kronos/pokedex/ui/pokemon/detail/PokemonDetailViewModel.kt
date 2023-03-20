@@ -14,6 +14,7 @@ import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
 import com.kronos.pokedex.domian.model.evolution_chain.EvolutionChain
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
+import com.kronos.pokedex.domian.model.pokemon.extension.totalStat
 import com.kronos.pokedex.domian.model.stat.Stat
 import com.kronos.pokedex.domian.repository.EvolutionChainRemoteRepository
 import com.kronos.pokedex.domian.repository.PokemonRemoteRepository
@@ -184,8 +185,7 @@ class PokemonDetailViewModel @Inject constructor(
             }
             postPokemonSprites(pokemonSprite)
 
-            statsTotal.set(0)
-            pokemonInfo.stats.forEach { statsTotal.set(statsTotal.get()?.plus(it.baseStat)) }
+            statsTotal.set(pokemonInfo.totalStat())
             loading.postValue(false)
         }
     }
