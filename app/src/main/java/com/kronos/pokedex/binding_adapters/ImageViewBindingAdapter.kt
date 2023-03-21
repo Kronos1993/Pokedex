@@ -83,3 +83,27 @@ fun handlePokemonSprite(view: ImageView, spriteUrl: String){
         Glide.with(view.context).load(spriteUrl).placeholder(R.drawable.ic_pokeball).into(view)
     }
 }
+
+@BindingAdapter("app:handle_pokemon_gender")
+fun handlePokemonGender(view: ImageView, pokemon_gender: Int?){
+    view.run {
+        if(pokemon_gender!=null){
+            if(pokemon_gender == 1)
+                view.setBackgroundResource(R.drawable.ic_female)
+            else
+                view.setBackgroundResource(R.drawable.ic_male)
+        }
+    }
+}
+
+@BindingAdapter("app:handle_pokemon_evol_time_of_day")
+fun handlePokemonEvolTime(view: ImageView, pokemon_evol_time: String?){
+    view.run {
+        if(pokemon_evol_time!=null){
+            if(pokemon_evol_time == "day")
+                view.setBackgroundResource(R.drawable.ic_day)
+            else if(pokemon_evol_time == "night")
+                view.setBackgroundResource(R.drawable.ic_night)
+        }
+    }
+}

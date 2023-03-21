@@ -25,6 +25,11 @@
 
     <color name="hidden_ability">#87FFAA</color>
 
+    <color name="male_icon_color">#0783EF</color>
+    <color name="female_icon_color">#B2F466E6</color>
+    <color name="day_time_icon_color">#F8E962</color>
+    <color name="night_time_icon_color">#5C5C5C</color>
+
 
     <color name="app_icon_external_blue">#091563</color>
     <color name="app_icon_inner_circle_top">#091563</color>

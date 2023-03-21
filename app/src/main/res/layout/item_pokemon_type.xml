@@ -13,7 +13,7 @@
         style="@style/Widget.Pokedex.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margin_3">
+        android:layout_marginEnd="@dimen/margin_3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

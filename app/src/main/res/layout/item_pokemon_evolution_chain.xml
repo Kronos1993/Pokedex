@@ -158,16 +158,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailBeautyLabel" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewEvolutionDetailGender"
-                style="@style/TextViewSmall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewEvolutionDetailGender"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_margin="@dimen/margin_5"
-                app:handle_text="@{String.valueOf(evolutionDetail.gender)}"
+                app:handle_pokemon_gender="@{evolutionDetail.gender}"
                 app:handle_visibility="@{evolutionDetail.gender!=null}"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailGenderLabel"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
                 app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailGenderLabel" />
 
@@ -456,16 +454,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailPartyTypeLabel" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewEvolutionDetailTimeOfDay"
-                style="@style/TextViewSmall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewEvolutionDetailTimeOfDay"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_margin="@dimen/margin_5"
-                app:handle_text="@{evolutionDetail.timeOfDay}"
+                app:handle_pokemon_evol_time_of_day="@{evolutionDetail.timeOfDay}"
                 app:handle_visibility="@{evolutionDetail.timeOfDay}"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailTimeOfDayLabel"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
                 app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailTimeOfDayLabel" />
 
