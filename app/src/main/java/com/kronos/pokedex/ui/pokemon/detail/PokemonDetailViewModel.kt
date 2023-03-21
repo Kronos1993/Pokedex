@@ -117,19 +117,29 @@ class PokemonDetailViewModel @Inject constructor(
     fun loadPokemonInfo(pokemonList: NamedResourceApi) {
         viewModelScope.launch(Dispatchers.IO) {
             loading.postValue(true)
-            var pokemonInfo = pokemonRemoteRepository.getPokemonInfo(pokemonList.name)
+            var pokemonInfo:PokemonInfo? = null
+            if(urlProvider.extractIdFromUrl(pokemonList.url)!=null){
+                pokemonInfo = pokemonRemoteRepository.getPokemonInfo(urlProvider.extractIdFromUrl(pokemonList.url))
+            }else{
+                pokemonInfo = pokemonRemoteRepository.getPokemonInfo(pokemonList.name)
+            }
 
             var specie = pokemonSpecieRemoteRepository.getSpecieInfo(pokemonInfo.id)
 
             if (specie != null) {
-                var evolChain = pokemonEvolutionChainRemoteRepository.getEvolutionChain(
-                    urlProvider.extractIdFromUrl(specie.evolutionChain.let {
-                        if (it != null && !it.url.isNullOrEmpty())
-                            it.url
-                        else
-                            "0"
-                    })
-                )
+                if(!specie.evolutionChain?.url.isNullOrEmpty()){
+                    var evolChain = pokemonEvolutionChainRemoteRepository.getEvolutionChain(
+                        urlProvider.extractIdFromUrl(specie.evolutionChain.let {
+                            if (it != null && !it.url.isNullOrEmpty())
+                                it.url
+                            else
+                                "0"
+                        })
+                    )
+                    postPokemonEvolutionChain(evolChain)
+                    var evoList = mutableListOf(evolChain.chain!!)
+                    postPokemonEvolutionChainList(handleEvolutionChain(evoList,evolChain.chain!!))
+                }
                 pokemonInfo.specie = specie
                 if (specie.description.isNotEmpty()) {
                     var find = false
@@ -143,9 +153,6 @@ class PokemonDetailViewModel @Inject constructor(
                     }
 
                 }
-                postPokemonEvolutionChain(evolChain)
-                var evoList = mutableListOf<ChainLink>(evolChain.chain!!)
-                postPokemonEvolutionChainList(handleEvolutionChain(evoList,evolChain.chain!!))
             }
 
             postPokemonInfo(pokemonInfo)

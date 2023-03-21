@@ -36,6 +36,7 @@ fun setStatName(view: TextView, stat: String) {
 @BindingAdapter("app:pokemon_type")
 fun setPokemonType(view: TextView, specie: SpecieInfo?) {
     view.run {
+        visibility = View.VISIBLE
         if(specie!=null){
             when {
                 specie.isBaby -> {
@@ -117,7 +118,7 @@ fun setPokedexName(view: TextView, pokedexName: String?) {
 fun setPokemonHeight(view: TextView, height: Double?) {
     view.run {
         if(height!=null){
-            view.text = "${(height/10).toDouble()} mts"
+            view.text = "${(height/10)} mts"
         }
     }
 }
@@ -126,7 +127,7 @@ fun setPokemonHeight(view: TextView, height: Double?) {
 fun setPokemonWeight(view: TextView, weight: Double?) {
     view.run {
         if(weight!=null){
-            view.text = "${(weight/10).toDouble()} kg"
+            view.text = "${(weight/10)} kg"
         }
     }
 }
