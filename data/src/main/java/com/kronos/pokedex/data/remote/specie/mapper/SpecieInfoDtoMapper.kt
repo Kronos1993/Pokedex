@@ -3,7 +3,9 @@ package com.kronos.pokedex.data.remote.specie.mapper
 import com.kronos.pokedex.data.remote.description.mapper.toDescription
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
 import com.kronos.pokedex.data.remote.specie.dto.SpecieInfoDto
+import com.kronos.pokedex.data.remote.specie.dto.SpecieVarietiesDto
 import com.kronos.pokedex.domian.model.specie.SpecieInfo
+import com.kronos.pokedex.domian.model.specie.SpecieVarieties
 
 fun SpecieInfoDto.toSpecieInfo(): SpecieInfo =
     SpecieInfo(
@@ -31,4 +33,13 @@ fun SpecieInfoDto.toSpecieInfo(): SpecieInfo =
         isBaby = isBaby,
         isLegendary = isLegendary,
         isMythical = isMythical,
+        varieties = varieties.map {
+            it.toSpecieVarieties()
+        }
+    )
+
+fun SpecieVarietiesDto.toSpecieVarieties(): SpecieVarieties =
+    SpecieVarieties(
+        isDefault = is_default,
+        pokemon = pokemon.toNamedResource(),
     )

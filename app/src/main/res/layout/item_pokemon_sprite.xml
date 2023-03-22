@@ -24,7 +24,6 @@
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:layout_margin="@dimen/margin_5"
-                app:handle_pokemon_sprite="@{pokemonSprite.first}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -34,6 +33,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
+                android:textAlignment="center"
                 android:text="@{pokemonSprite.second}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

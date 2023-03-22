@@ -30,4 +30,6 @@ data class SpecieInfoDto(
     var isMythical:Boolean = false,
     @SerializedName("name")
     var name:String = "",
+    @SerializedName("varieties")
+    var varieties:List<SpecieVarietiesDto> = listOf(),
 )

@@ -444,7 +444,60 @@
                             app:layout_constraintEnd_toStartOf="@+id/guidelineSprite9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineSprite2"
                             app:layout_constraintTop_toTopOf="parent"
-                            tools:itemCount="3"
+                            tools:itemCount="1"
+                            tools:listitem="@layout/item_pokemon_sprite" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/containerOtherForms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:handle_visibility="@{viewModel.pokemonOtherFormsUrl.size()>0}"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                    app:layout_constraintStart_toStartOf="@+id/guideline1"
+                    app:layout_constraintTop_toBottomOf="@id/containerSprites">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewPokemonOtherFormsHeader"
+                        style="@style/TextViewNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/margin_10"
+                        android:text="OTHER FORMS"
+                        android:textStyle="bold" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineOtherForms2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".01" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineOtherForms9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".99" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerViewPokemonOtherForms"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_3"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineOtherForms9"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineOtherForms2"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:itemCount="1"
                             tools:listitem="@layout/item_pokemon_sprite" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -62,6 +62,9 @@ class PokemonDetailViewModel @Inject constructor(
     private val _pokemonSpritesUrl = MutableLiveData<List<Pair<String, String>>>()
     val pokemonSpritesUrl = _pokemonSpritesUrl.asLiveData()
 
+    private val _pokemonOtherFormsUrl = MutableLiveData<List<Pair<String, String>>>()
+    val pokemonOtherFormsUrl = _pokemonOtherFormsUrl.asLiveData()
+
     var pokemonInfoPageAdapter: WeakReference<PokemonInfoPageAdapter?> = WeakReference(null)
 
     var pokemonTypeAdapter: WeakReference<PokemonTypeAdapter?> = WeakReference(PokemonTypeAdapter())
@@ -73,6 +76,10 @@ class PokemonDetailViewModel @Inject constructor(
         WeakReference(PokemonStatsAdapter())
 
     var pokemonSpriteAdapter: WeakReference<PokemonSpriteAdapter?> = WeakReference(
+        PokemonSpriteAdapter()
+    )
+
+    var pokemonOtherFormsAdapter: WeakReference<PokemonSpriteAdapter?> = WeakReference(
         PokemonSpriteAdapter()
     )
 
@@ -114,14 +121,19 @@ class PokemonDetailViewModel @Inject constructor(
         _pokemonSpritesUrl.postValue(pokemonSprites)
     }
 
+    private fun postPokemonOtherForms(pokemonOtherForms: List<Pair<String, String>>) {
+        _pokemonOtherFormsUrl.postValue(pokemonOtherForms)
+    }
+
     fun loadPokemonInfo(pokemonList: NamedResourceApi) {
         viewModelScope.launch(Dispatchers.IO) {
             loading.postValue(true)
             var pokemonInfo:PokemonInfo? = null
-            if(urlProvider.extractIdFromUrl(pokemonList.url)!=null){
-                pokemonInfo = pokemonRemoteRepository.getPokemonInfo(urlProvider.extractIdFromUrl(pokemonList.url))
+
+            pokemonInfo = if(urlProvider.extractIdFromUrl(pokemonList.url)!=null){
+                pokemonRemoteRepository.getPokemonInfo(urlProvider.extractIdFromUrl(pokemonList.url))
             }else{
-                pokemonInfo = pokemonRemoteRepository.getPokemonInfo(pokemonList.name)
+                pokemonRemoteRepository.getPokemonInfo(pokemonList.name)
             }
 
             var specie = pokemonSpecieRemoteRepository.getSpecieInfo(pokemonInfo.id)
@@ -191,6 +203,14 @@ class PokemonDetailViewModel @Inject constructor(
                 }
             }
             postPokemonSprites(pokemonSprite)
+
+            var pokemonOtherForms = mutableListOf<Pair<String, String>>()
+            specie.varieties.forEach {
+                if (!it.pokemon.name.isNullOrEmpty() && pokemonInfo.name!=it.pokemon.name) {
+                    pokemonOtherForms.add(Pair(it.pokemon.url, it.pokemon.name.replace("-".toRegex()," ").uppercase()))
+                }
+            }
+            postPokemonOtherForms(pokemonOtherForms)
 
             statsTotal.set(pokemonInfo.totalStat())
             loading.postValue(false)

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -13,13 +14,16 @@ import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonInfoBinding
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.Ability
+import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.model.type.Type
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
+import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
 import com.kronos.pokedex.ui.types.PokemonTypeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
@@ -50,6 +54,7 @@ class PokemonInfoFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.pokemonInfo.observe(this.viewLifecycleOwner, ::handlePokemonInfo)
         viewModel.pokemonSpritesUrl.observe(this.viewLifecycleOwner, ::handlePokemonSprites)
+        viewModel.pokemonOtherFormsUrl.observe(this.viewLifecycleOwner, ::handlePokemonOtherForms)
     }
 
     private fun handlePokemonInfo(pokemonInfo: PokemonInfo) {
@@ -82,10 +87,16 @@ class PokemonInfoFragment : Fragment() {
         viewModel.pokemonSpriteAdapter.get()?.notifyDataSetChanged()
     }
 
+    private fun handlePokemonOtherForms(sprites: List<Pair<String,String>>) {
+        viewModel.pokemonOtherFormsAdapter.get()?.submitList(sprites)
+        viewModel.pokemonOtherFormsAdapter.get()?.notifyDataSetChanged()
+    }
+
     private fun initViews() {
         initRecyclerPokemonTypes()
         initRecyclerPokemonAbilities()
         initRecyclerPokemonSprites()
+        initRecyclerPokemonOtherForms()
     }
 
     private fun initRecyclerPokemonTypes() {
@@ -129,7 +140,25 @@ class PokemonInfoFragment : Fragment() {
         binding.recyclerViewPokemonSprites.setHasFixedSize(false)
         if (viewModel.pokemonSpriteAdapter.get() == null)
             viewModel.pokemonSpriteAdapter = WeakReference(PokemonSpriteAdapter())
+        viewModel.pokemonSpriteAdapter.get()?.setUrlProvider(viewModel.urlProvider)
         binding.recyclerViewPokemonSprites.adapter = viewModel.pokemonSpriteAdapter.get()
+    }
+
+    private fun initRecyclerPokemonOtherForms() {
+        binding.recyclerViewPokemonOtherForms.layoutManager = GridLayoutManager(context, 2)
+        binding.recyclerViewPokemonOtherForms.setHasFixedSize(false)
+        if (viewModel.pokemonOtherFormsAdapter.get() == null)
+            viewModel.pokemonOtherFormsAdapter = WeakReference(PokemonSpriteAdapter())
+        viewModel.pokemonOtherFormsAdapter.get()?.setUrlProvider(viewModel.urlProvider)
+        binding.recyclerViewPokemonOtherForms.adapter = viewModel.pokemonOtherFormsAdapter.get()
+        viewModel.pokemonOtherFormsAdapter.get()?.setAdapterItemClick(object :
+            AdapterItemClickListener<Pair<String,String>> {
+            override fun onItemClick(t: Pair<String,String>, pos: Int) {
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_POKEMON, NamedResourceApi(t.second,t.first))
+                findNavController().navigate(R.id.action_nav_pokemon_detail_self, bundle)
+            }
+        })
     }
 
     override fun onDestroyView() {

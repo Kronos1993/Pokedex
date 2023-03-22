@@ -18,4 +18,5 @@ data class SpecieInfo(
     var isLegendary:Boolean = false,
     var isMythical:Boolean = false,
     var name:String = "",
+    var varieties:List<SpecieVarieties> = listOf(),
 ): Serializable
