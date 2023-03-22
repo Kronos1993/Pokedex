@@ -33,8 +33,7 @@ class PokemonListAdapter : ListAdapter<PokemonDexEntry, PokemonListAdapter.Pokem
     override fun onBindViewHolder(holder: PokemonListViewHolder, position: Int) {
         val currentPokemon = getItemAt(position)
         holder.bind(currentPokemon,position)
-        val dexNumber = currentPokemon.pokemon.url.replace("https://pokeapi.co/api/v2/pokemon-species/","").replace("/","")
-        Glide.with(holder.binding.imageViewPokemonItem).load(urlProvider.getImageUrl(Integer.valueOf(dexNumber))).placeholder(R.drawable.ic_pokeball).into(holder.binding.imageViewPokemonItem)
+        Glide.with(holder.binding.imageViewPokemonItem).load(urlProvider.getImageUrl(urlProvider.extractIdFromUrl(currentPokemon.pokemon.url))).placeholder(R.drawable.ic_pokeball).into(holder.binding.imageViewPokemonItem)
     }
 
     private fun getItemAt(adapterPosition: Int): PokemonDexEntry = getItem(adapterPosition)
