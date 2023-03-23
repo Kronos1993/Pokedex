@@ -102,7 +102,7 @@
                             style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="@{viewModel.pokemonInfo.name.toUpperCase()}"
+                            app:handle_pokemon_name="@{viewModel.pokemonInfo.name}"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toTopOf="@+id/layoutTypes"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"

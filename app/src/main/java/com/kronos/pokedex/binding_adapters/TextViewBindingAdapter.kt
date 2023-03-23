@@ -72,30 +72,12 @@ fun transformText(view: TextView,text : String?) {
     }
 }
 
-@BindingAdapter("app:handle_pokemon_move_name")
-fun setPokemonMoveName(view: TextView, moveName: String?) {
-    view.run {
-        if(moveName!=null){
-            var move = moveName.replace(Regex("-")," ")
-            if(move.length>1){
-                view.text = move.substring(0, 1).uppercase() + move.substring(1).lowercase()
-            }else{
-                view.text = view.context.getString(R.string.unknown)
-            }
-        }
-    }
-}
-
 @BindingAdapter("app:handle_pokemon_name")
 fun setPokemonName(view: TextView, pokemonName: String?) {
     view.run {
         if(pokemonName!=null){
             var name = pokemonName.replace(Regex("-")," ")
-            if(name.length>1){
-                view.text = name.substring(0, 1).uppercase() + name.substring(1).lowercase()
-            }else{
-                view.text = view.context.getString(R.string.unknown)
-            }
+            view.text = name.uppercase()
         }
     }
 }

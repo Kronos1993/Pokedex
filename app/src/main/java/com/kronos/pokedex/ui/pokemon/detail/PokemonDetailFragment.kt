@@ -14,6 +14,9 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonDetailBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.ability.AbilityInfo
+import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
+import com.kronos.pokedex.domian.model.evolution_chain.EvolutionChain
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonEvolutionFragment
@@ -57,8 +60,8 @@ class PokemonDetailFragment : Fragment() {
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
 
-    private fun handlePokemonInfo(pokemonInfo: PokemonInfo) {
-        requireActivity().title = pokemonInfo.name
+    private fun handlePokemonInfo(pokemonInfo: PokemonInfo?) {
+        requireActivity().title = pokemonInfo?.name
     }
 
 
@@ -144,6 +147,11 @@ class PokemonDetailFragment : Fragment() {
         viewModel.postPokemonInfo(PokemonInfo())
         viewModel.postPokemonMoves(listOf())
         viewModel.postPokemonStats(listOf())
+        viewModel.postAbilityInfo(AbilityInfo())
+        viewModel.postPokemonEvolutionChain(EvolutionChain())
+        viewModel.postPokemonEvolutionChainList(listOf())
+        viewModel.postPokemonSprites(listOf())
+        viewModel.postPokemonOtherForms(listOf())
         super.onPause()
     }
 

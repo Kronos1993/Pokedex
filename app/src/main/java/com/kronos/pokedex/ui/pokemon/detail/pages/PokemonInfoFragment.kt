@@ -16,6 +16,7 @@ import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonInfoBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.Ability
+import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.model.type.Type
@@ -55,6 +56,13 @@ class PokemonInfoFragment : Fragment() {
         viewModel.pokemonInfo.observe(this.viewLifecycleOwner, ::handlePokemonInfo)
         viewModel.pokemonSpritesUrl.observe(this.viewLifecycleOwner, ::handlePokemonSprites)
         viewModel.pokemonOtherFormsUrl.observe(this.viewLifecycleOwner, ::handlePokemonOtherForms)
+        viewModel.abilityInfo.observe(this.viewLifecycleOwner, ::handleAbilityInfo)
+    }
+
+    private fun handleAbilityInfo(abilityInfo: AbilityInfo) {
+        if (!abilityInfo.name.isNullOrEmpty()){
+            Toast.makeText(requireContext(), "${abilityInfo.name} : ${abilityInfo.effects.size}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun handlePokemonInfo(pokemonInfo: PokemonInfo) {
@@ -127,10 +135,7 @@ class PokemonInfoFragment : Fragment() {
         viewModel.pokemonAbilityAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<Ability> {
             override fun onItemClick(t: Ability, pos: Int) {
-                val bundle = Bundle()
-                bundle.putSerializable(CURRENT_TYPE, t)
-                Toast.makeText(requireContext(), t.ability.name, Toast.LENGTH_SHORT).show()
-                //findNavController().navigate(R.id.action_nav_pokemon_list_to_nav_pokemon_detail, bundle)
+                viewModel.loadAbilityInfo(t.ability)
             }
         })
     }

@@ -8,14 +8,15 @@ import com.kronos.core.extensions.asLiveData
 import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.R
-import com.kronos.pokedex.data.remote.evolution_chain.dto.EvolutionChainDto
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
 import com.kronos.pokedex.domian.model.evolution_chain.EvolutionChain
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.model.pokemon.extension.totalStat
 import com.kronos.pokedex.domian.model.stat.Stat
+import com.kronos.pokedex.domian.repository.AbilityRemoteRepository
 import com.kronos.pokedex.domian.repository.EvolutionChainRemoteRepository
 import com.kronos.pokedex.domian.repository.PokemonRemoteRepository
 import com.kronos.pokedex.domian.repository.SpecieRemoteRepository
@@ -40,6 +41,7 @@ class PokemonDetailViewModel @Inject constructor(
     private var pokemonRemoteRepository: PokemonRemoteRepository,
     private var pokemonSpecieRemoteRepository: SpecieRemoteRepository,
     private var pokemonEvolutionChainRemoteRepository: EvolutionChainRemoteRepository,
+    private var abilityRemoteRepository: AbilityRemoteRepository,
     var urlProvider: UrlProvider,
     var logger: ILogger,
 ) : ParentViewModel() {
@@ -64,6 +66,9 @@ class PokemonDetailViewModel @Inject constructor(
 
     private val _pokemonOtherFormsUrl = MutableLiveData<List<Pair<String, String>>>()
     val pokemonOtherFormsUrl = _pokemonOtherFormsUrl.asLiveData()
+
+    private val _abilityInfo = MutableLiveData<AbilityInfo>()
+    val abilityInfo = _abilityInfo.asLiveData()
 
     var pokemonInfoPageAdapter: WeakReference<PokemonInfoPageAdapter?> = WeakReference(null)
 
@@ -109,37 +114,42 @@ class PokemonDetailViewModel @Inject constructor(
         })
     }
 
-    private fun postPokemonEvolutionChain(evolutionChain: EvolutionChain) {
+    fun postPokemonEvolutionChain(evolutionChain: EvolutionChain) {
         _pokemonEvolutionChain.postValue(evolutionChain)
     }
 
-    private fun postPokemonEvolutionChainList(evolutionChainList: List<ChainLink>) {
+    fun postPokemonEvolutionChainList(evolutionChainList: List<ChainLink>) {
         _pokemonEvolutionList.postValue(evolutionChainList)
     }
 
-    private fun postPokemonSprites(pokemonSprites: List<Pair<String, String>>) {
+    fun postPokemonSprites(pokemonSprites: List<Pair<String, String>>) {
         _pokemonSpritesUrl.postValue(pokemonSprites)
     }
 
-    private fun postPokemonOtherForms(pokemonOtherForms: List<Pair<String, String>>) {
+    fun postPokemonOtherForms(pokemonOtherForms: List<Pair<String, String>>) {
         _pokemonOtherFormsUrl.postValue(pokemonOtherForms)
     }
+
+    fun postAbilityInfo(abilityInfo: AbilityInfo) {
+        _abilityInfo.postValue(abilityInfo)
+    }
+
 
     fun loadPokemonInfo(pokemonList: NamedResourceApi) {
         viewModelScope.launch(Dispatchers.IO) {
             loading.postValue(true)
-            var pokemonInfo:PokemonInfo? = null
+            var pokemonInfo: PokemonInfo? = null
 
-            pokemonInfo = if(urlProvider.extractIdFromUrl(pokemonList.url)!=null){
+            pokemonInfo = if (urlProvider.extractIdFromUrl(pokemonList.url) != null) {
                 pokemonRemoteRepository.getPokemonInfo(urlProvider.extractIdFromUrl(pokemonList.url))
-            }else{
+            } else {
                 pokemonRemoteRepository.getPokemonInfo(pokemonList.name)
             }
 
             var specie = pokemonSpecieRemoteRepository.getSpecieInfo(pokemonInfo.id)
 
             if (specie != null) {
-                if(!specie.evolutionChain?.url.isNullOrEmpty()){
+                if (!specie.evolutionChain?.url.isNullOrEmpty()) {
                     var evolChain = pokemonEvolutionChainRemoteRepository.getEvolutionChain(
                         urlProvider.extractIdFromUrl(specie.evolutionChain.let {
                             if (it != null && !it.url.isNullOrEmpty())
@@ -150,15 +160,15 @@ class PokemonDetailViewModel @Inject constructor(
                     )
                     postPokemonEvolutionChain(evolChain)
                     var evoList = mutableListOf(evolChain.chain!!)
-                    postPokemonEvolutionChainList(handleEvolutionChain(evoList,evolChain.chain!!))
+                    postPokemonEvolutionChainList(handleEvolutionChain(evoList, evolChain.chain!!))
                 }
                 pokemonInfo.specie = specie
-                if (specie.description.isNotEmpty()) {
+                if (specie.flavorText.isNotEmpty()) {
                     var find = false
                     var pos = 0
-                    while (!find && pos < specie.description.size) {
-                        if (pokemonInfo.specie.description[pos].language == "en") {
-                            pokemonDescription.set(pokemonInfo.specie.description[pos].description)
+                    while (!find && pos < specie.flavorText.size) {
+                        if (pokemonInfo.specie.flavorText[pos].language == "en") {
+                            pokemonDescription.set(pokemonInfo.specie.flavorText[pos].description)
                             find = true
                         } else
                             pos++
@@ -206,8 +216,13 @@ class PokemonDetailViewModel @Inject constructor(
 
             var pokemonOtherForms = mutableListOf<Pair<String, String>>()
             specie.varieties.forEach {
-                if (!it.pokemon.name.isNullOrEmpty() && pokemonInfo.name!=it.pokemon.name) {
-                    pokemonOtherForms.add(Pair(it.pokemon.url, it.pokemon.name.replace("-".toRegex()," ").uppercase()))
+                if (!it.pokemon.name.isNullOrEmpty() && pokemonInfo.name != it.pokemon.name) {
+                    pokemonOtherForms.add(
+                        Pair(
+                            it.pokemon.url,
+                            it.pokemon.name.replace("-".toRegex(), " ").uppercase()
+                        )
+                    )
                 }
             }
             postPokemonOtherForms(pokemonOtherForms)
@@ -217,16 +232,34 @@ class PokemonDetailViewModel @Inject constructor(
         }
     }
 
-    private fun handleEvolutionChain(evoList : MutableList<ChainLink>, chain:ChainLink):MutableList<ChainLink>{
-        return if (chain?.evolvesTo!!.isNotEmpty()){
+    private fun handleEvolutionChain(
+        evoList: MutableList<ChainLink>,
+        chain: ChainLink
+    ): MutableList<ChainLink> {
+        return if (chain?.evolvesTo!!.isNotEmpty()) {
             var i = ChainLink()
-            for(item in chain?.evolvesTo!!){
+            for (item in chain?.evolvesTo!!) {
                 i = item
                 evoList.add(item)
             }
-            handleEvolutionChain(evoList,i)
-        }else{
+            handleEvolutionChain(evoList, i)
+        } else {
             evoList
+        }
+    }
+
+    fun loadAbilityInfo(ability: NamedResourceApi) {
+        viewModelScope.launch(Dispatchers.IO) {
+            loading.postValue(true)
+            var abilityInfo: AbilityInfo? = null
+
+            abilityInfo = if (urlProvider.extractIdFromUrl(ability.url) != null) {
+                abilityRemoteRepository.getAbility(urlProvider.extractIdFromUrl(ability.url))
+            } else {
+                abilityRemoteRepository.getAbility(ability.name)
+            }
+            postAbilityInfo(abilityInfo)
+            loading.postValue(false)
         }
     }
 }
