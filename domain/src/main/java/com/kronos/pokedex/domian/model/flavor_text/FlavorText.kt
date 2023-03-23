@@ -1,8 +1,8 @@
-package com.kronos.pokedex.domian.model.description
+package com.kronos.pokedex.domian.model.flavor_text
 
 import java.io.Serializable
 
-data class Description(
+data class FlavorText(
     var description:String = "",
     var language:String = "",
 ): Serializable

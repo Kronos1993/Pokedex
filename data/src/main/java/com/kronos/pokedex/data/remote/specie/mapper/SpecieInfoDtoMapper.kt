@@ -1,6 +1,6 @@
 package com.kronos.pokedex.data.remote.specie.mapper
 
-import com.kronos.pokedex.data.remote.description.mapper.toDescription
+import com.kronos.pokedex.data.remote.description.mapper.toFlavorText
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
 import com.kronos.pokedex.data.remote.specie.dto.SpecieInfoDto
 import com.kronos.pokedex.data.remote.specie.dto.SpecieVarietiesDto
@@ -19,8 +19,8 @@ fun SpecieInfoDto.toSpecieInfo(): SpecieInfo =
             else
                 null
         },
-        description = description.map {
-            it.toDescription()
+        flavorText = description.map {
+            it.toFlavorText()
         },
         growthRate = growthRate.toNamedResource(),
         habitat = habitat.let{

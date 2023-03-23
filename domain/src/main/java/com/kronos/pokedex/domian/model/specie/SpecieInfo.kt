@@ -2,7 +2,7 @@ package com.kronos.pokedex.domian.model.specie
 
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ResourceApi
-import com.kronos.pokedex.domian.model.description.Description
+import com.kronos.pokedex.domian.model.flavor_text.FlavorText
 import java.io.Serializable
 
 data class SpecieInfo(
@@ -10,7 +10,7 @@ data class SpecieInfo(
     var captureRate:Int = 0,
     var evolutionChain: ResourceApi? = ResourceApi(),
     var evolvesFrom:NamedResourceApi? = NamedResourceApi(),
-    var description:List<Description> = listOf(),
+    var flavorText:List<FlavorText> = listOf(),
     var growthRate:NamedResourceApi? = NamedResourceApi(),
     var habitat:NamedResourceApi? = NamedResourceApi(),
     var hasGenderDifferences:Boolean = false,

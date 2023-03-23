@@ -1,6 +1,6 @@
 package com.kronos.pokedex.data.remote.move.mapper
 
-import com.kronos.pokedex.data.remote.description.mapper.toDescription
+import com.kronos.pokedex.data.remote.description.mapper.toFlavorText
 import com.kronos.pokedex.data.remote.move.dto.MoveInfoDto
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
 import com.kronos.pokedex.data.remote.type.mapper.toType
@@ -15,8 +15,8 @@ fun MoveInfoDto.toMoveInfo(): MoveInfo =
         moveCategory = moveCategory.name,
         priority = priority,
         type = type.toType(),
-        moveDescription = moveDescription.map {
-            it.toDescription()
+        moveFlavorText = moveDescription.map {
+            it.toFlavorText()
         },
         learnedBy = learnedBy.map {
             it.toNamedResource()

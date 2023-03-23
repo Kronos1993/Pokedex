@@ -1,7 +1,6 @@
 package com.kronos.pokedex.domian.model.pokemon
 
 import com.kronos.pokedex.domian.model.ability.Ability
-import com.kronos.pokedex.domian.model.form.Form
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.model.specie.SpecieInfo
 import com.kronos.pokedex.domian.model.sprite.Sprite
@@ -14,7 +13,6 @@ data class PokemonInfo(
     val name:String = "",
     val abilities:List<Ability> = listOf(),
     val baseExperience:Int = 0,
-    val forms:List<Form> = listOf(),
     val height:Double = 0.0,
     val weight:Double = 0.0,
     val types:List<Type> = listOf(),
