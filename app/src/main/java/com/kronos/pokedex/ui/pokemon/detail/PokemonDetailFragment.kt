@@ -55,8 +55,13 @@ class PokemonDetailFragment : Fragment() {
     }
 
     private fun observeViewModel() {
+        viewModel.pokemonInfo.observe(this.viewLifecycleOwner, ::handlePokemonInfo)
         viewModel.loading.observe(this.viewLifecycleOwner, ::handleLoading)
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
+    }
+
+    private fun handlePokemonInfo(pokemonInfo: PokemonInfo) {
+        binding.viewPagerPokemonInfo.setCurrentItem(0,true)
     }
 
     private fun handleError(hashtable: Hashtable<String, String>) {

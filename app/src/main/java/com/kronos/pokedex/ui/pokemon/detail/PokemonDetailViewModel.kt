@@ -114,11 +114,11 @@ class PokemonDetailViewModel @Inject constructor(
         })
     }
 
-    fun postPokemonEvolutionChain(evolutionChain: EvolutionChain) {
+    private fun postPokemonEvolutionChain(evolutionChain: EvolutionChain) {
         _pokemonEvolutionChain.postValue(evolutionChain)
     }
 
-    fun postPokemonEvolutionChainList(evolutionChainList: List<ChainLink>) {
+    private fun postPokemonEvolutionChainList(evolutionChainList: List<ChainLink>) {
         _pokemonEvolutionList.postValue(evolutionChainList)
     }
 
@@ -173,7 +173,6 @@ class PokemonDetailViewModel @Inject constructor(
                         } else
                             pos++
                     }
-
                 }
             }
 
