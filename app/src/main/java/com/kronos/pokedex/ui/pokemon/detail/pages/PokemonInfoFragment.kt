@@ -21,6 +21,7 @@ import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.model.type.Type
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
+import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
 import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
@@ -42,15 +43,10 @@ class PokemonInfoFragment : Fragment() {
     ) = binding.run {
         viewModel = this@PokemonInfoFragment.viewModel
         lifecycleOwner = this@PokemonInfoFragment.viewLifecycleOwner
-        root
-    }
-
-    override fun onResume() {
-        super.onResume()
         initViews()
         observeViewModel()
+        root
     }
-
 
     private fun observeViewModel() {
         viewModel.pokemonInfo.observe(this.viewLifecycleOwner, ::handlePokemonInfo)
@@ -61,7 +57,9 @@ class PokemonInfoFragment : Fragment() {
 
     private fun handleAbilityInfo(abilityInfo: AbilityInfo) {
         if (!abilityInfo.name.isNullOrEmpty()){
-            Toast.makeText(requireContext(), "${abilityInfo.name} : ${abilityInfo.effects.size}", Toast.LENGTH_SHORT).show()
+            val bundle = Bundle()
+            bundle.putSerializable(CURRENT_ABILITY, abilityInfo)
+            findNavController().navigate(R.id.action_nav_pokemon_detail_to_nav_ability_info_dialog_fragment, bundle)
         }
     }
 

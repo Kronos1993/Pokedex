@@ -12,7 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="bottomSheetDialogTheme">@style/ModalBottomSheetDialog</item>
+        <item name="bottomSheetDialogTheme">@style/Widget.Pokedex.BottomSheetDialog</item>
 
         <item name="cardViewStyle">@style/Widget.Pokedex.CardView</item>
         <item name="linearProgressIndicatorStyle">@style/Widget.PokemonStat.LinearProgressIndicator</item>

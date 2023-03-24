@@ -13,7 +13,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/backgroundColor</item>
-        <item name="bottomSheetDialogTheme">@style/ModalBottomSheetDialog</item>
+        <item name="bottomSheetDialogTheme">@style/Widget.Pokedex.BottomSheetDialog</item>
 
         <item name="cardViewStyle">@style/Widget.Pokedex.CardView</item>
         <item name="linearProgressIndicatorStyle">@style/Widget.PokemonStat.LinearProgressIndicator</item>
@@ -36,12 +36,12 @@
         <item name="android:layout_marginTop">@dimen/margin_10</item>
     </style>
 
-    <style name="ModalBottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+    <style name="Widget.Pokedex.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/ModalBottomSheet</item>
     </style>
 
     <style name="ModalBottomSheet" parent="Widget.Material3.BottomSheet.Modal">
-        <!-- Apply attributes here -->
+        <item name="backgroundColor">@color/backgroundColor</item>
     </style>
 
     <style name="Widget.Pokedex.CardView" parent="CardView">

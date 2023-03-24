@@ -64,14 +64,14 @@ class PokemonListFragment : Fragment() {
         if (hashtable["error"] != null) {
             if (hashtable["error"]!!.isNotEmpty()) {
                 show(
-                    binding.recyclerViewPokemonList,
+                    binding.layoutPokemonList.recyclerViewPokemonList,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_error_background
                 )
             } else {
                 show(
-                    binding.recyclerViewPokemonList,
+                    binding.layoutPokemonList.recyclerViewPokemonList,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_success_background
@@ -102,17 +102,18 @@ class PokemonListFragment : Fragment() {
     }
 
     private fun handlePokemonList(list: List<PokemonDexEntry>) {
+        binding.layoutPokemonList.pokemonList = list
         viewModel.pokemonListAdapter.get()?.submitList(list)
         viewModel.pokemonListAdapter.get()?.notifyDataSetChanged()
     }
 
     private fun initViews() {
-        binding.recyclerViewPokemonList.layoutManager = GridLayoutManager(context,2)
-        binding.recyclerViewPokemonList.setHasFixedSize(false)
+        binding.layoutPokemonList.recyclerViewPokemonList.layoutManager = GridLayoutManager(context,2)
+        binding.layoutPokemonList.recyclerViewPokemonList.setHasFixedSize(false)
         if (viewModel.pokemonListAdapter.get() == null)
             viewModel.pokemonListAdapter = WeakReference(PokemonListAdapter())
         viewModel.pokemonListAdapter.get()?.setUrlProvider(viewModel.urlProvider)
-        binding.recyclerViewPokemonList.adapter = viewModel.pokemonListAdapter.get()
+        binding.layoutPokemonList.recyclerViewPokemonList.adapter = viewModel.pokemonListAdapter.get()
         viewModel.pokemonListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<PokemonDexEntry> {
             override fun onItemClick(t: PokemonDexEntry, pos: Int) {
@@ -125,8 +126,8 @@ class PokemonListFragment : Fragment() {
             }
 
         })
-        binding.recyclerViewPokemonList.postDelayed({
-            binding.recyclerViewPokemonList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let{ it ?: 0 })
+        binding.layoutPokemonList.recyclerViewPokemonList.postDelayed({
+            binding.layoutPokemonList.recyclerViewPokemonList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let{ it ?: 0 })
         }, 50)
     }
 

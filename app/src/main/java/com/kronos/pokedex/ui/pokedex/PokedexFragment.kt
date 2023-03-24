@@ -77,19 +77,21 @@ class PokedexFragment : Fragment() {
     }
 
     private fun handleLoading(b: Boolean) {
-        if (b) {
-            LoadingDialog.getProgressDialog(
-                requireContext(),
-                R.string.loading_dialog_text,
-                com.kronos.resources.R.color.colorSecondaryVariant
-            )!!.show()
-        } else {
-            LoadingDialog.getProgressDialog(
-                requireContext(),
-                R.string.loading_dialog_text,
-                com.kronos.resources.R.color.colorSecondaryVariant
-            )!!.dismiss()
-        }
+        try{
+            if (b) {
+                LoadingDialog.getProgressDialog(
+                    requireContext(),
+                    R.string.loading_dialog_text,
+                    com.kronos.resources.R.color.colorSecondaryVariant
+                )!!.show()
+            } else {
+                LoadingDialog.getProgressDialog(
+                    requireContext(),
+                    R.string.loading_dialog_text,
+                    com.kronos.resources.R.color.colorSecondaryVariant
+                )!!.dismiss()
+            }
+        }catch (e:Exception){}
     }
 
     private fun handlePokedexList(list: List<NamedResourceApi>) {

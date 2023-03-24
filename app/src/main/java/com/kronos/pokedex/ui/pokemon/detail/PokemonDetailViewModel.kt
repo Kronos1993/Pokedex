@@ -148,7 +148,7 @@ class PokemonDetailViewModel @Inject constructor(
 
             var specie = pokemonSpecieRemoteRepository.getSpecieInfo(pokemonInfo.id)
 
-            if (specie != null) {
+            if (specie != null && !specie.name.isNullOrEmpty()) {
                 if (!specie.evolutionChain?.url.isNullOrEmpty()) {
                     var evolChain = pokemonEvolutionChainRemoteRepository.getEvolutionChain(
                         urlProvider.extractIdFromUrl(specie.evolutionChain.let {

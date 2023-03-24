@@ -55,15 +55,9 @@ class PokemonDetailFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.pokemonInfo.observe(this.viewLifecycleOwner, ::handlePokemonInfo)
         viewModel.loading.observe(this.viewLifecycleOwner, ::handleLoading)
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
-
-    private fun handlePokemonInfo(pokemonInfo: PokemonInfo?) {
-        requireActivity().title = pokemonInfo?.name
-    }
-
 
     private fun handleError(hashtable: Hashtable<String, String>) {
         if (hashtable["error"] != null) {
@@ -86,19 +80,22 @@ class PokemonDetailFragment : Fragment() {
     }
 
     private fun handleLoading(b: Boolean) {
-        if (b) {
-            LoadingDialog.getProgressDialog(
-                requireContext(),
-                R.string.loading_dialog_text,
-                com.kronos.resources.R.color.colorSecondaryVariant
-            )!!.show()
-        } else {
-            LoadingDialog.getProgressDialog(
-                requireContext(),
-                R.string.loading_dialog_text,
-                com.kronos.resources.R.color.colorSecondaryVariant
-            )!!.dismiss()
-        }
+        try{
+            if (b) {
+                LoadingDialog.getProgressDialog(
+                    requireContext(),
+                    R.string.loading_dialog_text,
+                    com.kronos.resources.R.color.colorSecondaryVariant
+                )!!.show()
+            } else {
+                LoadingDialog.getProgressDialog(
+                    requireContext(),
+                    R.string.loading_dialog_text,
+                    com.kronos.resources.R.color.colorSecondaryVariant
+                )!!.dismiss()
+            }
+        }catch (e:Exception){}
+
     }
 
     private fun initViews() {
@@ -138,7 +135,6 @@ class PokemonDetailFragment : Fragment() {
     }
 
     override fun onPause() {
-        binding.unbind()
         viewModel.pokemonInfoPageAdapter = WeakReference(null)
         viewModel.pokemonAbilityAdapter = WeakReference(null)
         viewModel.pokemonSpriteAdapter = WeakReference(null)
@@ -148,10 +144,9 @@ class PokemonDetailFragment : Fragment() {
         viewModel.postPokemonMoves(listOf())
         viewModel.postPokemonStats(listOf())
         viewModel.postAbilityInfo(AbilityInfo())
-        viewModel.postPokemonEvolutionChain(EvolutionChain())
-        viewModel.postPokemonEvolutionChainList(listOf())
         viewModel.postPokemonSprites(listOf())
         viewModel.postPokemonOtherForms(listOf())
+        binding.unbind()
         super.onPause()
     }
 

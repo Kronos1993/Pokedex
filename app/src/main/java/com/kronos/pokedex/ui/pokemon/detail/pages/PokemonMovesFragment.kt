@@ -32,15 +32,10 @@ class PokemonMovesFragment : Fragment() {
     ) = binding.run {
         viewModel = this@PokemonMovesFragment.viewModel
         lifecycleOwner = this@PokemonMovesFragment.viewLifecycleOwner
-        root
-    }
-
-    override fun onResume() {
-        super.onResume()
         initViews()
         observeViewModel()
+        root
     }
-
 
     private fun observeViewModel() {
         viewModel.pokemonMoves.observe(this.viewLifecycleOwner, ::handlePokemonMoves)
