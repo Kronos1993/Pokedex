@@ -97,8 +97,6 @@ class AbilityInfoViewModel @Inject constructor(
             } else {
                 abilityRemoteRepository.getAbility(ability.name)
             }
-
-
             postAbilityInfo(abilityInfo)
             loadPokemonList(abilityInfo)
             loading.postValue(false)

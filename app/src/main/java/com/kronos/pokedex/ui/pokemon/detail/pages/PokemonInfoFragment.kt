@@ -23,6 +23,7 @@ import com.kronos.pokedex.domian.model.type.Type
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
 import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
+import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailFragmentDirections
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
 import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
@@ -57,9 +58,12 @@ class PokemonInfoFragment : Fragment() {
 
     private fun handleAbilityInfo(abilityInfo: AbilityInfo) {
         if (!abilityInfo.name.isNullOrEmpty()){
-            val bundle = Bundle()
-            bundle.putSerializable(CURRENT_ABILITY, abilityInfo)
-            findNavController().navigate(R.id.action_nav_pokemon_detail_to_nav_ability_info_dialog_fragment, bundle)
+            if (findNavController().currentDestination?.id == R.id.nav_pokemon_detail) {
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_ABILITY, abilityInfo)
+                findNavController().navigate(R.id.action_nav_pokemon_detail_to_nav_ability_info_dialog_fragment, bundle)
+            }
+
         }
     }
 

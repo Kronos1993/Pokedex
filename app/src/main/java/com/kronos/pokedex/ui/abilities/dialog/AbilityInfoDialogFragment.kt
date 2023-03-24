@@ -15,6 +15,7 @@ import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentDialogAbilityInfoBinding
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.ui.abilities.detail.AbilityInfoViewModel
@@ -84,7 +85,11 @@ class AbilityInfoDialogFragment : BottomSheetDialogFragment()  {
         this.isCancelable = true
         val bundle = arguments
         if (bundle?.get(CURRENT_ABILITY) != null) {
-            viewModel.postAbilityInfo((bundle.get(CURRENT_ABILITY) as AbilityInfo))
+            when {
+                bundle.get(CURRENT_ABILITY) is AbilityInfo -> viewModel.postAbilityInfo((bundle.get(CURRENT_ABILITY) as AbilityInfo))
+                bundle.get(CURRENT_ABILITY) is NamedResourceApi -> viewModel.loadAbilityInfo((bundle.get(CURRENT_ABILITY) as NamedResourceApi))
+                else -> hideDialog()
+            }
         } else {
             hideDialog()
         }
