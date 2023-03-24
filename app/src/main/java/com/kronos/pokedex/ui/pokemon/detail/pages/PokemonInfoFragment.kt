@@ -17,16 +17,13 @@ import com.kronos.pokedex.databinding.FragmentPokemonInfoBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.Ability
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
-import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.model.type.Type
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
 import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
-import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailFragmentDirections
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
-import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
 import com.kronos.pokedex.ui.types.PokemonTypeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
@@ -89,6 +86,8 @@ class PokemonInfoFragment : Fragment() {
         if (pokemonInfo.abilities.size > 1)
             binding.layoutAbilities.recyclerViewPokemonAbilities.layoutManager =
                 GridLayoutManager(context, 2)
+
+        binding.invalidateAll()
 
     }
 
@@ -161,9 +160,7 @@ class PokemonInfoFragment : Fragment() {
         viewModel.pokemonOtherFormsAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<Pair<String,String>> {
             override fun onItemClick(t: Pair<String,String>, pos: Int) {
-                val bundle = Bundle()
-                bundle.putSerializable(CURRENT_POKEMON, NamedResourceApi(t.second,t.first))
-                findNavController().navigate(R.id.action_nav_pokemon_detail_self, bundle)
+                viewModel.loadPokemonInfo(NamedResourceApi(t.second,t.first))
             }
         })
     }
