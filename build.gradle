@@ -7,7 +7,7 @@ buildscript {
         versionTargetSdk = 32
         versionApacheCommonsIo = '2.5'
         kotlin_version = "1.6.10"
-        material_version = "1.5.0"
+        material_version = "1.8.0"
         standardLibrary = "1.5.20"
         coroutines = "1.3.9"
         lifecycle = "2.5.1"
