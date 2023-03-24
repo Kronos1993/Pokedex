@@ -63,9 +63,8 @@ class PokemonEvolutionFragment : Fragment() {
         viewModel.evolutionPokemonAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<ChainLink> {
             override fun onItemClick(t: ChainLink, pos: Int) {
-                val bundle = Bundle()
-                bundle.putSerializable(CURRENT_POKEMON, t.species)
-                findNavController().navigate(R.id.action_nav_pokemon_detail_self, bundle)
+                viewModel.loadPokemonInfo(t.species)
+
             }
         })
 

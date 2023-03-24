@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -20,6 +21,7 @@ import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.ui.abilities.detail.AbilityInfoViewModel
 import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
+import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +33,7 @@ import java.lang.ref.WeakReference
 @AndroidEntryPoint
 class AbilityInfoDialogFragment : BottomSheetDialogFragment()  {
     private val binding by fragmentBinding<FragmentDialogAbilityInfoBinding>(R.layout.fragment_dialog_ability_info)
-
+    private val viewModelPokemonDetail by activityViewModels<PokemonDetailViewModel>()
     private val viewModel by viewModels<AbilityInfoViewModel>()
 
     override fun onCreateView(
@@ -106,9 +108,8 @@ class AbilityInfoDialogFragment : BottomSheetDialogFragment()  {
         viewModel.pokemonListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<PokemonDexEntry> {
             override fun onItemClick(t: PokemonDexEntry, pos: Int) {
-                val bundle = Bundle()
-                bundle.putSerializable(CURRENT_POKEMON, t.pokemon)
-                findNavController().navigate(R.id.action_nav_ability_info_dialog_to_nav_pokemon_detail, bundle)
+                viewModelPokemonDetail.loadPokemonInfo(t.pokemon)
+                hideDialog()
             }
         })
     }
