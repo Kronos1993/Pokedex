@@ -140,7 +140,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_pokedex, R.id.nav_move_list, R.id.nav_nature_list
+                R.id.nav_pokedex, R.id.nav_abilities, R.id.nav_move_list, R.id.nav_nature_list
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

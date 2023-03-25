@@ -8,7 +8,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="com.kronos.pokedex.ui.abilities.detail.AbilityInfoViewModel" />
+            type="com.kronos.pokedex.ui.abilities.dialog.AbilityInfoViewModel" />
     </data>
 
         <FrameLayout
@@ -95,8 +95,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/margin_5"
                             android:layout_marginBottom="@dimen/margin_5"
-                            android:maxLines="2"
-                            android:textAlignment="textStart"
+                            android:maxLines="5"
                             android:singleLine="false"
                             android:text="@{viewModel.abilityGameDescription}"
                             android:textStyle="bold"
@@ -116,6 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
                     android:text="EFFECT"
+                    app:handle_visibility="@{viewModel.abilityEffect}"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -126,6 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/Widget.Pokedex.CardView"
+                    app:handle_visibility="@{viewModel.abilityEffect}"
                     android:layout_marginStart="@dimen/margin_5"
                     android:layout_marginTop="@dimen/margin_10"
                     android:layout_marginEnd="@dimen/margin_5"

@@ -19,10 +19,8 @@ import com.kronos.pokedex.databinding.FragmentDialogAbilityInfoBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
-import com.kronos.pokedex.ui.abilities.detail.AbilityInfoViewModel
 import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
-import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers

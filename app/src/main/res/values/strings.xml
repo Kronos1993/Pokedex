@@ -17,10 +17,10 @@
     <string name="menu_pokemon_detail">Pokemon Detail</string>
     <string name="menu_move_list">Moves</string>
     <string name="menu_nature_list">Natures</string>
+    <string name="menu_abilities">Abilities</string>
+
     <string name="no_pokemon">NO POKEMON FOUND</string>
     <string name="no_pokedex">NO POKEDEX FOUND</string>
     <string name="unknown">Unknown</string>
     <string name="no_moves">No Moves</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

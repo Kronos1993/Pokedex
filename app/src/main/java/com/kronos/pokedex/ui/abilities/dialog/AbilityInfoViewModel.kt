@@ -1,4 +1,4 @@
-package com.kronos.pokedex.ui.abilities.detail
+package com.kronos.pokedex.ui.abilities.dialog
 
 import android.content.Context
 import androidx.databinding.ObservableField
