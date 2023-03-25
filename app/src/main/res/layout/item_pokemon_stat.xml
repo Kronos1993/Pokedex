@@ -7,6 +7,10 @@
         <variable
             name="pokemonStat"
             type="com.kronos.pokedex.domian.model.stat.Stat" />
+
+        <variable
+            name="statTotal"
+            type="Integer" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -48,9 +52,9 @@
                 android:indeterminate="false"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:max="252"
-                android:progress="@{Integer.valueOf(String.valueOf(pokemonStat.baseStat))}"
-                app:animate_progress ="@{Integer.valueOf(String.valueOf(pokemonStat.baseStat))}"
+                app:set_max_progress="@{statTotal}"
+                android:progress="@{pokemonStat.baseStat}"
+                app:animate_progress ="@{pokemonStat.baseStat}"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonStatName"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineStatsEffortStart"
                 app:layout_constraintStart_toStartOf="@+id/guidelineStatsDivider"

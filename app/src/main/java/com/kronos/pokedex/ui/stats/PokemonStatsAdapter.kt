@@ -12,9 +12,14 @@ import com.kronos.pokedex.domian.model.stat.Stat
 class PokemonStatsAdapter : ListAdapter<Stat, PokemonStatsAdapter.PokemonStatViewHolder>(GeneralDiffCallback<Stat>()) {
 
     private var adapterItemClickListener:AdapterItemClickListener<Stat>?=null
+    private var maxStat = 0
 
     fun setAdapterItemClick(adapterItemClickListener:AdapterItemClickListener<Stat>?){
         this.adapterItemClickListener = adapterItemClickListener
+    }
+
+    fun setMaxStat(max:Int = 0){
+        this.maxStat = max
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonStatViewHolder {
@@ -24,15 +29,16 @@ class PokemonStatsAdapter : ListAdapter<Stat, PokemonStatsAdapter.PokemonStatVie
 
     override fun onBindViewHolder(holder: PokemonStatViewHolder, position: Int) {
         val currentPokemonStat = getItemAt(position)
-        holder.bind(currentPokemonStat)
+        holder.bind(currentPokemonStat,maxStat)
     }
 
     private fun getItemAt(adapterPosition: Int): Stat = getItem(adapterPosition)
 
     class PokemonStatViewHolder(var binding:ItemPokemonStatBinding, var clickListener:AdapterItemClickListener<Stat>?) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(stat: Stat){
+        fun bind(stat: Stat,maxStat: Int){
             binding.run {
                 pokemonStat = stat
+                statTotal = maxStat
                 root.setOnClickListener {
                     clickListener?.onItemClick(stat,adapterPosition)
                 }

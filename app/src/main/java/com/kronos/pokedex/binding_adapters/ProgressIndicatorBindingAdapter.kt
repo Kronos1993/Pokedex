@@ -42,6 +42,13 @@ fun animateProgress(view: LinearProgressIndicator, stat: Int) {
     }
 }
 
+@BindingAdapter("app:set_max_progress")
+fun setMaxProgress(view: LinearProgressIndicator, stat: Int) {
+    view.run {
+        max = stat + 10
+    }
+}
+
 class ProgressBarAnimation(progressBar: LinearProgressIndicator, fullDuration: Long) :
     Animation() {
     private val mProgressBar: LinearProgressIndicator = progressBar

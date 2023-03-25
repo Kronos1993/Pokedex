@@ -14,8 +14,8 @@ fun handleVisibility(view: View, enable: Boolean) = view.run {
 }
 
 @BindingAdapter("handle_visibility")
-fun handleVisibility(view: View, enable: String) = view.run {
-    isVisible = !enable.isNullOrEmpty()
+fun handleVisibility(view: View, text: String?) = view.run {
+    isVisible = !text.isNullOrEmpty()
 }
 
 @BindingAdapter("is_hidden_ability")

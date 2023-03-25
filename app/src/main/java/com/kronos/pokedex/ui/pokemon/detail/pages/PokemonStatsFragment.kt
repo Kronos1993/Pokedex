@@ -38,6 +38,7 @@ class PokemonStatsFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.pokemonStats.observe(this.viewLifecycleOwner, ::handlePokemonStats)
+        viewModel.pokemonInfo.observe(this.viewLifecycleOwner) { binding.invalidateAll() }
     }
 
 
@@ -55,6 +56,7 @@ class PokemonStatsFragment : Fragment() {
         binding.recyclerViewPokemonStats.setHasFixedSize(false)
         if (viewModel.pokemonStatAdapter.get() == null)
             viewModel.pokemonStatAdapter = WeakReference(PokemonStatsAdapter())
+        viewModel.pokemonStatAdapter.get()?.setMaxStat(viewModel.statsTotal.get()?:0)
         binding.recyclerViewPokemonStats.adapter = viewModel.pokemonStatAdapter.get()
         viewModel.pokemonStatAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<Stat> {
