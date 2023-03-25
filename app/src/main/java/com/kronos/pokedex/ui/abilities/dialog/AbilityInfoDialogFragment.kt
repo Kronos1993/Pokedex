@@ -49,9 +49,7 @@ class AbilityInfoDialogFragment : BottomSheetDialogFragment()  {
     }
 
     private fun setListeners() {
-        binding.textViewAbilityViewMore.setOnClickListener {
-            //go to ability detail fragment passing named resource api
-        }
+
     }
 
     private fun setObservers() {

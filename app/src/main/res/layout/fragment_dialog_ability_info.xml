@@ -43,28 +43,22 @@
                         style="@style/TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_marginTop="@dimen/margin_8"
                         android:layout_weight="4"
                         android:textStyle="bold"
+                        android:textSize="@dimen/margin_18"
                         android:text="@{viewModel.abilityInfo.name.toUpperCase().replaceAll(`-`,` `)}"
                         app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/drag_handle" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textViewAbilityViewMore"
-                        style="@style/TextViewNormalBlue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="See More"
-                        android:textAlignment="textEnd"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/textViewAbilityName"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textViewAbilityName" />
-
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_3"
+                    android:layout_margin="@dimen/margin_5"
+                    android:background="@color/primary_dark"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewAbilityGameDescriptionHeader"
@@ -102,6 +96,7 @@
                             android:layout_marginTop="@dimen/margin_5"
                             android:layout_marginBottom="@dimen/margin_5"
                             android:maxLines="2"
+                            android:textAlignment="textStart"
                             android:singleLine="false"
                             android:text="@{viewModel.abilityGameDescription}"
                             android:textStyle="bold"
@@ -151,7 +146,7 @@
                             android:layout_marginBottom="@dimen/margin_5"
                             android:maxLines="15"
                             android:singleLine="false"
-                            android:text="@{viewModel.abilityShortEffect}"
+                            android:text="@{viewModel.abilityEffect}"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
