@@ -10,11 +10,11 @@
             android:title="@string/menu_pokedex" />
         <item
             android:id="@+id/nav_abilities"
-            android:icon="@drawable/ic_pokeball"
+            android:icon="@drawable/ic_eye"
             android:title="@string/menu_abilities" />
         <item
             android:id="@+id/nav_move_list"
-            android:icon="@drawable/ic_pokeball"
+            android:icon="@drawable/ic_move"
             android:title="@string/menu_move_list" />
         <item
             android:id="@+id/nav_nature_list"
