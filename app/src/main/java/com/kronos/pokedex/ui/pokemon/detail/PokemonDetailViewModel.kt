@@ -12,16 +12,14 @@ import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
 import com.kronos.pokedex.domian.model.evolution_chain.EvolutionChain
+import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.model.pokemon.extension.totalStat
 import com.kronos.pokedex.domian.model.stat.Stat
-import com.kronos.pokedex.domian.repository.AbilityRemoteRepository
-import com.kronos.pokedex.domian.repository.EvolutionChainRemoteRepository
-import com.kronos.pokedex.domian.repository.PokemonRemoteRepository
-import com.kronos.pokedex.domian.repository.SpecieRemoteRepository
+import com.kronos.pokedex.domian.repository.*
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
-import com.kronos.pokedex.ui.move.list.PokemonMoveListAdapter
+import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEvolutionChainAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
@@ -37,11 +35,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PokemonDetailViewModel @Inject constructor(
-    @ApplicationContext val context: Context,
+    @ApplicationContext private val context: Context,
     private var pokemonRemoteRepository: PokemonRemoteRepository,
     private var pokemonSpecieRemoteRepository: SpecieRemoteRepository,
     private var pokemonEvolutionChainRemoteRepository: EvolutionChainRemoteRepository,
     private var abilityRemoteRepository: AbilityRemoteRepository,
+    private var moveRemoteRepository: MoveRemoteRepository,
     var urlProvider: UrlProvider,
     var logger: ILogger,
 ) : ParentViewModel() {
@@ -56,7 +55,6 @@ class PokemonDetailViewModel @Inject constructor(
     val pokemonMoves = _pokemonMoves.asLiveData()
 
     private val _pokemonEvolutionChain = MutableLiveData<EvolutionChain>()
-    val pokemonEvolutionChain = _pokemonEvolutionChain.asLiveData()
 
     private val _pokemonEvolutionList = MutableLiveData<List<ChainLink>>()
     val pokemonEvolutionList = _pokemonEvolutionList.asLiveData()
@@ -69,6 +67,9 @@ class PokemonDetailViewModel @Inject constructor(
 
     private val _abilityInfo = MutableLiveData<AbilityInfo>()
     val abilityInfo = _abilityInfo.asLiveData()
+
+    private val _moveInfo = MutableLiveData<MoveInfo>()
+    val moveInfo = _moveInfo.asLiveData()
 
     var pokemonInfoPageAdapter: WeakReference<PokemonInfoPageAdapter?> = WeakReference(null)
 
@@ -132,6 +133,10 @@ class PokemonDetailViewModel @Inject constructor(
 
     fun postAbilityInfo(abilityInfo: AbilityInfo) {
         _abilityInfo.postValue(abilityInfo)
+    }
+
+    fun postMoveInfo(moveInfo: MoveInfo) {
+        _moveInfo.postValue(moveInfo)
     }
 
 
@@ -258,6 +263,21 @@ class PokemonDetailViewModel @Inject constructor(
                 abilityRemoteRepository.getAbility(ability.name)
             }
             postAbilityInfo(abilityInfo)
+            loading.postValue(false)
+        }
+    }
+
+    fun loadMoveInfo(move: NamedResourceApi) {
+        viewModelScope.launch(Dispatchers.IO) {
+            loading.postValue(true)
+            var moveInfo: MoveInfo? = null
+
+            moveInfo = if (urlProvider.extractIdFromUrl(move.url) != null) {
+                moveRemoteRepository.getMove(urlProvider.extractIdFromUrl(move.url))
+            } else {
+                moveRemoteRepository.getMove(move.name)
+            }
+            postMoveInfo(moveInfo)
             loading.postValue(false)
         }
     }

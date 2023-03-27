@@ -58,15 +58,6 @@ class PokemonStatsFragment : Fragment() {
             viewModel.pokemonStatAdapter = WeakReference(PokemonStatsAdapter())
         viewModel.pokemonStatAdapter.get()?.setMaxStat(viewModel.statsTotal.get()?:0)
         binding.recyclerViewPokemonStats.adapter = viewModel.pokemonStatAdapter.get()
-        viewModel.pokemonStatAdapter.get()?.setAdapterItemClick(object :
-            AdapterItemClickListener<Stat> {
-            override fun onItemClick(t: Stat, pos: Int) {
-                val bundle = Bundle()
-                bundle.putSerializable(CURRENT_TYPE, t)
-                Toast.makeText(requireContext(), t.statName, Toast.LENGTH_SHORT).show()
-                //findNavController().navigate(R.id.action_nav_pokemon_list_to_nav_pokemon_detail, bundle)
-            }
-        })
     }
 
     override fun onDestroyView() {

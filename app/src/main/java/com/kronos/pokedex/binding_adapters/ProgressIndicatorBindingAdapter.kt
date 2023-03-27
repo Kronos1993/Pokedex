@@ -45,7 +45,7 @@ fun animateProgress(view: LinearProgressIndicator, stat: Int) {
 @BindingAdapter("app:set_max_progress")
 fun setMaxProgress(view: LinearProgressIndicator, stat: Int) {
     view.run {
-        max = stat + 10
+        max = stat/2
     }
 }
 

@@ -29,7 +29,6 @@ import java.lang.ref.WeakReference
 import java.util.*
 
 const val CURRENT_TYPE = "current_type"
-const val CURRENT_POKEMON_MOVES = "current_pokemon_moves"
 
 @AndroidEntryPoint
 class PokemonDetailFragment : Fragment() {
