@@ -373,18 +373,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailHappinessLabel" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewEvolutionDetailRain"
-                style="@style/TextViewSmall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewEvolutionDetailRain"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_margin="@dimen/margin_5"
-                app:handle_text="@{String.valueOf(evolutionDetail.needsOverworldRain)}"
+                app:srcCompat="@drawable/ic_rain"
                 app:handle_visibility="@{evolutionDetail.needsOverworldRain}"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailRainLabel"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
                 app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailRainLabel" />
+
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailPartyMemberLabel"
