@@ -25,6 +25,11 @@
             android:id="@+id/action_nav_ability_list_to_nav_ability_info_dialog"
             app:destination="@id/nav_ability_info_dialog" />
     </fragment>
+    <dialog
+        android:id="@+id/nav_ability_info_dialog"
+        android:name="com.kronos.pokedex.ui.abilities.dialog.AbilityInfoDialogFragment"
+        android:label="@string/ability_info"
+        tools:layout="@layout/fragment_dialog_ability_info"/>
 
     <fragment
         android:id="@+id/nav_pokemon_list"
@@ -46,6 +51,9 @@
         <action
             android:id="@+id/action_nav_pokemon_detail_to_nav_ability_info_dialog_fragment"
             app:destination="@id/nav_ability_info_dialog" />
+        <action
+            android:id="@+id/action_nav_pokemon_detail_to_nav_move_info_dialog"
+            app:destination="@id/nav_move_info_dialog" />
     </fragment>
 
 
@@ -53,7 +61,16 @@
         android:id="@+id/nav_move_list"
         android:name="com.kronos.pokedex.ui.move.list.MoveListFragment"
         android:label="@string/menu_move_list"
-        tools:layout="@layout/fragment_nature_list" />
+        tools:layout="@layout/fragment_nature_list" >
+        <action
+            android:id="@+id/action_nav_move_list_to_nav_move_info_dialog"
+            app:destination="@id/nav_move_info_dialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/nav_move_info_dialog"
+        android:name="com.kronos.pokedex.ui.move.dialog.MoveInfoDialogFragment"
+        android:label="@string/move_info"
+        tools:layout="@layout/fragment_dialog_move_info"/>
 
     <fragment
         android:id="@+id/nav_nature_list"
@@ -61,9 +78,4 @@
         android:label="@string/menu_nature_list"
         tools:layout="@layout/fragment_move_list" />
 
-    <dialog
-        android:id="@+id/nav_ability_info_dialog"
-        android:name="com.kronos.pokedex.ui.abilities.dialog.AbilityInfoDialogFragment"
-        android:label="AbilityInfoDialogFragment"
-        tools:layout="@layout/fragment_dialog_ability_info"/>
 </navigation>

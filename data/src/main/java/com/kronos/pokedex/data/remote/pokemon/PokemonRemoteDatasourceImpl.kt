@@ -57,7 +57,7 @@ class PokemonRemoteDatasourceImpl @Inject constructor(
                 e.printStackTrace()
                 PokemonInfo()
             }
-        Log.e(PokemonRemoteDatasourceImpl::javaClass.name, "pokemon list: $result")
+        Log.e(PokemonRemoteDatasourceImpl::javaClass.name, "pokemon: $result")
         return result
     }
 
@@ -75,7 +75,7 @@ class PokemonRemoteDatasourceImpl @Inject constructor(
                 e.printStackTrace()
                 PokemonInfo()
             }
-        Log.e(PokemonRemoteDatasourceImpl::javaClass.name, "pokemon list: $result")
+        Log.e(PokemonRemoteDatasourceImpl::javaClass.name, "pokemon: $result")
         return result
     }
 

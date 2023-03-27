@@ -17,6 +17,7 @@
     <color name="menuBackground">#FF000000</color>
     <color name="blackText">#FFF</color>
     <color name="blueText">#FFF</color>
+    <color name="blue_rain">#90CAF9</color>
     <color name="yellowText">#FFF</color>
     <color name="hintColor">#FFF</color>
 

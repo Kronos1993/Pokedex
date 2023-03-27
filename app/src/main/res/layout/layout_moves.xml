@@ -48,7 +48,7 @@
             android:text="@string/no_moves"
             android:textAlignment="center"
             android:textSize="@dimen/text_20"
-            app:handle_visibility="@{moves.size()&lt;=0}"
+            app:handle_visibility="@{moves.size()==0}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

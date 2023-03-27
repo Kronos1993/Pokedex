@@ -6,13 +6,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonMovesBinding
+import com.kronos.pokedex.domian.model.ability.AbilityInfo
+import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.move.MoveList
-import com.kronos.pokedex.ui.move.list.PokemonMoveListAdapter
+import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
+import com.kronos.pokedex.ui.move.ShowMoveIn
+import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
+import com.kronos.pokedex.ui.move.list.CURRENT_MOVE
 import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,8 +45,19 @@ class PokemonMovesFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.pokemonMoves.observe(this.viewLifecycleOwner, ::handlePokemonMoves)
+        viewModel.moveInfo.observe(this.viewLifecycleOwner, ::handleMoveInfo)
     }
 
+    private fun handleMoveInfo(moveInfo: MoveInfo) {
+        if (!moveInfo.moveName.isNullOrEmpty()){
+            if (findNavController().currentDestination?.id == R.id.nav_pokemon_detail) {
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_MOVE, moveInfo)
+                findNavController().navigate(R.id.action_nav_pokemon_detail_to_nav_move_info_dialog, bundle)
+            }
+
+        }
+    }
 
     private fun handlePokemonMoves(pokemonMoves: List<MoveList>) {
         viewModel.moveByPokemonAdapter.get()?.submitList(pokemonMoves)
@@ -58,15 +75,12 @@ class PokemonMovesFragment : Fragment() {
         binding.layoutMove.recyclerViewMoves.layoutManager = GridLayoutManager(context,2)
         binding.layoutMove.recyclerViewMoves.setHasFixedSize(false)
         if (viewModel.moveByPokemonAdapter.get() == null)
-            viewModel.moveByPokemonAdapter = WeakReference(PokemonMoveListAdapter())
+            viewModel.moveByPokemonAdapter = WeakReference(PokemonMoveListAdapter(ShowMoveIn.POKEMON_DETAIL))
         binding.layoutMove.recyclerViewMoves.adapter = viewModel.moveByPokemonAdapter.get()
         viewModel.moveByPokemonAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<MoveList> {
             override fun onItemClick(t: MoveList, pos: Int) {
-                val bundle = Bundle()
-                bundle.putSerializable(CURRENT_TYPE, t)
-                Toast.makeText(requireContext(), t.move.name, Toast.LENGTH_SHORT).show()
-                //findNavController().navigate(R.id.action_nav_pokemon_list_to_nav_pokemon_detail, bundle)
+                viewModel.loadMoveInfo(t.move)
             }
         })
     }
