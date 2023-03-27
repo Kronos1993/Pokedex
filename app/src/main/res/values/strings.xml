@@ -16,8 +16,10 @@
     <string name="menu_pokemon_list">Pokemons</string>
     <string name="menu_pokemon_detail">Pokemon Detail</string>
     <string name="menu_move_list">Moves</string>
+    <string name="move_info">Move</string>
     <string name="menu_nature_list">Natures</string>
     <string name="menu_abilities">Abilities</string>
+    <string name="ability_info">Ability</string>
 
     <string name="no_pokemon">NO POKEMON FOUND</string>
     <string name="no_pokedex">NO POKEDEX FOUND</string>
