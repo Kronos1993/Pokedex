@@ -3,16 +3,12 @@ package com.kronos.pokedex.data.remote.ability
 import android.util.Log
 import com.kronos.pokedex.data.data_source.ability.AbilityRemoteDataSource
 import com.kronos.pokedex.data.remote.ability.api.AbilityApi
-import com.kronos.pokedex.data.remote.ability.mapper.toAbility
 import com.kronos.pokedex.data.remote.ability.mapper.toAbilityInfo
 import com.kronos.pokedex.data.remote.pokedex.PokedexRemoteDataSourceImpl
-import com.kronos.pokedex.data.remote.pokedex.mapper.toPokedex
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ResponseList
-import com.kronos.pokedex.domian.model.ability.Ability
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
-import com.kronos.pokedex.domian.model.pokedex.Pokedex
 import javax.inject.Inject
 
 class AbilityRemoteDatasourceImpl @Inject constructor(
@@ -54,7 +50,7 @@ class AbilityRemoteDatasourceImpl @Inject constructor(
                 e.printStackTrace()
                 AbilityInfo()
             }
-        Log.e(PokedexRemoteDataSourceImpl::javaClass.name, "pokemon list: $result")
+        Log.e(PokedexRemoteDataSourceImpl::javaClass.name, "ability: $result")
         return result
     }
 
@@ -72,7 +68,7 @@ class AbilityRemoteDatasourceImpl @Inject constructor(
                 e.printStackTrace()
                 AbilityInfo()
             }
-        Log.e(PokedexRemoteDataSourceImpl::javaClass.name, "pokemon list: $result")
+        Log.e(PokedexRemoteDataSourceImpl::javaClass.name, "ability: $result")
         return result
     }
 }

@@ -5,8 +5,8 @@ import com.kronos.pokedex.data.data_source.pokedex.PokedexRemoteDataSource
 import com.kronos.pokedex.data.remote.pokedex.api.PokedexApi
 import com.kronos.pokedex.data.remote.pokedex.mapper.toPokedex
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
-import com.kronos.pokedex.domian.model.ResponseList
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.ResponseList
 import com.kronos.pokedex.domian.model.pokedex.Pokedex
 import javax.inject.Inject
 
@@ -31,7 +31,7 @@ class PokedexRemoteDataSourceImpl @Inject constructor(
                 e.printStackTrace()
                 ResponseList()
             }
-        Log.e(PokedexRemoteDataSourceImpl::javaClass.name, "pokemon list: ${result.results}")
+        Log.e(PokedexRemoteDataSourceImpl::javaClass.name, "pokedex list: ${result.results}")
         return result
     }
 
@@ -49,7 +49,7 @@ class PokedexRemoteDataSourceImpl @Inject constructor(
                 e.printStackTrace()
                 Pokedex()
             }
-        Log.e(PokedexRemoteDataSourceImpl::javaClass.name, "pokemon list: $result")
+        Log.e(PokedexRemoteDataSourceImpl::javaClass.name, "pokedex: $result")
         return result
     }
 
@@ -67,7 +67,7 @@ class PokedexRemoteDataSourceImpl @Inject constructor(
                 e.printStackTrace()
                 Pokedex()
             }
-        Log.e(PokedexRemoteDataSourceImpl::javaClass.name, "pokemon list: $result")
+        Log.e(PokedexRemoteDataSourceImpl::javaClass.name, "pokedex: $result")
         return result
     }
 

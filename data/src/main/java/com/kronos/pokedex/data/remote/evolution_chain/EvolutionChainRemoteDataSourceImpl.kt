@@ -2,19 +2,12 @@ package com.kronos.pokedex.data.remote.evolution_chain
 
 import android.util.Log
 import com.kronos.pokedex.data.data_source.evolution_chain.EvolutionChainRemoteDataSource
-import com.kronos.pokedex.data.data_source.pokedex.PokedexRemoteDataSource
 import com.kronos.pokedex.data.remote.evolution_chain.api.EvolutionChainApi
-import com.kronos.pokedex.data.remote.evolution_chain.dto.EvolutionChainDto
-import com.kronos.pokedex.data.remote.evolution_chain.mapper.toChainLink
 import com.kronos.pokedex.data.remote.evolution_chain.mapper.toEvolutionChain
-import com.kronos.pokedex.data.remote.pokedex.api.PokedexApi
-import com.kronos.pokedex.data.remote.pokedex.mapper.toPokedex
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
-import com.kronos.pokedex.domian.model.ResponseList
 import com.kronos.pokedex.domian.model.NamedResourceApi
-import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
+import com.kronos.pokedex.domian.model.ResponseList
 import com.kronos.pokedex.domian.model.evolution_chain.EvolutionChain
-import com.kronos.pokedex.domian.model.pokedex.Pokedex
 import javax.inject.Inject
 
 class EvolutionChainRemoteDataSourceImpl @Inject constructor(
@@ -38,7 +31,7 @@ class EvolutionChainRemoteDataSourceImpl @Inject constructor(
                 e.printStackTrace()
                 ResponseList()
             }
-        Log.e(EvolutionChainRemoteDataSourceImpl::javaClass.name, "pokemon list: ${result.results}")
+        Log.e(EvolutionChainRemoteDataSourceImpl::javaClass.name, "evo chain list: ${result.results}")
         return result
     }
 
@@ -56,7 +49,7 @@ class EvolutionChainRemoteDataSourceImpl @Inject constructor(
                 e.printStackTrace()
                 EvolutionChain()
             }
-        Log.e(EvolutionChainRemoteDataSourceImpl::javaClass.name, "pokemon list: $result")
+        Log.e(EvolutionChainRemoteDataSourceImpl::javaClass.name, "evo chain: $result")
         return result
     }
 
