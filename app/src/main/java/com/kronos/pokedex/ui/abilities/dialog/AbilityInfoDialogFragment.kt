@@ -19,6 +19,7 @@ import com.kronos.pokedex.databinding.FragmentDialogAbilityInfoBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
+import com.kronos.pokedex.ui.abilities.ShowAbilityIn
 import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
@@ -29,7 +30,7 @@ import kotlinx.coroutines.withContext
 import java.lang.ref.WeakReference
 
 @AndroidEntryPoint
-class AbilityInfoDialogFragment : BottomSheetDialogFragment()  {
+class AbilityInfoDialogFragment : BottomSheetDialogFragment() {
     private val binding by fragmentBinding<FragmentDialogAbilityInfoBinding>(R.layout.fragment_dialog_ability_info)
     private val viewModelPokemonDetail by activityViewModels<PokemonDetailViewModel>()
     private val viewModel by viewModels<AbilityInfoViewModel>()
@@ -84,8 +85,14 @@ class AbilityInfoDialogFragment : BottomSheetDialogFragment()  {
         val bundle = arguments
         if (bundle?.get(CURRENT_ABILITY) != null) {
             when {
-                bundle.get(CURRENT_ABILITY) is AbilityInfo -> viewModel.postAbilityInfo((bundle.get(CURRENT_ABILITY) as AbilityInfo))
-                bundle.get(CURRENT_ABILITY) is NamedResourceApi -> viewModel.loadAbilityInfo((bundle.get(CURRENT_ABILITY) as NamedResourceApi))
+                bundle.get(CURRENT_ABILITY) is AbilityInfo -> {
+                    viewModel.postAbilityInfo((bundle.get(CURRENT_ABILITY) as AbilityInfo))
+                    viewModel.postOrigen(ShowAbilityIn.POKEMON_DETAIL)
+                }
+                bundle.get(CURRENT_ABILITY) is NamedResourceApi -> {
+                    viewModel.loadAbilityInfo((bundle.get(CURRENT_ABILITY) as NamedResourceApi))
+                    viewModel.postOrigen(ShowAbilityIn.ABILITY_LIST)
+                }
                 else -> hideDialog()
             }
         } else {
@@ -95,16 +102,19 @@ class AbilityInfoDialogFragment : BottomSheetDialogFragment()  {
     }
 
     private fun initView() {
-        binding.layoutPokemonList.recyclerViewPokemonList.layoutManager = GridLayoutManager(context,2)
+        binding.layoutPokemonList.recyclerViewPokemonList.layoutManager =
+            GridLayoutManager(context, 2)
         binding.layoutPokemonList.recyclerViewPokemonList.setHasFixedSize(false)
         if (viewModel.pokemonListAdapter.get() == null)
             viewModel.pokemonListAdapter = WeakReference(PokemonListAdapter())
         viewModel.pokemonListAdapter.get()?.setUrlProvider(viewModel.urlProvider)
-        binding.layoutPokemonList.recyclerViewPokemonList.adapter = viewModel.pokemonListAdapter.get()
+        binding.layoutPokemonList.recyclerViewPokemonList.adapter =
+            viewModel.pokemonListAdapter.get()
         viewModel.pokemonListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<PokemonDexEntry> {
             override fun onItemClick(t: PokemonDexEntry, pos: Int) {
-                viewModelPokemonDetail.loadPokemonInfo(t.pokemon)
+                if (viewModel.origen.value == ShowAbilityIn.POKEMON_DETAIL)
+                    viewModelPokemonDetail.loadPokemonInfo(t.pokemon)
                 hideDialog()
             }
         })
@@ -121,5 +131,12 @@ class AbilityInfoDialogFragment : BottomSheetDialogFragment()  {
     override fun onDestroy() {
         binding.unbind()
         super.onDestroy()
+    }
+
+    override fun onPause() {
+        binding.unbind()
+        viewModel.postAbilityInfo(AbilityInfo())
+        viewModel.postOrigen(null)
+        super.onPause()
     }
 }

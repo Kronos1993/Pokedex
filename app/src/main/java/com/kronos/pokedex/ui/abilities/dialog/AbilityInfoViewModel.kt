@@ -11,6 +11,8 @@ import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.domian.repository.AbilityRemoteRepository
+import com.kronos.pokedex.ui.abilities.ShowAbilityIn
+import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,6 +33,9 @@ class AbilityInfoViewModel @Inject constructor(
     private val _abilityInfo = MutableLiveData<AbilityInfo>()
     val abilityInfo = _abilityInfo.asLiveData()
 
+    private val _origen = MutableLiveData<ShowAbilityIn?>()
+    val origen = _origen.asLiveData()
+
     var abilityShortEffect = ObservableField<String?>()
     var abilityEffect = ObservableField<String?>()
     var abilityGameDescription = ObservableField<String?>()
@@ -42,6 +47,10 @@ class AbilityInfoViewModel @Inject constructor(
 
     fun postAbilityInfo(abilityInfo: AbilityInfo) {
         _abilityInfo.postValue(abilityInfo)
+    }
+
+    fun postOrigen(origen: ShowAbilityIn?) {
+        _origen.postValue(origen)
     }
 
     fun getAbilityGameDescription(abilityInfo: AbilityInfo) {
@@ -104,8 +113,8 @@ class AbilityInfoViewModel @Inject constructor(
     }
 
     fun loadPokemonList(abilityInfo: AbilityInfo){
-        var pokemonEntry = abilityInfo.pokemon.mapIndexed { index, pokemonWithAbility ->
-            PokemonDexEntry(index, pokemonWithAbility.pokemon)
+        var pokemonEntry = abilityInfo.pokemon.map { pokemonWithAbility ->
+            PokemonDexEntry(urlProvider.extractIdFromUrl(pokemonWithAbility.pokemon.url), pokemonWithAbility.pokemon)
         }
         postPokemonList(pokemonEntry)
     }

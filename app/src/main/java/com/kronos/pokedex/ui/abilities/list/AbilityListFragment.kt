@@ -166,7 +166,7 @@ class AbilityListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.pokemon_list_menu, menu)
+        inflater.inflate(R.menu.main, menu)
         val searchItem: MenuItem = menu.findItem(R.id.action_search)
 
         // getting search view of our item.
