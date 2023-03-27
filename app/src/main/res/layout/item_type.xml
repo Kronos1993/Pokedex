@@ -22,9 +22,10 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageViewType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:handle_pokemon_type="@{pokemonType.name}"
+                android:layout_width="@dimen/margin_24"
+                android:layout_height="@dimen/margin_24"
+                android:layout_marginStart="@dimen/margin_3"
+                app:handle_type="@{pokemonType.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
