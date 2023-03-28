@@ -122,7 +122,8 @@ class MoveListFragment : Fragment() {
         viewModel.moveAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<MoveList> {
             override fun onItemClick(t: MoveList, pos: Int) {
-                if (searchView != null) searchView.clearFocus()
+                if (searchView != null)
+                    searchView.clearFocus()
                 viewModel.filterMove("")
                 if (!t.move.name.isNullOrEmpty()) {
                     if (findNavController().currentDestination?.id == R.id.nav_move_list) {
@@ -170,6 +171,7 @@ class MoveListFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.main, menu)
         val searchItem: MenuItem = menu.findItem(R.id.action_search)

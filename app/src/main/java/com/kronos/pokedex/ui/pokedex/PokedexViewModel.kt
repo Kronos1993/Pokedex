@@ -28,6 +28,9 @@ class PokedexViewModel  @Inject constructor(
     private val _pokedexList = MutableLiveData<MutableList<NamedResourceApi>>()
     val pokedexList = _pokedexList.asLiveData()
 
+    private val _pokedexOriginalList = MutableLiveData<MutableList<NamedResourceApi>>()
+    val pokedexOriginalList = _pokedexOriginalList.asLiveData()
+
     var pokedexListAdapter: WeakReference<ItemListAdapter?> = WeakReference(ItemListAdapter())
 
     private val _limit = MutableLiveData<Int>()
@@ -50,7 +53,22 @@ class PokedexViewModel  @Inject constructor(
                     pokelist.add(it)
             }
         }
-        _pokedexList.postValue(pokelist as MutableList<NamedResourceApi>?)
+        _pokedexList.postValue(pokelist)
+        loading.postValue(false)
+    }
+
+    private fun postPokedexOriginalList(list: List<NamedResourceApi>) {
+        var pokelist = mutableListOf<NamedResourceApi>()
+        if(_pokedexOriginalList.value!=null){
+            pokelist = _pokedexOriginalList.value!!
+        }
+        list.forEach {
+            if(!(pokelist as ArrayList).contains(it)){
+                if(!it.name.equals("hoenn",true) && !it.name.equals("johto",false) && !it.name.contains("original-") && !it.name.contains("conquest-gallery") && !it.name.contains("letsgo-kanto"))
+                    pokelist.add(it)
+            }
+        }
+        _pokedexOriginalList.postValue(pokelist)
         loading.postValue(false)
     }
 
@@ -61,6 +79,7 @@ class PokedexViewModel  @Inject constructor(
                 val responseList = pokedexRemoteRepository.list(limit.value!!,offset.value!!)
                 _total.postValue(responseList.count)
                 postPokedex(responseList.results)
+                postPokedexOriginalList(responseList.results)
             }
             call.await()
         }
@@ -72,6 +91,29 @@ class PokedexViewModel  @Inject constructor(
                 setOffset(offset.value!! + limit.value!!)
                 getPokedex()
             }
+        }
+    }
+
+    private fun postPokedexListFiltered(list: List<NamedResourceApi>) {
+        _pokedexList.postValue(list as MutableList<NamedResourceApi>?)
+    }
+
+    fun filterPokedex(pokedexName: String) {
+        if (pokedexName.isNotEmpty()) {
+            // creating a new array list to filter our data.
+            val filteredList: ArrayList<NamedResourceApi> = ArrayList()
+            // running a for loop to compare elements.
+            for (item in _pokedexOriginalList.value!!) {
+                // checking if the entered string matched with any item of our recycler view.
+                if (item.name.lowercase().contains(pokedexName.lowercase())) {
+                    // if the item is matched we are
+                    // adding it to our filtered list.
+                    filteredList.add(item)
+                }
+            }
+            postPokedexListFiltered(filteredList)
+        } else {
+            postPokedexListFiltered(_pokedexOriginalList.value!!)
         }
     }
 

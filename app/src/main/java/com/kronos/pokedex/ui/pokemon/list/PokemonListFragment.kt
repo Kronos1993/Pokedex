@@ -142,6 +142,7 @@ class PokemonListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        menu.clear()
         inflater.inflate(R.menu.main, menu)
         val searchItem: MenuItem = menu.findItem(R.id.action_search)
 
@@ -163,8 +164,6 @@ class PokemonListFragment : Fragment() {
             }
         })
     }
-
-
 
     override fun onDestroyView() {
         binding.unbind()

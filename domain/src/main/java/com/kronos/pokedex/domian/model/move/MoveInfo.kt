@@ -17,4 +17,5 @@ data class MoveInfo(
     var priority: Int = 0,
     var type:NamedResourceApi = NamedResourceApi(),
     var effects:List<EffectEntry> = listOf(),
+    var effectChance:Int? = 0,
 ): Serializable

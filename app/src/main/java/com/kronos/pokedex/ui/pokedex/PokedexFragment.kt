@@ -1,8 +1,8 @@
 package com.kronos.pokedex.ui.pokedex
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -28,6 +28,8 @@ class PokedexFragment : Fragment() {
 
     private val viewModel by viewModels<PokedexViewModel>()
 
+    lateinit var searchView: SearchView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,6 +37,7 @@ class PokedexFragment : Fragment() {
     ) = binding.run {
         viewModel = this@PokedexFragment.viewModel
         lifecycleOwner = this@PokedexFragment.viewLifecycleOwner
+        setHasOptionsMenu(true)
         root
     }
 
@@ -108,6 +111,8 @@ class PokedexFragment : Fragment() {
         viewModel.pokedexListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<NamedResourceApi> {
             override fun onItemClick(t: NamedResourceApi, pos: Int) {
+                if (searchView != null) searchView.clearFocus()
+                    viewModel.filterPokedex("")
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_POKEDEX, t)
                 findNavController().navigate(R.id.action_nav_pokedex_to_nav_pokemon_list, bundle)
@@ -124,6 +129,31 @@ class PokedexFragment : Fragment() {
                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0)
                         viewModel.getMorePokedex()
                 }
+            }
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menu.clear()
+        inflater.inflate(R.menu.main, menu)
+        val searchItem: MenuItem = menu.findItem(R.id.action_search)
+
+        // getting search view of our item.
+        searchView = searchItem.actionView as SearchView
+
+        // below line is to call set on query text listener method.
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(msg: String): Boolean {
+                // inside on query text change method we are
+                // calling a method to filter our recycler view.
+                viewModel.filterPokedex(msg)
+                return false
             }
         })
     }

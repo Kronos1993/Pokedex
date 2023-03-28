@@ -142,9 +142,12 @@ class AbilityListFragment : Fragment() {
         binding.layoutAbilityList.recyclerViewPokemonAbilities.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val visibleItemCount: Int = (recyclerView.layoutManager as GridLayoutManager).childCount
-                val totalItemCount: Int = (recyclerView.layoutManager as GridLayoutManager).itemCount
-                val firstVisibleItemPosition: Int = (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
+                val visibleItemCount: Int =
+                    (recyclerView.layoutManager as GridLayoutManager).childCount
+                val totalItemCount: Int =
+                    (recyclerView.layoutManager as GridLayoutManager).itemCount
+                val firstVisibleItemPosition: Int =
+                    (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
                 if (!viewModel.loading.value!!) {
                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0)
                         viewModel.getMoreAbilities()
@@ -165,6 +168,7 @@ class AbilityListFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.main, menu)
         val searchItem: MenuItem = menu.findItem(R.id.action_search)

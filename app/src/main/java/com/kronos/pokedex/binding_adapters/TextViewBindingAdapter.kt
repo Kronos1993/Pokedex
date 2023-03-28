@@ -113,3 +113,22 @@ fun setPokemonWeight(view: TextView, weight: Double?) {
         }
     }
 }
+
+@BindingAdapter("app:handle_move_category")
+fun setMoveCategory(view: TextView, category: String?) {
+    view.run {
+        if(category!=null){
+            when(category) {
+                "physical" -> {
+                    view.text = view.context.getString(R.string.move_physical)
+                }
+                "special" -> {
+                    view.text = view.context.getString(R.string.move_special)
+                }
+                else->{
+                    view.text = view.context.getString(R.string.move_status)
+                }
+            }
+        }
+    }
+}

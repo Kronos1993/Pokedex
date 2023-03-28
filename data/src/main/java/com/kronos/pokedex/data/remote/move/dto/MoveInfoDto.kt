@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 import com.kronos.pokedex.data.remote.description.EffectEntryDto
 import com.kronos.pokedex.data.remote.description.FlavorTextDto
 import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
-import com.kronos.pokedex.data.remote.type.dto.TypeDto
 
 data class MoveInfoDto(
     @SerializedName("accuracy")
@@ -26,5 +25,7 @@ data class MoveInfoDto(
     @SerializedName("priority")
     var priority: Int = 0,
     @SerializedName("type")
-    var type: NamedResourceApiDto = NamedResourceApiDto()
+    var type: NamedResourceApiDto = NamedResourceApiDto(),
+    @SerializedName("effect_chance")
+    var effectChance: Int? = 0,
 )

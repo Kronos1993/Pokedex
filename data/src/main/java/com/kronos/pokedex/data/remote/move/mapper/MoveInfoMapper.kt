@@ -22,5 +22,6 @@ fun MoveInfoDto.toMoveInfo(): MoveInfo =
         learnedBy = learnedBy.map {
             it.toNamedResource()
         },
-        effects = effectEntries.map { it.toEffectEntry() }
+        effects = effectEntries.map { it.toEffectEntry() },
+        effectChance = effectChance,
     )

@@ -30,7 +30,6 @@ class PokemonListViewModel @Inject constructor(
     val pokemonList = _pokemonList.asLiveData()
 
     private val _pokemonOriginalList = MutableLiveData<MutableList<PokemonDexEntry>>()
-    val pokemonOriginalList = _pokemonOriginalList.asLiveData()
 
     private val _limit = MutableLiveData<Int>()
     val limit = _limit.asLiveData()

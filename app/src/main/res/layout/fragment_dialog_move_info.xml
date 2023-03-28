@@ -36,6 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/margin_5"
                     android:weightSum="5">
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -46,9 +47,9 @@
                         android:layout_marginStart="@dimen/margin_8"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textViewAbilityName"
+                        android:id="@+id/textViewMoveName"
                         style="@style/TextViewNormal"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_8"
                         android:layout_weight="4"
@@ -58,7 +59,6 @@
                         app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/drag_handle" />
-
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <View
@@ -256,6 +256,40 @@
                             app:layout_constraintTop_toBottomOf="@+id/textViewMovePriorityHeader" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewMoveCategoryHeader"
+                    style="@style/TextViewNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:text="CATEGORY"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_5"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_5"
+                    app:move_category_color="@{viewModel.moveInfo.moveCategory}"
+                    style="@style/Widget.Pokedex.CardView">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewMoveCategory"
+                        style="@style/TextViewNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:textSize="@dimen/margin_18"
+                        app:handle_move_category="@{viewModel.moveInfo.moveCategory}"/>
 
                 </com.google.android.material.card.MaterialCardView>
 

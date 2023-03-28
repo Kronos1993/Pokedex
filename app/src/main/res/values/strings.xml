@@ -24,5 +24,9 @@
     <string name="no_pokemon">NO POKEMON FOUND</string>
     <string name="no_pokedex">NO POKEDEX FOUND</string>
     <string name="unknown">Unknown</string>
+
     <string name="no_moves">No Moves</string>
+    <string name="move_physical">PHYSICAL</string>
+    <string name="move_special">SPECIAL</string>
+    <string name="move_status">STATUS</string>
 </resources>
