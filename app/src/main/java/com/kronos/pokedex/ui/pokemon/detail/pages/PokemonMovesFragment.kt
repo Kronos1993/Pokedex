@@ -55,7 +55,6 @@ class PokemonMovesFragment : Fragment() {
                 bundle.putSerializable(CURRENT_MOVE, moveInfo)
                 findNavController().navigate(R.id.action_nav_pokemon_detail_to_nav_move_info_dialog, bundle)
             }
-
         }
     }
 
@@ -92,6 +91,7 @@ class PokemonMovesFragment : Fragment() {
 
     override fun onPause() {
         binding.unbind()
+        viewModel.postMoveInfo(MoveInfo())
         super.onPause()
     }
 }

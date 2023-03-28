@@ -22,6 +22,7 @@ import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.pokedex.ui.move.list.CURRENT_MOVE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
+import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -115,16 +116,26 @@ class MoveInfoDialogFragment : BottomSheetDialogFragment() {
         viewModel.pokemonListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<PokemonDexEntry> {
             override fun onItemClick(t: PokemonDexEntry, pos: Int) {
-                if (viewModel.origen.value == ShowMoveIn.POKEMON_DETAIL)
+                if (viewModel.origen.value == ShowMoveIn.POKEMON_DETAIL) {
                     viewModelPokemonDetail.loadPokemonInfo(t.pokemon)
-                hideDialog()
+                    hideDialog()
+                } else if (viewModel.origen.value == ShowMoveIn.MOVE_LIST) {
+                    dismiss()
+                    val bundle = Bundle()
+                    bundle.putSerializable(CURRENT_POKEMON, t.pokemon)
+                    findNavController().navigate(
+                        R.id.action_nav_move_info_dialog_to_nav_pokemon_detail,
+                        bundle
+                    )
+                }
+
             }
         })
     }
 
     private fun hideDialog() {
         lifecycleScope.launch {
-            withContext(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
                 findNavController().navigateUp()
             }
         }

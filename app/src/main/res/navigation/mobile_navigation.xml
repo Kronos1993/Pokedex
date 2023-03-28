@@ -29,7 +29,11 @@
         android:id="@+id/nav_ability_info_dialog"
         android:name="com.kronos.pokedex.ui.abilities.dialog.AbilityInfoDialogFragment"
         android:label="@string/ability_info"
-        tools:layout="@layout/fragment_dialog_ability_info"/>
+        tools:layout="@layout/fragment_dialog_ability_info">
+        <action
+            android:id="@+id/action_nav_ability_info_dialog_to_nav_pokemon_detail"
+            app:destination="@id/nav_pokemon_detail" />
+    </dialog>
 
     <fragment
         android:id="@+id/nav_pokemon_list"
@@ -70,7 +74,11 @@
         android:id="@+id/nav_move_info_dialog"
         android:name="com.kronos.pokedex.ui.move.dialog.MoveInfoDialogFragment"
         android:label="@string/move_info"
-        tools:layout="@layout/fragment_dialog_move_info"/>
+        tools:layout="@layout/fragment_dialog_move_info">
+        <action
+            android:id="@+id/action_nav_move_info_dialog_to_nav_pokemon_detail"
+            app:destination="@id/nav_pokemon_detail" />
+    </dialog>
 
     <fragment
         android:id="@+id/nav_nature_list"

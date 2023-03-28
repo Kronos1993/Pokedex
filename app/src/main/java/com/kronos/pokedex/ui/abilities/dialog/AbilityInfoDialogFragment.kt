@@ -22,6 +22,7 @@ import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.ui.abilities.ShowAbilityIn
 import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
+import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -113,9 +114,18 @@ class AbilityInfoDialogFragment : BottomSheetDialogFragment() {
         viewModel.pokemonListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<PokemonDexEntry> {
             override fun onItemClick(t: PokemonDexEntry, pos: Int) {
-                if (viewModel.origen.value == ShowAbilityIn.POKEMON_DETAIL)
+                if (viewModel.origen.value == ShowAbilityIn.POKEMON_DETAIL) {
                     viewModelPokemonDetail.loadPokemonInfo(t.pokemon)
-                hideDialog()
+                    hideDialog()
+                } else if (viewModel.origen.value == ShowAbilityIn.ABILITY_LIST) {
+                    dismiss()
+                    val bundle = Bundle()
+                    bundle.putSerializable(CURRENT_POKEMON, t.pokemon)
+                    findNavController().navigate(
+                        R.id.action_nav_ability_info_dialog_to_nav_pokemon_detail,
+                        bundle
+                    )
+                }
             }
         })
     }

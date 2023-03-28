@@ -60,7 +60,6 @@ class PokemonInfoFragment : Fragment() {
                 bundle.putSerializable(CURRENT_ABILITY, abilityInfo)
                 findNavController().navigate(R.id.action_nav_pokemon_detail_to_nav_ability_info_dialog_fragment, bundle)
             }
-
         }
     }
 
@@ -172,6 +171,7 @@ class PokemonInfoFragment : Fragment() {
 
     override fun onPause() {
         binding.unbind()
+        viewModel.postAbilityInfo(AbilityInfo())
         super.onPause()
     }
 }
