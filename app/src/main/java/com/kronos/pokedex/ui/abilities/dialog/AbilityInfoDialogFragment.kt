@@ -89,17 +89,19 @@ class AbilityInfoDialogFragment : BottomSheetDialogFragment() {
                 bundle.get(CURRENT_ABILITY) is AbilityInfo -> {
                     viewModel.postAbilityInfo((bundle.get(CURRENT_ABILITY) as AbilityInfo))
                     viewModel.postOrigen(ShowAbilityIn.POKEMON_DETAIL)
+                    initView()
                 }
                 bundle.get(CURRENT_ABILITY) is NamedResourceApi -> {
                     viewModel.loadAbilityInfo((bundle.get(CURRENT_ABILITY) as NamedResourceApi))
                     viewModel.postOrigen(ShowAbilityIn.ABILITY_LIST)
+                    initView()
                 }
                 else -> hideDialog()
             }
         } else {
             hideDialog()
         }
-        initView()
+
     }
 
     private fun initView() {

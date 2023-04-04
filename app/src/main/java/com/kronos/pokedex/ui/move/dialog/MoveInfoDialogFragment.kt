@@ -91,17 +91,19 @@ class MoveInfoDialogFragment : BottomSheetDialogFragment() {
                 bundle.get(CURRENT_MOVE) is MoveInfo -> {
                     viewModel.postMoveInfo((bundle.get(CURRENT_MOVE) as MoveInfo))
                     viewModel.postOrigen(ShowMoveIn.POKEMON_DETAIL)
+                    initView()
                 }
                 bundle.get(CURRENT_MOVE) is NamedResourceApi -> {
                     viewModel.loadMoveInfo((bundle.get(CURRENT_MOVE) as NamedResourceApi))
                     viewModel.postOrigen(ShowMoveIn.MOVE_LIST)
+                    initView()
                 }
                 else -> hideDialog()
             }
         } else {
             hideDialog()
         }
-        initView()
+
     }
 
     private fun initView() {
