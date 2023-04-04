@@ -9,7 +9,6 @@ import com.kronos.logger.LoggerType
 import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.repository.PokedexRemoteRepository
-import com.kronos.pokedex.ui.ItemListAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +30,7 @@ class PokedexViewModel  @Inject constructor(
     private val _pokedexOriginalList = MutableLiveData<MutableList<NamedResourceApi>>()
     val pokedexOriginalList = _pokedexOriginalList.asLiveData()
 
-    var pokedexListAdapter: WeakReference<ItemListAdapter?> = WeakReference(ItemListAdapter())
+    var pokedexListAdapter: WeakReference<PokedexListAdapter?> = WeakReference(PokedexListAdapter())
 
     private val _limit = MutableLiveData<Int>()
     val limit = _limit.asLiveData()

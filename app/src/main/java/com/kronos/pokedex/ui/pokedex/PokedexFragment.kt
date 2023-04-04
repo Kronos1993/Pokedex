@@ -15,7 +15,6 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokedexBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
-import com.kronos.pokedex.ui.ItemListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 import java.util.*
@@ -106,7 +105,7 @@ class PokedexFragment : Fragment() {
         binding.recyclerViewPokedexList.layoutManager = GridLayoutManager(context,2)
         binding.recyclerViewPokedexList.setHasFixedSize(false)
         if (viewModel.pokedexListAdapter.get() == null)
-            viewModel.pokedexListAdapter = WeakReference(ItemListAdapter())
+            viewModel.pokedexListAdapter = WeakReference(PokedexListAdapter())
         binding.recyclerViewPokedexList.adapter = viewModel.pokedexListAdapter.get()
         viewModel.pokedexListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<NamedResourceApi> {
