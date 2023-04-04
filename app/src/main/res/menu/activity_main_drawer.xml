@@ -18,7 +18,7 @@
             android:title="@string/menu_move_list" />
         <item
             android:id="@+id/nav_nature_list"
-            android:icon="@drawable/ic_pokeball"
+            android:icon="@drawable/ic_nature"
             android:title="@string/menu_nature_list" />
     </group>
 </menu>

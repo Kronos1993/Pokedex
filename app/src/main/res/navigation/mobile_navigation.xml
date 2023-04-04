@@ -82,8 +82,18 @@
 
     <fragment
         android:id="@+id/nav_nature_list"
-        android:name="com.kronos.pokedex.ui.nature.NatureListFragment"
+        android:name="com.kronos.pokedex.ui.nature.list.NatureListFragment"
         android:label="@string/menu_nature_list"
-        tools:layout="@layout/fragment_move_list" />
+        tools:layout="@layout/fragment_nature_list" >
+        <action
+            android:id="@+id/action_nav_nature_list_to_nav_detail_info_dialog"
+            app:destination="@id/nav_detail_info_dialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/nav_detail_info_dialog"
+        android:name="com.kronos.pokedex.ui.nature.dialog.NatureDetailDialogFragment"
+        android:label="@string/nature_info"
+        tools:layout="@layout/fragment_dialog_nature_info">
+    </dialog>
 
 </navigation>

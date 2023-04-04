@@ -16,17 +16,21 @@
     <string name="menu_pokemon_list">Pokemons</string>
     <string name="menu_pokemon_detail">Pokemon Detail</string>
     <string name="menu_move_list">Moves</string>
-    <string name="move_info">Move</string>
     <string name="menu_nature_list">Natures</string>
     <string name="menu_abilities">Abilities</string>
+
     <string name="ability_info">Ability</string>
 
     <string name="no_pokemon">NO POKEMON FOUND</string>
     <string name="no_pokedex">NO POKEDEX FOUND</string>
     <string name="unknown">Unknown</string>
 
+    <string name="move_info">Move</string>
     <string name="no_moves">No Moves</string>
     <string name="move_physical">PHYSICAL</string>
     <string name="move_special">SPECIAL</string>
     <string name="move_status">STATUS</string>
+
+    <string name="nature_info">Nature</string>
+    <string name="no_natures">No Natures</string>
 </resources>
