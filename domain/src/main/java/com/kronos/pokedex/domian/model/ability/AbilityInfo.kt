@@ -1,7 +1,7 @@
 package com.kronos.pokedex.domian.model.ability
 
 import com.kronos.pokedex.domian.model.EffectEntry
-import com.kronos.pokedex.domian.model.flavor_text.FlavorText
+import com.kronos.pokedex.domian.model.FlavorText
 import java.io.Serializable
 
 data class AbilityInfo(

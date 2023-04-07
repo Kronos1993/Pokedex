@@ -2,7 +2,7 @@ package com.kronos.pokedex.domian.model.specie
 
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ResourceApi
-import com.kronos.pokedex.domian.model.flavor_text.FlavorText
+import com.kronos.pokedex.domian.model.FlavorText
 import java.io.Serializable
 
 data class SpecieInfo(

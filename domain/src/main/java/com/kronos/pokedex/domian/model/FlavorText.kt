@@ -1,4 +1,4 @@
-package com.kronos.pokedex.domian.model.flavor_text
+package com.kronos.pokedex.domian.model
 
 import java.io.Serializable
 

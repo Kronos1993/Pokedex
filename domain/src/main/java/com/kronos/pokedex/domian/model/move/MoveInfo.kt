@@ -2,8 +2,7 @@ package com.kronos.pokedex.domian.model.move
 
 import com.kronos.pokedex.domian.model.EffectEntry
 import com.kronos.pokedex.domian.model.NamedResourceApi
-import com.kronos.pokedex.domian.model.flavor_text.FlavorText
-import com.kronos.pokedex.domian.model.type.Type
+import com.kronos.pokedex.domian.model.FlavorText
 import java.io.Serializable
 
 data class MoveInfo(
