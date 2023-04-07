@@ -5,6 +5,8 @@ import com.kronos.pokedex.data.remote.description.mapper.toFlavorText
 import com.kronos.pokedex.data.remote.item.dto.ItemInfoDto
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
 import com.kronos.pokedex.data.remote.sprite.mapper.toSprite
+import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.ResourceApi
 import com.kronos.pokedex.domian.model.item.ItemInfo
 
 fun ItemInfoDto.toItemInfo(): ItemInfo =
@@ -13,12 +15,12 @@ fun ItemInfoDto.toItemInfo(): ItemInfo =
         id = id,
         attributes = attributes.map { it.toNamedResource() },
         sprites = sprites.toSprite(),
-        babyTriggerFor = babyTriggerFor,
+        babyTriggerFor = babyTriggerFor.let { if (it != null) it else ResourceApi() },
         category = category.toNamedResource(),
         cost = cost,
         descriptions = descriptions.map { it.toFlavorText() },
         effectEntries = effectEntries.map { it.toEffectEntry() },
-        flingEffect = flingEffect.toNamedResource(),
+        flingEffect = flingEffect?.toNamedResource() ?: NamedResourceApi(),
         flingPower = flingPower,
         heldByPokemon = heldByPokemon.map { it.pokemon.toNamedResource() }
     )

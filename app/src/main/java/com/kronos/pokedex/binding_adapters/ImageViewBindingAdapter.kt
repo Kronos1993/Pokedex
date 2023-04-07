@@ -89,6 +89,13 @@ fun handlePokemonSprite(view: ImageView, spriteUrl: String){
     }
 }
 
+@BindingAdapter("app:handle_item_sprite")
+fun handleItemSprite(view: ImageView, itemSpriteUrl: String?){
+    if (itemSpriteUrl != null) {
+        Glide.with(view.context).load(itemSpriteUrl).placeholder(R.drawable.ic_backpack).into(view)
+    }
+}
+
 @BindingAdapter("app:handle_pokemon_gender")
 fun handlePokemonGender(view: ImageView, pokemon_gender: Int?){
     view.run {

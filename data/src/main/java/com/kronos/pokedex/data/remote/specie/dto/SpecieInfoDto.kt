@@ -1,7 +1,7 @@
 package com.kronos.pokedex.data.remote.specie.dto
 
 import com.google.gson.annotations.SerializedName
-import com.kronos.pokedex.data.remote.description.FlavorTextDto
+import com.kronos.pokedex.data.remote.description.FlavorTextEntryDto
 import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
 import com.kronos.pokedex.domian.model.ResourceApi
 
@@ -15,7 +15,7 @@ data class SpecieInfoDto(
     @SerializedName("evolves_from_species")
     var evolvesFrom:NamedResourceApiDto = NamedResourceApiDto(),
     @SerializedName("flavor_text_entries")
-    var description:List<FlavorTextDto> = listOf(),
+    var description:List<FlavorTextEntryDto> = listOf(),
     @SerializedName("growth_rate")
     var growthRate:NamedResourceApiDto = NamedResourceApiDto(),
     @SerializedName("habitat")

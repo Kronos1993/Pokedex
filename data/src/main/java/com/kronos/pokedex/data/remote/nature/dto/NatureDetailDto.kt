@@ -1,8 +1,6 @@
 package com.kronos.pokedex.data.remote.nature.dto
 
 import com.google.gson.annotations.SerializedName
-import com.kronos.pokedex.data.remote.description.EffectEntryDto
-import com.kronos.pokedex.data.remote.description.FlavorTextDto
 import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
 
 data class NatureDetailDto(

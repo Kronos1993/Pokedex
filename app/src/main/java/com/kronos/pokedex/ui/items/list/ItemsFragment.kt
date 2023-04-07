@@ -1,10 +1,11 @@
-package com.kronos.pokedex.ui.items
+package com.kronos.pokedex.ui.items.list
 
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kronos.core.adapters.AdapterItemClickListener
@@ -114,7 +115,7 @@ class ItemsFragment : Fragment() {
                     viewModel.filterItems("")
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_ITEM, t)
-                //findNavController().navigate(R.id.action_nav_pokedex_to_nav_pokemon_list, bundle)
+                findNavController().navigate(R.id.action_nav_items_to_nav_item_detail, bundle)
             }
         })
 

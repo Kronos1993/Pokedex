@@ -39,7 +39,7 @@
                 app:handle_text="@{berry.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageViewNature"
+                app:layout_constraintStart_toEndOf="@+id/imageViewBerry"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

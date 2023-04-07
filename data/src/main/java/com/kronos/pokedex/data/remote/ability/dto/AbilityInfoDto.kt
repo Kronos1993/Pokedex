@@ -2,9 +2,8 @@ package com.kronos.pokedex.data.remote.ability.dto
 
 import com.google.gson.annotations.SerializedName
 import com.kronos.pokedex.data.remote.Name
-import com.kronos.pokedex.data.remote.VerboseEffect
 import com.kronos.pokedex.data.remote.description.EffectEntryDto
-import com.kronos.pokedex.data.remote.description.FlavorTextDto
+import com.kronos.pokedex.data.remote.description.FlavorTextEntryDto
 import com.kronos.pokedex.domian.model.NamedResourceApi
 
 data class AbilityInfoDto(
@@ -23,7 +22,7 @@ data class AbilityInfoDto(
     @SerializedName("effect_changes")
     val effectChanges: List<AbilityEffectChangeDto>,
     @SerializedName("flavor_text_entries")
-    val flavorTextEntries: List<FlavorTextDto>,
+    val flavorTextEntryEntries: List<FlavorTextEntryDto>,
     @SerializedName("pokemon")
     val pokemon: List<PokemonWithAbilityDto>
 )

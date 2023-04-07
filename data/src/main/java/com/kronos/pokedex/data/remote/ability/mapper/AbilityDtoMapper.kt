@@ -22,7 +22,7 @@ fun AbilityInfoDto.toAbilityInfo(): AbilityInfo =
         id = id,
         name = name,
         pokemon = pokemon.map { it.toPokemonWithAbility() },
-        flavorText = flavorTextEntries.map { it.toFlavorText() },
+        flavorText = flavorTextEntryEntries.map { it.toFlavorText() },
         effects = effectEntries.map { it.toEffectEntry() },
     )
 

@@ -1,4 +1,4 @@
-package com.kronos.pokedex.ui.items
+package com.kronos.pokedex.ui.items.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

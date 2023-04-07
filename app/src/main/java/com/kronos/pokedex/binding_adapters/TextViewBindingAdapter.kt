@@ -71,6 +71,15 @@ fun transformText(view: TextView, text: String?) {
     }
 }
 
+@BindingAdapter("app:handle_long_item_effect_text")
+fun transformItemLongEffectText(view: TextView, text: String?) {
+    view.run {
+        if (text != null) {
+            view.text = text.replace(Regex("\n"), " ")
+        }
+    }
+}
+
 @BindingAdapter("app:handle_pokemon_name")
 fun setPokemonName(view: TextView, pokemonName: String?) {
     view.run {

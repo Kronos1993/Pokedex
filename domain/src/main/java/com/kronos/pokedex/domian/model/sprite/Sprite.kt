@@ -3,7 +3,7 @@ package com.kronos.pokedex.domian.model.sprite
 import java.io.Serializable
 
 data class Sprite(
-    val default:String = "",
+    val defaultImg:String = "",
     val backDefault:String = "",
     val backFemale:String = "",
     val backShiny:String = "",
