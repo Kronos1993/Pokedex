@@ -148,7 +148,7 @@ fun setIncreasedStat(view: TextView, increasedStat: String?) {
 fun setDecreasedStat(view: TextView, decreasedStat: String?) {
     view.run {
         if (decreasedStat != null) {
-            view.text = decreasedStat.replace(Regex("-"),"").uppercase()
+            view.text = decreasedStat.replace(Regex("-")," ").uppercase()
         } else {
             view.text = "NONE".uppercase()
         }

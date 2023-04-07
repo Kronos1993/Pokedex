@@ -5,23 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.kronos.pokedex.ui.move.dialog.MoveInfoViewModel" />
     </data>
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        style="@style/Widget.Pokedex.BottomSheetDialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
         <FrameLayout
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-            style="@style/Widget.Pokedex.BottomSheetDialog"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:background="@color/backgroundColor"
+                android:orientation="vertical"
                 tools:context=".ui.pokemon.list.PokemonListFragment">
 
                 <com.google.android.material.bottomsheet.BottomSheetDragHandleView
@@ -30,21 +36,21 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toStartOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
                     android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/margin_5"
                     android:weightSum="5">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_move"
+                        android:layout_marginStart="@dimen/margin_8"
                         android:layout_marginTop="@dimen/margin_8"
-                        android:layout_marginStart="@dimen/margin_8"/>
+                        app:srcCompat="@drawable/ic_move" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewMoveName"
@@ -53,9 +59,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_8"
                         android:layout_weight="4"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/margin_18"
                         android:text="@{viewModel.moveInfo.moveName.toUpperCase().replaceAll(`-`,` `)}"
+                        android:textSize="@dimen/margin_18"
+                        android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/drag_handle" />
@@ -65,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_3"
                     android:layout_margin="@dimen/margin_5"
-                    android:background="@color/primary_dark"/>
+                    android:background="@color/primary_dark" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewMoveInfoHeader"
@@ -81,9 +87,9 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardViewMoveInfo"
+                    style="@style/Widget.Pokedex.CardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Pokedex.CardView"
                     android:layout_marginStart="@dimen/margin_5"
                     android:layout_marginTop="@dimen/margin_10"
                     android:layout_marginEnd="@dimen/margin_5"
@@ -100,28 +106,28 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".23"/>
+                            app:layout_constraintGuide_percent=".23" />
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guide40"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".4"/>
+                            app:layout_constraintGuide_percent=".4" />
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guide60"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".6"/>
+                            app:layout_constraintGuide_percent=".6" />
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guide80"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".8"/>
+                            app:layout_constraintGuide_percent=".8" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewMoveAccuracyHeader"
@@ -129,8 +135,8 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/margin_5"
-                            android:textAlignment="center"
                             android:text="Accuracy"
+                            android:textAlignment="center"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toStartOf="@+id/guide20"
                             app:layout_constraintStart_toStartOf="parent"
@@ -143,8 +149,8 @@
                             android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/margin_5"
                             android:layout_marginBottom="@dimen/margin_5"
-                            android:textAlignment="center"
                             android:text="@{String.valueOf(viewModel.moveInfo.accuracy)}"
+                            android:textAlignment="center"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/textViewMoveAccuracyHeader"
@@ -169,9 +175,9 @@
                             style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center"
                             android:layout_marginBottom="@dimen/margin_5"
                             android:text="@{String.valueOf(viewModel.moveInfo.pp)}"
+                            android:textAlignment="center"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/textViewMovePPHeader"
@@ -184,8 +190,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
-                            android:textAlignment="center"
                             android:text="Power"
+                            android:textAlignment="center"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toStartOf="@+id/guide60"
                             app:layout_constraintStart_toStartOf="@+id/guide40"
@@ -197,8 +203,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/margin_5"
-                            android:textAlignment="center"
                             android:text="@{String.valueOf(viewModel.moveInfo.power)}"
+                            android:textAlignment="center"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/textViewMovePowerHeader"
@@ -210,9 +216,9 @@
                             style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textAlignment="center"
                             android:layout_marginTop="@dimen/margin_5"
                             android:text="Type"
+                            android:textAlignment="center"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toStartOf="@+id/guide80"
                             app:layout_constraintStart_toStartOf="@+id/guide60"
@@ -236,8 +242,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
-                            android:textAlignment="center"
                             android:text="Priority"
+                            android:textAlignment="center"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/guide80"
@@ -272,24 +278,24 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.Pokedex.CardView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_5"
                     android:layout_marginTop="@dimen/margin_10"
                     android:layout_marginEnd="@dimen/margin_5"
-                    app:move_category_color="@{viewModel.moveInfo.moveCategory}"
-                    style="@style/Widget.Pokedex.CardView">
+                    app:move_category_color="@{viewModel.moveInfo.moveCategory}">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewMoveCategory"
                         style="@style/TextViewNormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textAlignment="center"
                         android:gravity="center"
+                        android:textAlignment="center"
                         android:textSize="@dimen/margin_18"
-                        app:handle_move_category="@{viewModel.moveInfo.moveCategory}"/>
+                        android:textStyle="bold"
+                        app:handle_move_category="@{viewModel.moveInfo.moveCategory}" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -307,9 +313,9 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardViewMoveDescription"
+                    style="@style/Widget.Pokedex.CardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Pokedex.CardView"
                     android:layout_marginStart="@dimen/margin_5"
                     android:layout_marginTop="@dimen/margin_10"
                     android:layout_marginEnd="@dimen/margin_5"
@@ -346,21 +352,21 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
                     android:text="EFFECT"
-                    app:handle_visibility="@{viewModel.moveEffect}"
                     android:textStyle="bold"
+                    app:handle_visibility="@{viewModel.moveEffect}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardViewMoveEffect"
+                    style="@style/Widget.Pokedex.CardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.Pokedex.CardView"
-                    app:handle_visibility="@{viewModel.moveEffect}"
                     android:layout_marginStart="@dimen/margin_5"
                     android:layout_marginTop="@dimen/margin_10"
                     android:layout_marginEnd="@dimen/margin_5"
+                    app:handle_visibility="@{viewModel.moveEffect}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardViewAbilityGameEffect">
@@ -373,9 +379,10 @@
                             android:id="@+id/textViewMoveEffectDescription"
                             style="@style/TextViewNormal"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
                             android:layout_marginBottom="@dimen/margin_5"
+                            android:maxHeight="@dimen/size_100"
                             android:maxLines="15"
                             android:singleLine="false"
                             android:text="@{viewModel.moveEffect}"
@@ -400,8 +407,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardViewAbilityEffect" />
             </androidx.appcompat.widget.LinearLayoutCompat>
-
-
         </FrameLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

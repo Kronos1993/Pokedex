@@ -24,12 +24,27 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_3"
+                app:handle_visibility="@{viewModel.pokemonEvolutionList.size>0}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="3"
                 tools:listitem="@layout/item_pokemon_evolution_chain" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_no_natures"
+                style="@style/TextViewNormal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_evolutions"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_20"
+                app:handle_visibility="@{viewModel.pokemonEvolutionList.size==0 || viewModel.pokemonEvolutionList == null}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

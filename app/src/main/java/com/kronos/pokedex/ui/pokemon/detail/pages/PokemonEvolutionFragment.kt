@@ -3,22 +3,16 @@ package com.kronos.pokedex.ui.pokemon.detail.pages
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonEvolutionBinding
 import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
-import com.kronos.pokedex.domian.model.stat.Stat
-import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEvolutionChainAdapter
-import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
-import com.kronos.pokedex.ui.stats.PokemonStatsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 
@@ -47,6 +41,7 @@ class PokemonEvolutionFragment : Fragment() {
     private fun handlePokemonEvolution(list: List<ChainLink>) {
         viewModel.evolutionPokemonAdapter.get()?.submitList(list)
         viewModel.evolutionPokemonAdapter.get()?.notifyDataSetChanged()
+        binding.invalidateAll()
     }
 
     private fun initViews() {

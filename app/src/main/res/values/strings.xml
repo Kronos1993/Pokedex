@@ -14,7 +14,10 @@
 
     <string name="menu_pokedex">Pokedex</string>
     <string name="menu_pokemon_list">Pokemons</string>
+
     <string name="menu_pokemon_detail">Pokemon Detail</string>
+    <string name="no_evolutions">No Data</string>
+
     <string name="menu_move_list">Moves</string>
     <string name="menu_nature_list">Natures</string>
     <string name="menu_abilities">Abilities</string>
@@ -33,4 +36,6 @@
 
     <string name="nature_info">Nature</string>
     <string name="no_natures">No Natures</string>
+    <string name="menu_items">Items</string>
+    <string name="menu_berries">Berries</string>
 </resources>

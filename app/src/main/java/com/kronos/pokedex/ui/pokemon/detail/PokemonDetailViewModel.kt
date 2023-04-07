@@ -16,6 +16,7 @@ import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.model.pokemon.extension.totalStat
+import com.kronos.pokedex.domian.model.specie.SpecieInfo
 import com.kronos.pokedex.domian.model.stat.Stat
 import com.kronos.pokedex.domian.repository.*
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
@@ -141,7 +142,7 @@ class PokemonDetailViewModel @Inject constructor(
 
 
     fun loadPokemonInfo(pokemonList: NamedResourceApi) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch (Dispatchers.IO) {
             loading.postValue(true)
             var pokemonInfo: PokemonInfo? = null
 
@@ -179,6 +180,10 @@ class PokemonDetailViewModel @Inject constructor(
                             pos++
                     }
                 }
+            }else{
+                pokemonInfo.specie = SpecieInfo()
+                postPokemonEvolutionChain(EvolutionChain())
+                postPokemonEvolutionChainList(listOf())
             }
 
             postPokemonInfo(pokemonInfo)

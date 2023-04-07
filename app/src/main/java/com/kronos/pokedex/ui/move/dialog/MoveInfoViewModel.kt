@@ -75,7 +75,10 @@ class MoveInfoViewModel @Inject constructor(
             while (!find && pos < moveInfo.effects.size) {
                 if (moveInfo.effects[pos].language == "en") {
                     moveShortEffect.set(moveInfo.effects[pos].shortEffect)
-                    moveEffect.set(moveInfo.effects[pos].effect)
+                    if(moveInfo.effectChance!=null)
+                        moveEffect.set(moveInfo.effects[pos].effect.replace(Regex("effect_chance"),moveInfo.effectChance.toString()).replace("$",""))
+                    else
+                        moveEffect.set(moveInfo.effects[pos].effect)
                     find = true
                 } else
                     pos++

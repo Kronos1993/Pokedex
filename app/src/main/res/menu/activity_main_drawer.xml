@@ -3,22 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/group_pokemon"
+        android:checkableBehavior="single">
+        <item android:title="Pokemon">
+            <menu>
+                <item
+                    android:id="@+id/nav_pokedex"
+                    android:icon="@drawable/ic_pokedex"
+                    android:title="@string/menu_pokedex" />
+                <item
+                    android:id="@+id/nav_abilities"
+                    android:icon="@drawable/ic_eye"
+                    android:title="@string/menu_abilities" />
+                <item
+                    android:id="@+id/nav_move_list"
+                    android:icon="@drawable/ic_move"
+                    android:title="@string/menu_move_list" />
+                <item
+                    android:id="@+id/nav_nature_list"
+                    android:icon="@drawable/ic_nature"
+                    android:title="@string/menu_nature_list" />
+            </menu>
+        </item>
+    </group>
+
+    <group
+        android:id="@+id/group_game_item"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_pokedex"
-            android:icon="@drawable/ic_pokedex"
-            android:title="@string/menu_pokedex" />
+            android:id="@+id/nav_items"
+            android:icon="@drawable/ic_backpack"
+            android:title="@string/menu_items" />
         <item
-            android:id="@+id/nav_abilities"
-            android:icon="@drawable/ic_eye"
-            android:title="@string/menu_abilities" />
-        <item
-            android:id="@+id/nav_move_list"
-            android:icon="@drawable/ic_move"
-            android:title="@string/menu_move_list" />
-        <item
-            android:id="@+id/nav_nature_list"
-            android:icon="@drawable/ic_nature"
-            android:title="@string/menu_nature_list" />
+            android:id="@+id/nav_berries"
+            android:icon="@drawable/ic_berries"
+            android:title="@string/menu_berries" />
     </group>
 </menu>

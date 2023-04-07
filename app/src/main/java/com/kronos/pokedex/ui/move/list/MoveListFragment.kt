@@ -161,7 +161,7 @@ class MoveListFragment : Fragment() {
 
     private fun initViewModel() {
         viewModel.setLimit(viewModel.limit.value.let {
-            it ?: resources.getInteger(R.integer.def_limit)
+            it ?: resources.getInteger(R.integer.move_limit)
         })
         viewModel.setOffset(viewModel.offset.value.let {
             it ?: resources.getInteger(R.integer.def_offset)
