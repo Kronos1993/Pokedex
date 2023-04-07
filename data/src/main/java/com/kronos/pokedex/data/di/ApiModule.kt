@@ -1,7 +1,9 @@
 package com.kronos.pokedex.data.di
 
 import com.kronos.pokedex.data.remote.ability.api.AbilityApi
+import com.kronos.pokedex.data.remote.berry.api.BerryApi
 import com.kronos.pokedex.data.remote.evolution_chain.api.EvolutionChainApi
+import com.kronos.pokedex.data.remote.item.api.ItemApi
 import com.kronos.pokedex.data.remote.move.api.MoveApi
 import com.kronos.pokedex.data.remote.nature.api.NatureApi
 import com.kronos.pokedex.data.remote.pokedex.api.PokedexApi
@@ -49,6 +51,16 @@ class ApiModule {
     @Provides
     fun provideNatureApi(retrofit: Retrofit): NatureApi {
         return retrofit.create(NatureApi::class.java)
+    }
+
+    @Provides
+    fun provideItemApi(retrofit: Retrofit): ItemApi {
+        return retrofit.create(ItemApi::class.java)
+    }
+
+    @Provides
+    fun provideBerryApi(retrofit: Retrofit): BerryApi {
+        return retrofit.create(BerryApi::class.java)
     }
 
 }

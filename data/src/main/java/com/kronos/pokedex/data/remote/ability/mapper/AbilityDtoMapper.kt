@@ -6,11 +6,9 @@ import com.kronos.pokedex.data.remote.ability.dto.PokemonWithAbilityDto
 import com.kronos.pokedex.data.remote.description.mapper.toEffectEntry
 import com.kronos.pokedex.data.remote.description.mapper.toFlavorText
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
-import com.kronos.pokedex.domian.model.EffectEntry
 import com.kronos.pokedex.domian.model.ability.Ability
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.ability.PokemonWithAbility
-import com.kronos.pokedex.domian.model.flavor_text.FlavorText
 
 fun AbilityDto.toAbility(): Ability =
     Ability(

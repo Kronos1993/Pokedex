@@ -4,16 +4,14 @@ import android.util.Log
 import com.kronos.pokedex.data.data_source.move.MoveRemoteDataSource
 import com.kronos.pokedex.data.remote.move.api.MoveApi
 import com.kronos.pokedex.data.remote.move.mapper.toMoveInfo
-import com.kronos.pokedex.data.remote.move.mapper.toMoveList
 import com.kronos.pokedex.data.remote.pokedex.PokedexRemoteDataSourceImpl
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ResponseList
 import com.kronos.pokedex.domian.model.move.MoveInfo
-import com.kronos.pokedex.domian.model.move.MoveList
 import javax.inject.Inject
 
-class MoveRemoteDatasourceImpl @Inject constructor(
+class MoveRemoteDataSourceImpl @Inject constructor(
     private val moveApi: MoveApi,
 ) : MoveRemoteDataSource {
 
@@ -34,7 +32,7 @@ class MoveRemoteDatasourceImpl @Inject constructor(
                 e.printStackTrace()
                 ResponseList()
             }
-        Log.e(MoveRemoteDatasourceImpl::javaClass.name, "move list: $result")
+        Log.e(MoveRemoteDataSourceImpl::javaClass.name, "move list: $result")
         return result
     }
 

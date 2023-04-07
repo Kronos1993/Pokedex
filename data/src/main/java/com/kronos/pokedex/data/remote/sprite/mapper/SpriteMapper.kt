@@ -5,6 +5,12 @@ import com.kronos.pokedex.domian.model.sprite.Sprite
 
 fun SpriteDto.toSprite(): Sprite =
     Sprite(
+        default.let {
+            if(it.isNullOrEmpty())
+                ""
+            else
+                it
+        },
         backDefault.let {
             if(it.isNullOrEmpty())
                 ""

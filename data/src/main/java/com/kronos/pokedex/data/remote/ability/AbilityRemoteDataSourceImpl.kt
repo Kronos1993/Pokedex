@@ -11,7 +11,7 @@ import com.kronos.pokedex.domian.model.ResponseList
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import javax.inject.Inject
 
-class AbilityRemoteDatasourceImpl @Inject constructor(
+class AbilityRemoteDataSourceImpl @Inject constructor(
     private val abilityApi: AbilityApi,
 ) : AbilityRemoteDataSource {
 
@@ -32,7 +32,7 @@ class AbilityRemoteDatasourceImpl @Inject constructor(
                 e.printStackTrace()
                 ResponseList()
             }
-        Log.e(AbilityRemoteDatasourceImpl::javaClass.name, "ability list: $result")
+        Log.e(AbilityRemoteDataSourceImpl::javaClass.name, "ability list: $result")
         return result
     }
 

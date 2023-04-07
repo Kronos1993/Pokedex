@@ -3,7 +3,7 @@ package com.kronos.pokedex.data.remote.description.mapper
 import com.kronos.pokedex.data.remote.description.EffectEntryDto
 import com.kronos.pokedex.data.remote.description.FlavorTextDto
 import com.kronos.pokedex.domian.model.EffectEntry
-import com.kronos.pokedex.domian.model.flavor_text.FlavorText
+import com.kronos.pokedex.domian.model.FlavorText
 
 fun FlavorTextDto.toFlavorText(): FlavorText =
     FlavorText(
