@@ -17,25 +17,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_abilities"
-        android:name="com.kronos.pokedex.ui.abilities.list.AbilityListFragment"
-        android:label="@string/menu_abilities"
-        tools:layout="@layout/layout_abilities">
-        <action
-            android:id="@+id/action_nav_ability_list_to_nav_ability_info_dialog"
-            app:destination="@id/nav_ability_info_dialog" />
-    </fragment>
-    <dialog
-        android:id="@+id/nav_ability_info_dialog"
-        android:name="com.kronos.pokedex.ui.abilities.dialog.AbilityInfoDialogFragment"
-        android:label="@string/ability_info"
-        tools:layout="@layout/fragment_dialog_ability_info">
-        <action
-            android:id="@+id/action_nav_ability_info_dialog_to_nav_pokemon_detail"
-            app:destination="@id/nav_pokemon_detail" />
-    </dialog>
-
-    <fragment
         android:id="@+id/nav_pokemon_list"
         android:name="com.kronos.pokedex.ui.pokemon.list.PokemonListFragment"
         android:label="@string/menu_pokemon_list"
@@ -60,6 +41,24 @@
             app:destination="@id/nav_move_info_dialog" />
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_abilities"
+        android:name="com.kronos.pokedex.ui.abilities.list.AbilityListFragment"
+        android:label="@string/menu_abilities"
+        tools:layout="@layout/layout_abilities">
+        <action
+            android:id="@+id/action_nav_ability_list_to_nav_ability_info_dialog"
+            app:destination="@id/nav_ability_info_dialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/nav_ability_info_dialog"
+        android:name="com.kronos.pokedex.ui.abilities.dialog.AbilityInfoDialogFragment"
+        android:label="@string/ability_info"
+        tools:layout="@layout/fragment_dialog_ability_info">
+        <action
+            android:id="@+id/action_nav_ability_info_dialog_to_nav_pokemon_detail"
+            app:destination="@id/nav_pokemon_detail" />
+    </dialog>
 
     <fragment
         android:id="@+id/nav_move_list"
@@ -96,4 +95,17 @@
         tools:layout="@layout/fragment_dialog_nature_info">
     </dialog>
 
+    <fragment
+        android:id="@+id/nav_berries"
+        android:name="com.kronos.pokedex.ui.berries.BerriesFragment"
+        android:label="@string/menu_berries"
+        tools:layout="@layout/fragment_berries" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_items"
+        android:name="com.kronos.pokedex.ui.items.ItemsFragment"
+        android:label="@string/menu_items"
+        tools:layout="@layout/fragment_items" >
+    </fragment>
 </navigation>

@@ -36,6 +36,10 @@
 
     <string name="nature_info">Nature</string>
     <string name="no_natures">No Natures</string>
+
     <string name="menu_items">Items</string>
+    <string name="no_items_found">NO ITEMS FOUND</string>
+
     <string name="menu_berries">Berries</string>
+    <string name="no_berries_found">NO BERRIES FOUND</string>
 </resources>

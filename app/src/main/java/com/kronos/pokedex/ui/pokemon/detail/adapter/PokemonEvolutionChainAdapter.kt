@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.adapters.diff.GeneralDiffCallback
 import com.kronos.pokedex.databinding.ItemPokemonEvolutionChainBinding
-import com.kronos.pokedex.databinding.ItemPokemonSpriteBinding
 import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
 import com.kronos.pokedex.domian.model.evolution_chain.EvolutionDetail
 import com.kronos.webclient.UrlProvider
@@ -35,7 +34,7 @@ class PokemonEvolutionChainAdapter : ListAdapter<ChainLink, PokemonEvolutionChai
         var evoDetail = EvolutionDetail()
         if(currentPokemonEvolutionChain.evolutionDetails.isNotEmpty())
             evoDetail = currentPokemonEvolutionChain.evolutionDetails[0]
-        holder.bind(currentPokemonEvolutionChain,urlProvider.getImageUrl(urlProvider.extractIdFromUrl(currentPokemonEvolutionChain.species.url)),evoDetail)
+        holder.bind(currentPokemonEvolutionChain,urlProvider.getPokemonImageUrl(urlProvider.extractIdFromUrl(currentPokemonEvolutionChain.species.url)),evoDetail)
     }
 
     private fun getItemAt(adapterPosition: Int): ChainLink = getItem(adapterPosition)

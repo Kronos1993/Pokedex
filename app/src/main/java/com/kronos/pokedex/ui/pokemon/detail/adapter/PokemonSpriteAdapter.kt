@@ -35,7 +35,7 @@ class PokemonSpriteAdapter : ListAdapter<Pair<String,String>, PokemonSpriteAdapt
         holder.bind(currentPokemonType)
         if (currentPokemonType.first != null) {
             try {
-                Glide.with(holder.binding.imageViewSprite.context).load(urlProvider.getImageUrl(urlProvider.extractIdFromUrl(currentPokemonType.first))).placeholder(R.drawable.ic_pokeball).into(holder.binding.imageViewSprite)
+                Glide.with(holder.binding.imageViewSprite.context).load(urlProvider.getPokemonImageUrl(urlProvider.extractIdFromUrl(currentPokemonType.first))).placeholder(R.drawable.ic_pokeball).into(holder.binding.imageViewSprite)
             }catch (e:Exception){
                 e.printStackTrace()
                 Glide.with(holder.binding.imageViewSprite.context).load(currentPokemonType.first).placeholder(R.drawable.ic_pokeball).into(holder.binding.imageViewSprite)

@@ -4,6 +4,7 @@
     <integer name="move_limit">150</integer>
     <integer name="ability_limit">150</integer>
     <integer name="item_limit">150</integer>
+    <integer name="berry_limit">100</integer>
     <integer name="def_offset">0</integer>
     <integer name="def_recycler_pos">0</integer>
     <integer name="def_start_range">0</integer>

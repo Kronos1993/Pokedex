@@ -33,7 +33,7 @@ class PokemonListAdapter : ListAdapter<PokemonDexEntry, PokemonListAdapter.Pokem
     override fun onBindViewHolder(holder: PokemonListViewHolder, position: Int) {
         val currentPokemon = getItemAt(position)
         holder.bind(currentPokemon,position)
-        Glide.with(holder.binding.imageViewPokemonItem).load(urlProvider.getImageUrl(urlProvider.extractIdFromUrl(currentPokemon.pokemon.url))).placeholder(R.drawable.ic_pokeball).into(holder.binding.imageViewPokemonItem)
+        Glide.with(holder.binding.imageViewPokemonItem).load(urlProvider.getPokemonImageUrl(urlProvider.extractIdFromUrl(currentPokemon.pokemon.url))).placeholder(R.drawable.ic_pokeball).into(holder.binding.imageViewPokemonItem)
     }
 
     private fun getItemAt(adapterPosition: Int): PokemonDexEntry = getItem(adapterPosition)
