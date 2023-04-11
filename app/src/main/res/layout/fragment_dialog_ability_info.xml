@@ -36,6 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_margin="@dimen/margin_8"
                     android:weightSum="5">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -43,7 +44,6 @@
                         style="@style/TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_8"
                         android:layout_weight="4"
                         android:textStyle="bold"
                         android:textSize="@dimen/margin_18"

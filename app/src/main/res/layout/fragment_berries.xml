@@ -7,13 +7,13 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="com.kronos.pokedex.ui.berries.BerriesViewModel" />
+            type="com.kronos.pokedex.ui.berries.list.BerriesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.berries.BerriesFragment">
+        tools:context=".ui.berries.list.BerriesFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_berry_list"

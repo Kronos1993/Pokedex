@@ -1,4 +1,4 @@
-package com.kronos.pokedex.ui.berries
+package com.kronos.pokedex.ui.berries.list
 
 import android.os.Bundle
 import android.view.*
@@ -114,7 +114,7 @@ class BerriesFragment : Fragment() {
                     viewModel.filterBerries("")
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_BERRY, t)
-                //findNavController().navigate(R.id.action_nav_pokedex_to_nav_pokemon_list, bundle)
+                findNavController().navigate(R.id.action_nav_berries_to_nav_detail_berry_dialog, bundle)
             }
         })
 

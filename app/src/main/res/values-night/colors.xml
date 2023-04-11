@@ -23,6 +23,10 @@
     <color name="sdefense_color">#4A5D67</color>
     <color name="speed_color">#77E1EF</color>
 
+    <color name="berry_potency_min">#FFE082</color>
+    <color name="berry_potency_med">#FFCC80</color>
+    <color name="berry_potency_hight">#FFAB91</color>
+
     <color name="hidden_ability">#B2DFBF</color>
     <color name="male_icon_color">#81D4FA</color>
     <color name="female_icon_color">#CE93D8</color>

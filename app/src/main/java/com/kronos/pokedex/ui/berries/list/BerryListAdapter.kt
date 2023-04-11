@@ -1,4 +1,4 @@
-package com.kronos.pokedex.ui.berries
+package com.kronos.pokedex.ui.berries.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

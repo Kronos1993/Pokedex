@@ -1,4 +1,4 @@
-package com.kronos.pokedex.ui.berries
+package com.kronos.pokedex.ui.berries.list
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData

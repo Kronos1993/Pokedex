@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
 import android.view.Menu
-import androidx.activity.viewModels
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -21,11 +20,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.kronos.core.extensions.binding.activityBinding
 import com.kronos.core.util.validatePermission
 import com.kronos.pokedex.databinding.ActivityMainBinding
-import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -140,7 +137,12 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_pokedex, R.id.nav_abilities, R.id.nav_move_list, R.id.nav_nature_list
+                R.id.nav_pokedex,
+                R.id.nav_abilities,
+                R.id.nav_move_list,
+                R.id.nav_nature_list,
+                R.id.nav_items,
+                R.id.nav_berries
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

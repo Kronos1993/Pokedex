@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.kronos.pokedex.ui.nature.dialog.NatureDetailViewModel" />
+            type="com.kronos.pokedex.ui.berries.dialog.BerryInfoViewModel" />
     </data>
 
     <FrameLayout
@@ -37,30 +37,34 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_8"
                 android:orientation="horizontal"
+                android:layout_margin="@dimen/margin_8"
                 android:weightSum="5">
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageViewBerry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_8"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/ic_nature" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_berries" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewNatureName"
+                    android:id="@+id/textViewBerryName"
                     style="@style/TextViewNormal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="4"
-                    android:text="@{viewModel.natureInfo.name.toUpperCase().replaceAll(`-`,` `)}"
+                    android:text="@{viewModel.berryInfo.name.toUpperCase().replaceAll(`-`,` `)}"
                     android:textSize="@dimen/margin_18"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/drag_handle" />
+
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <View
@@ -70,19 +74,19 @@
                 android:background="@color/primary_dark" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewNatureInfoHeader"
+                android:id="@+id/textViewBerryInfoHeader"
                 style="@style/TextViewNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
-                android:text="INFO"
+                android:text="BERRY INFO"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardViewMoveInfo"
+                android:id="@+id/cardViewBerryInfo"
                 style="@style/Widget.Pokedex.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,127 +95,132 @@
                 android:layout_marginEnd="@dimen/margin_5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardViewAbilityGameEffect">
+                app:layout_constraintTop_toBottomOf="@+id/textViewAbilityName">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guide20"
+                        android:id="@+id/guideline"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent=".50" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guide40"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="1" />
+                        app:layout_constraintGuide_begin="141dp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textViewNatureStatHeader"
+                        android:id="@+id/textViewBerryFirmness"
                         style="@style/TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_5"
-                        android:text="Stat"
-                        android:textAlignment="textStart"
+                        android:singleLine="false"
+                        android:text="FIRMNESS"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/guide20"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textViewNatureIncreasedStat"
+                        android:id="@+id/textViewBerryFirmnessValue"
+                        style="@style/TextViewNormal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:maxLines="5"
+                        android:singleLine="false"
+                        app:handle_text="@{viewModel.berryInfo.firmness.name}"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/textViewBerryFirmness"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline"
+                        app:layout_constraintTop_toTopOf="@+id/textViewBerryFirmness" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewBerryGrowthTime"
                         style="@style/TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_5"
+                        android:singleLine="false"
+                        android:text="GROWTH TIME"
                         android:textStyle="bold"
-                        android:drawableEnd="@drawable/ic_up"
-                        app:handle_increased_stat="@{viewModel.natureInfo.increasedStat}"
-                        app:layout_constraintEnd_toStartOf="@+id/guide20"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textViewNatureStatHeader" />
+                        app:layout_constraintTop_toBottomOf="@+id/textViewBerryFirmness" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textViewNatureDecreasedStat"
-                        style="@style/TextViewNormal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_5"
-                        android:textStyle="bold"
-                        android:drawableEnd="@drawable/ic_down"
-                        app:handle_decreased_stat="@{viewModel.natureInfo.decreasedStat}"
-                        app:layout_constraintBottom_toBottomOf="@+id/textViewNatureIncreasedStat"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guide20"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewNatureStatHeader" />
-
-                    <View
-                        android:id="@+id/view"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_3"
-                        android:layout_margin="@dimen/margin_5"
-                        android:background="@color/primary_dark"
-                        app:layout_constraintEnd_toStartOf="@+id/guide20"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewNatureIncreasedStat" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textViewNatureFlavorHeader"
+                        android:id="@+id/textViewBerryGrowthTimeValue"
                         style="@style/TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/margin_10"
-                        android:text="Flavor"
-                        android:textAlignment="textStart"
+                        android:maxLines="5"
+                        android:singleLine="false"
+                        android:text="@{String.valueOf(viewModel.berryInfo.growthTime)}"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/guide20"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textViewNatureFlavor"
-                        style="@style/TextViewNormal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_5"
-                        android:layout_marginBottom="@dimen/margin_5"
-                        android:textStyle="bold"
-                        android:drawableStart="@drawable/ic_like"
-                        android:drawablePadding="@dimen/margin_5"
-                        app:handle_likes_flavor="@{viewModel.natureInfo.likesFlavor}"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/guide20"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewNatureFlavorHeader" />
-
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textViewNatureHatesFlavor"
-                        style="@style/TextViewNormal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_5"
-                        android:layout_marginBottom="@dimen/margin_5"
-                        android:textStyle="bold"
-                        android:drawablePadding="@dimen/margin_5"
-                        android:drawableStart="@drawable/ic_dislike"
-                        app:handle_hates_flavor="@{viewModel.natureInfo.hatesFlavor}"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/textViewBerryGrowthTime"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/guide20"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewNatureFlavorHeader" />
+                        app:layout_constraintStart_toStartOf="@+id/guideline"
+                        app:layout_constraintTop_toTopOf="@+id/textViewBerryGrowthTime" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewBerrySmoothness"
+                        style="@style/TextViewNormal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:singleLine="false"
+                        android:text="SMOOTHNESS"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewBerryGrowthTime" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewBerrySmoothnessValue"
+                        style="@style/TextViewNormal"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:maxLines="5"
+                        android:singleLine="false"
+                        android:text="@{String.valueOf(viewModel.berryInfo.smoothness)}"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/textViewBerrySmoothness"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/guideline"
+                        app:layout_constraintTop_toTopOf="@+id/textViewBerrySmoothness" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewBerryFalvorsHeader"
+                style="@style/TextViewNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="BERRY FLAVORS"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_berry_flavors"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/item_berry_flavor"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     </FrameLayout>
 
