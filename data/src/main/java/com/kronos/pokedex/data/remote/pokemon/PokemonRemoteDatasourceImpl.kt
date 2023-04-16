@@ -4,19 +4,14 @@ import android.util.Log
 import com.kronos.pokedex.data.data_source.pokemon.PokemonRemoteDataSource
 import com.kronos.pokedex.data.remote.pokemon.api.PokemonApi
 import com.kronos.pokedex.data.remote.pokemon.dto.PokemonInfoDto
-import com.kronos.pokedex.data.remote.pokemon.dto.PokemonListDto
 import com.kronos.pokedex.data.remote.pokemon.mapper.toPokemonInfo
-import com.kronos.pokedex.data.remote.pokemon.mapper.toPokemonList
+import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
 import com.kronos.pokedex.data.remote.response_list.ResponseListDto
-import com.kronos.pokedex.data.remote.specie.dto.SpecieInfoDto
+import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ResponseList
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
-import com.kronos.pokedex.domian.model.pokemon.PokemonList
-import com.kronos.pokedex.domian.model.specie.SpecieInfo
 import com.kronos.pokedex.domian.repository.SpecieRemoteRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
 import retrofit2.Callback
 import javax.inject.Inject
 
@@ -25,13 +20,13 @@ class PokemonRemoteDatasourceImpl @Inject constructor(
     private val specieRemoteRepository: SpecieRemoteRepository,
 ) : PokemonRemoteDataSource {
 
-    override suspend fun listPokemon(limit:Int, offset:Int): ResponseList<PokemonList> {
-        var result: ResponseList<PokemonList> =
+    override suspend fun listPokemon(limit:Int, offset:Int): ResponseList<NamedResourceApi> {
+        var result: ResponseList<NamedResourceApi> =
             try{
                 pokemonApi.list(limit,offset).execute().let {
                     if (it.isSuccessful && it.body() != null) {
                         var response = it.body()!!
-                        ResponseList(response.count,response.next,response.results.map { it.toPokemonList() })
+                        ResponseList(response.count,response.next,response.results.map { it.toNamedResource() })
                     } else {
                         ResponseList()
                     }
@@ -45,7 +40,7 @@ class PokemonRemoteDatasourceImpl @Inject constructor(
     }
 
     override fun listPokemon(limit: Int,offset: Int, callback: Any) {
-        pokemonApi.list(limit, offset).enqueue(callback as Callback<ResponseListDto<PokemonListDto>>)
+        pokemonApi.list(limit, offset).enqueue(callback as Callback<ResponseListDto<NamedResourceApiDto>>)
     }
 
     override suspend fun getPokemonInfo(pokemonId: Int): PokemonInfo {
@@ -62,7 +57,7 @@ class PokemonRemoteDatasourceImpl @Inject constructor(
                 e.printStackTrace()
                 PokemonInfo()
             }
-        Log.e(PokemonRemoteDatasourceImpl::javaClass.name, "pokemon list: $result")
+        Log.e(PokemonRemoteDatasourceImpl::javaClass.name, "pokemon: $result")
         return result
     }
 
@@ -80,7 +75,7 @@ class PokemonRemoteDatasourceImpl @Inject constructor(
                 e.printStackTrace()
                 PokemonInfo()
             }
-        Log.e(PokemonRemoteDatasourceImpl::javaClass.name, "pokemon list: $result")
+        Log.e(PokemonRemoteDatasourceImpl::javaClass.name, "pokemon: $result")
         return result
     }
 

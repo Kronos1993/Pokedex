@@ -1,7 +1,9 @@
 package com.kronos.pokedex.domian.model.evolution_chain
 
-import java.io.Serializable
+import com.kronos.pokedex.domian.model.NamedResourceApi
 
 data class EvolutionChain(
-    var url:String = "",
-): Serializable
+    var babyFriggerItem:NamedResourceApi? = NamedResourceApi(),
+    var chain:ChainLink? = ChainLink(),
+    var id:Int? = 0,
+)

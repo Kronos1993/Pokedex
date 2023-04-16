@@ -9,13 +9,11 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardViewParcel"
+        android:id="@+id/cardViewPokemonAbility"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_5"
         app:is_hidden_ability="@{pokemonAbility.hidden}"
-        app:cardCornerRadius="@dimen/card_radius"
-        app:cardElevation="@dimen/cardview_default_elevation"
         app:contentPadding="@dimen/margin_10">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,17 +21,26 @@
                 android:layout_height="match_parent"
                 android:background="@color/transparent">
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageViewHiddenAbility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:handle_visibility="@{pokemonAbility.hidden}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_eye" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewPokemonItemName"
                     style="@style/TextViewNormal"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@{pokemonAbility.ability.name.toUpperCase()}"
+                    android:text="@{pokemonAbility.ability.name.toUpperCase().replaceAll(`-`,` `)}"
                     android:textStyle="bold"
-                    android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageViewHiddenAbility"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

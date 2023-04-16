@@ -1,10 +1,8 @@
 package com.kronos.pokedex.data.remote.pokemon.mapper
 
 import com.kronos.pokedex.data.remote.ability.mapper.toAbility
-import com.kronos.pokedex.data.remote.move.mapper.toMove
 import com.kronos.pokedex.data.remote.move.mapper.toMoveList
 import com.kronos.pokedex.data.remote.pokemon.dto.PokemonInfoDto
-import com.kronos.pokedex.data.remote.specie.mapper.toSpecieInfo
 import com.kronos.pokedex.data.remote.sprite.mapper.toSprite
 import com.kronos.pokedex.data.remote.stat.mapper.toStat
 import com.kronos.pokedex.data.remote.type.mapper.toType

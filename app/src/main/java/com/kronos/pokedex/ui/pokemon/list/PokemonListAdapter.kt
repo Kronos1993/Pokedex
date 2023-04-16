@@ -7,16 +7,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.adapters.diff.GeneralDiffCallback
+import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.ItemPokemonBinding
-import com.kronos.pokedex.domian.model.pokemon.PokemonList
+import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.webclient.UrlProvider
 
-class PokemonListAdapter : ListAdapter<PokemonList, PokemonListAdapter.PokemonListViewHolder>(GeneralDiffCallback<PokemonList>()) {
+class PokemonListAdapter : ListAdapter<PokemonDexEntry, PokemonListAdapter.PokemonListViewHolder>(GeneralDiffCallback<PokemonDexEntry>()) {
 
-    private var adapterItemClickListener:AdapterItemClickListener<PokemonList>?=null
+    private var adapterItemClickListener:AdapterItemClickListener<PokemonDexEntry>?=null
     private lateinit var urlProvider: UrlProvider
 
-    fun setAdapterItemClick(adapterItemClickListener:AdapterItemClickListener<PokemonList>?){
+    fun setAdapterItemClick(adapterItemClickListener:AdapterItemClickListener<PokemonDexEntry>?){
         this.adapterItemClickListener = adapterItemClickListener
     }
 
@@ -32,16 +33,15 @@ class PokemonListAdapter : ListAdapter<PokemonList, PokemonListAdapter.PokemonLi
     override fun onBindViewHolder(holder: PokemonListViewHolder, position: Int) {
         val currentPokemon = getItemAt(position)
         holder.bind(currentPokemon,position)
-        Glide.with(holder.binding.imageViewPokemonItem).load(urlProvider.getImageUrl(position +1)).into(holder.binding.imageViewPokemonItem)
+        Glide.with(holder.binding.imageViewPokemonItem).load(urlProvider.getPokemonImageUrl(urlProvider.extractIdFromUrl(currentPokemon.pokemon.url))).placeholder(R.drawable.ic_pokeball).into(holder.binding.imageViewPokemonItem)
     }
 
-    private fun getItemAt(adapterPosition: Int): PokemonList = getItem(adapterPosition)
+    private fun getItemAt(adapterPosition: Int): PokemonDexEntry = getItem(adapterPosition)
 
-    class PokemonListViewHolder(var binding:ItemPokemonBinding, var clickListener:AdapterItemClickListener<PokemonList>?) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(pokemon: PokemonList,position: Int){
+    class PokemonListViewHolder(var binding:ItemPokemonBinding, var clickListener:AdapterItemClickListener<PokemonDexEntry>?) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(pokemon: PokemonDexEntry,position: Int){
             binding.run {
-                pokemonListModel = pokemon
-                pokedexNumber = position + 1
+                pokemonDexEntryModel = pokemon
                 root.setOnClickListener {
                     clickListener?.onItemClick(pokemon,adapterPosition)
                 }

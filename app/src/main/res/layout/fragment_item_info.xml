@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.kronos.pokedex.ui.items.detail.ItemDetailViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor"
+        tools:context=".ui.items.detail.ItemDetailFragment">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/margin_10">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".02" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline9"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".98" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardViewBaseItemDetail"
+                    style="@style/Widget.Pokedex.CardView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                    app:layout_constraintStart_toStartOf="@+id/guideline1"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineBase1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".05" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineBase35"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".25" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineBase9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".95" />
+
+                        <ImageView
+                            android:id="@+id/imageViewItemSprite"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_margin="@dimen/margin_5"
+                            app:handle_item_sprite="@{viewModel.itemInfo.sprites.defaultImg}"
+                            app:layout_constraintBottom_toTopOf="@+id/textViewItemDescription"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineBase35"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineBase1"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/textViewItemId"
+                            style="@style/TextViewSmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_8"
+                            android:layout_marginEnd="@dimen/margin_8"
+                            android:text="@{`#`+ viewModel.itemInfo.id}"
+                            app:layout_constraintBottom_toTopOf="@+id/textViewItemName"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/textViewItemName"
+                            style="@style/TextViewNormal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            app:handle_pokemon_name="@{viewModel.itemInfo.name}"
+                            app:layout_constraintBottom_toTopOf="@+id/textViewItemDescription"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/textViewItemDescription"
+                            style="@style/TextViewSmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/margin_8"
+                            android:maxLines="15"
+                            android:singleLine="false"
+                            app:handle_long_item_effect_text="@{viewModel.itemDescription}"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineBase1"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/containerBasicInfo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                    app:layout_constraintStart_toStartOf="@+id/guideline1"
+                    app:layout_constraintTop_toBottomOf="@+id/cardViewBaseItemDetail">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewItemBasicInfoHeader"
+                        style="@style/TextViewNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:text="INFO"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardViewItemDetailBaseInfo"
+                        style="@style/Widget.Pokedex.CardView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                        app:layout_constraintStart_toStartOf="@+id/guideline1"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guidelineInfo1"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".05" />
+
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guidelineInfo45"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".45" />
+
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guidelineInfo9"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".95" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewItemCostLabel"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_10"
+                                android:text="Cost"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewItemCost"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_5"
+                                android:text="@{`$` + String.valueOf(viewModel.itemInfo.cost)}"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@+id/textViewItemCostLabel"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintStart_toEndOf="@+id/textViewItemCostLabel"
+                                app:layout_constraintTop_toTopOf="@+id/textViewItemCostLabel" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewItemShortEffectLabel"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_marginTop="@dimen/margin_10"
+                                android:layout_height="wrap_content"
+                                android:text="Effect:"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewItemCostLabel" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewItemShortEffect"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                app:handle_text="@{viewModel.itemEffect}"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewItemShortEffectLabel" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewItemEffectLongLabel"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_marginTop="@dimen/margin_10"
+                                android:layout_height="wrap_content"
+                                android:text="Effect Explanation:"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewItemShortEffect" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/textViewItemEffectLong"
+                                style="@style/TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="@dimen/margin_10"
+                                android:textStyle="bold"
+                                app:handle_long_item_effect_text="@{viewModel.itemLongEffect}"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewItemEffectLongLabel" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/containerAbility"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                    app:layout_constraintStart_toStartOf="@+id/guideline1"
+                    app:layout_constraintTop_toBottomOf="@id/containerBasicInfo">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewItemHeldByHeader"
+                        style="@style/TextViewNormal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:text="HELD BY"
+                        android:textStyle="bold" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineHeldBy1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".01" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineHeldBy9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".99" />
+
+                        <include
+                            android:id="@+id/layoutPokemon"
+                            layout="@layout/layout_pokemons"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineHeldBy9"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineHeldBy1"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
+</layout>

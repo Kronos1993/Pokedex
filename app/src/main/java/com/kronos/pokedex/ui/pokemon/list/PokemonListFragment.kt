@@ -1,24 +1,22 @@
 package com.kronos.pokedex.ui.pokemon.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.core.util.LoadingDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonListBinding
-import com.kronos.pokedex.domian.model.pokemon.PokemonList
+import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
+import com.kronos.pokedex.ui.pokedex.CURRENT_POKEDEX
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -31,6 +29,8 @@ class PokemonListFragment : Fragment() {
 
     private val viewModel by viewModels<PokemonListViewModel>()
 
+    lateinit var searchView: SearchView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,6 +38,7 @@ class PokemonListFragment : Fragment() {
     ) = binding.run {
         viewModel = this@PokemonListFragment.viewModel
         lifecycleOwner = this@PokemonListFragment.viewLifecycleOwner
+        setHasOptionsMenu(true)
         root
     }
 
@@ -63,14 +64,14 @@ class PokemonListFragment : Fragment() {
         if (hashtable["error"] != null) {
             if (hashtable["error"]!!.isNotEmpty()) {
                 show(
-                    binding.recyclerViewPokemonList,
+                    binding.layoutPokemonList.recyclerViewPokemonList,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_error_background
                 )
             } else {
                 show(
-                    binding.recyclerViewPokemonList,
+                    binding.layoutPokemonList.recyclerViewPokemonList,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_success_background
@@ -80,66 +81,88 @@ class PokemonListFragment : Fragment() {
     }
 
     private fun handleLoading(b: Boolean) {
-        if (b) {
-            LoadingDialog.getProgressDialog(
-                requireContext(),
-                R.string.loading_dialog_text,
-                com.kronos.resources.R.color.colorSecondaryVariant
-            )!!.show()
-        } else {
-            LoadingDialog.getProgressDialog(
-                requireContext(),
-                R.string.loading_dialog_text,
-                com.kronos.resources.R.color.colorSecondaryVariant
-            )!!.dismiss()
+        try {
+            if (b) {
+                LoadingDialog.getProgressDialog(
+                    requireContext(),
+                    R.string.loading_dialog_text,
+                    com.kronos.resources.R.color.colorSecondaryVariant
+                )!!.show()
+            } else {
+                LoadingDialog.getProgressDialog(
+                    requireContext(),
+                    R.string.loading_dialog_text,
+                    com.kronos.resources.R.color.colorSecondaryVariant
+                )!!.dismiss()
+            }
+        }catch (e:IllegalArgumentException){
+            e.printStackTrace()
         }
+
     }
 
-    private fun handlePokemonList(list: List<PokemonList>) {
+    private fun handlePokemonList(list: List<PokemonDexEntry>) {
+        binding.layoutPokemonList.pokemonList = list
         viewModel.pokemonListAdapter.get()?.submitList(list)
         viewModel.pokemonListAdapter.get()?.notifyDataSetChanged()
     }
 
     private fun initViews() {
-        binding.recyclerViewPokemonList.layoutManager = GridLayoutManager(context,2)
-        binding.recyclerViewPokemonList.setHasFixedSize(false)
+        binding.layoutPokemonList.recyclerViewPokemonList.layoutManager = GridLayoutManager(context,2)
+        binding.layoutPokemonList.recyclerViewPokemonList.setHasFixedSize(false)
         if (viewModel.pokemonListAdapter.get() == null)
             viewModel.pokemonListAdapter = WeakReference(PokemonListAdapter())
         viewModel.pokemonListAdapter.get()?.setUrlProvider(viewModel.urlProvider)
-        binding.recyclerViewPokemonList.adapter = viewModel.pokemonListAdapter.get()
+        binding.layoutPokemonList.recyclerViewPokemonList.adapter = viewModel.pokemonListAdapter.get()
         viewModel.pokemonListAdapter.get()?.setAdapterItemClick(object :
-            AdapterItemClickListener<PokemonList> {
-            override fun onItemClick(t: PokemonList, pos: Int) {
+            AdapterItemClickListener<PokemonDexEntry> {
+            override fun onItemClick(t: PokemonDexEntry, pos: Int) {
+                if(searchView!=null) searchView.clearFocus()
+                viewModel.filterPokemon("")
                 val bundle = Bundle()
-                bundle.putSerializable(CURRENT_POKEMON, t)
+                bundle.putSerializable(CURRENT_POKEMON, t.pokemon)
                 viewModel.setRecyclerLastPosition(pos)
                 findNavController().navigate(R.id.action_nav_pokemon_list_to_nav_pokemon_detail, bundle)
             }
 
         })
-        binding.recyclerViewPokemonList.addOnScrollListener(object :
-            RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val visibleItemCount: Int = (recyclerView.layoutManager as GridLayoutManager).childCount
-                val totalItemCount: Int = (recyclerView.layoutManager as GridLayoutManager).itemCount
-                val firstVisibleItemPosition: Int = (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
-                if (!viewModel.loading.value!!) {
-                    if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0)
-                        viewModel.getMorePokemons()
-                }
-            }
-        })
-
-        binding.recyclerViewPokemonList.postDelayed({
-            binding.recyclerViewPokemonList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let{ it ?: 0 })
+        binding.layoutPokemonList.recyclerViewPokemonList.postDelayed({
+            binding.layoutPokemonList.recyclerViewPokemonList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let{ it ?: 0 })
         }, 50)
     }
 
     private fun initViewModel() {
-        viewModel.setLimit(viewModel.limit.value.let{ it ?: resources.getInteger(R.integer.def_limit)})
-        viewModel.setOffset(viewModel.offset.value.let{ it ?: resources.getInteger(R.integer.def_offset)})
-        if (viewModel.pokemonList.value.isNullOrEmpty())
-            viewModel.getPokemons()
+        val bundle = arguments
+        if (bundle?.get(CURRENT_POKEDEX) != null) {
+            viewModel.getPokemons((bundle.get(CURRENT_POKEDEX) as NamedResourceApi).name)
+        } else {
+            findNavController().popBackStack()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menu.clear()
+        inflater.inflate(R.menu.main, menu)
+        val searchItem: MenuItem = menu.findItem(R.id.action_search)
+
+        // getting search view of our item.
+        searchView = searchItem.actionView as SearchView
+
+        // below line is to call set on query text listener method.
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(msg: String): Boolean {
+                // inside on query text change method we are
+                // calling a method to filter our recycler view.
+                viewModel.filterPokemon(msg)
+                return false
+            }
+        })
     }
 
     override fun onDestroyView() {

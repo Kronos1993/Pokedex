@@ -12,7 +12,16 @@ class UrlProviderImp @Inject constructor(
         return UrlConstants.SERVER_URL
     }
 
-    override fun getImageUrl(id:Int): String {
-        return "${UrlConstants.IMAGE_URL + id}.png"
+    override fun getPokemonImageUrl(id: Int): String {
+        return "${UrlConstants.POKEMON_IMAGE_URL + id}.png"
+    }
+
+    override fun getItemImageUrl(item: String): String {
+        return "${UrlConstants.ITEM_IMAGE_URL + item}.png"
+    }
+
+    override fun extractIdFromUrl(url: String): Int {
+        return "/-?[0-9]+/$".toRegex().find(url)!!.value.filter { it.isDigit() || it == '-' }
+            .toInt()
     }
 }

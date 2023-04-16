@@ -23,6 +23,7 @@
     <color name="menuBackground">#FFF</color>
     <color name="blackText">#000000</color>
     <color name="blueText">#3D85FC</color>
+    <color name="blue_rain">#3D85FC</color>
     <color name="greenText">#529A59</color>
     <color name="darkBlueText">#346AC6</color>
     <color name="yellowText">#F4A531</color>

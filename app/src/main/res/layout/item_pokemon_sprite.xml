@@ -4,18 +4,15 @@
 
     <data>
         <variable
-            name="pokemonSpriteUrl"
-            type="String" />
+            name="pokemonSprite"
+            type="kotlin.Pair&lt;String,String>" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardViewPokemonType"
+        android:id="@+id/cardViewPokemonSprite"
+        style="@style/Widget.Pokedex.CardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/backgroundCardColor"
-        android:layout_margin="@dimen/margin_3"
-        app:cardCornerRadius="@dimen/card_radius"
-        app:cardElevation="@dimen/cardview_default_elevation">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -27,11 +24,21 @@
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:layout_margin="@dimen/margin_5"
-                app:handle_pokemon_sprite="@{pokemonSpriteUrl}"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewSpriteType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:textAlignment="center"
+                android:text="@{pokemonSprite.second.toUpperCase()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageViewSprite" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

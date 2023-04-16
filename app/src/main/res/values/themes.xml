@@ -2,16 +2,21 @@
     <!-- Base application theme. -->
     <style name="Theme.Pokedex" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryVariant">@color/accent</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/backgroundColor</item>
+        <item name="bottomSheetDialogTheme">@style/Widget.Pokedex.BottomSheetDialog</item>
+
+        <item name="cardViewStyle">@style/Widget.Pokedex.CardView</item>
+        <item name="linearProgressIndicatorStyle">@style/Widget.PokemonStat.LinearProgressIndicator</item>
     </style>
 
     <style name="Theme.Pokedex.NoActionBar">
@@ -31,6 +36,20 @@
         <item name="android:layout_marginTop">@dimen/margin_10</item>
     </style>
 
+    <style name="Widget.Pokedex.BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModalBottomSheet</item>
+    </style>
+
+    <style name="ModalBottomSheet" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundColor">@color/backgroundColor</item>
+    </style>
+
+    <style name="Widget.Pokedex.CardView" parent="CardView">
+        <item name="cardBackgroundColor">@color/backgroundCardColor</item>
+        <item name="cardElevation">@dimen/cardview_default_elevation</item>
+        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
+        <item name="android:layout_margin">@dimen/margin_5</item>
+    </style>
 
     <style name="TextViewRound" parent="Theme.Pokedex">
         <!--<item name="android:background">@drawable/rounded_editview</item>-->
@@ -50,48 +69,9 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="TextViewError" parent="Theme.Pokedex">
-        <item name="android:background">@drawable/rounded_text_view_stroke</item>
-        <item name="backgroundTint">@color/backgroundColorPrimary</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:padding">@dimen/margin_10</item>
-        <item name="android:gravity">center</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:layout_marginStart">@dimen/margin_8</item>
-        <item name="android:layout_marginEnd">@dimen/margin_8</item>
-    </style>
-
-    <style name="TextViewWarning" parent="Theme.Pokedex">
-        <item name="android:background">@drawable/rounded_text_view_stroke</item>
-        <item name="android:backgroundTint">@color/warning</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:padding">@dimen/margin_10</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:layout_marginStart">@dimen/margin_8</item>
-        <item name="android:layout_marginEnd">@dimen/margin_8</item>
-    </style>
-
-    <style name="TextViewStroke" parent="Theme.Pokedex">
-        <item name="android:background">@drawable/rounded_text_view_stroke</item>
-        <item name="android:textColor">@color/primaryText</item>
-        <item name="android:padding">@dimen/margin_10</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:layout_marginStart">@dimen/margin_8</item>
-        <item name="android:layout_marginEnd">@dimen/margin_8</item>
-    </style>
 
     <style name="TextViewNormal" parent="Theme.Pokedex">
         <item name="android:textColor">@color/blackText</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:singleLine">true</item>
         <item name="android:textSize">@dimen/text_15</item>
         <item name="android:layout_marginStart">@dimen/margin_8</item>
         <item name="android:layout_marginEnd">@dimen/margin_8</item>
@@ -99,9 +79,6 @@
 
     <style name="TextViewSmall" parent="Theme.Pokedex">
         <item name="android:textColor">@color/blackText</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:singleLine">true</item>
         <item name="android:textSize">@dimen/text_12</item>
     </style>
 
@@ -113,89 +90,6 @@
         <item name="android:textSize">@dimen/text_16</item>
         <item name="android:layout_marginStart">@dimen/margin_8</item>
         <item name="android:layout_marginEnd">@dimen/margin_8</item>
-    </style>
-
-
-    <style name="TextViewNormalRed" parent="Theme.Pokedex">
-        <item name="android:textColor">@color/alertColor</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:layout_marginStart">@dimen/margin_8</item>
-        <item name="android:layout_marginEnd">@dimen/margin_8</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TextViewNormalWhite" parent="Theme.Pokedex">
-        <item name="android:textColor">@color/whiteText</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:layout_marginStart">@dimen/margin_8</item>
-        <item name="android:layout_marginEnd">@dimen/margin_8</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textSize">@dimen/text_12</item>
-    </style>
-
-    <style name="TextViewNormalBlack" parent="Theme.Pokedex">
-        <item name="android:textColor">@color/blackText</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:layout_marginStart">@dimen/margin_8</item>
-        <item name="android:layout_marginEnd">@dimen/margin_8</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TextViewNormalBlue" parent="Theme.Pokedex">
-        <item name="android:textColor">@color/blueText</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:layout_marginStart">@dimen/margin_8</item>
-        <item name="android:layout_marginEnd">@dimen/margin_8</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TextViewNormalPrimary" parent="Theme.Pokedex">
-        <!--<item name="android:textColor">@color/purple_text_color</item>-->
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:textColor">@color/primary_text_color</item>
-        <item name="android:layout_marginStart">@dimen/margin_8</item>
-        <item name="android:layout_marginEnd">@dimen/margin_8</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textSize">@dimen/text_12</item>
-    </style>
-
-    <style name="TextViewNormalBlackButton" parent="Theme.Pokedex">
-        <!--<item name="android:textColor">@color/purple_text_color</item>-->
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:textColor">@color/colorSecondaryVariant</item>
-        <item name="android:layout_marginStart">@dimen/margin_8</item>
-        <item name="android:layout_marginEnd">@dimen/margin_8</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textSize">@dimen/text_12</item>
-    </style>
-
-    <style name="TextViewNormalGreen" parent="Theme.Pokedex">
-        <item name="android:textColor">@color/green</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:layout_marginStart">@dimen/margin_8</item>
-        <item name="android:layout_marginEnd">@dimen/margin_8</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TextViewNormalOrange" parent="Theme.Pokedex">
-        <item name="android:textColor">@color/warning</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:layout_marginStart">@dimen/margin_8</item>
-        <item name="android:layout_marginEnd">@dimen/margin_8</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Widget.PokemonStat.LinearProgressIndicator" parent="Widget.MaterialComponents.LinearProgressIndicator">

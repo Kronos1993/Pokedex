@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="evolutionSprite"
+            type="String" />
+
+        <variable
+            name="evolutionChain"
+            type="com.kronos.pokedex.domian.model.evolution_chain.ChainLink" />
+
+        <variable
+            name="evolutionDetail"
+            type="com.kronos.pokedex.domian.model.evolution_chain.EvolutionDetail" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardViewPokemonEvolutionChain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewEvolutionForm"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_margin="@dimen/margin_5"
+            app:handle_pokemon_sprite="@{evolutionSprite}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textViewEvolutionFormName"
+            style="@style/TextViewSmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_margin="@dimen/margin_5"
+            app:handle_pokemon_name="@{evolutionChain.species.name}"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewEvolutionForm"
+            app:layout_constraintStart_toStartOf="@+id/imageViewEvolutionForm"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewEvolutionForm" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/margin_10"
+            app:handle_visibility="@{evolutionChain.evolutionDetails.size()>0}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEvolutionFormName">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineLabelDivider"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".5" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailTriggerLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Trigger:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.trigger!=null}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailTrigger"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{evolutionDetail.trigger.name}"
+                app:handle_visibility="@{evolutionDetail.trigger!=null}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailTriggerLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailTriggerLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailLevelLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Level:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.minLevel!=null}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailTriggerLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailLevel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{String.valueOf(evolutionDetail.minLevel)}"
+                app:handle_visibility="@{evolutionDetail.minLevel!=null}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailLevelLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailLevelLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailBeautyLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Beauty:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.minBeauty!=null}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailLevelLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailBeauty"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{String.valueOf(evolutionDetail.minBeauty)}"
+                app:handle_visibility="@{evolutionDetail.minBeauty!=null}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailBeautyLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailBeautyLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailGenderLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Gender:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.gender!=null}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailBeautyLabel" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewEvolutionDetailGender"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_pokemon_gender="@{evolutionDetail.gender}"
+                app:handle_visibility="@{evolutionDetail.gender!=null}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailGenderLabel"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailGenderLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailUseItemLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Use Item:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.item.name}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailGenderLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailUseItem"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{evolutionDetail.item.name}"
+                app:handle_visibility="@{evolutionDetail.item.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailUseItemLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailUseItemLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailHeldItemLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Held Item:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.heldItem.name}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailUseItemLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailHeldItem"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{evolutionDetail.heldItem.name}"
+                app:handle_visibility="@{evolutionDetail.heldItem.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailHeldItemLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailHeldItemLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailMoveKnowLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Know Move:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.knownMove.name}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailHeldItemLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailMoveKnow"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{evolutionDetail.knownMove.name}"
+                app:handle_visibility="@{evolutionDetail.knownMove.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailMoveKnowLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailMoveKnowLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailKnowMoveTypeLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Know Move Type:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.knownMoveType.name}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailMoveKnowLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailKnowMoveType"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{evolutionDetail.knownMoveType.name}"
+                app:handle_visibility="@{evolutionDetail.knownMoveType.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailKnowMoveTypeLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailKnowMoveTypeLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailLocationLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Location:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.location.name}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailKnowMoveTypeLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailLocation"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{evolutionDetail.location.name}"
+                app:handle_visibility="@{evolutionDetail.location.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailLocationLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailLocationLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailAffectionLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Affection:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.minAffection!=null}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailLocationLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailAffection"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{String.valueOf(evolutionDetail.minAffection)}"
+                app:handle_visibility="@{evolutionDetail.minAffection!=null}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailAffectionLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailAffectionLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailHappinessLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Happiness:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.minHappiness!=null}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailAffectionLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailHappiness"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{String.valueOf(evolutionDetail.minHappiness)}"
+                app:handle_visibility="@{evolutionDetail.minHappiness!=null}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailHappinessLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailHappinessLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailRainLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Raining:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.needsOverworldRain}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailHappinessLabel" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewEvolutionDetailRain"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="@dimen/margin_5"
+                app:srcCompat="@drawable/ic_rain"
+                app:handle_visibility="@{evolutionDetail.needsOverworldRain}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailRainLabel"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailRainLabel" />
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailPartyMemberLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Party Member:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.partySpecies.name}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailRainLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailPartyMember"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{evolutionDetail.partySpecies.name}"
+                app:handle_visibility="@{evolutionDetail.partySpecies.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailPartyMemberLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailPartyMemberLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailPartyTypeLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Party Type:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.partyType.name}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailPartyMemberLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailPartyType"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{evolutionDetail.partyType.name}"
+                app:handle_visibility="@{evolutionDetail.partyType.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailPartyTypeLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailPartyTypeLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailTimeOfDayLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Time of the day:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.timeOfDay}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailPartyTypeLabel" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewEvolutionDetailTimeOfDay"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_pokemon_evol_time_of_day="@{evolutionDetail.timeOfDay}"
+                app:handle_visibility="@{evolutionDetail.timeOfDay}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailTimeOfDayLabel"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailTimeOfDayLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailTurnUpsideDownLabel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="Turn Upside Down:"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{evolutionDetail.turnUpsideDown}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEvolutionDetailTimeOfDayLabel" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewEvolutionDetailTurnUpsideDown"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{String.valueOf(evolutionDetail.turnUpsideDown)}"
+                app:handle_visibility="@{evolutionDetail.turnUpsideDown}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailTurnUpsideDownLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailTurnUpsideDownLabel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,20 +1,21 @@
 package com.kronos.pokedex.data.remote.move.dto
 
 import com.google.gson.annotations.SerializedName
-import com.kronos.pokedex.data.remote.description.DescriptionDto
-import com.kronos.pokedex.data.remote.pokemon.dto.PokemonListDto
-import com.kronos.pokedex.data.remote.type.dto.TypeDto
-import com.kronos.pokedex.domian.model.type.Type
+import com.kronos.pokedex.data.remote.description.EffectEntryDto
+import com.kronos.pokedex.data.remote.description.FlavorTextEntryDto
+import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
 
 data class MoveInfoDto(
     @SerializedName("accuracy")
     var accuracy: Int = 0,
     @SerializedName("damage_class")
-    var moveCategory: MoveClassDto = MoveClassDto(),
+    var moveCategory: NamedResourceApiDto = NamedResourceApiDto(),
     @SerializedName("flavor_text_entries")
-    var moveDescription: List<DescriptionDto> = listOf(),
+    var moveDescription: List<FlavorTextEntryDto> = listOf(),
+    @SerializedName("effect_entries")
+    val effectEntries: List<EffectEntryDto>,
     @SerializedName("learned_by_pokemon")
-    var learnedBy: List<PokemonListDto> = listOf(),
+    var learnedBy: List<NamedResourceApiDto> = listOf(),
     @SerializedName("name")
     var moveName: String = "",
     @SerializedName("power")
@@ -24,5 +25,7 @@ data class MoveInfoDto(
     @SerializedName("priority")
     var priority: Int = 0,
     @SerializedName("type")
-    var type: TypeDto = TypeDto()
+    var type: NamedResourceApiDto = NamedResourceApiDto(),
+    @SerializedName("effect_chance")
+    var effectChance: Int? = 0,
 )

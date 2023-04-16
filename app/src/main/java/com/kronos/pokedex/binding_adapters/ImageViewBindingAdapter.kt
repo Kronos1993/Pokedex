@@ -6,8 +6,8 @@ import com.bumptech.glide.Glide
 import com.kronos.pokedex.R
 
 
-@BindingAdapter("app:handle_pokemon_type")
-fun handleType(view: ImageView, typeName: String) = view.run {
+@BindingAdapter("app:handle_type")
+fun handleType(view: ImageView, typeName: String?) = view.run {
     if (typeName != null) {
         when {
             typeName.equals("normal", false) -> {
@@ -64,14 +64,19 @@ fun handleType(view: ImageView, typeName: String) = view.run {
             typeName.equals("fairy", false) -> {
                 view.setBackgroundResource(R.drawable.ic_pokemon_type_fairy)
             }
-            typeName.equals("shadow", false) -> {
-                view.setBackgroundResource(R.drawable.ic_pokemon_type_icons)
+        }
+    }
+}
+
+@BindingAdapter("app:handle_move_priority")
+fun handleMovePriority(view: ImageView, typePriority: Int?) = view.run {
+    if (typePriority != null) {
+        when (typePriority) {
+            1 -> {
+                view.setBackgroundResource(R.drawable.ic_check)
             }
-            typeName.equals("unknown", false) -> {
-                view.setBackgroundResource(R.drawable.ic_pokemon_type_icons)
-            }
-            else -> {
-                view.setBackgroundResource(R.drawable.ic_pokemon_type_icons)
+            0 -> {
+                view.setBackgroundResource(R.drawable.ic_cancel)
             }
         }
     }
@@ -81,5 +86,36 @@ fun handleType(view: ImageView, typeName: String) = view.run {
 fun handlePokemonSprite(view: ImageView, spriteUrl: String){
     if (spriteUrl != null) {
         Glide.with(view.context).load(spriteUrl).placeholder(R.drawable.ic_pokeball).into(view)
+    }
+}
+
+@BindingAdapter("app:handle_item_sprite")
+fun handleItemSprite(view: ImageView, itemSpriteUrl: String?){
+    if (itemSpriteUrl != null) {
+        Glide.with(view.context).load(itemSpriteUrl).placeholder(R.drawable.ic_backpack).into(view)
+    }
+}
+
+@BindingAdapter("app:handle_pokemon_gender")
+fun handlePokemonGender(view: ImageView, pokemon_gender: Int?){
+    view.run {
+        if(pokemon_gender!=null){
+            if(pokemon_gender == 1)
+                view.setBackgroundResource(R.drawable.ic_female)
+            else
+                view.setBackgroundResource(R.drawable.ic_male)
+        }
+    }
+}
+
+@BindingAdapter("app:handle_pokemon_evol_time_of_day")
+fun handlePokemonEvolTime(view: ImageView, pokemon_evol_time: String?){
+    view.run {
+        if(pokemon_evol_time!=null){
+            if(pokemon_evol_time == "day")
+                view.setBackgroundResource(R.drawable.ic_day)
+            else if(pokemon_evol_time == "night")
+                view.setBackgroundResource(R.drawable.ic_night)
+        }
     }
 }

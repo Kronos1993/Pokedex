@@ -3,7 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_pokemon_list">
+    app:startDestination="@+id/nav_pokedex">
+
+    <fragment
+        android:id="@+id/nav_pokedex"
+        android:name="com.kronos.pokedex.ui.pokedex.PokedexFragment"
+        android:label="@string/menu_pokedex"
+        tools:layout="@layout/fragment_pokedex" >
+
+        <action
+            android:id="@+id/action_nav_pokedex_to_nav_pokemon_list"
+            app:destination="@id/nav_pokemon_list" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_pokemon_list"
@@ -12,7 +23,9 @@
         tools:layout="@layout/fragment_pokemon_list" >
         <action
             android:id="@+id/action_nav_pokemon_list_to_nav_pokemon_detail"
-            app:destination="@id/nav_pokemon_detail" />
+            app:destination="@id/nav_pokemon_detail"
+            app:popUpTo="@id/nav_pokemon_list"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -21,24 +34,98 @@
         android:label="@string/menu_pokemon_detail"
         tools:layout="@layout/fragment_pokemon_detail" >
         <action
-            android:id="@+id/action_nav_pokemon_detail_to_nav_moves_by_pokemon_dialog"
-            app:destination="@id/nav_moves_by_pokemon_dialog" />
+            android:id="@+id/action_nav_pokemon_detail_to_nav_ability_info_dialog_fragment"
+            app:destination="@id/nav_ability_info_dialog" />
+        <action
+            android:id="@+id/action_nav_pokemon_detail_to_nav_move_info_dialog"
+            app:destination="@id/nav_move_info_dialog" />
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_abilities"
+        android:name="com.kronos.pokedex.ui.abilities.list.AbilityListFragment"
+        android:label="@string/menu_abilities"
+        tools:layout="@layout/layout_abilities">
+        <action
+            android:id="@+id/action_nav_ability_list_to_nav_ability_info_dialog"
+            app:destination="@id/nav_ability_info_dialog" />
+    </fragment>
     <dialog
-        android:id="@+id/nav_moves_by_pokemon_dialog"
-        android:name="com.kronos.pokedex.ui.move.dialog.MoveByPokemonDialogFragment"
-        tools:layout="@layout/fragment_dialog_move_by_pokemon" />
+        android:id="@+id/nav_ability_info_dialog"
+        android:name="com.kronos.pokedex.ui.abilities.dialog.AbilityInfoDialogFragment"
+        android:label="@string/ability_info"
+        tools:layout="@layout/fragment_dialog_ability_info">
+        <action
+            android:id="@+id/action_nav_ability_info_dialog_to_nav_pokemon_detail"
+            app:destination="@id/nav_pokemon_detail" />
+    </dialog>
 
     <fragment
         android:id="@+id/nav_move_list"
         android:name="com.kronos.pokedex.ui.move.list.MoveListFragment"
         android:label="@string/menu_move_list"
-        tools:layout="@layout/fragment_nature_list" />
+        tools:layout="@layout/fragment_nature_list" >
+        <action
+            android:id="@+id/action_nav_move_list_to_nav_move_info_dialog"
+            app:destination="@id/nav_move_info_dialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/nav_move_info_dialog"
+        android:name="com.kronos.pokedex.ui.move.dialog.MoveInfoDialogFragment"
+        android:label="@string/move_info"
+        tools:layout="@layout/fragment_dialog_move_info">
+        <action
+            android:id="@+id/action_nav_move_info_dialog_to_nav_pokemon_detail"
+            app:destination="@id/nav_pokemon_detail" />
+    </dialog>
 
     <fragment
         android:id="@+id/nav_nature_list"
-        android:name="com.kronos.pokedex.ui.nature.NatureListFragment"
+        android:name="com.kronos.pokedex.ui.nature.list.NatureListFragment"
         android:label="@string/menu_nature_list"
-        tools:layout="@layout/fragment_move_list" />
+        tools:layout="@layout/fragment_nature_list" >
+        <action
+            android:id="@+id/action_nav_nature_list_to_nav_detail_info_dialog"
+            app:destination="@id/nav_detail_info_dialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/nav_detail_info_dialog"
+        android:name="com.kronos.pokedex.ui.nature.dialog.NatureDetailDialogFragment"
+        android:label="@string/nature_info"
+        tools:layout="@layout/fragment_dialog_nature_info">
+    </dialog>
+
+    <fragment
+        android:id="@+id/nav_berries"
+        android:name="com.kronos.pokedex.ui.berries.list.BerriesFragment"
+        android:label="@string/menu_berries"
+        tools:layout="@layout/fragment_berries" >
+        <action
+            android:id="@+id/action_nav_berries_to_nav_detail_berry_dialog"
+            app:destination="@id/nav_detail_berry_dialog" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/nav_detail_berry_dialog"
+        android:name="com.kronos.pokedex.ui.berries.dialog.BerryInfoDialogFragment"
+        android:label="@string/menu_berries"
+        tools:layout="@layout/fragment_dialog_berry_info" >
+    </dialog>
+
+    <fragment
+        android:id="@+id/nav_items"
+        android:name="com.kronos.pokedex.ui.items.list.ItemsFragment"
+        android:label="@string/menu_items"
+        tools:layout="@layout/fragment_items" >
+        <action
+            android:id="@+id/action_nav_items_to_nav_item_detail"
+            app:destination="@id/nav_item_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_item_detail"
+        android:name="com.kronos.pokedex.ui.items.detail.ItemDetailFragment"
+        android:label="@string/menu_item_detail"
+        tools:layout="@layout/fragment_item_info" >
+    </fragment>
 </navigation>

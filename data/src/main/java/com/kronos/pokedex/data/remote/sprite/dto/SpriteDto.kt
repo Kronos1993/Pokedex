@@ -3,6 +3,8 @@ package com.kronos.pokedex.data.remote.sprite.dto
 import com.google.gson.annotations.SerializedName
 
 data class SpriteDto(
+    @SerializedName("default")
+    val default:String = "",
     @SerializedName("back_default")
     val backDefault:String = "",
     @SerializedName("back_female")
