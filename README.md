@@ -10,7 +10,7 @@ Demo App using Kotlin,View Binding, Retrofit, Dependency Injection and Pokemon A
 This is a demo app.
 
 The "Pokedex" app is an Android application that allows users to browse information about different Pokemon species. 
-The app retrieves its data from the official Pokemon API, which provides a comprehensive catalog of Pokemon with detailed information such as stats, abilities, and evolutions.
+The app retrieves its data from the official Pokemon API(https://pokeapi.co/), which provides a comprehensive catalog of Pokemon with detailed information such as stats, abilities, and evolutions.
 
 The app follows the Clean Architecture principles, which promote a clear separation of concerns between the different layers of the application. 
 The project is divided into several modules that handle specific functionalities, such as:
@@ -27,7 +27,7 @@ This pattern allows for easier testing, maintainability, and scalability of the 
 The user interface of the app is designed following the Material Design guidelines, which provide a modern and intuitive visual language for Android apps. 
 The app uses different UI components such as RecyclerView, CardView, and Toolbar to display the Pokemon information in an attractive and user-friendly way.
 
-Overall, the "Pokemon Explorer" app provides a reliable and enjoyable experience for Pokemon fans who want to learn more about their favorite creatures in a mobile-friendly way.
+Overall, the "Pokedex" app provides a reliable and enjoyable experience for Pokemon fans who want to learn more about their favorite creatures in a mobile-friendly way.
 
 <br />
 
