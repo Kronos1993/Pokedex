@@ -145,6 +145,8 @@ class PokemonDetailViewModel @Inject constructor(
         viewModelScope.launch (Dispatchers.IO) {
             loading.postValue(true)
             var pokemonInfo: PokemonInfo? = null
+            pokemonDescription.set("")
+            statsTotal.set(0)
 
             pokemonInfo = if (urlProvider.extractIdFromUrl(pokemonList.url) != null) {
                 pokemonRemoteRepository.getPokemonInfo(urlProvider.extractIdFromUrl(pokemonList.url))

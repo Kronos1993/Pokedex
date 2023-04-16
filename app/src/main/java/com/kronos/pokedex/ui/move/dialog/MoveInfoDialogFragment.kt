@@ -80,6 +80,7 @@ class MoveInfoDialogFragment : BottomSheetDialogFragment() {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.setCancelable(false)
         dialog.setCanceledOnTouchOutside(true)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return dialog
     }
 
@@ -137,7 +138,7 @@ class MoveInfoDialogFragment : BottomSheetDialogFragment() {
 
     private fun hideDialog() {
         lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
                 findNavController().navigateUp()
             }
         }

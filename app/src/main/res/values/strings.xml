@@ -21,6 +21,7 @@
     <string name="no_evolutions">No Data</string>
 
     <string name="unknown">Unknown</string>
+    <string name="none">None</string>
 
     <string name="menu_move_list">Moves</string>
     <string name="move_info">Move</string>

@@ -165,6 +165,8 @@ class PokemonDetailFragment : Fragment() {
         viewModel.postPokemonStats(listOf())
         viewModel.postPokemonSprites(listOf())
         viewModel.postPokemonOtherForms(listOf())
+        viewModel.pokemonDescription.set(null)
+        viewModel.statsTotal.set(null)
         binding.unbind()
         super.onPause()
     }

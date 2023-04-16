@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.kronos.pokedex.R
+import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.specie.SpecieInfo
 
 @BindingAdapter("app:set_stat_name")
@@ -74,8 +75,33 @@ fun transformText(view: TextView, text: String?) {
 @BindingAdapter("app:handle_long_item_effect_text")
 fun transformItemLongEffectText(view: TextView, text: String?) {
     view.run {
-        if (text != null) {
-            view.text = text.replace(Regex("\n"), " ")
+        view.text = text?.replace(Regex("\n"), " ") ?: view.context.getString(R.string.unknown)
+    }
+}
+
+@BindingAdapter("app:handle_pokemon_description")
+fun handlePokemonDescription(view: TextView, text: String?) {
+    view.run {
+        view.text = text?.replace(Regex("\n"), " ") ?: view.context.getString(R.string.unknown)
+
+    }
+}
+
+@BindingAdapter("app:handle_move_description")
+fun handleMoveDescription(view: TextView, text: String?) {
+    view.run {
+        view.text = text?.replace(Regex("\n"), " ") ?: view.context.getString(R.string.unknown)
+
+    }
+}
+
+@BindingAdapter("app:handle_move_effect")
+fun handleMoveEffect(view: TextView, moveInfo:MoveInfo?) {
+    view.run {
+        if (moveInfo !=null)
+            view.text = text?.replace(Regex("effect_chance"), moveInfo.effectChance.toString())?.replace("$","")
+        else{
+            view.context.getString(R.string.unknown)
         }
     }
 }
@@ -83,10 +109,11 @@ fun transformItemLongEffectText(view: TextView, text: String?) {
 @BindingAdapter("app:handle_pokemon_name")
 fun setPokemonName(view: TextView, pokemonName: String?) {
     view.run {
-        if (pokemonName != null) {
+        view.text = if (pokemonName != null) {
             var name = pokemonName.replace(Regex("-"), " ")
-            view.text = name.uppercase()
-        }
+            name.uppercase()
+        } else
+            view.context.getString(R.string.unknown)
     }
 }
 
@@ -96,30 +123,33 @@ fun setPokedexName(view: TextView, pokedexName: String?) {
         if (pokedexName != null) {
             var name = pokedexName.replace(Regex("updated"), "").replace(Regex("extended"), "")
                 .replace(Regex("-"), " ")
-            if (name.length > 1) {
-                view.text = name.uppercase()
+            view.text = if (name.length > 1) {
+                name.uppercase()
             } else {
-                view.text = view.context.getString(R.string.unknown)
+                view.context.getString(R.string.unknown)
             }
-        }
+        } else
+            view.text = view.context.getString(R.string.unknown)
     }
 }
 
 @BindingAdapter("app:handle_pokemon_height")
 fun setPokemonHeight(view: TextView, height: Double?) {
     view.run {
-        if (height != null) {
-            view.text = "${(height / 10)} mts"
-        }
+        view.text = if (height != null) {
+            "${(height / 10)} mts"
+        } else
+            view.context.getString(R.string.unknown)
     }
 }
 
 @BindingAdapter("app:handle_pokemon_weight")
 fun setPokemonWeight(view: TextView, weight: Double?) {
     view.run {
-        if (weight != null) {
-            view.text = "${(weight / 10)} kg"
-        }
+        view.text = if (weight != null) {
+            "${(weight / 10)} kg"
+        } else
+            view.context.getString(R.string.unknown)
     }
 }
 
@@ -145,43 +175,29 @@ fun setMoveCategory(view: TextView, category: String?) {
 @BindingAdapter("app:handle_increased_stat")
 fun setIncreasedStat(view: TextView, increasedStat: String?) {
     view.run {
-        if (increasedStat != null) {
-            view.text = increasedStat.replace(Regex("-")," ").uppercase()
-        } else {
-            view.text = "NONE".uppercase()
-        }
+        view.text = increasedStat?.replace(Regex("-"), " ")?.uppercase()
+            ?: view.context.getString(R.string.none).uppercase()
     }
 }
 
 @BindingAdapter("app:handle_decreased_stat")
 fun setDecreasedStat(view: TextView, decreasedStat: String?) {
     view.run {
-        if (decreasedStat != null) {
-            view.text = decreasedStat.replace(Regex("-")," ").uppercase()
-        } else {
-            view.text = "NONE".uppercase()
-        }
+        view.text = decreasedStat?.replace(Regex("-"), " ")?.uppercase()
+            ?: view.context.getString(R.string.none).uppercase()
     }
 }
 
 @BindingAdapter("app:handle_hates_flavor")
 fun setHatesFlavor(view: TextView, hatesFlavor: String?) {
     view.run {
-        if (hatesFlavor != null) {
-            view.text = hatesFlavor.uppercase()
-        } else {
-            view.text = "NONE".uppercase()
-        }
+        view.text = hatesFlavor?.uppercase() ?: view.context.getString(R.string.none).uppercase()
     }
 }
 
 @BindingAdapter("app:handle_likes_flavor")
 fun setLikesFlavor(view: TextView, likesFlavor: String?) {
     view.run {
-        if (likesFlavor != null) {
-            view.text = likesFlavor.uppercase()
-        } else {
-            view.text = "NONE".uppercase()
-        }
+        view.text = likesFlavor?.uppercase() ?: view.context.getString(R.string.none).uppercase()
     }
 }

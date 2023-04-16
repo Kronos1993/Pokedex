@@ -53,9 +53,18 @@ class PokemonMoveListAdapter(var showIn: ShowMoveIn = ShowMoveIn.MOVE_LIST) :
                     0
                 }
             }
+
+            var method = move.moveDetails.let {
+                if (it.isNotEmpty())
+                    it[0].moveLearnMethod
+                else {
+                    ""
+                }
+            }
             binding.run {
                 pokemonMove = move
                 pokemonMoveLevelLearned = level
+                pokemonMoveLearnedMethod = method
                 root.setOnClickListener {
                     clickListener?.onItemClick(move, adapterPosition)
                 }
