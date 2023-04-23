@@ -128,4 +128,15 @@
         android:label="@string/menu_item_detail"
         tools:layout="@layout/fragment_item_info" >
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_categories_items"
+        android:name="com.kronos.pokedex.ui.items.by_categories.ItemCategoriesFragment"
+        android:label="@string/menu_item_categories"
+        tools:layout="@layout/fragment_categories_items" >
+        <action
+            android:id="@+id/action_nav_categories_items_to_nav_items"
+            app:destination="@id/nav_items" />
+    </fragment>
+
 </navigation>

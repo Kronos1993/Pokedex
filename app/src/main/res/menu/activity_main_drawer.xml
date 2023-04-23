@@ -31,6 +31,12 @@
             android:id="@+id/nav_items"
             android:icon="@drawable/ic_backpack"
             android:title="@string/menu_items" />
+
+        <item
+            android:id="@+id/nav_categories_items"
+            android:icon="@drawable/ic_backpack"
+            android:title="@string/menu_item_categories" />
+
         <item
             android:id="@+id/nav_berries"
             android:icon="@drawable/ic_berries"

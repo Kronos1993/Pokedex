@@ -385,6 +385,7 @@
                             android:maxHeight="@dimen/size_100"
                             android:maxLines="15"
                             android:singleLine="false"
+                            android:text="@{viewModel.moveEffect}"
                             app:handle_move_effect="@{viewModel.moveInfo}"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"

@@ -48,7 +48,8 @@ class PokedexViewModel  @Inject constructor(
         }
         list.forEach {
             if(!(pokelist as ArrayList).contains(it)){
-                if(!it.name.equals("hoenn",true) && !it.name.equals("johto",false) && !it.name.contains("original-") && !it.name.contains("conquest-gallery") && !it.name.contains("letsgo-kanto"))
+                //if(!it.name.equals("hoenn",true) && !it.name.equals("johto",false) && !it.name.contains("original-") && !it.name.contains("conquest-gallery") && !it.name.contains("letsgo-kanto"))
+                if(!it.name.contains("conquest-gallery"))
                     pokelist.add(it)
             }
         }
@@ -63,7 +64,8 @@ class PokedexViewModel  @Inject constructor(
         }
         list.forEach {
             if(!(pokelist as ArrayList).contains(it)){
-                if(!it.name.equals("hoenn",true) && !it.name.equals("johto",false) && !it.name.contains("original-") && !it.name.contains("conquest-gallery") && !it.name.contains("letsgo-kanto"))
+                //if(!it.name.equals("hoenn",true) && !it.name.equals("johto",false) && !it.name.contains("original-") && !it.name.contains("conquest-gallery") && !it.name.contains("letsgo-kanto"))
+                if(!it.name.contains("conquest-gallery"))
                     pokelist.add(it)
             }
         }

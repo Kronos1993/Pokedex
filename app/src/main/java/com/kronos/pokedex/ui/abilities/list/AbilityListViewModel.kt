@@ -39,9 +39,6 @@ class AbilityListViewModel @Inject constructor(
     private val _offset = MutableLiveData<Int>()
     val offset = _offset.asLiveData()
 
-    private val _recyclerLastPos = MutableLiveData<Int>()
-    val recyclerLastPos = _recyclerLastPos.asLiveData()
-
     private var _total = MutableLiveData<Int>()
     val total = _total.asLiveData()
 
@@ -134,10 +131,6 @@ class AbilityListViewModel @Inject constructor(
         viewModelScope.launch {
             logger.write(this::class.java.name, LoggerType.INFO, item)
         }
-    }
-
-    fun setRecyclerLastPosition(i: Int) {
-        _recyclerLastPos.value = i
     }
 
 }

@@ -107,6 +107,8 @@ class MoveInfoViewModel @Inject constructor(
             } else {
                 moveRemoteRepository.getMove(move.name)
             }
+            getMoveEffect(moveInfo)
+            getMoveGameDescription(moveInfo)
             postMoveInfo(moveInfo)
             loadPokemonList(moveInfo)
             loading.postValue(false)

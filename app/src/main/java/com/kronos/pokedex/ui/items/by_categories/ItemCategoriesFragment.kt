@@ -1,4 +1,4 @@
-package com.kronos.pokedex.ui.move.list
+package com.kronos.pokedex.ui.items.by_categories
 
 import android.os.Bundle
 import android.view.*
@@ -13,23 +13,19 @@ import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.core.util.LoadingDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
-import com.kronos.pokedex.databinding.FragmentMoveListBinding
-import com.kronos.pokedex.domian.model.move.MoveList
-import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
-import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
-import com.kronos.pokedex.ui.move.ShowMoveIn
+import com.kronos.pokedex.databinding.FragmentCategoriesItemsBinding
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 import java.util.*
 
-const val CURRENT_MOVE = "current_move"
+const val CURRENT_ITEMS = "current_items"
 
 @AndroidEntryPoint
-class MoveListFragment : Fragment() {
+class ItemCategoriesFragment : Fragment() {
+    private val binding by fragmentBinding<FragmentCategoriesItemsBinding>(R.layout.fragment_categories_items)
 
-    private val binding by fragmentBinding<FragmentMoveListBinding>(R.layout.fragment_move_list)
-
-    private val viewModel by viewModels<MoveListViewModel>()
+    private val viewModel by viewModels<ItemCategoriesViewModel>()
 
     lateinit var searchView: SearchView
 
@@ -38,8 +34,8 @@ class MoveListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = binding.run {
-        viewModel = this@MoveListFragment.viewModel
-        lifecycleOwner = this@MoveListFragment.viewLifecycleOwner
+        viewModel = this@ItemCategoriesFragment.viewModel
+        lifecycleOwner = this@ItemCategoriesFragment.viewLifecycleOwner
         setHasOptionsMenu(true)
         root
     }
@@ -56,7 +52,7 @@ class MoveListFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.moveList.observe(this.viewLifecycleOwner, ::handleMoveList)
+        viewModel.itemCategory.observe(this.viewLifecycleOwner, ::handleItemCategories)
         viewModel.loading.observe(this.viewLifecycleOwner, ::handleLoading)
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
@@ -66,14 +62,14 @@ class MoveListFragment : Fragment() {
         if (hashtable["error"] != null) {
             if (hashtable["error"]!!.isNotEmpty()) {
                 show(
-                    binding.layoutMoveList.recyclerViewMoves,
+                    binding.recyclerViewItemsList,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_error_background
                 )
             } else {
                 show(
-                    binding.layoutMoveList.recyclerViewMoves,
+                    binding.recyclerViewItemsList,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_success_background
@@ -83,7 +79,7 @@ class MoveListFragment : Fragment() {
     }
 
     private fun handleLoading(b: Boolean) {
-        try {
+        try{
             if (b) {
                 LoadingDialog.getProgressDialog(
                     requireContext(),
@@ -97,56 +93,40 @@ class MoveListFragment : Fragment() {
                     com.kronos.resources.R.color.colorSecondaryVariant
                 )!!.dismiss()
             }
-        } catch (e: IllegalArgumentException) {
-            e.printStackTrace()
-        }
-
+        }catch (e:Exception){}
     }
 
-    private fun handleMoveList(list: List<MoveList>) {
-        viewModel.moveAdapter.get()?.submitList(list)
-        viewModel.moveAdapter.get()?.notifyDataSetChanged()
-        binding.layoutMoveList.run {
-            moves = list
-        }
+    private fun handleItemCategories(list: List<NamedResourceApi>) {
+        viewModel.itemCategoryListAdapter.get()?.submitList(list)
+        viewModel.itemCategoryListAdapter.get()?.notifyDataSetChanged()
     }
 
     private fun initViews() {
-        binding.layoutMoveList.recyclerViewMoves.layoutManager =
-            GridLayoutManager(context, 2)
-        binding.layoutMoveList.recyclerViewMoves.setHasFixedSize(false)
-        if (viewModel.moveAdapter.get() == null)
-            viewModel.moveAdapter = WeakReference(PokemonMoveListAdapter(ShowMoveIn.MOVE_LIST))
-        binding.layoutMoveList.recyclerViewMoves.adapter =
-            viewModel.moveAdapter.get()
-        viewModel.moveAdapter.get()?.setAdapterItemClick(object :
-            AdapterItemClickListener<MoveList> {
-            override fun onItemClick(t: MoveList, pos: Int) {
-                if (searchView != null)
-                    searchView.clearFocus()
-                viewModel.filterMove("")
+        binding.recyclerViewItemsList.layoutManager = GridLayoutManager(context,2)
+        binding.recyclerViewItemsList.setHasFixedSize(false)
+        if (viewModel.itemCategoryListAdapter.get() == null)
+            viewModel.itemCategoryListAdapter = WeakReference(ItemByCategoriesListAdapter())
+        viewModel.itemCategoryListAdapter.get()!!.setUrlProvider(viewModel.urlProvider)
+        binding.recyclerViewItemsList.adapter = viewModel.itemCategoryListAdapter.get()
+        viewModel.itemCategoryListAdapter.get()?.setAdapterItemClick(object :
+            AdapterItemClickListener<NamedResourceApi> {
+            override fun onItemClick(t: NamedResourceApi, pos: Int) {
+                if (searchView != null) searchView.clearFocus()
+                    viewModel.filterItemCategories("")
                 viewModel.setRecyclerLastPosition(pos)
-                if (!t.move.name.isNullOrEmpty()) {
-                    if (findNavController().currentDestination?.id == R.id.nav_move_list) {
-                        val bundle = Bundle()
-                        bundle.putSerializable(CURRENT_MOVE, t.move)
-                        findNavController().navigate(
-                            R.id.action_nav_move_list_to_nav_move_info_dialog,
-                            bundle
-                        )
-                    }
-
-                }
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_ITEMS, t)
+                findNavController().navigate(R.id.action_nav_categories_items_to_nav_items, bundle)
             }
-
         })
-        binding.layoutMoveList.recyclerViewMoves.postDelayed({
-            binding.layoutMoveList.recyclerViewMoves.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
+
+        binding.recyclerViewItemsList.postDelayed({
+            binding.recyclerViewItemsList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
                 it ?: 0
             })
         }, 50)
 
-        binding.layoutMoveList.recyclerViewMoves.addOnScrollListener(object :
+        binding.recyclerViewItemsList.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount: Int = (recyclerView.layoutManager as GridLayoutManager).childCount
@@ -154,26 +134,15 @@ class MoveListFragment : Fragment() {
                 val firstVisibleItemPosition: Int = (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
                 if (!viewModel.loading.value!!) {
                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0)
-                        viewModel.getMoreMoves()
+                        viewModel.getMoreItemCategories()
                 }
             }
         })
     }
 
-    private fun initViewModel() {
-        viewModel.setLimit(viewModel.limit.value.let {
-            it ?: resources.getInteger(R.integer.move_limit)
-        })
-        viewModel.setOffset(viewModel.offset.value.let {
-            it ?: resources.getInteger(R.integer.def_offset)
-        })
-        if (viewModel.moveOriginalList.value.isNullOrEmpty())
-            viewModel.getMoves()
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.clear()
         // Inflate the menu; this adds items to the action bar if it is present.
+        menu.clear()
         inflater.inflate(R.menu.main, menu)
         val searchItem: MenuItem = menu.findItem(R.id.action_search)
 
@@ -190,10 +159,22 @@ class MoveListFragment : Fragment() {
             override fun onQueryTextChange(msg: String): Boolean {
                 // inside on query text change method we are
                 // calling a method to filter our recycler view.
-                viewModel.filterMove(msg)
+                viewModel.filterItemCategories(msg)
                 return false
             }
         })
+    }
+
+    private fun initViewModel() {
+        viewModel.setLimit(viewModel.limit.value.let{ it ?: resources.getInteger(R.integer.item_limit)})
+        viewModel.setOffset(viewModel.offset.value.let{ it ?: resources.getInteger(R.integer.def_offset)})
+        if (viewModel.itemCategory.value.isNullOrEmpty())
+            viewModel.getItemCategories()
+    }
+
+    override fun onDestroyView() {
+        binding.unbind()
+        super.onDestroyView()
     }
 
     override fun onPause() {
@@ -201,8 +182,5 @@ class MoveListFragment : Fragment() {
         super.onPause()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding.unbind()
-    }
+
 }

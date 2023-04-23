@@ -39,6 +39,8 @@
 
     <string name="menu_items">Items</string>
     <string name="no_items_found">NO ITEMS FOUND</string>
+    <string name="menu_item_categories">Items Categories</string>
+    <string name="no_categories_items_found">NO CATEGORIES ITEMS FOUND</string>
     <string name="menu_item_detail">Item Detail</string>
 
     <string name="menu_berries">Berries</string>
