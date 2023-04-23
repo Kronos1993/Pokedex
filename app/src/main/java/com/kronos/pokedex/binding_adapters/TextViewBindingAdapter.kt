@@ -61,6 +61,7 @@ fun transformText(view: TextView, text: String?) {
     view.run {
         if (text != null) {
             var textMod = text.replace(Regex("-"), " ")
+            textMod = replaceNewLine(textMod)
             if (textMod.length > 1) {
                 view.text = textMod.substring(0, 1).uppercase() + textMod.substring(1).lowercase()
             } else {
@@ -91,7 +92,6 @@ fun handlePokemonDescription(view: TextView, text: String?) {
 fun handleMoveDescription(view: TextView, text: String?) {
     view.run {
         view.text = text?.replace(Regex("\n"), " ") ?: view.context.getString(R.string.unknown)
-
     }
 }
 
@@ -201,3 +201,5 @@ fun setLikesFlavor(view: TextView, likesFlavor: String?) {
         view.text = likesFlavor?.uppercase() ?: view.context.getString(R.string.none).uppercase()
     }
 }
+
+fun replaceNewLine(text :String) = text.replace(Regex("\n"), " ")

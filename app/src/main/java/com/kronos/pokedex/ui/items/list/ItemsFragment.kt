@@ -15,6 +15,8 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentItemsBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.ui.items.ShowItemIn
+import com.kronos.pokedex.ui.items.by_categories.CURRENT_ITEMS
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 import java.util.*
@@ -79,7 +81,7 @@ class ItemsFragment : Fragment() {
     }
 
     private fun handleLoading(b: Boolean) {
-        try{
+        try {
             if (b) {
                 LoadingDialog.getProgressDialog(
                     requireContext(),
@@ -93,7 +95,8 @@ class ItemsFragment : Fragment() {
                     com.kronos.resources.R.color.colorSecondaryVariant
                 )!!.dismiss()
             }
-        }catch (e:Exception){}
+        } catch (e: Exception) {
+        }
     }
 
     private fun handleItems(list: List<NamedResourceApi>) {
@@ -102,7 +105,7 @@ class ItemsFragment : Fragment() {
     }
 
     private fun initViews() {
-        binding.recyclerViewItemsList.layoutManager = GridLayoutManager(context,2)
+        binding.recyclerViewItemsList.layoutManager = GridLayoutManager(context, 2)
         binding.recyclerViewItemsList.setHasFixedSize(false)
         if (viewModel.itemListAdapter.get() == null)
             viewModel.itemListAdapter = WeakReference(ItemListAdapter())
@@ -112,25 +115,37 @@ class ItemsFragment : Fragment() {
             AdapterItemClickListener<NamedResourceApi> {
             override fun onItemClick(t: NamedResourceApi, pos: Int) {
                 if (searchView != null) searchView.clearFocus()
-                    viewModel.filterItems("")
+                viewModel.filterItems("")
+                viewModel.setRecyclerLastPosition(pos)
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_ITEM, t)
                 findNavController().navigate(R.id.action_nav_items_to_nav_item_detail, bundle)
             }
         })
 
-        binding.recyclerViewItemsList.addOnScrollListener(object :
-            RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val visibleItemCount: Int = (recyclerView.layoutManager as GridLayoutManager).childCount
-                val totalItemCount: Int = (recyclerView.layoutManager as GridLayoutManager).itemCount
-                val firstVisibleItemPosition: Int = (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
-                if (!viewModel.loading.value!!) {
-                    if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0)
-                        viewModel.getMoreItems()
+        binding.recyclerViewItemsList.postDelayed({
+            binding.recyclerViewItemsList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
+                it ?: 0
+            })
+        }, 50)
+
+        if (viewModel.origen.value == ShowItemIn.ITEM_LIST){
+            binding.recyclerViewItemsList.addOnScrollListener(object :
+                RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    val visibleItemCount: Int =
+                        (recyclerView.layoutManager as GridLayoutManager).childCount
+                    val totalItemCount: Int =
+                        (recyclerView.layoutManager as GridLayoutManager).itemCount
+                    val firstVisibleItemPosition: Int =
+                        (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
+                    if (!viewModel.loading.value!!) {
+                        if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0)
+                            viewModel.getMoreItems()
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -159,10 +174,22 @@ class ItemsFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        viewModel.setLimit(viewModel.limit.value.let{ it ?: resources.getInteger(R.integer.item_limit)})
-        viewModel.setOffset(viewModel.offset.value.let{ it ?: resources.getInteger(R.integer.def_offset)})
-        if (viewModel.itemList.value.isNullOrEmpty())
-            viewModel.getBerries()
+        viewModel.setLimit(viewModel.limit.value.let {
+            it ?: resources.getInteger(R.integer.item_limit)
+        })
+        viewModel.setOffset(viewModel.offset.value.let {
+            it ?: resources.getInteger(R.integer.def_offset)
+        })
+        var bundle = arguments
+        if (bundle?.get(CURRENT_ITEMS) != null) {
+            viewModel.postOrigen(ShowItemIn.ITEM_CATEGORY)
+            viewModel.getItemsByCategories(bundle.get(CURRENT_ITEMS) as NamedResourceApi)
+        } else {
+            viewModel.postOrigen(ShowItemIn.ITEM_LIST)
+            if(viewModel.itemList.value.isNullOrEmpty()){
+                viewModel.getItems()
+            }
+        }
     }
 
     override fun onDestroyView() {

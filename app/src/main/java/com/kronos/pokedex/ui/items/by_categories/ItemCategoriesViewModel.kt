@@ -1,4 +1,4 @@
-package com.kronos.pokedex.ui.items.list
+package com.kronos.pokedex.ui.items.by_categories
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
@@ -9,8 +9,6 @@ import com.kronos.logger.LoggerType
 import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.repository.ItemRemoteRepository
-import com.kronos.pokedex.ui.items.ShowItemIn
-import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -21,23 +19,20 @@ import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 @HiltViewModel
-class ItemsViewModel @Inject constructor(
+class ItemCategoriesViewModel @Inject constructor(
     @ApplicationContext val context: Context,
     private var itemRemoteRepository: ItemRemoteRepository,
     var urlProvider: UrlProvider,
     var logger: ILogger,
 ) : ParentViewModel() {
 
-    private val _itemList = MutableLiveData<MutableList<NamedResourceApi>>()
-    val itemList = _itemList.asLiveData()
+    private val _itemCategoryList = MutableLiveData<MutableList<NamedResourceApi>>()
+    val itemCategory = _itemCategoryList.asLiveData()
 
-    private val _itemOriginalList = MutableLiveData<MutableList<NamedResourceApi>>()
-    val itemOriginalList = _itemOriginalList.asLiveData()
+    private val _itemCategoryOriginalList = MutableLiveData<MutableList<NamedResourceApi>>()
+    val itemCategoryOriginalList = _itemCategoryOriginalList.asLiveData()
 
-    private val _origen = MutableLiveData<ShowItemIn?>()
-    val origen = _origen.asLiveData()
-
-    var itemListAdapter: WeakReference<ItemListAdapter?> = WeakReference(ItemListAdapter())
+    var itemCategoryListAdapter: WeakReference<ItemByCategoriesListAdapter?> = WeakReference(ItemByCategoriesListAdapter())
 
     private val _limit = MutableLiveData<Int>()
     val limit = _limit.asLiveData()
@@ -48,87 +43,66 @@ class ItemsViewModel @Inject constructor(
     private var _total = MutableLiveData<Int>()
     val total = _total.asLiveData()
 
-    fun postOrigen(origen: ShowItemIn?) {
-        _origen.value = origen
-    }
-
-    private fun postItems(list: List<NamedResourceApi>) {
+    private fun postItemByCategories(list: List<NamedResourceApi>) {
         var itemlist = mutableListOf<NamedResourceApi>()
-        if (_itemList.value != null) {
-            itemlist = _itemList.value!!
+        if (_itemCategoryList.value != null) {
+            itemlist = _itemCategoryList.value!!
         }
         list.forEach {
             if (!(itemlist as ArrayList).contains(it)) {
                 itemlist.add(it)
             }
         }
-        _itemList.postValue(itemlist)
+        _itemCategoryList.postValue(itemlist)
         loading.postValue(false)
     }
 
-    private fun postItemsOriginalList(list: List<NamedResourceApi>) {
+    private fun postItemByCategoriesOriginalList(list: List<NamedResourceApi>) {
         var itemslist = mutableListOf<NamedResourceApi>()
-        if (_itemOriginalList.value != null) {
-            itemslist = _itemOriginalList.value!!
+        if (_itemCategoryOriginalList.value != null) {
+            itemslist = _itemCategoryOriginalList.value!!
         }
         list.forEach {
             if (!(itemslist as ArrayList).contains(it)) {
                 itemslist.add(it)
             }
         }
-        _itemOriginalList.postValue(itemslist)
+        _itemCategoryOriginalList.postValue(itemslist)
         loading.postValue(false)
     }
 
-    fun getItems() {
+    fun getItemCategories() {
         loading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             var call = async {
-                val responseList = itemRemoteRepository.listItems(limit.value!!, offset.value!!)
+                val responseList = itemRemoteRepository.listItemCategories(limit.value!!, offset.value!!)
                 _total.postValue(responseList.count)
-                postItems(responseList.results)
-                postItemsOriginalList(responseList.results)
+                postItemByCategories(responseList.results)
+                postItemByCategoriesOriginalList(responseList.results)
             }
             call.await()
         }
     }
 
-    fun getItemsByCategories(itemCategory:NamedResourceApi) {
-        loading.value = true
-        viewModelScope.launch(Dispatchers.IO) {
-            var call = async {
-                val itemCategory = if (urlProvider.extractIdFromUrl(itemCategory.url) != null) {
-                    itemRemoteRepository.getItemCategory(urlProvider.extractIdFromUrl(itemCategory.url))
-                } else {
-                    itemRemoteRepository.getItemCategory(itemCategory.name)
-                }
-                _total.postValue(itemCategory.items.size)
-                postItems(itemCategory.items)
-                postItemsOriginalList(itemCategory.items)
-            }
-            call.await()
-        }
-    }
-
-    fun getMoreItems() {
+    fun getMoreItemCategories() {
         viewModelScope.launch {
             if (offset.value!! <= _total.value!!) {
                 setOffset(offset.value!! + limit.value!!)
-                getItems()
+                getItemCategories()
             }
         }
     }
 
-    private fun postItemListFiltered(list: List<NamedResourceApi>) {
-        _itemList.postValue(list as MutableList<NamedResourceApi>?)
+    private fun postItemCategoriesFiltered(list: List<NamedResourceApi>) {
+        _itemCategoryList.postValue(list as MutableList<NamedResourceApi>?)
     }
 
-    fun filterItems(itemName: String) {
+    fun filterItemCategories(itemName: String) {
         if (itemName.isNotEmpty()) {
             // creating a new array list to filter our data.
             val filteredList: ArrayList<NamedResourceApi> = ArrayList()
             // running a for loop to compare elements.
-            for (item in _itemOriginalList.value!!) {
+            for (item in _itemCategoryOriginalList.value!!) {
                 // checking if the entered string matched with any item of our recycler view.
                 if (item.name.lowercase().contains(itemName.lowercase())) {
                     // if the item is matched we are
@@ -136,9 +110,9 @@ class ItemsViewModel @Inject constructor(
                     filteredList.add(item)
                 }
             }
-            postItemListFiltered(filteredList)
+            postItemCategoriesFiltered(filteredList)
         } else {
-            postItemListFiltered(_itemOriginalList.value!!)
+            postItemCategoriesFiltered(_itemCategoryOriginalList.value!!)
         }
     }
 
@@ -155,4 +129,6 @@ class ItemsViewModel @Inject constructor(
     fun setOffset(i: Int) {
         _offset.value = i
     }
+
+
 }
