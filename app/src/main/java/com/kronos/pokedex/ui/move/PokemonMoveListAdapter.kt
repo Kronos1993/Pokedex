@@ -10,7 +10,7 @@ import com.kronos.pokedex.databinding.ItemMoveListBinding
 import com.kronos.pokedex.databinding.ItemPokemonMoveBinding
 import com.kronos.pokedex.domian.model.move.MoveList
 
-class PokemonMoveListAdapter(var showIn: ShowMoveIn = ShowMoveIn.MOVE_LIST) :
+class PokemonMoveListAdapter(var showIn: ShowMoveIn) :
     ListAdapter<MoveList, RecyclerView.ViewHolder>(GeneralDiffCallback<MoveList>()) {
 
     private var adapterItemClickListener: AdapterItemClickListener<MoveList>? = null

@@ -40,6 +40,16 @@
         <item name="bottomSheetStyle">@style/ModalBottomSheet</item>
     </style>
 
+    <style name="Widget.Pokedex.NormalButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_margin">@dimen/margin_5</item>
+        <item name="cornerRadius">@dimen/margin_40</item>
+    </style>
+
+    <style name="Widget.Pokedex.SelectedButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:layout_margin">@dimen/margin_5</item>
+        <item name="cornerRadius">@dimen/margin_40</item>
+    </style>
+
     <style name="ModalBottomSheet" parent="Widget.Material3.BottomSheet.Modal">
         <item name="backgroundColor">@color/backgroundColor</item>
     </style>

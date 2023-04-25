@@ -3,7 +3,6 @@ package com.kronos.pokedex.ui.pokemon.detail.pages
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -12,14 +11,11 @@ import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonMovesBinding
-import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.move.MoveList
-import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
 import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
 import com.kronos.pokedex.ui.move.list.CURRENT_MOVE
-import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
@@ -44,7 +40,7 @@ class PokemonMovesFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.pokemonMoves.observe(this.viewLifecycleOwner, ::handlePokemonMoves)
+        viewModel.pokemonMovesToShow.observe(this.viewLifecycleOwner, ::handlePokemonMoves)
         viewModel.moveInfo.observe(this.viewLifecycleOwner, ::handleMoveInfo)
     }
 

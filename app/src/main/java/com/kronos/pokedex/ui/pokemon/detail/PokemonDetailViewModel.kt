@@ -12,6 +12,7 @@ import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
 import com.kronos.pokedex.domian.model.evolution_chain.EvolutionChain
+import com.kronos.pokedex.domian.model.move.MoveDetail
 import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
@@ -21,6 +22,7 @@ import com.kronos.pokedex.domian.model.stat.Stat
 import com.kronos.pokedex.domian.repository.*
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
+import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEvolutionChainAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
@@ -52,8 +54,23 @@ class PokemonDetailViewModel @Inject constructor(
     private val _pokemonStats = MutableLiveData<List<Stat>>()
     val pokemonStats = _pokemonStats.asLiveData()
 
-    private val _pokemonMoves = MutableLiveData<List<MoveList>>()
-    val pokemonMoves = _pokemonMoves.asLiveData()
+    private val _pokemonMovesToShow = MutableLiveData<List<MoveList>>()
+    val pokemonMovesToShow = _pokemonMovesToShow.asLiveData()
+
+    private val _allMoves = MutableLiveData<List<MoveList>>()
+    val allMoves = _allMoves.asLiveData()
+
+    private val _movesLevelUp = MutableLiveData<List<MoveList>>()
+    val movesLevelUp = _movesLevelUp.asLiveData()
+
+    private val _movesTutor = MutableLiveData<List<MoveList>>()
+    val movesTutor = _movesTutor.asLiveData()
+
+    private val _movesTM = MutableLiveData<List<MoveList>>()
+    val movesTM = _movesTM.asLiveData()
+
+    private val _movesEgg = MutableLiveData<List<MoveList>>()
+    val movesEgg = _movesEgg.asLiveData()
 
     private val _pokemonEvolutionChain = MutableLiveData<EvolutionChain>()
 
@@ -91,7 +108,7 @@ class PokemonDetailViewModel @Inject constructor(
     )
 
     var moveByPokemonAdapter: WeakReference<PokemonMoveListAdapter?> = WeakReference(
-        PokemonMoveListAdapter()
+        PokemonMoveListAdapter(ShowMoveIn.POKEMON_DETAIL)
     )
 
     var evolutionPokemonAdapter: WeakReference<PokemonEvolutionChainAdapter?> = WeakReference(
@@ -102,6 +119,9 @@ class PokemonDetailViewModel @Inject constructor(
 
     var pokemonDescription = ObservableField<String?>()
 
+    var showMove = ObservableField<String?>()
+    var buttonSelected = ObservableField<String?>()
+
     fun postPokemonInfo(pokemonInfo: PokemonInfo) {
         _pokemonInfo.postValue(pokemonInfo)
     }
@@ -111,9 +131,42 @@ class PokemonDetailViewModel @Inject constructor(
     }
 
     fun postPokemonMoves(moves: List<MoveList>) {
-        _pokemonMoves.postValue(moves.sortedBy {
+        _pokemonMovesToShow.postValue(moves.sortedBy {
             it.order
         })
+    }
+
+    private fun groupMoves(moves: List<MoveList>){
+        var levelUp = mutableListOf<MoveList>()
+        var tutor = mutableListOf<MoveList>()
+        var tm = mutableListOf<MoveList>()
+        var egg = mutableListOf<MoveList>()
+
+        var moveDetail: MoveDetail? = null
+        for (move in moves){
+            if (move.moveDetails.isNotEmpty()){
+                moveDetail = move.moveDetails[0]
+                when (moveDetail.moveLearnMethod) {
+                    "level-up" -> {
+                        levelUp.add(move)
+                    }
+                    "egg" -> {
+                        egg.add(move)
+                    }
+                    "machine" -> {
+                        tm.add(move)
+                    }
+                    else -> {
+                        tutor.add(move)
+                    }
+                }
+            }
+        }
+        _movesLevelUp.postValue(levelUp)
+        _movesTM.postValue(tm)
+        _movesTutor.postValue(tutor)
+        _movesEgg.postValue(egg)
+        _allMoves.postValue(moves)
     }
 
     private fun postPokemonEvolutionChain(evolutionChain: EvolutionChain) {
@@ -190,6 +243,7 @@ class PokemonDetailViewModel @Inject constructor(
 
             postPokemonInfo(pokemonInfo)
             postPokemonMoves(pokemonInfo.moves)
+            groupMoves(pokemonInfo.moves)
             postPokemonStats(pokemonInfo.stats)
 
             var pokemonSprite = mutableListOf<Pair<String, String>>()
@@ -288,4 +342,25 @@ class PokemonDetailViewModel @Inject constructor(
             loading.postValue(false)
         }
     }
+
+    fun setShowMove(move: String) {
+        when(move){
+            "all"->{
+                _allMoves.value?.let { postPokemonMoves(it) }
+            }
+            "egg"->{
+                _movesEgg.value?.let { postPokemonMoves(it) }
+            }
+            "tutor"->{
+                _movesTutor.value?.let { postPokemonMoves(it) }
+            }
+            "tm"->{
+                _movesTM.value?.let { postPokemonMoves(it) }
+            }
+            "level-up"->{
+                _movesLevelUp.value?.let { postPokemonMoves(it) }
+            }
+        }
+    }
+
 }

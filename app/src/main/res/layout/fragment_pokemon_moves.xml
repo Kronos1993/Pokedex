@@ -21,6 +21,62 @@
            android:layout_width="match_parent"
            android:layout_height="match_parent">
 
+           <LinearLayout
+               android:id="@+id/layoutMoveSource"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:weightSum="5"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent">
+
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/butonAllMoves"
+                   style="@style/Widget.Pokedex.NormalButton"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="All"
+                   android:onClick="@{()->viewModel.setShowMove(`all`)}"/>
+
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/butonEgg"
+                   style="@style/Widget.Pokedex.NormalButton"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="Egg"
+                   android:onClick="@{()->viewModel.setShowMove(`egg`)}"/>
+
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/butonLevel"
+                   style="@style/Widget.Pokedex.NormalButton"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="LVL"
+                   android:onClick="@{()->viewModel.setShowMove(`level-up`)}"/>
+
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/butonTutor"
+                   style="@style/Widget.Pokedex.NormalButton"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="TUT"
+                   android:onClick="@{()->viewModel.setShowMove(`tutor`)}" />
+
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/butonTM"
+                   style="@style/Widget.Pokedex.NormalButton"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:text="TM"
+                   android:onClick="@{()->viewModel.setShowMove(`tm`)}" />
+           </LinearLayout>
+
            <include
                android:id="@+id/layoutMove"
                layout="@layout/layout_moves"
@@ -29,7 +85,7 @@
                app:layout_constraintBottom_toBottomOf="parent"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent" />
+               app:layout_constraintTop_toBottomOf="@+id/layoutMoveSource" />
 
        </androidx.constraintlayout.widget.ConstraintLayout>
 

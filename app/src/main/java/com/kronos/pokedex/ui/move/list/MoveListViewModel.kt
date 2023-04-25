@@ -10,6 +10,7 @@ import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.repository.MoveRemoteRepository
 import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
+import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -44,7 +45,7 @@ class MoveListViewModel @Inject constructor(
     val total = _total.asLiveData()
 
     var moveAdapter: WeakReference<PokemonMoveListAdapter?> =
-        WeakReference(PokemonMoveListAdapter())
+        WeakReference(PokemonMoveListAdapter(ShowMoveIn.MOVE_LIST))
 
     private fun postMoveList(list: List<MoveList>) {
         if (_moveList.value != null) {
