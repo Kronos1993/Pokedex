@@ -41,7 +41,7 @@
     </style>
 
     <style name="Widget.Pokedex.NormalButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:layout_margin">@dimen/margin_5</item>
+        <item name="android:layout_margin">@dimen/margin_3</item>
         <item name="cornerRadius">@dimen/margin_40</item>
     </style>
 

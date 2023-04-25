@@ -116,6 +116,8 @@ fun handlePokemonEvolTime(view: ImageView, pokemon_evol_time: String?){
                 view.setBackgroundResource(R.drawable.ic_day)
             else if(pokemon_evol_time == "night")
                 view.setBackgroundResource(R.drawable.ic_night)
+            else if(pokemon_evol_time == "full-moon")
+                view.setBackgroundResource(R.drawable.ic_full_moon)
         }
     }
 }
