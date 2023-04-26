@@ -24,6 +24,7 @@ import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
 import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
+import com.kronos.pokedex.ui.show_image.CURRENT_IMAGE_URL
 import com.kronos.pokedex.ui.types.PokemonTypeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
@@ -54,11 +55,14 @@ class PokemonInfoFragment : Fragment() {
     }
 
     private fun handleAbilityInfo(abilityInfo: AbilityInfo) {
-        if (!abilityInfo.name.isNullOrEmpty()){
+        if (!abilityInfo.name.isNullOrEmpty()) {
             if (findNavController().currentDestination?.id == R.id.nav_pokemon_detail) {
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_ABILITY, abilityInfo)
-                findNavController().navigate(R.id.action_nav_pokemon_detail_to_nav_ability_info_dialog_fragment, bundle)
+                findNavController().navigate(
+                    R.id.action_nav_pokemon_detail_to_nav_ability_info_dialog_fragment,
+                    bundle
+                )
             }
         }
     }
@@ -72,6 +76,17 @@ class PokemonInfoFragment : Fragment() {
                     it.frontDefault
             }
         ).into(binding.imageViewPokemon)
+
+        binding.imageViewPokemon.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable(CURRENT_IMAGE_URL, pokemonInfo.sprites.let {
+                if (!it.frontHome.isNullOrEmpty())
+                    it.frontHome
+                else
+                    it.frontDefault
+            })
+            findNavController().navigate(R.id.action_global_nav_show_image, bundle)
+        }
 
         viewModel.pokemonTypeAdapter.get()?.submitList(pokemonInfo.types)
         viewModel.pokemonTypeAdapter.get()?.notifyDataSetChanged()
@@ -90,12 +105,12 @@ class PokemonInfoFragment : Fragment() {
 
     }
 
-    private fun handlePokemonSprites(sprites: List<Pair<String,String>>) {
+    private fun handlePokemonSprites(sprites: List<Pair<String, String>>) {
         viewModel.pokemonSpriteAdapter.get()?.submitList(sprites)
         viewModel.pokemonSpriteAdapter.get()?.notifyDataSetChanged()
     }
 
-    private fun handlePokemonOtherForms(sprites: List<Pair<String,String>>) {
+    private fun handlePokemonOtherForms(sprites: List<Pair<String, String>>) {
         viewModel.pokemonOtherFormsAdapter.get()?.submitList(sprites)
         viewModel.pokemonOtherFormsAdapter.get()?.notifyDataSetChanged()
     }
@@ -147,6 +162,14 @@ class PokemonInfoFragment : Fragment() {
             viewModel.pokemonSpriteAdapter = WeakReference(PokemonSpriteAdapter())
         viewModel.pokemonSpriteAdapter.get()?.setUrlProvider(viewModel.urlProvider)
         binding.recyclerViewPokemonSprites.adapter = viewModel.pokemonSpriteAdapter.get()
+        viewModel.pokemonSpriteAdapter.get()?.setAdapterItemClick(object :
+            AdapterItemClickListener<Pair<String, String>> {
+            override fun onItemClick(t: Pair<String, String>, pos: Int) {
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_IMAGE_URL, t.first)
+                findNavController().navigate(R.id.action_global_nav_show_image, bundle)
+            }
+        })
     }
 
     private fun initRecyclerPokemonOtherForms() {
@@ -157,9 +180,9 @@ class PokemonInfoFragment : Fragment() {
         viewModel.pokemonOtherFormsAdapter.get()?.setUrlProvider(viewModel.urlProvider)
         binding.recyclerViewPokemonOtherForms.adapter = viewModel.pokemonOtherFormsAdapter.get()
         viewModel.pokemonOtherFormsAdapter.get()?.setAdapterItemClick(object :
-            AdapterItemClickListener<Pair<String,String>> {
-            override fun onItemClick(t: Pair<String,String>, pos: Int) {
-                viewModel.loadPokemonInfo(NamedResourceApi(t.second,t.first))
+            AdapterItemClickListener<Pair<String, String>> {
+            override fun onItemClick(t: Pair<String, String>, pos: Int) {
+                viewModel.loadPokemonInfo(NamedResourceApi(t.second, t.first))
             }
         })
     }

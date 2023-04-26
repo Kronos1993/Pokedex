@@ -139,4 +139,11 @@
             app:destination="@id/nav_items" />
     </fragment>
 
+    <dialog
+        android:id="@+id/nav_show_image"
+        android:name="com.kronos.pokedex.ui.show_image.ShowImageDialogFragment"
+        android:label=""
+        tools:layout="@layout/fragment_dialog_show_image" >
+    </dialog><action android:id="@+id/action_global_nav_show_image" app:destination="@id/nav_show_image"/>
+
 </navigation>
