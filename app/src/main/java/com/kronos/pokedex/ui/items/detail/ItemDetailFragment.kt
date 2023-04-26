@@ -3,6 +3,7 @@ package com.kronos.pokedex.ui.items.detail
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -154,6 +155,9 @@ class ItemDetailFragment : Fragment() {
     override fun onPause() {
         viewModel.postItemInfo(ItemInfo())
         viewModel.pokemonListAdapter = WeakReference(null)
+        viewModel.itemDescription.set(null)
+        viewModel.itemEffect.set(null)
+        viewModel.itemLongEffect.set(null)
         binding.unbind()
         super.onPause()
     }

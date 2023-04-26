@@ -97,7 +97,7 @@
                             android:layout_marginBottom="@dimen/margin_5"
                             android:maxLines="5"
                             android:singleLine="false"
-                            android:text="@{viewModel.abilityGameDescription}"
+                            app:handle_text="@{viewModel.abilityGameDescription}"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
