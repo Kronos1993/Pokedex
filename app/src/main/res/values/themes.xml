@@ -41,13 +41,20 @@
     </style>
 
     <style name="Widget.Pokedex.NormalButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:layout_margin">@dimen/margin_3</item>
-        <item name="cornerRadius">@dimen/margin_40</item>
     </style>
 
     <style name="Widget.Pokedex.SelectedButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:layout_margin">@dimen/margin_5</item>
-        <item name="cornerRadius">@dimen/margin_40</item>
+    </style>
+
+    <style name="Widget.Pokedex.ToggleButton.IconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
     </style>
 
     <style name="ModalBottomSheet" parent="Widget.Material3.BottomSheet.Modal">

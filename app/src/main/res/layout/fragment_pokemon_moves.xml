@@ -21,12 +21,14 @@
            android:layout_width="match_parent"
            android:layout_height="match_parent">
 
-           <LinearLayout
-               android:id="@+id/layoutMoveSource"
-               android:layout_width="match_parent"
+           <com.google.android.material.button.MaterialButtonToggleGroup
+               android:id="@+id/toggleButton"
+               android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:orientation="horizontal"
-               android:weightSum="5"
+               app:singleSelection="true"
+               android:paddingStart="@dimen/margin_5"
+               android:paddingEnd="@dimen/margin_5"
+               app:checkedButton="@id/butonAllMoves"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toTopOf="parent">
@@ -34,48 +36,54 @@
                <com.google.android.material.button.MaterialButton
                    android:id="@+id/butonAllMoves"
                    style="@style/Widget.Pokedex.NormalButton"
+                   android:text="All"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
-                   android:text="All"
                    android:onClick="@{()->viewModel.setShowMove(`all`)}"/>
+               <!--app:icon="@drawable/ic_all_move"-->
 
                <com.google.android.material.button.MaterialButton
                    android:id="@+id/butonEgg"
                    style="@style/Widget.Pokedex.NormalButton"
+                   android:text="Egg"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
-                   android:text="Egg"
                    android:onClick="@{()->viewModel.setShowMove(`egg`)}"/>
+               <!--app:icon="@drawable/ic_pokemon_egg"-->
 
                <com.google.android.material.button.MaterialButton
                    android:id="@+id/butonLevel"
-                   style="@style/Widget.Pokedex.NormalButton"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:layout_weight="1"
+                   style="@style/Widget.Pokedex.NormalButton"
                    android:text="LVL"
+                   android:layout_weight="1"
                    android:onClick="@{()->viewModel.setShowMove(`level-up`)}"/>
+               <!--app:icon="@drawable/ic_level"-->
 
                <com.google.android.material.button.MaterialButton
                    android:id="@+id/butonTutor"
-                   style="@style/Widget.Pokedex.NormalButton"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:layout_weight="1"
+                   style="@style/Widget.Pokedex.NormalButton"
                    android:text="TUT"
+                   android:layout_weight="1"
                    android:onClick="@{()->viewModel.setShowMove(`tutor`)}" />
+               <!--app:icon="@drawable/ic_tutor"-->
 
                <com.google.android.material.button.MaterialButton
                    android:id="@+id/butonTM"
-                   style="@style/Widget.Pokedex.NormalButton"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:layout_weight="1"
+                   style="@style/Widget.Pokedex.NormalButton"
                    android:text="TM"
+                   android:layout_weight="1"
                    android:onClick="@{()->viewModel.setShowMove(`tm`)}" />
-           </LinearLayout>
+               <!--app:icon="@drawable/ic_move"-->
+
+           </com.google.android.material.button.MaterialButtonToggleGroup>
 
            <include
                android:id="@+id/layoutMove"
@@ -85,7 +93,7 @@
                app:layout_constraintBottom_toBottomOf="parent"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toBottomOf="@+id/layoutMoveSource" />
+               app:layout_constraintTop_toBottomOf="@+id/toggleButton" />
 
        </androidx.constraintlayout.widget.ConstraintLayout>
 
