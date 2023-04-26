@@ -23,7 +23,7 @@
 
            <com.google.android.material.button.MaterialButtonToggleGroup
                android:id="@+id/toggleButton"
-               android:layout_width="wrap_content"
+               android:layout_width="0dp"
                android:layout_height="wrap_content"
                app:singleSelection="true"
                android:paddingStart="@dimen/margin_5"
