@@ -20,6 +20,7 @@ import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.ui.items.list.CURRENT_ITEM
 import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
+import com.kronos.pokedex.ui.show_image.CURRENT_IMAGE_URL
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 import java.util.*
@@ -55,6 +56,14 @@ class ItemDetailFragment : Fragment() {
 
     private fun handleItemInfo(itemInfo: ItemInfo) {
         handlePokemon(itemInfo.heldByPokemon)
+        if (!itemInfo.sprites.defaultImg.isNullOrEmpty()){
+            binding.imageViewItemSprite.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_IMAGE_URL, itemInfo.sprites.defaultImg)
+                findNavController().navigate(R.id.action_global_nav_show_image, bundle)
+            }
+        }
+
     }
 
     private fun handleError(hashtable: Hashtable<String, String>) {
