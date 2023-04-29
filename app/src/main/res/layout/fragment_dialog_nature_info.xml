@@ -50,7 +50,6 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewNatureName"
-                    style="@style/TextViewNormal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -71,7 +70,6 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewNatureInfoHeader"
-                style="@style/TextViewNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -113,7 +111,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewNatureStatHeader"
-                        style="@style/TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_5"
@@ -126,7 +123,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewNatureIncreasedStat"
-                        style="@style/TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_5"
@@ -139,7 +135,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewNatureDecreasedStat"
-                        style="@style/TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_5"
@@ -163,7 +158,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewNatureFlavorHeader"
-                        style="@style/TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_10"
@@ -176,7 +170,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewNatureFlavor"
-                        style="@style/TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_5"
@@ -193,7 +186,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewNatureHatesFlavor"
-                        style="@style/TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_5"

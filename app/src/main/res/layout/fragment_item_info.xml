@@ -89,7 +89,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewItemId"
-                            style="@style/TextViewSmall"
+                            style="@style/Widget.Pokedex.TextView.TextViewSmall"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_8"
@@ -101,7 +101,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewItemName"
-                            style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -112,7 +111,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewItemDescription"
-                            style="@style/TextViewSmall"
+                            style="@style/Widget.Pokedex.TextView.TextViewSmall"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_8"
@@ -138,7 +137,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewItemBasicInfoHeader"
-                        style="@style/TextViewNormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10"
@@ -181,7 +179,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewItemCostLabel"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/margin_10"
@@ -192,7 +190,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewItemCost"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/margin_5"
@@ -205,7 +203,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewItemShortEffectLabel"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_marginTop="@dimen/margin_10"
                                 android:layout_height="wrap_content"
@@ -217,7 +215,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewItemShortEffect"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
@@ -228,7 +226,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewItemEffectLongLabel"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_marginTop="@dimen/margin_10"
                                 android:layout_height="wrap_content"
@@ -240,7 +238,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewItemEffectLong"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="@dimen/margin_10"
@@ -266,7 +264,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewItemHeldByHeader"
-                        style="@style/TextViewNormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10"

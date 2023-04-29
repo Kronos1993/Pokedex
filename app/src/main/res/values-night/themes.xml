@@ -12,10 +12,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/backgroundColor</item>
         <item name="bottomSheetDialogTheme">@style/Widget.Pokedex.BottomSheetDialog</item>
+        <item name="materialButtonStyle">@style/Widget.Pokedex.NormalButton</item>
+        <item name="android:textViewStyle">@style/Widget.Pokedex.TextView.TextViewNormal</item>
 
         <item name="cardViewStyle">@style/Widget.Pokedex.CardView</item>
-        <item name="linearProgressIndicatorStyle">@style/Widget.PokemonStat.LinearProgressIndicator</item>
+        <item name="linearProgressIndicatorStyle">@style/Widget.Pokedex.LinearProgressIndicator</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

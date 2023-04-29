@@ -12,6 +12,7 @@
     <color name="icon">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
+    <color name="buttonBorderColor">#FFFFFF</color>
 
     <color name="backgroundColor">#66000000</color>
     <color name="backgroundCardColor">#002338</color>

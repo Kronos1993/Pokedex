@@ -54,7 +54,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewMoveName"
-                        style="@style/TextViewNormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -75,7 +74,6 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewMoveInfoHeader"
-                    style="@style/TextViewNormal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
@@ -131,7 +129,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewMoveAccuracyHeader"
-                            style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/margin_5"
@@ -144,7 +141,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewMoveAccuracy"
-                            style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/margin_5"
@@ -159,7 +155,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewMovePPHeader"
-                            style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
@@ -172,7 +167,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewPP"
-                            style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/margin_5"
@@ -186,7 +180,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewMovePowerHeader"
-                            style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
@@ -199,7 +192,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewPower"
-                            style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/margin_5"
@@ -213,7 +205,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewMoveTypeHeader"
-                            style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
@@ -238,7 +229,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewMovePriorityHeader"
-                            style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
@@ -267,7 +257,6 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewMoveCategoryHeader"
-                    style="@style/TextViewNormal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
@@ -288,7 +277,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewMoveCategory"
-                        style="@style/TextViewNormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -301,7 +289,6 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewMoveDescriptionHeader"
-                    style="@style/TextViewNormal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
@@ -329,7 +316,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewMoveDescription"
-                            style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
@@ -347,7 +333,6 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewMoveEffectHeader"
-                    style="@style/TextViewNormal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
@@ -377,7 +362,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewMoveEffectDescription"
-                            style="@style/TextViewNormal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
