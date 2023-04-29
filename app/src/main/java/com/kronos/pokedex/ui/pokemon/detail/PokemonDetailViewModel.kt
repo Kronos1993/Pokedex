@@ -72,6 +72,9 @@ class PokemonDetailViewModel @Inject constructor(
     private val _movesEgg = MutableLiveData<List<MoveList>>()
     val movesEgg = _movesEgg.asLiveData()
 
+    private val _movesOther = MutableLiveData<List<MoveList>>()
+    val movesOther = _movesOther.asLiveData()
+
     private val _pokemonEvolutionChain = MutableLiveData<EvolutionChain>()
 
     private val _pokemonEvolutionList = MutableLiveData<List<ChainLink>>()
@@ -141,6 +144,7 @@ class PokemonDetailViewModel @Inject constructor(
         var tutor = mutableListOf<MoveList>()
         var tm = mutableListOf<MoveList>()
         var egg = mutableListOf<MoveList>()
+        var other = mutableListOf<MoveList>()
 
         var moveDetail: MoveDetail? = null
         for (move in moves){
@@ -156,8 +160,11 @@ class PokemonDetailViewModel @Inject constructor(
                     "machine" -> {
                         tm.add(move)
                     }
-                    else -> {
+                    "tutor" -> {
                         tutor.add(move)
+                    }
+                    else -> {
+                        other.add(move)
                     }
                 }
             }
@@ -166,6 +173,7 @@ class PokemonDetailViewModel @Inject constructor(
         _movesTM.postValue(tm)
         _movesTutor.postValue(tutor)
         _movesEgg.postValue(egg)
+        _movesOther.postValue(other)
         _allMoves.postValue(moves)
     }
 
@@ -359,6 +367,9 @@ class PokemonDetailViewModel @Inject constructor(
             }
             "level-up"->{
                 _movesLevelUp.value?.let { postPokemonMoves(it) }
+            }
+            "other"->{
+                _movesOther.value?.let { postPokemonMoves(it) }
             }
         }
     }

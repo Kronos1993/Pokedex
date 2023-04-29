@@ -28,24 +28,24 @@
                app:singleSelection="true"
                android:paddingStart="@dimen/margin_5"
                android:paddingEnd="@dimen/margin_5"
-               app:checkedButton="@id/butonAllMoves"
+               app:checkedButton="@id/buttonEgg"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toTopOf="parent">
 
-               <com.google.android.material.button.MaterialButton
-                   android:id="@+id/butonAllMoves"
-                   style="@style/Widget.Pokedex.NormalButton"
+               <!--<com.google.android.material.button.MaterialButton
+                   android:id="@+id/buttonAllMoves"
+                   style="@style/Widget.Pokedex.OutlinedButton"
                    android:text="All"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
-                   android:onClick="@{()->viewModel.setShowMove(`all`)}"/>
+                   android:onClick="@{()->viewModel.setShowMove(`all`)}"/>-->
                <!--app:icon="@drawable/ic_all_move"-->
 
                <com.google.android.material.button.MaterialButton
-                   android:id="@+id/butonEgg"
-                   style="@style/Widget.Pokedex.NormalButton"
+                   android:id="@+id/buttonEgg"
+                   style="@style/Widget.Pokedex.OutlinedButton"
                    android:text="Egg"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -54,34 +54,43 @@
                <!--app:icon="@drawable/ic_pokemon_egg"-->
 
                <com.google.android.material.button.MaterialButton
-                   android:id="@+id/butonLevel"
+                   android:id="@+id/buttonLevel"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   style="@style/Widget.Pokedex.NormalButton"
-                   android:text="LVL"
+                   style="@style/Widget.Pokedex.OutlinedButton"
+                   android:text="LV"
                    android:layout_weight="1"
                    android:onClick="@{()->viewModel.setShowMove(`level-up`)}"/>
                <!--app:icon="@drawable/ic_level"-->
 
                <com.google.android.material.button.MaterialButton
-                   android:id="@+id/butonTutor"
+                   android:id="@+id/buttonTutor"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   style="@style/Widget.Pokedex.NormalButton"
+                   style="@style/Widget.Pokedex.OutlinedButton"
                    android:text="TUT"
                    android:layout_weight="1"
                    android:onClick="@{()->viewModel.setShowMove(`tutor`)}" />
                <!--app:icon="@drawable/ic_tutor"-->
 
                <com.google.android.material.button.MaterialButton
-                   android:id="@+id/butonTM"
+                   android:id="@+id/buttonTM"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   style="@style/Widget.Pokedex.NormalButton"
+                   style="@style/Widget.Pokedex.OutlinedButton"
                    android:text="TM"
                    android:layout_weight="1"
                    android:onClick="@{()->viewModel.setShowMove(`tm`)}" />
                <!--app:icon="@drawable/ic_move"-->
+
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/buttonOtherMethodMoves"
+                   style="@style/Widget.Pokedex.OutlinedButton"
+                   android:text="OTHER"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:onClick="@{()->viewModel.setShowMove(`other`)}"/>
 
            </com.google.android.material.button.MaterialButtonToggleGroup>
 
