@@ -116,6 +116,30 @@ fun handlePokemonEvolTime(view: ImageView, pokemon_evol_time: String?){
                 view.setBackgroundResource(R.drawable.ic_day)
             else if(pokemon_evol_time == "night")
                 view.setBackgroundResource(R.drawable.ic_night)
+            else if(pokemon_evol_time == "full-moon")
+                view.setBackgroundResource(R.drawable.ic_full_moon)
+        }
+    }
+}
+
+@BindingAdapter("app:handle_pokemon_move_learned_method")
+fun handlePokemonMoveLearnedMethod(view: ImageView, learnedMethod: String?){
+    view.run {
+        if(learnedMethod!=null){
+            when(learnedMethod){
+                "egg"->{
+                    view.setBackgroundResource(R.drawable.ic_pokemon_egg)
+                }
+                "tutor"->{
+                    view.setBackgroundResource(R.drawable.ic_tutor)
+                }
+                "level-up"->{
+                    view.setBackgroundResource(R.drawable.ic_level)
+                }
+                "machine"->{
+                    view.setBackgroundResource(R.drawable.ic_move)
+                }
+            }
         }
     }
 }

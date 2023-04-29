@@ -36,7 +36,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewEvolutionFormName"
-            style="@style/TextViewSmall"
+            style="@style/Widget.Pokedex.TextView.TextViewSmall"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -65,7 +65,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailTriggerLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -79,7 +79,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailTrigger"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -92,7 +92,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailLevelLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -106,7 +106,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailLevel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -119,7 +119,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailBeautyLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -133,7 +133,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailBeauty"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -146,7 +146,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailGenderLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -171,7 +171,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailUseItemLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -185,7 +185,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailUseItem"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -198,7 +198,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailHeldItemLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -212,7 +212,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailHeldItem"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -225,7 +225,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailMoveKnowLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -239,7 +239,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailMoveKnow"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -252,7 +252,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailKnowMoveTypeLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -266,7 +266,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailKnowMoveType"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -279,7 +279,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailLocationLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -293,7 +293,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailLocation"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -306,7 +306,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailAffectionLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -321,7 +321,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailAffection"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -334,7 +334,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailHappinessLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -348,7 +348,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailHappiness"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -361,7 +361,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailRainLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -388,7 +388,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailPartyMemberLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -402,7 +402,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailPartyMember"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -415,7 +415,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailPartyTypeLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -429,7 +429,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailPartyType"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -442,7 +442,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailTimeOfDayLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -467,7 +467,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailTurnUpsideDownLabel"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
@@ -481,7 +481,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEvolutionDetailTurnUpsideDown"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"

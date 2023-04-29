@@ -45,4 +45,6 @@
 
     <string name="menu_berries">Berries</string>
     <string name="no_berries_found">NO BERRIES FOUND</string>
+    <string name="level">LEVEL:</string>
+    <string name="method">METHOD:</string>
 </resources>

@@ -3,6 +3,7 @@ package com.kronos.pokedex.ui.items.detail
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,7 @@ import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.ui.items.list.CURRENT_ITEM
 import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
+import com.kronos.pokedex.ui.show_image.CURRENT_IMAGE_URL
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 import java.util.*
@@ -54,6 +56,14 @@ class ItemDetailFragment : Fragment() {
 
     private fun handleItemInfo(itemInfo: ItemInfo) {
         handlePokemon(itemInfo.heldByPokemon)
+        if (!itemInfo.sprites.defaultImg.isNullOrEmpty()){
+            binding.imageViewItemSprite.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_IMAGE_URL, itemInfo.sprites.defaultImg)
+                findNavController().navigate(R.id.action_global_nav_show_image, bundle)
+            }
+        }
+
     }
 
     private fun handleError(hashtable: Hashtable<String, String>) {
@@ -154,6 +164,9 @@ class ItemDetailFragment : Fragment() {
     override fun onPause() {
         viewModel.postItemInfo(ItemInfo())
         viewModel.pokemonListAdapter = WeakReference(null)
+        viewModel.itemDescription.set(null)
+        viewModel.itemEffect.set(null)
+        viewModel.itemLongEffect.set(null)
         binding.unbind()
         super.onPause()
     }

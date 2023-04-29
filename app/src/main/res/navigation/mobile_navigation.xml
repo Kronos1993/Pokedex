@@ -110,6 +110,9 @@
         android:name="com.kronos.pokedex.ui.berries.dialog.BerryInfoDialogFragment"
         android:label="@string/menu_berries"
         tools:layout="@layout/fragment_dialog_berry_info" >
+        <action
+            android:id="@+id/action_nav_detail_berry_dialog_to_nav_item_detail"
+            app:destination="@id/nav_item_detail" />
     </dialog>
 
     <fragment
@@ -138,5 +141,12 @@
             android:id="@+id/action_nav_categories_items_to_nav_items"
             app:destination="@id/nav_items" />
     </fragment>
+
+    <dialog
+        android:id="@+id/nav_show_image"
+        android:name="com.kronos.pokedex.ui.show_image.ShowImageDialogFragment"
+        android:label=""
+        tools:layout="@layout/fragment_dialog_show_image" >
+    </dialog><action android:id="@+id/action_global_nav_show_image" app:destination="@id/nav_show_image"/>
 
 </navigation>

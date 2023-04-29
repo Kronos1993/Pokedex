@@ -18,6 +18,7 @@ import com.kronos.pokedex.databinding.FragmentDialogBerryInfoBindingImpl
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.item.BerryInfo
 import com.kronos.pokedex.ui.berries.list.CURRENT_BERRY
+import com.kronos.pokedex.ui.items.list.CURRENT_ITEM
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,6 +48,11 @@ class BerryInfoDialogFragment : BottomSheetDialogFragment() {
 
     private fun setObservers() {
         viewModel.berryInfo.observe(this.viewLifecycleOwner, ::handleBerryInfo)
+        binding.textViewSeeMore.setOnClickListener{
+            val bundle = Bundle()
+            bundle.putSerializable(CURRENT_ITEM, viewModel.berryInfo.value?.itemResource)
+            findNavController().navigate(R.id.action_nav_detail_berry_dialog_to_nav_item_detail, bundle)
+        }
     }
 
     private fun handleBerryInfo(berryInfo: BerryInfo) {

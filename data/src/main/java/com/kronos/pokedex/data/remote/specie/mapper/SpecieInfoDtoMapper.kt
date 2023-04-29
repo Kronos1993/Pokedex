@@ -35,7 +35,10 @@ fun SpecieInfoDto.toSpecieInfo(): SpecieInfo =
         isMythical = isMythical,
         varieties = varieties.map {
             it.toSpecieVarieties()
-        }
+        },
+        eggGroup = eggGroups.map {
+            it.toNamedResource()
+        },
     )
 
 fun SpecieVarietiesDto.toSpecieVarieties(): SpecieVarieties =

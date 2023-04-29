@@ -14,9 +14,11 @@
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/backgroundColor</item>
         <item name="bottomSheetDialogTheme">@style/Widget.Pokedex.BottomSheetDialog</item>
+        <item name="materialButtonStyle">@style/Widget.Pokedex.NormalButton</item>
+        <item name="android:textViewStyle">@style/Widget.Pokedex.TextView.TextViewNormal</item>
 
         <item name="cardViewStyle">@style/Widget.Pokedex.CardView</item>
-        <item name="linearProgressIndicatorStyle">@style/Widget.PokemonStat.LinearProgressIndicator</item>
+        <item name="linearProgressIndicatorStyle">@style/Widget.Pokedex.LinearProgressIndicator</item>
     </style>
 
     <style name="Theme.Pokedex.NoActionBar">
@@ -40,6 +42,35 @@
         <item name="bottomSheetStyle">@style/ModalBottomSheet</item>
     </style>
 
+    <style name="Widget.Pokedex.NormalButton" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/primary_dark</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">@dimen/margin_10</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Widget.Pokedex.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">@dimen/margin_10</item>
+        <item name="strokeColor">@color/buttonBorderColor</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Widget.Pokedex.Button.IconOnly" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:minWidth">24dp</item>
+        <item name="android:minHeight">24dp</item>
+    </style>
+
+    <style name="Widget.Pokedex.Button.WhiteIconOnly" parent="Widget.Pokedex.Button.IconOnly">
+        <item name="iconTint">@color/white</item>
+    </style>
+
+
     <style name="ModalBottomSheet" parent="Widget.Material3.BottomSheet.Modal">
         <item name="backgroundColor">@color/backgroundColor</item>
     </style>
@@ -51,7 +82,7 @@
         <item name="android:layout_margin">@dimen/margin_5</item>
     </style>
 
-    <style name="TextViewRound" parent="Theme.Pokedex">
+    <style name="Widget.Pokedex.TextView.TextViewRound" parent="Theme.Pokedex">
         <!--<item name="android:background">@drawable/rounded_editview</item>-->
         <item name="android:textColor">@color/white</item>
         <item name="android:layout_marginStart">@dimen/margin_10</item>
@@ -63,26 +94,26 @@
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="badge" parent="Theme.Pokedex">
+    <style name="Widget.Pokedex.TextView.Badge" parent="Theme.Pokedex">
         <item name="android:background">@drawable/badge_background</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center</item>
     </style>
 
 
-    <style name="TextViewNormal" parent="Theme.Pokedex">
+    <style name="Widget.Pokedex.TextView.TextViewNormal" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/blackText</item>
         <item name="android:textSize">@dimen/text_15</item>
         <item name="android:layout_marginStart">@dimen/margin_8</item>
         <item name="android:layout_marginEnd">@dimen/margin_8</item>
     </style>
 
-    <style name="TextViewSmall" parent="Theme.Pokedex">
+    <style name="Widget.Pokedex.TextView.TextViewSmall" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/blackText</item>
         <item name="android:textSize">@dimen/text_12</item>
     </style>
 
-    <style name="TextViewNormalDialog" parent="Theme.Pokedex">
+    <style name="Widget.Pokedex.TextView.TextViewNormalDialog" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/dialog_text_color</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
@@ -92,7 +123,7 @@
         <item name="android:layout_marginEnd">@dimen/margin_8</item>
     </style>
 
-    <style name="Widget.PokemonStat.LinearProgressIndicator" parent="Widget.MaterialComponents.LinearProgressIndicator">
+    <style name="Widget.Pokedex.LinearProgressIndicator" parent="Widget.MaterialComponents.LinearProgressIndicator">
         <item name="trackThickness">12dp</item>
         <item name="trackCornerRadius">6dp</item>
         <item name="trackColor">@color/backgroundColorPrimary</item>

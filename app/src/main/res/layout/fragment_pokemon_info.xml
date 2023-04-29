@@ -87,7 +87,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewPokemonPokedexEntry"
-                            style="@style/TextViewSmall"
+                            style="@style/Widget.Pokedex.TextView.TextViewSmall"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_8"
@@ -99,7 +99,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewPokemonName"
-                            style="@style/TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -121,7 +120,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewPokemonType"
-                            style="@style/TextViewSmall"
+                            style="@style/Widget.Pokedex.TextView.TextViewSmall"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/margin_8"
@@ -134,7 +133,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewPokemonDescription"
-                            style="@style/TextViewSmall"
+                            style="@style/Widget.Pokedex.TextView.TextViewSmall"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/margin_8"
@@ -161,7 +160,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewPokemonBasicInfoHeader"
-                        style="@style/TextViewNormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10"
@@ -204,7 +202,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewPokemonBaseExpLabel"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/margin_10"
@@ -216,7 +214,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewPokemonBaseExp"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="@{String.valueOf(viewModel.pokemonInfo.baseExperience)}"
@@ -228,7 +226,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewPokemonHeightLabel"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Height:"
@@ -239,7 +237,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewPokemonHeight"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 app:handle_pokemon_height="@{viewModel.pokemonInfo.height}"
@@ -251,7 +249,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewPokemonWeightLabel"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Weight:"
@@ -262,7 +260,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewPokemonWeight"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 app:handle_pokemon_weight="@{viewModel.pokemonInfo.weight}"
@@ -274,7 +272,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewPokemonHappinessLabel"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Base Happiness:"
@@ -285,7 +283,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewPokemonHappiness"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="@{String.valueOf(viewModel.pokemonInfo.specie.baseHappiness)}"
@@ -297,7 +295,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewPokemonGrowthRateLabel"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Growth Rate:"
@@ -308,7 +306,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewPokemonGrowthRate"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
@@ -320,7 +318,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewPokemonHabitatLabel"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="@dimen/margin_10"
@@ -333,7 +331,7 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/textViewPokemonHabitat"
-                                style="@style/TextViewSmall"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
@@ -349,7 +347,7 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/containerAbility"
+                    android:id="@+id/containerEggGroups"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -358,8 +356,57 @@
                     app:layout_constraintTop_toBottomOf="@id/containerBasicInfo">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textViewPokemonEggGroupHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:text="EGG GROUPS"
+                        android:textStyle="bold" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineEggGroup1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".01" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guidelineEggGroup9"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent=".99" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view_egg_group"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineEggGroup9"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineEggGroup1"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:itemCount="2"
+                            tools:listitem="@layout/item_egg_group" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/containerAbility"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                    app:layout_constraintStart_toStartOf="@+id/guideline1"
+                    app:layout_constraintTop_toBottomOf="@id/containerEggGroups">
+
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewPokemonAbilityHeader"
-                        style="@style/TextViewNormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10"
@@ -409,7 +456,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewPokemonSpriteHeader"
-                        style="@style/TextViewNormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10"
@@ -462,7 +508,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewPokemonOtherFormsHeader"
-                        style="@style/TextViewNormal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10"

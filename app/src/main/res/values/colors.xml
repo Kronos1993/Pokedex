@@ -12,6 +12,8 @@
     <color name="icon">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
 
+    <color name="buttonBorderColor">#607D8B</color>
+
     <color name="backgroundColor">#CFD8DC</color>
     <color name="backgroundCardColor">#FFFFFF</color>
 
@@ -34,14 +36,17 @@
     <color name="day_time_icon_color">#F8E962</color>
     <color name="night_time_icon_color">#5C5C5C</color>
 
-    <color name="move_physical_color">#D32F2F</color>
-    <color name="move_special_color">#512DA8</color>
+    <color name="move_physical_color">#FF5722</color>
+    <color name="move_special_color">#9C27B0</color>
     <color name="move_status_color">#637071</color>
 
     <color name="app_icon_external_blue">#091563</color>
     <color name="app_icon_inner_circle_top">#091563</color>
     <color name="app_icon_inner_circle_bottom">#4253BD</color>
     <color name="app_icon_second_inner_circle_top">#DD3232</color>
+
+    <color name="tutor_icon">#66000000</color>
+
     <color name="dialog_text_color">#66000000</color>
     <color name="grey">#7C7776</color>
     <color name="green">#529A59</color>

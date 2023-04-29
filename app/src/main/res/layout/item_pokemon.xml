@@ -34,7 +34,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewPokemonItemPokedexNumber"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@{`#` + String.valueOf(pokemonDexEntryModel.dexEntry)}"
@@ -45,7 +45,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewPokemonItemName"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"

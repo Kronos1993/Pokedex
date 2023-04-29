@@ -41,7 +41,6 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textViewAbilityName"
-                        style="@style/TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
@@ -62,7 +61,6 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewAbilityGameDescriptionHeader"
-                    style="@style/TextViewNormal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
@@ -90,14 +88,13 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewAbilityGameDescription"
-                            style="@style/TextViewNormal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/margin_5"
                             android:layout_marginBottom="@dimen/margin_5"
                             android:maxLines="5"
                             android:singleLine="false"
-                            android:text="@{viewModel.abilityGameDescription}"
+                            app:handle_text="@{viewModel.abilityGameDescription}"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +107,6 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewAbilityEffectHeader"
-                    style="@style/TextViewNormal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
@@ -140,7 +136,6 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/textViewAbilityEffectDescription"
-                            style="@style/TextViewNormal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/margin_5"

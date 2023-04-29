@@ -28,37 +28,96 @@
             android:layout_height="match_parent"
             android:background="@color/transparent">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewPokemonMoveLevel"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStart"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".01" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineMiddle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".40" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineEnd"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".99" />
+
+            <!--<androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewPokemonMoveLearnMethod"
                 style="@style/TextViewSmall"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
-                android:text="@{`Level ` + pokemonMoveLevelLearned}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textViewPokemonMoveName"
+                android:text="@string/method"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineMiddle"
+                app:layout_constraintStart_toStartOf="@+id/guidelineStart"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewPokemonMoveLearnMethod"
+                android:id="@+id/textViewPokemonMoveLearnMethodValue"
                 style="@style/TextViewSmall"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
-                android:text="@{`Method: ` + pokemonMoveLearnedMethod.toUpperCase()}"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonMoveLevel" />
+                android:text="@{pokemonMoveLearnedMethod.toUpperCase()}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonMoveLearnMethod"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@+id/guidelineMiddle"
+                app:layout_constraintTop_toTopOf="@+id/textViewPokemonMoveLearnMethod" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewPokemonMoveLevel"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@string/level"
+                app:handle_visibility="@{pokemonMoveLearnedMethod.equals(`level-up`)}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineMiddle"
+                app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonMoveLearnMethod" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewPokemonMoveLevelValue"
+                style="@style/TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{String.valueOf(pokemonMoveLevelLearned)}"
+                app:handle_visibility="@{pokemonMoveLearnedMethod.equals(`level-up`)}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonMoveLevel"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+                app:layout_constraintStart_toStartOf="@+id/guidelineMiddle"
+                app:layout_constraintTop_toTopOf="@+id/textViewPokemonMoveLevel" />
+-->
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewMethod"
+                android:layout_width="@dimen/margin_24"
+                android:layout_height="@dimen/margin_24"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_pokemon_move_learned_method="@{pokemonMoveLearnedMethod}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guidelineStart"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewPokemonMoveName"
-                style="@style/TextViewNormal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
                 app:handle_text="@{pokemonMove.move.name}"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewMethod"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonMoveLearnMethod" />
+                app:layout_constraintStart_toEndOf="@+id/imageViewMethod"
+                app:layout_constraintTop_toTopOf="@+id/imageViewMethod" />
 
 
 

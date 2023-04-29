@@ -35,7 +35,6 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewPokemonStatName"
-                style="@style/TextViewNormal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -48,7 +47,7 @@
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progressIndicatorPokemonStatValue"
-                style="@style/Widget.PokemonStat.LinearProgressIndicator"
+                style="@style/Widget.Pokedex.LinearProgressIndicator"
                 android:indeterminate="false"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -62,7 +61,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewStatValue"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_5"
@@ -96,7 +95,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEffort"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_5"
@@ -109,7 +108,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textViewEffortValue"
-                style="@style/TextViewSmall"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_5"
