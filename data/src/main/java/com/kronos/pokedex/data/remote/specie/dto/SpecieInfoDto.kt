@@ -32,4 +32,6 @@ data class SpecieInfoDto(
     var name:String = "",
     @SerializedName("varieties")
     var varieties:List<SpecieVarietiesDto> = listOf(),
+    @SerializedName("egg_groups")
+    var eggGroups:List<NamedResourceApiDto> = listOf(),
 )

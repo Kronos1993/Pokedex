@@ -67,10 +67,17 @@ class ShowImageDialogFragment : DialogFragment() {
         val bundle = arguments
         if (bundle?.get(CURRENT_IMAGE_URL) != null) {
             viewModel.postImageUrl(bundle.get(CURRENT_IMAGE_URL) as String)
+            initViews()
         } else {
             hideDialog()
         }
         binding.buttonClose.setOnClickListener { hideDialog() }
+    }
+
+    private fun initViews() {
+        if (!viewModel.imageUrl.value.isNullOrEmpty())
+            Glide.with(requireContext()).load(viewModel.imageUrl.value).placeholder(R.drawable.ic_pokeball)
+                .into(binding.showImageDialogImageView)
     }
 
     private fun hideDialog() {
@@ -88,7 +95,6 @@ class ShowImageDialogFragment : DialogFragment() {
 
     override fun onPause() {
         binding.unbind()
-        viewModel.postImageUrl("")
         super.onPause()
     }
 }

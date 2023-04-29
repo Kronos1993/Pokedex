@@ -44,6 +44,9 @@
     <color name="app_icon_inner_circle_top">#091563</color>
     <color name="app_icon_inner_circle_bottom">#4253BD</color>
     <color name="app_icon_second_inner_circle_top">#DD3232</color>
+
+    <color name="tutor_icon">#66000000</color>
+
     <color name="dialog_text_color">#66000000</color>
     <color name="grey">#7C7776</color>
     <color name="green">#529A59</color>

@@ -19,4 +19,5 @@ data class SpecieInfo(
     var isMythical:Boolean = false,
     var name:String = "",
     var varieties:List<SpecieVarieties> = listOf(),
+    var eggGroup:List<NamedResourceApi> = listOf(),
 ): Serializable

@@ -23,6 +23,7 @@ import com.kronos.pokedex.domian.repository.*
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
 import com.kronos.pokedex.ui.move.ShowMoveIn
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEggGroupAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEvolutionChainAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
@@ -95,6 +96,8 @@ class PokemonDetailViewModel @Inject constructor(
     var pokemonInfoPageAdapter: WeakReference<PokemonInfoPageAdapter?> = WeakReference(null)
 
     var pokemonTypeAdapter: WeakReference<PokemonTypeAdapter?> = WeakReference(PokemonTypeAdapter())
+
+    var pokemonEggGroupAdapter: WeakReference<PokemonEggGroupAdapter?> = WeakReference(PokemonEggGroupAdapter())
 
     var pokemonAbilityAdapter: WeakReference<PokemonAbilityAdapter?> =
         WeakReference(PokemonAbilityAdapter())

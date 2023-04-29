@@ -23,6 +23,7 @@ import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
 import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEggGroupAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
 import com.kronos.pokedex.ui.show_image.CURRENT_IMAGE_URL
 import com.kronos.pokedex.ui.types.PokemonTypeAdapter
@@ -94,6 +95,9 @@ class PokemonInfoFragment : Fragment() {
             binding.layoutTypes.recyclerViewPokemonType.layoutManager =
                 GridLayoutManager(context, 2)
 
+        viewModel.pokemonEggGroupAdapter.get()?.submitList(pokemonInfo.specie.eggGroup)
+        viewModel.pokemonEggGroupAdapter.get()?.notifyDataSetChanged()
+
         viewModel.pokemonAbilityAdapter.get()?.submitList(pokemonInfo.abilities)
         viewModel.pokemonAbilityAdapter.get()?.notifyDataSetChanged()
 
@@ -117,6 +121,7 @@ class PokemonInfoFragment : Fragment() {
 
     private fun initViews() {
         initRecyclerPokemonTypes()
+        initRecyclerPokemonEggGroup()
         initRecyclerPokemonAbilities()
         initRecyclerPokemonSprites()
         initRecyclerPokemonOtherForms()
@@ -134,6 +139,23 @@ class PokemonInfoFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_TYPE, t)
                 Toast.makeText(requireContext(), t.name, Toast.LENGTH_SHORT).show()
+                //findNavController().navigate(R.id.action_nav_pokemon_list_to_nav_pokemon_detail, bundle)
+            }
+        })
+    }
+
+    private fun initRecyclerPokemonEggGroup() {
+        binding.recyclerViewEggGroup.layoutManager = GridLayoutManager(context,2)
+        binding.recyclerViewEggGroup.setHasFixedSize(false)
+        if (viewModel.pokemonEggGroupAdapter.get() == null)
+            viewModel.pokemonEggGroupAdapter = WeakReference(PokemonEggGroupAdapter())
+        binding.recyclerViewEggGroup.adapter = viewModel.pokemonEggGroupAdapter.get()
+        viewModel.pokemonEggGroupAdapter.get()?.setAdapterItemClick(object :
+            AdapterItemClickListener<NamedResourceApi> {
+            override fun onItemClick(t: NamedResourceApi, pos: Int) {
+                /*val bundle = Bundle()
+                bundle.putSerializable(CURRENT_TYPE, t)
+                Toast.makeText(requireContext(), t.name, Toast.LENGTH_SHORT).show()*/
                 //findNavController().navigate(R.id.action_nav_pokemon_list_to_nav_pokemon_detail, bundle)
             }
         })
