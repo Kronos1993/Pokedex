@@ -23,10 +23,10 @@
                 android:id="@+id/imageViewEggGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:handle_egg_group="@{eggGroup.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_pokemon_info" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewEggGroupName"
@@ -34,7 +34,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
-                android:text="@{eggGroup.name.toUpperCase().replaceAll(`-`,` `)}"
+                app:handle_egg_group_name="@{eggGroup.name.toUpperCase().replaceAll(`-`,` `)}"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

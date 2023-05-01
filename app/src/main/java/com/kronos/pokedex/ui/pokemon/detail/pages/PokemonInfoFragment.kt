@@ -95,6 +95,9 @@ class PokemonInfoFragment : Fragment() {
             binding.layoutTypes.recyclerViewPokemonType.layoutManager =
                 GridLayoutManager(context, 2)
 
+        if (pokemonInfo.specie.eggGroup.size > 1)
+            binding.recyclerViewEggGroup.layoutManager = GridLayoutManager(context,2)
+
         viewModel.pokemonEggGroupAdapter.get()?.submitList(pokemonInfo.specie.eggGroup)
         viewModel.pokemonEggGroupAdapter.get()?.notifyDataSetChanged()
 
@@ -145,7 +148,7 @@ class PokemonInfoFragment : Fragment() {
     }
 
     private fun initRecyclerPokemonEggGroup() {
-        binding.recyclerViewEggGroup.layoutManager = GridLayoutManager(context,2)
+        binding.recyclerViewEggGroup.layoutManager = LinearLayoutManager(context)
         binding.recyclerViewEggGroup.setHasFixedSize(false)
         if (viewModel.pokemonEggGroupAdapter.get() == null)
             viewModel.pokemonEggGroupAdapter = WeakReference(PokemonEggGroupAdapter())
