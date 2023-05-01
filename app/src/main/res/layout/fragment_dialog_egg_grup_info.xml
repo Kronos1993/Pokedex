@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.kronos.pokedex.ui.egg_group.detail.EggGroupDetailViewModel" />
+    </data>
+
+        <FrameLayout
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            style="@style/Widget.Pokedex.BottomSheetDialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/backgroundColor"
+                tools:context=".ui.egg_group.detail.EggGroupDetailFragment">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageViewEggGroup"
+                        android:layout_width="@dimen/margin_24"
+                        android:layout_height="@dimen/margin_24"
+                        android:layout_marginStart="@dimen/margin_5"
+                        app:handle_egg_group="@{viewModel.eggGroupInfo.name}"
+                        android:layout_gravity="center_vertical"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/Widget.Pokedex.TextView.TextViewHeader"
+                        android:id="@+id/textViewEggGroupName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:textSize="@dimen/margin_18"
+                        android:text="@string/pokemon_species"
+                        app:textAllCaps="true"/>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_3"
+                    android:layout_margin="@dimen/margin_5"
+                    android:background="@color/primary_dark"/>
+
+                <include
+                    android:id="@+id/layout_pokemon_list"
+                    layout="@layout/layout_pokemons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </FrameLayout>
+
+</layout>

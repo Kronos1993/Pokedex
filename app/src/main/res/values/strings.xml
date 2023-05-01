@@ -45,6 +45,12 @@
 
     <string name="menu_berries">Berries</string>
     <string name="no_berries_found">NO BERRIES FOUND</string>
+
+    <string name="menu_egg_groups">Egg Groups</string>
+    <string name="no_egg_groups_found">NO EGG GROUPS FOUND</string>
+
+
+
     <string name="level">LEVEL:</string>
     <string name="method">METHOD:</string>
     <string name="game_description">GAME DESCRIPTION</string>
@@ -95,4 +101,5 @@
     <string name="_time_of_the_day">Time of the day:</string>
     <string name="_turn_upside_down">Turn Upside Down:</string>
     <string name="ev">EV:</string>
+    <string name="pokemon_species">Pokemon Species</string>
 </resources>

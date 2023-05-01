@@ -26,14 +26,6 @@
             android:orientation="vertical"
             tools:context=".ui.pokemon.list.PokemonListFragment">
 
-            <com.google.android.material.bottomsheet.BottomSheetDragHandleView
-                android:id="@+id/drag_handle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,10 +51,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="4"
                     android:text="@{viewModel.berryInfo.name.toUpperCase().replaceAll(`-`,` `)}"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/drag_handle" />
+                    android:textStyle="bold"/>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewSeeMore"
@@ -73,10 +62,7 @@
                     android:layout_weight="1"
                     android:textAlignment="textEnd"
                     android:text="@string/see_more"
-                    android:textColor="@color/link"
-                    app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/drag_handle" />
+                    android:textColor="@color/link"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
