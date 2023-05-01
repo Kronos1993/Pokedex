@@ -49,6 +49,9 @@
     <string name="menu_egg_groups">Egg Groups</string>
     <string name="no_egg_groups_found">NO EGG GROUPS FOUND</string>
 
+    <string name="menu_types">Types</string>
+    <string name="no_types_found">NO TYPES FOUND</string>
+
 
 
     <string name="level">LEVEL:</string>

@@ -26,7 +26,7 @@ import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEggGroupAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
 import com.kronos.pokedex.ui.show_image.CURRENT_IMAGE_URL
-import com.kronos.pokedex.ui.types.PokemonTypeAdapter
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonTypeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 

@@ -1,4 +1,4 @@
-package com.kronos.pokedex.ui.types
+package com.kronos.pokedex.ui.pokemon.detail.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.adapters.diff.GeneralDiffCallback
+import com.kronos.pokedex.databinding.ItemPokemonTypeBinding
 import com.kronos.pokedex.databinding.ItemTypeBinding
 import com.kronos.pokedex.domian.model.type.Type
 import com.kronos.webclient.UrlProvider
@@ -24,7 +25,7 @@ class PokemonTypeAdapter : ListAdapter<Type, PokemonTypeAdapter.PokemonTypeViewH
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonTypeViewHolder {
-        val binding = ItemTypeBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemPokemonTypeBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return PokemonTypeViewHolder(binding,adapterItemClickListener)
     }
 
@@ -35,7 +36,7 @@ class PokemonTypeAdapter : ListAdapter<Type, PokemonTypeAdapter.PokemonTypeViewH
 
     private fun getItemAt(adapterPosition: Int): Type = getItem(adapterPosition)
 
-    class PokemonTypeViewHolder(var binding:ItemTypeBinding, var clickListener:AdapterItemClickListener<Type>?) : RecyclerView.ViewHolder(binding.root) {
+    class PokemonTypeViewHolder(var binding:ItemPokemonTypeBinding, var clickListener:AdapterItemClickListener<Type>?) : RecyclerView.ViewHolder(binding.root) {
         fun bind(type: Type){
             binding.run {
                 pokemonType = type

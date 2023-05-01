@@ -28,7 +28,7 @@ import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEvolutionChainAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
 import com.kronos.pokedex.ui.stats.PokemonStatsAdapter
-import com.kronos.pokedex.ui.types.PokemonTypeAdapter
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonTypeAdapter
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext

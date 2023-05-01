@@ -138,6 +138,8 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.nav_pokedex,
+                R.id.nav_egg_groups,
+                R.id.nav_types,
                 R.id.nav_abilities,
                 R.id.nav_move_list,
                 R.id.nav_nature_list,
