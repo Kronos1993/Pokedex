@@ -8,7 +8,7 @@ data class Language(
     val official: Boolean,
     val iso639: String,
     val iso3166: String,
-    val names: List<Name>
+    val nameDtos: List<NameDto>
 )
 
 data class Description(
@@ -44,7 +44,7 @@ data class MachineVersionDetail(
     val versionGroup: NamedResourceApi
 )
 
-data class Name(
+data class NameDto(
     val name: String,
     val language: NamedResourceApi
 )

@@ -2,6 +2,7 @@ package com.kronos.pokedex.data.di
 
 import com.kronos.pokedex.data.repository.ability.AbilityRemoteRepositoryImpl
 import com.kronos.pokedex.data.repository.berry.BerryRemoteRepositoryImpl
+import com.kronos.pokedex.data.repository.egg_group.EggGroupRemoteRepositoryImpl
 import com.kronos.pokedex.data.repository.evolution_chain.EvolutionChainRemoteRepositoryImpl
 import com.kronos.pokedex.data.repository.item.ItemRemoteRepositoryImpl
 import com.kronos.pokedex.data.repository.move.MoveRemoteRepositoryImpl
@@ -9,6 +10,7 @@ import com.kronos.pokedex.data.repository.nature.NatureRemoteRepositoryImpl
 import com.kronos.pokedex.data.repository.pokedex.PokedexRemoteRepositoryImpl
 import com.kronos.pokedex.data.repository.pokemon.PokemonRemoteRepositoryImpl
 import com.kronos.pokedex.data.repository.specie.SpecieRemoteRepositoryImpl
+import com.kronos.pokedex.data.repository.type.TypeRemoteRepositoryImpl
 import com.kronos.pokedex.domian.repository.*
 import dagger.Binds
 import dagger.Module
@@ -46,4 +48,9 @@ abstract class RepositoryModule {
     @Binds
     abstract fun provideItemRemoteRepository(impl: ItemRemoteRepositoryImpl): ItemRemoteRepository
 
+    @Binds
+    abstract fun provideEggGroupRemoteRepository(impl: EggGroupRemoteRepositoryImpl): EggGroupRemoteRepository
+
+    @Binds
+    abstract fun provideTypeRemoteRepository(impl: TypeRemoteRepositoryImpl): TypeRemoteRepository
 }

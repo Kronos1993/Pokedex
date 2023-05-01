@@ -7,5 +7,5 @@ data class TypeDto(
     @SerializedName("slot")
     var slot:Int = 0,
     @SerializedName("type")
-    var typeInfoDto: NamedResourceApiDto = NamedResourceApiDto(),
+    var type: NamedResourceApiDto = NamedResourceApiDto(),
 )
