@@ -10,9 +10,9 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewPokemonEvolution"
+        style="@style/Widget.Pokedex.CardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_3">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,8 +29,9 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewEvolutionTrigger"
+                style="@style/Widget.Pokedex.TextView.TextViewNormal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
@@ -40,8 +41,9 @@
                 app:layout_constraintTop_toBottomOf="@id/imageViewEvolutionSprite" />
 
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewEvolutionLevel"
+                style="@style/Widget.Pokedex.TextView.TextViewNormal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"

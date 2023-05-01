@@ -80,6 +80,7 @@
         <item name="cardElevation">@dimen/cardview_default_elevation</item>
         <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
         <item name="android:layout_margin">@dimen/margin_5</item>
+        <item name="contentPadding">@dimen/margin_5</item>
     </style>
 
     <style name="Widget.Pokedex.TextView.TextViewRound" parent="Theme.Pokedex">
@@ -106,6 +107,21 @@
         <item name="android:textSize">@dimen/text_15</item>
         <item name="android:layout_marginStart">@dimen/margin_8</item>
         <item name="android:layout_marginEnd">@dimen/margin_8</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+    </style>
+
+    <style name="Widget.Pokedex.TextView.TextViewHeader" parent="Widget.Pokedex.TextView.TextViewNormal">
+        <item name="android:layout_marginTop">@dimen/margin_5</item>
+        <item name="android:layout_marginBottom">@dimen/margin_5</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.Pokedex.TextView.TextViewSegmentHeader" parent="Widget.Pokedex.TextView.TextViewNormal">
+        <item name="android:layout_marginStart">@dimen/margin_5</item>
+        <item name="android:layout_marginEnd">@dimen/margin_5</item>
+        <item name="android:layout_marginTop">@dimen/margin_5</item>
+        <item name="android:layout_marginBottom">@dimen/margin_5</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Widget.Pokedex.TextView.TextViewSmall" parent="Widget.MaterialComponents.TextView">

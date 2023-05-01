@@ -30,37 +30,28 @@
                 android:orientation="vertical"
                 tools:context=".ui.pokemon.list.PokemonListFragment">
 
-                <com.google.android.material.bottomsheet.BottomSheetDragHandleView
-                    android:id="@+id/drag_handle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toStartOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_8"
                     android:orientation="horizontal"
                     android:weightSum="5">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_8"
+                        android:layout_margin="@dimen/margin_5"
                         android:layout_gravity="center"
                         app:srcCompat="@drawable/ic_move" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewMoveName"
+                        style="@style/Widget.Pokedex.TextView.TextViewHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="4"
-                        android:text="@{viewModel.moveInfo.moveName.toUpperCase().replaceAll(`-`,` `)}"
-                        android:textSize="@dimen/margin_18"
                         android:textStyle="bold"
+                        android:text="@{viewModel.moveInfo.moveName.toUpperCase().replaceAll(`-`,` `)}"
                         app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/drag_handle" />
@@ -72,13 +63,12 @@
                     android:layout_margin="@dimen/margin_5"
                     android:background="@color/primary_dark" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewMoveInfoHeader"
+                    style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_5"
-                    android:text="INFO"
-                    android:textStyle="bold"
+                    android:text="@string/info"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -89,7 +79,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_5"
-                    android:layout_marginTop="@dimen/margin_10"
                     android:layout_marginEnd="@dimen/margin_5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -127,20 +116,22 @@
                             android:orientation="vertical"
                             app:layout_constraintGuide_percent=".8" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewMoveAccuracyHeader"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/margin_5"
-                            android:text="Accuracy"
+                            android:text="@string/accuracy"
                             android:textAlignment="center"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toStartOf="@+id/guide20"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewMoveAccuracy"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/margin_5"
@@ -153,20 +144,22 @@
                             app:layout_constraintStart_toStartOf="@+id/textViewMoveAccuracyHeader"
                             app:layout_constraintTop_toBottomOf="@id/textViewMoveAccuracyHeader" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewMovePPHeader"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
-                            android:text="PP"
+                            android:text="@string/pp"
                             android:textAlignment="center"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toStartOf="@+id/guide40"
                             app:layout_constraintStart_toStartOf="@+id/guide20"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewPP"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/margin_5"
@@ -178,20 +171,22 @@
                             app:layout_constraintStart_toStartOf="@+id/textViewMovePPHeader"
                             app:layout_constraintTop_toBottomOf="@+id/textViewMovePPHeader" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewMovePowerHeader"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
-                            android:text="Power"
+                            android:text="@string/power"
                             android:textAlignment="center"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toStartOf="@+id/guide60"
                             app:layout_constraintStart_toStartOf="@+id/guide40"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewPower"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/margin_5"
@@ -203,12 +198,13 @@
                             app:layout_constraintStart_toStartOf="@+id/textViewMovePowerHeader"
                             app:layout_constraintTop_toBottomOf="@+id/textViewMovePowerHeader" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewMoveTypeHeader"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
-                            android:text="Type"
+                            android:text="@string/type"
                             android:textAlignment="center"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toStartOf="@+id/guide80"
@@ -217,6 +213,7 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/imageViewType"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="@dimen/margin_24"
                             android:layout_height="@dimen/margin_24"
                             android:layout_marginBottom="@dimen/margin_5"
@@ -227,7 +224,7 @@
                             app:layout_constraintStart_toStartOf="@+id/textViewMoveTypeHeader"
                             app:layout_constraintTop_toBottomOf="@+id/textViewMoveTypeHeader" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewMovePriorityHeader"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -241,6 +238,7 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/imageViewPriority"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="@dimen/margin_24"
                             android:layout_height="@dimen/margin_24"
                             android:layout_marginBottom="@dimen/margin_5"
@@ -255,12 +253,13 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewMoveCategoryHeader"
+                    style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
-                    android:text="CATEGORY"
+                    android:text="@string/category"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -275,24 +274,24 @@
                     android:layout_marginEnd="@dimen/margin_5"
                     app:move_category_color="@{viewModel.moveInfo.moveCategory}">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewMoveCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textAlignment="center"
-                        android:textSize="@dimen/margin_18"
                         android:textStyle="bold"
                         app:handle_move_category="@{viewModel.moveInfo.moveCategory}" />
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewMoveDescriptionHeader"
+                    style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
-                    android:text="DESCRIPTION"
+                    android:text="@string/description"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -314,14 +313,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewMoveDescription"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
                             android:layout_marginBottom="@dimen/margin_5"
-                            app:handle_move_description="@{viewModel.moveDescription}"
+                            android:layout_height="wrap_content"
                             android:textStyle="bold"
+                            app:handle_move_description="@{viewModel.moveDescription}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -331,12 +331,12 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewMoveEffectHeader"
+                    style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_5"
-                    android:text="EFFECT"
+                    android:text="@string/effect"
                     android:textStyle="bold"
                     app:handle_visibility="@{viewModel.moveEffect}"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -360,8 +360,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewMoveEffectDescription"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"

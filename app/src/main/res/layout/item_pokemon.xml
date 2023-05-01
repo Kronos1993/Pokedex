@@ -13,9 +13,7 @@
         android:id="@+id/cardViewPokemon"
         style="@style/Widget.Pokedex.CardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_5"
-        app:contentPadding="@dimen/margin_10">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -32,7 +30,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewPokemonItemPokedexNumber"
                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
@@ -43,7 +41,7 @@
                 app:layout_constraintStart_toEndOf="@+id/imageViewPokemonItem"
                 app:layout_constraintTop_toTopOf="@+id/imageViewPokemonItem" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewPokemonItemName"
                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"

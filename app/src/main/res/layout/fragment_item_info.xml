@@ -87,7 +87,7 @@
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase1"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewItemId"
                             style="@style/Widget.Pokedex.TextView.TextViewSmall"
                             android:layout_width="0dp"
@@ -99,8 +99,9 @@
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewItemName"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -109,7 +110,7 @@
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewItemDescription"
                             style="@style/Widget.Pokedex.TextView.TextViewSmall"
                             android:layout_width="0dp"
@@ -135,12 +136,13 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toBottomOf="@+id/cardViewBaseItemDetail">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewItemBasicInfoHeader"
+                        style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10"
-                        android:text="INFO"
+                        android:text="@string/info"
                         android:textStyle="bold" />
 
                     <com.google.android.material.card.MaterialCardView
@@ -177,18 +179,18 @@
                                 android:orientation="vertical"
                                 app:layout_constraintGuide_percent=".95" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewItemCostLabel"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/margin_10"
-                                android:text="Cost"
+                                android:text="@string/cost"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewItemCost"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
@@ -201,19 +203,19 @@
                                 app:layout_constraintStart_toEndOf="@+id/textViewItemCostLabel"
                                 app:layout_constraintTop_toTopOf="@+id/textViewItemCostLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewItemShortEffectLabel"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_marginTop="@dimen/margin_10"
                                 android:layout_height="wrap_content"
-                                android:text="Effect:"
+                                android:text="@string/_effect"
                                 android:textStyle="bold"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
                                 app:layout_constraintTop_toBottomOf="@+id/textViewItemCostLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewItemShortEffect"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
@@ -224,19 +226,19 @@
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
                                 app:layout_constraintTop_toBottomOf="@+id/textViewItemShortEffectLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewItemEffectLongLabel"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_marginTop="@dimen/margin_10"
                                 android:layout_height="wrap_content"
-                                android:text="Effect Explanation:"
+                                android:text="@string/_effect_explanation"
                                 android:textStyle="bold"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
                                 app:layout_constraintTop_toBottomOf="@+id/textViewItemShortEffect" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewItemEffectLong"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
@@ -262,12 +264,13 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toBottomOf="@id/containerBasicInfo">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewItemHeldByHeader"
+                        style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_10"
-                        android:text="HELD BY"
+                        android:text="@string/held_by"
                         android:textStyle="bold" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
