@@ -158,18 +158,12 @@ class ItemDetailFragment : Fragment() {
 
     override fun onDestroyView() {
         binding.unbind()
-        super.onDestroyView()
-    }
-
-    override fun onPause() {
         viewModel.postItemInfo(ItemInfo())
         viewModel.pokemonListAdapter = WeakReference(null)
         viewModel.itemDescription.set(null)
         viewModel.itemEffect.set(null)
         viewModel.itemLongEffect.set(null)
-        binding.unbind()
-        super.onPause()
+        super.onDestroyView()
     }
-
 
 }

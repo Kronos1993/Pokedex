@@ -142,13 +142,9 @@ class AbilityInfoDialogFragment : BottomSheetDialogFragment() {
 
     override fun onDestroy() {
         binding.unbind()
+        viewModel.postAbilityInfo(AbilityInfo())
+        viewModel.postOrigen(null)
         super.onDestroy()
     }
 
-    override fun onPause() {
-        binding.unbind()
-        viewModel.postAbilityInfo(AbilityInfo())
-        viewModel.postOrigen(null)
-        super.onPause()
-    }
 }

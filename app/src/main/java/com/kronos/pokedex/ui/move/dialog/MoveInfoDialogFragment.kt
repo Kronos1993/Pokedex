@@ -146,13 +146,8 @@ class MoveInfoDialogFragment : BottomSheetDialogFragment() {
 
     override fun onDestroy() {
         binding.unbind()
-        super.onDestroy()
-    }
-
-    override fun onPause() {
-        binding.unbind()
         viewModel.postMoveInfo(MoveInfo())
         viewModel.postOrigen(null)
-        super.onPause()
+        super.onDestroy()
     }
 }

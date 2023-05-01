@@ -91,12 +91,7 @@ class NatureDetailDialogFragment : BottomSheetDialogFragment() {
 
     override fun onDestroy() {
         binding.unbind()
-        super.onDestroy()
-    }
-
-    override fun onPause() {
-        binding.unbind()
         viewModel.postNatureInfo(NatureDetail())
-        super.onPause()
+        super.onDestroy()
     }
 }
