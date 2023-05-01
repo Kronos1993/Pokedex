@@ -76,7 +76,7 @@
                             android:orientation="vertical"
                             app:layout_constraintGuide_percent=".95" />
 
-                        <ImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/imageViewPokemon"
                             android:layout_width="96dp"
                             android:layout_height="96dp"
@@ -85,7 +85,7 @@
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase1"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewPokemonPokedexEntry"
                             style="@style/Widget.Pokedex.TextView.TextViewSmall"
                             android:layout_width="0dp"
@@ -97,8 +97,9 @@
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewPokemonName"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
@@ -118,7 +119,7 @@
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewPokemonType"
                             style="@style/Widget.Pokedex.TextView.TextViewSmall"
                             android:layout_width="0dp"
@@ -131,7 +132,7 @@
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35"
                             app:pokemon_type="@{viewModel.pokemonInfo.specie}" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewPokemonDescription"
                             style="@style/Widget.Pokedex.TextView.TextViewSmall"
                             android:layout_width="0dp"
@@ -158,12 +159,12 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toBottomOf="@+id/cardViewPokemonDetailBaseDetail">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewPokemonBasicInfoHeader"
+                        style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10"
-                        android:text="INFO"
+                        android:text="@string/info"
                         android:textStyle="bold" />
 
                     <com.google.android.material.card.MaterialCardView
@@ -200,19 +201,19 @@
                                 android:orientation="vertical"
                                 app:layout_constraintGuide_percent=".95" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonBaseExpLabel"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/margin_10"
-                                android:text="Base Exp."
+                                android:text="@string/base_exp"
                                 android:textStyle="bold"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonBaseExp"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
@@ -224,18 +225,18 @@
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintTop_toTopOf="@+id/textViewPokemonBaseExpLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonHeightLabel"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Height:"
+                                android:text="@string/height"
                                 android:textStyle="bold"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
                                 app:layout_constraintTop_toBottomOf="@+id/textViewPokemonBaseExpLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonHeight"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
@@ -247,18 +248,18 @@
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintTop_toTopOf="@+id/textViewPokemonHeightLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonWeightLabel"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Weight:"
+                                android:text="@string/weight"
                                 android:textStyle="bold"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
                                 app:layout_constraintTop_toBottomOf="@+id/textViewPokemonHeightLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonWeight"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
@@ -270,18 +271,18 @@
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintTop_toTopOf="@+id/textViewPokemonWeightLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonHappinessLabel"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Base Happiness:"
+                                android:text="@string/base_happiness"
                                 android:textStyle="bold"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
                                 app:layout_constraintTop_toBottomOf="@+id/textViewPokemonWeightLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonHappiness"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
@@ -293,18 +294,18 @@
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintTop_toTopOf="@+id/textViewPokemonHappinessLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonGrowthRateLabel"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Growth Rate:"
+                                android:text="@string/growth_rate"
                                 android:textStyle="bold"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
                                 app:layout_constraintTop_toBottomOf="@+id/textViewPokemonHappinessLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonGrowthRate"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
@@ -316,20 +317,20 @@
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintTop_toTopOf="@+id/textViewPokemonGrowthRateLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonHabitatLabel"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="@dimen/margin_10"
-                                android:text="Habitat:"
+                                android:text="@string/habitat"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo45"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo1"
                                 app:layout_constraintTop_toBottomOf="@+id/textViewPokemonGrowthRateLabel" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonHabitat"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
@@ -355,17 +356,19 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toBottomOf="@id/containerBasicInfo">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewPokemonEggGroupHeader"
+                        style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10"
-                        android:text="EGG GROUPS"
+                        android:text="@string/egg_groups"
+                        handle_visibility="@{viewModel.pokemonInfo.specie.eggGroup.size()>0}"
                         android:textStyle="bold" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        handle_visibility="@{viewModel.pokemonInfo.specie.eggGroup.size()>0}">
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guidelineEggGroup1"
@@ -405,12 +408,12 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toBottomOf="@id/containerEggGroups">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewPokemonAbilityHeader"
+                        style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10"
-                        android:text="ABILITIES"
+                        android:text="@string/abilities"
                         android:textStyle="bold" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -454,12 +457,12 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toBottomOf="@id/containerAbility">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewPokemonSpriteHeader"
+                        style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10"
-                        android:text="SPRITES"
+                        android:text="@string/sprites"
                         android:textStyle="bold" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -506,12 +509,12 @@
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toBottomOf="@id/containerSprites">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewPokemonOtherFormsHeader"
+                        style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_10"
-                        android:text="OTHER FORMS"
+                        android:text="@string/other_forms"
                         android:textStyle="bold" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout

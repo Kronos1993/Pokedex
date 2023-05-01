@@ -26,36 +26,27 @@
             android:orientation="vertical"
             tools:context=".ui.pokemon.list.PokemonListFragment">
 
-            <com.google.android.material.bottomsheet.BottomSheetDragHandleView
-                android:id="@+id/drag_handle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_8"
                 android:orientation="horizontal"
                 android:weightSum="5">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginStart="@dimen/margin_5"
                     android:layout_gravity="center"
                     app:srcCompat="@drawable/ic_nature" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewNatureName"
+                    style="@style/Widget.Pokedex.TextView.TextViewHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="4"
                     android:text="@{viewModel.natureInfo.name.toUpperCase().replaceAll(`-`,` `)}"
-                    android:textSize="@dimen/margin_18"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
                     app:layout_constraintStart_toStartOf="parent"
@@ -68,12 +59,12 @@
                 android:layout_margin="@dimen/margin_5"
                 android:background="@color/primary_dark" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewNatureInfoHeader"
+                style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
-                android:text="INFO"
+                android:text="@string/info"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -109,20 +100,22 @@
                         android:orientation="vertical"
                         app:layout_constraintGuide_percent="1" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewNatureStatHeader"
+                        style="@style/Widget.Pokedex.TextView.TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_5"
-                        android:text="Stat"
+                        android:text="@string/stat"
                         android:textAlignment="textStart"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/guide20"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewNatureIncreasedStat"
+                        style="@style/Widget.Pokedex.TextView.TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_5"
@@ -133,8 +126,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/textViewNatureStatHeader" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewNatureDecreasedStat"
+                        style="@style/Widget.Pokedex.TextView.TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_5"
@@ -156,20 +150,22 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewNatureIncreasedStat" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewNatureFlavorHeader"
+                        style="@style/Widget.Pokedex.TextView.TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_10"
-                        android:text="Flavor"
+                        android:text="@string/flavor"
                         android:textAlignment="textStart"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/guide20"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/view" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewNatureFlavor"
+                        style="@style/Widget.Pokedex.TextView.TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_5"
@@ -184,8 +180,9 @@
                         app:layout_constraintTop_toBottomOf="@+id/textViewNatureFlavorHeader" />
 
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewNatureHatesFlavor"
+                        style="@style/Widget.Pokedex.TextView.TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_5"

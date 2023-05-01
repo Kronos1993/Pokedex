@@ -32,13 +32,15 @@
                 tools:itemCount="3"
                 tools:listitem="@layout/item_pokemon_evolution_chain" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text_no_natures"
+                style="@style/Widget.Pokedex.TextView.TextViewNormal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/no_evolutions"
                 android:textAlignment="center"
                 android:textSize="@dimen/text_20"
+                app:textAllCaps="true"
                 app:handle_visibility="@{viewModel.pokemonEvolutionList.size==0 || viewModel.pokemonEvolutionList == null}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

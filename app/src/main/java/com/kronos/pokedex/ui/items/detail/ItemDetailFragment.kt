@@ -125,7 +125,7 @@ class ItemDetailFragment : Fragment() {
             override fun onItemClick(t: PokemonDexEntry, pos: Int) {
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_POKEMON, t.pokemon)
-                //findNavController().navigate(R.id.action_nav_ability_info_dialog_to_nav_pokemon_detail,bundle)
+                findNavController().navigate(R.id.action_nav_item_detail_to_nav_pokemon_detail,bundle)
             }
         })
     }
@@ -158,18 +158,12 @@ class ItemDetailFragment : Fragment() {
 
     override fun onDestroyView() {
         binding.unbind()
-        super.onDestroyView()
-    }
-
-    override fun onPause() {
         viewModel.postItemInfo(ItemInfo())
         viewModel.pokemonListAdapter = WeakReference(null)
         viewModel.itemDescription.set(null)
         viewModel.itemEffect.set(null)
         viewModel.itemLongEffect.set(null)
-        binding.unbind()
-        super.onPause()
+        super.onDestroyView()
     }
-
 
 }

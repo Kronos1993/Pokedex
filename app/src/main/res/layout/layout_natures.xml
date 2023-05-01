@@ -40,11 +40,13 @@
             tools:itemCount="10"
             tools:listitem="@layout/item_nature" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_no_natures"
+            style="@style/Widget.Pokedex.TextView.TextViewNormal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/no_natures"
+            app:textAllCaps="true"
             android:textAlignment="center"
             android:textSize="@dimen/text_20"
             app:handle_visibility="@{natures.size()==0}"

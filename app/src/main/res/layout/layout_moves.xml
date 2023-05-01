@@ -40,12 +40,14 @@
             tools:itemCount="10"
             tools:listitem="@layout/item_pokemon_move" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_no_moves"
+            style="@style/Widget.Pokedex.TextView.TextViewNormal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/no_moves"
             android:textAlignment="center"
+            app:textAllCaps="true"
             android:textSize="@dimen/text_20"
             app:handle_visibility="@{moves.size()==0}"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -36,15 +36,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="@dimen/margin_8"
                     android:weightSum="5">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/Widget.Pokedex.TextView.TextViewHeader"
                         android:id="@+id/textViewAbilityName"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
-                        android:textStyle="bold"
                         android:textSize="@dimen/margin_18"
                         android:text="@{viewModel.abilityInfo.name.toUpperCase().replaceAll(`-`,` `)}"
                         app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
@@ -59,12 +58,13 @@
                     android:layout_margin="@dimen/margin_5"
                     android:background="@color/primary_dark"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewAbilityGameDescriptionHeader"
+                    style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
-                    android:text="GAME DESCRIPTION"
+                    android:text="@string/game_description"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -86,8 +86,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewAbilityGameDescription"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/margin_5"
@@ -105,12 +106,13 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewAbilityEffectHeader"
+                    style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
-                    android:text="EFFECT"
+                    android:text="@string/effect"
                     app:handle_visibility="@{viewModel.abilityEffect}"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -134,8 +136,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewAbilityEffectDescription"
+                            style="@style/Widget.Pokedex.TextView.TextViewNormal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="@dimen/margin_5"

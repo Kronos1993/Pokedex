@@ -65,11 +65,11 @@
                 tools:itemCount="3"
                 tools:listitem="@layout/item_pokemon_stat" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewStatsTotal"
+                style="@style/Widget.Pokedex.TextView.TextViewNormal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10"
                 android:text="@{`Total: ` + viewModel.statsTotal}"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineStats9"

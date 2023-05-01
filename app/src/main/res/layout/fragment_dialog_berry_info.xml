@@ -38,7 +38,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_margin="@dimen/margin_8"
                 android:weightSum="5">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -46,32 +45,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_margin="@dimen/margin_5"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_berries" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewBerryName"
-                    android:layout_width="0dp"
+                    style="@style/Widget.Pokedex.TextView.TextViewHeader"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="4"
                     android:text="@{viewModel.berryInfo.name.toUpperCase().replaceAll(`-`,` `)}"
-                    android:textSize="@dimen/margin_18"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/drag_handle" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewSeeMore"
-                    style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                    style="@style/Widget.Pokedex.TextView.TextViewNormal"
+                    android:layout_marginTop="@dimen/margin_8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAlignment="textEnd"
-                    android:text="See more"
+                    android:text="@string/see_more"
                     android:textColor="@color/link"
                     app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
                     app:layout_constraintStart_toStartOf="parent"
@@ -85,12 +86,13 @@
                 android:layout_margin="@dimen/margin_5"
                 android:background="@color/primary_dark" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewBerryInfoHeader"
+                style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
-                android:text="BERRY INFO"
+                android:text="@string/berry_info"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -119,19 +121,20 @@
                         android:orientation="vertical"
                         app:layout_constraintGuide_begin="141dp" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewBerryFirmness"
+                        style="@style/Widget.Pokedex.TextView.TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_5"
                         android:singleLine="false"
-                        android:text="FIRMNESS"
+                        android:text="@string/firmness"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/guideline"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewBerryFirmnessValue"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -144,19 +147,20 @@
                         app:layout_constraintStart_toStartOf="@+id/guideline"
                         app:layout_constraintTop_toTopOf="@+id/textViewBerryFirmness" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewBerryGrowthTime"
+                        style="@style/Widget.Pokedex.TextView.TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_5"
                         android:singleLine="false"
-                        android:text="GROWTH TIME"
+                        android:text="@string/growth_time"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/guideline"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewBerryFirmness" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewBerryGrowthTimeValue"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -169,21 +173,22 @@
                         app:layout_constraintStart_toStartOf="@+id/guideline"
                         app:layout_constraintTop_toTopOf="@+id/textViewBerryGrowthTime" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewBerrySmoothness"
+                        style="@style/Widget.Pokedex.TextView.TextViewNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/margin_5"
                         android:layout_marginBottom="@dimen/margin_5"
                         android:singleLine="false"
-                        android:text="SMOOTHNESS"
+                        android:text="@string/smoothness"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/guideline"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewBerryGrowthTime" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewBerrySmoothnessValue"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -200,12 +205,13 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewBerryFalvorsHeader"
+                style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_5"
-                android:text="BERRY FLAVORS"
+                android:text="@string/berry_flavors"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

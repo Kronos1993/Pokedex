@@ -17,9 +17,7 @@
         android:id="@+id/cardViewPokemonStats"
         style="@style/Widget.Pokedex.CardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_5"
-        app:contentPadding="@dimen/margin_10">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,8 +31,9 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent=".2" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewPokemonStatName"
+                style="@style/Widget.Pokedex.TextView.TextViewNormal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -59,7 +58,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textViewPokemonStatName"
                 app:set_progress_color="@{pokemonStat.statName}" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewStatValue"
                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
@@ -93,20 +92,20 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent=".9" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewEffort"
                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_5"
                 android:layout_marginEnd="@dimen/margin_5"
-                android:text="EV:"
+                android:text="@string/ev"
                 app:handle_visibility="@{pokemonStat.statEffort>0}"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineStatsEffortDivider"
                 app:layout_constraintStart_toStartOf="@+id/guidelineStatsEffortStart"
                 app:layout_constraintTop_toBottomOf="@+id/barrier" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewEffortValue"
                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"

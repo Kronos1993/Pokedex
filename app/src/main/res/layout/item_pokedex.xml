@@ -8,7 +8,7 @@
             type="com.kronos.pokedex.domian.model.NamedResourceApi" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/cardViewPokedex"
         style="@style/Widget.Pokedex.CardView"
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_pokedex" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewPokemonItemName"
                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
@@ -44,5 +44,5 @@
                 app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 </layout>

@@ -92,9 +92,4 @@ class ShowImageDialogFragment : DialogFragment() {
         binding.unbind()
         super.onDestroy()
     }
-
-    override fun onPause() {
-        binding.unbind()
-        super.onPause()
-    }
 }

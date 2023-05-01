@@ -26,7 +26,8 @@
             tools:itemCount="10"
             tools:listitem="@layout/item_item" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/Widget.Pokedex.TextView.TextViewNormal"
             android:id="@+id/text_no_berries"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

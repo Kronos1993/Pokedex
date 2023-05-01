@@ -73,6 +73,18 @@ fun transformText(view: TextView, text: String?) {
     }
 }
 
+@BindingAdapter("app:handle_egg_group_name")
+fun transformEggGroupName(view: TextView, text: String?) {
+    view.run {
+        if (text != null) {
+            val regex = Regex("[0-9]") // Matches any digit from 0 to 9
+            view.text = text.replace(regex, "")
+        } else {
+            view.text = view.context.getString(R.string.unknown)
+        }
+    }
+}
+
 @BindingAdapter("app:handle_long_item_effect_text")
 fun transformItemLongEffectText(view: TextView, text: String?) {
     view.run {

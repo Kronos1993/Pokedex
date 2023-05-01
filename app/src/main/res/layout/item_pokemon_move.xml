@@ -20,8 +20,7 @@
         android:id="@+id/cardViewPokemonMove"
         style="@style/Widget.Pokedex.CardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_3">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -49,7 +48,7 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent=".99" />
 
-            <!--<androidx.appcompat.widget.AppCompatTextView
+            <!--<com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewPokemonMoveLearnMethod"
                 style="@style/TextViewSmall"
                 android:layout_width="0dp"
@@ -60,7 +59,7 @@
                 app:layout_constraintStart_toStartOf="@+id/guidelineStart"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewPokemonMoveLearnMethodValue"
                 style="@style/TextViewSmall"
                 android:layout_width="0dp"
@@ -72,7 +71,7 @@
                 app:layout_constraintStart_toStartOf="@+id/guidelineMiddle"
                 app:layout_constraintTop_toTopOf="@+id/textViewPokemonMoveLearnMethod" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewPokemonMoveLevel"
                 style="@style/TextViewSmall"
                 android:layout_width="0dp"
@@ -84,7 +83,7 @@
                 app:layout_constraintStart_toStartOf="@+id/guidelineStart"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPokemonMoveLearnMethod" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewPokemonMoveLevelValue"
                 style="@style/TextViewSmall"
                 android:layout_width="0dp"
@@ -108,8 +107,9 @@
                 app:layout_constraintStart_toStartOf="@+id/guidelineStart"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewPokemonMoveName"
+                style="@style/Widget.Pokedex.TextView.TextViewNormal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"

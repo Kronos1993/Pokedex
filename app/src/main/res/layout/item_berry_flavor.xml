@@ -14,16 +14,14 @@
         style="@style/Widget.Pokedex.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:handle_berry_potency="@{flavor.potency}"
-        android:layout_margin="@dimen/margin_5"
-        app:contentPadding="@dimen/margin_10">
+        app:handle_berry_potency="@{flavor.potency}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/transparent">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewBerryFlavor"
                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"

@@ -107,12 +107,8 @@ class BerryInfoDialogFragment : BottomSheetDialogFragment() {
 
     override fun onDestroy() {
         binding.unbind()
+        viewModel.postBerryInfo(BerryInfo())
         super.onDestroy()
     }
 
-    override fun onPause() {
-        binding.unbind()
-        viewModel.postBerryInfo(BerryInfo())
-        super.onPause()
-    }
 }

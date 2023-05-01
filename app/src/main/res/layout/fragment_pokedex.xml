@@ -26,13 +26,11 @@
             tools:itemCount="10"
             tools:listitem="@layout/item_pokedex" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text_no_pokemon"
+            style="@style/Widget.Pokedex.TextView.TextViewNormal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:text="@string/no_pokedex"
             android:textAlignment="center"
             android:textSize="@dimen/text_20"

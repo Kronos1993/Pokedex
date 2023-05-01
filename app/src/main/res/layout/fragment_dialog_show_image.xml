@@ -39,16 +39,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonClose"/>
 
-        <!--                <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/showImageDialogImageView"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:minWidth="250dp"
-                            android:minHeight="250dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/buttonClose" />-->
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -82,6 +82,59 @@ fun handleMovePriority(view: ImageView, typePriority: Int?) = view.run {
     }
 }
 
+@BindingAdapter("app:handle_egg_group")
+fun handleEggGroup(view: ImageView, eggGroup: String?) = view.run {
+    if (eggGroup != null) {
+        when (eggGroup) {
+            "monster" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_type_dragon)
+            }
+            "water1" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_type_water)
+            }
+            "bug" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_type_bug)
+            }
+            "flying" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_type_flying)
+            }
+            "ground" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_type_ground)
+            }
+            "fairy" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_type_fairy)
+            }
+            "plant" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_type_grass)
+            }
+            "humanshape" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_human_shape)
+            }
+            "water3" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_type_water)
+            }
+            "mineral" -> {
+                view.setBackgroundResource(R.drawable.ic_mineral)
+            }
+            "indeterminate" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_egg)
+            }
+            "water2" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_type_water)
+            }
+            "ditto" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_egg)
+            }
+            "dragon" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_type_water)
+            }
+            "no-eggs" -> {
+                view.setBackgroundResource(R.drawable.ic_pokemon_no_egg)
+            }
+        }
+    }
+}
+
 @BindingAdapter("app:handle_pokemon_sprite")
 fun handlePokemonSprite(view: ImageView, spriteUrl: String){
     if (spriteUrl != null) {
