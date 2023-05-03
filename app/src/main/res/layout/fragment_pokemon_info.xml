@@ -60,27 +60,28 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".05" />
+                            app:layout_constraintGuide_percent=".02" />
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guidelineBase35"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".35" />
+                            app:layout_constraintGuide_percent=".30" />
 
                         <androidx.constraintlayout.widget.Guideline
                             android:id="@+id/guidelineBase9"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".95" />
+                            app:layout_constraintGuide_percent=".98" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/imageViewPokemon"
-                            android:layout_width="96dp"
-                            android:layout_height="96dp"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
                             android:layout_margin="@dimen/margin_5"
+                            app:layout_constraintBottom_toTopOf="@+id/textViewPokemonDescription"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase35"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase1"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -93,6 +94,7 @@
                             android:layout_marginStart="@dimen/margin_8"
                             android:layout_marginEnd="@dimen/margin_8"
                             android:text="@{`#`+ viewModel.pokemonInfo.id}"
+                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toTopOf="@+id/textViewPokemonName"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
@@ -104,17 +106,6 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             app:handle_pokemon_name="@{viewModel.pokemonInfo.name}"
-                            app:layout_constraintBottom_toTopOf="@+id/layoutTypes"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
-
-                        <include
-                            android:id="@+id/layoutTypes"
-                            layout="@layout/layout_types"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_8"
-                            android:layout_marginEnd="@dimen/margin_8"
                             app:layout_constraintBottom_toTopOf="@+id/textViewPokemonType"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
@@ -127,10 +118,20 @@
                             android:layout_marginStart="@dimen/margin_8"
                             android:layout_marginEnd="@dimen/margin_8"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageViewPokemon"
+                            app:layout_constraintBottom_toTopOf="@+id/layoutTypes"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35"
                             app:pokemon_type="@{viewModel.pokemonInfo.specie}" />
+
+                        <include
+                            android:id="@+id/layoutTypes"
+                            layout="@layout/layout_types"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toTopOf="@id/textViewPokemonDescription"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
+
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewPokemonDescription"
@@ -140,12 +141,11 @@
                             android:layout_margin="@dimen/margin_8"
                             android:maxLines="15"
                             android:singleLine="false"
-                            app:handle_pokemon_description="@{viewModel.pokemonDescription}"
                             android:textStyle="bold"
+                            app:handle_pokemon_description="@{viewModel.pokemonDescription}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineBase1"
-                            app:layout_constraintTop_toBottomOf="@+id/imageViewPokemon" />
+                            app:layout_constraintStart_toStartOf="@+id/guidelineBase1" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -192,7 +192,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
-                                app:layout_constraintGuide_percent=".45" />
+                                app:layout_constraintGuide_percent=".40" />
 
                             <androidx.constraintlayout.widget.Guideline
                                 android:id="@+id/guidelineInfo9"
