@@ -17,9 +17,6 @@ interface PokemonApi {
     fun getPokemonInfo(@Path("pokemon")pokemonName:String): Call<PokemonInfoDto>
 
     @GET("pokemon/{pokemon}")
-    fun getPokemonInfo(@Path("pokemon")pokemonId:Int): Call<PokemonInfoDto
-            >
-
-
+    fun getPokemonInfo(@Path("pokemon")pokemonId:Int): Call<PokemonInfoDto>
 }
 

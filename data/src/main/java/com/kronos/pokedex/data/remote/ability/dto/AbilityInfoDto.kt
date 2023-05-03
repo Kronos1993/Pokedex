@@ -16,7 +16,7 @@ data class AbilityInfoDto(
     @SerializedName("generation")
     val generation: NamedResourceApi,
     @SerializedName("names")
-    val nameDtos: List<NameDto>,
+    val names: List<NameDto>,
     @SerializedName("effect_entries")
     val effectEntries: List<EffectEntryDto>,
     @SerializedName("effect_changes")

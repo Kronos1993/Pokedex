@@ -1,5 +1,6 @@
 package com.kronos.pokedex.domian.model.item
 
+import com.kronos.pokedex.domian.model.Name
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import java.io.Serializable
 
@@ -12,6 +13,7 @@ data class BerryInfo(
     var item:ItemInfo = ItemInfo(),
     var maxHarvest:Int = 0,
     var name:String = "",
+    var names:List<Name> = listOf(),
     var naturalGiftPower:Int = 0,
     var naturalGiftType:NamedResourceApi = NamedResourceApi(),
     var size:Int = 0,

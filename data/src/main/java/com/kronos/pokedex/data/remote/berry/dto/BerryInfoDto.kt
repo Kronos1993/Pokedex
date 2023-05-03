@@ -1,6 +1,7 @@
 package com.kronos.pokedex.data.remote.berry.dto
 
 import com.google.gson.annotations.SerializedName
+import com.kronos.pokedex.data.remote.NameDto
 import com.kronos.pokedex.data.remote.item.dto.ItemInfoDto
 import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
 import com.kronos.pokedex.domian.model.NamedResourceApi
@@ -21,6 +22,8 @@ data class BerryInfoDto(
     var maxHarvest:Int = 0,
     @SerializedName("name")
     var name:String = "",
+    @SerializedName("names")
+    val names: List<NameDto>,
     @SerializedName("natural_gift_power")
     var naturalGiftPower:Int = 0,
     @SerializedName("natural_gift_type")

@@ -125,6 +125,8 @@ class PokemonDetailViewModel @Inject constructor(
 
     var pokemonDescription = ObservableField<String?>()
 
+    var pokemonName = ObservableField<String?>()
+
     var showMove = ObservableField<String?>()
     var buttonSelected = ObservableField<String?>()
 
@@ -210,6 +212,7 @@ class PokemonDetailViewModel @Inject constructor(
             loading.postValue(true)
             var pokemonInfo: PokemonInfo? = null
             pokemonDescription.set("")
+            pokemonName.set("")
             statsTotal.set(0)
 
             pokemonInfo = if (urlProvider.extractIdFromUrl(pokemonList.url) != null) {
@@ -246,7 +249,21 @@ class PokemonDetailViewModel @Inject constructor(
                             pos++
                     }
                 }
+                if (specie.names.isNotEmpty()) {
+                    var find = false
+                    var pos = 0
+                    while (!find && pos < specie.names.size) {
+                        if (specie.names[pos].language.name == "en") {
+                            pokemonName.set(specie.names[pos].name)
+                            find = true
+                        } else
+                            pos++
+                    }
+                }else{
+                    pokemonName.set(pokemonInfo.name)
+                }
             }else{
+                pokemonName.set(pokemonInfo.name)
                 pokemonInfo.specie = SpecieInfo()
                 postPokemonEvolutionChain(EvolutionChain())
                 postPokemonEvolutionChainList(listOf())

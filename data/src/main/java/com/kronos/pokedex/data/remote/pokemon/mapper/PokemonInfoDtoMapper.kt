@@ -6,6 +6,7 @@ import com.kronos.pokedex.data.remote.pokemon.dto.PokemonInfoDto
 import com.kronos.pokedex.data.remote.sprite.mapper.toSprite
 import com.kronos.pokedex.data.remote.stat.mapper.toStat
 import com.kronos.pokedex.data.remote.type.mapper.toType
+import com.kronos.pokedex.domian.model.Name
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.model.specie.SpecieInfo
 

@@ -1,5 +1,6 @@
 package com.kronos.pokedex.domian.model.pokemon
 
+import com.kronos.pokedex.domian.model.Name
 import com.kronos.pokedex.domian.model.ability.Ability
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.model.specie.SpecieInfo
