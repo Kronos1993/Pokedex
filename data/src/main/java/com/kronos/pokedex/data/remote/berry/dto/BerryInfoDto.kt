@@ -23,7 +23,7 @@ data class BerryInfoDto(
     @SerializedName("name")
     var name:String = "",
     @SerializedName("names")
-    val names: List<NameDto>,
+    val names: List<NameDto> = listOf(),
     @SerializedName("natural_gift_power")
     var naturalGiftPower:Int = 0,
     @SerializedName("natural_gift_type")
