@@ -126,7 +126,7 @@ fun handleEggGroup(view: ImageView, eggGroup: String?) = view.run {
                 view.setBackgroundResource(R.drawable.ic_pokemon_egg)
             }
             "dragon" -> {
-                view.setBackgroundResource(R.drawable.ic_pokemon_type_water)
+                view.setBackgroundResource(R.drawable.ic_pokemon_type_dragon)
             }
             "no-eggs" -> {
                 view.setBackgroundResource(R.drawable.ic_pokemon_no_egg)

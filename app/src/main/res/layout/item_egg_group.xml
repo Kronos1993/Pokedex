@@ -21,8 +21,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageViewEggGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/margin_24"
+                android:layout_height="@dimen/margin_24"
                 app:handle_egg_group="@{eggGroup.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

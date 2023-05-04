@@ -28,7 +28,7 @@ import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEvolutionChainAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
 import com.kronos.pokedex.ui.stats.PokemonStatsAdapter
-import com.kronos.pokedex.ui.types.PokemonTypeAdapter
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonTypeAdapter
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -49,7 +49,7 @@ class PokemonDetailViewModel @Inject constructor(
     var logger: ILogger,
 ) : ParentViewModel() {
 
-    private val _pokemonInfo = MutableLiveData<PokemonInfo>()
+    private val _pokemonInfo = MutableLiveData<PokemonInfo?>()
     val pokemonInfo = _pokemonInfo.asLiveData()
 
     private val _pokemonStats = MutableLiveData<List<Stat>>()
@@ -125,10 +125,12 @@ class PokemonDetailViewModel @Inject constructor(
 
     var pokemonDescription = ObservableField<String?>()
 
+    var pokemonName = ObservableField<String?>()
+
     var showMove = ObservableField<String?>()
     var buttonSelected = ObservableField<String?>()
 
-    fun postPokemonInfo(pokemonInfo: PokemonInfo) {
+    fun postPokemonInfo(pokemonInfo: PokemonInfo?) {
         _pokemonInfo.postValue(pokemonInfo)
     }
 
@@ -210,6 +212,7 @@ class PokemonDetailViewModel @Inject constructor(
             loading.postValue(true)
             var pokemonInfo: PokemonInfo? = null
             pokemonDescription.set("")
+            pokemonName.set("")
             statsTotal.set(0)
 
             pokemonInfo = if (urlProvider.extractIdFromUrl(pokemonList.url) != null) {
@@ -246,7 +249,21 @@ class PokemonDetailViewModel @Inject constructor(
                             pos++
                     }
                 }
+                if (specie.names.isNotEmpty()) {
+                    var find = false
+                    var pos = 0
+                    while (!find && pos < specie.names.size) {
+                        if (specie.names[pos].language.name == "en") {
+                            pokemonName.set(specie.names[pos].name)
+                            find = true
+                        } else
+                            pos++
+                    }
+                }else{
+                    pokemonName.set(pokemonInfo.name)
+                }
             }else{
+                pokemonName.set(pokemonInfo.name)
                 pokemonInfo.specie = SpecieInfo()
                 postPokemonEvolutionChain(EvolutionChain())
                 postPokemonEvolutionChainList(listOf())

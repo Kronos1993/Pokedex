@@ -1,7 +1,7 @@
 package com.kronos.pokedex.data.remote.ability.dto
 
 import com.google.gson.annotations.SerializedName
-import com.kronos.pokedex.data.remote.Name
+import com.kronos.pokedex.data.remote.NameDto
 import com.kronos.pokedex.data.remote.description.EffectEntryDto
 import com.kronos.pokedex.data.remote.description.FlavorTextEntryDto
 import com.kronos.pokedex.domian.model.NamedResourceApi
@@ -16,7 +16,7 @@ data class AbilityInfoDto(
     @SerializedName("generation")
     val generation: NamedResourceApi,
     @SerializedName("names")
-    val names: List<Name>,
+    val names: List<NameDto>,
     @SerializedName("effect_entries")
     val effectEntries: List<EffectEntryDto>,
     @SerializedName("effect_changes")

@@ -1,6 +1,7 @@
 package com.kronos.pokedex.data.remote.item.dto
 
 import com.google.gson.annotations.SerializedName
+import com.kronos.pokedex.data.remote.NameDto
 import com.kronos.pokedex.data.remote.description.EffectEntryDto
 import com.kronos.pokedex.data.remote.description.FlavorTextDto
 import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
@@ -31,6 +32,8 @@ data class ItemInfoDto(
     var id:Int = 0,
     @SerializedName("name")
     var name:String = "",
+    @SerializedName("names")
+    val names: List<NameDto>,
     @SerializedName("sprites")
     var sprites:SpriteDto = SpriteDto()
 ):Serializable

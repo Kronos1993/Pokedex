@@ -1,6 +1,7 @@
 package com.kronos.pokedex.data.remote.move.dto
 
 import com.google.gson.annotations.SerializedName
+import com.kronos.pokedex.data.remote.NameDto
 import com.kronos.pokedex.data.remote.description.EffectEntryDto
 import com.kronos.pokedex.data.remote.description.FlavorTextEntryDto
 import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
@@ -18,6 +19,8 @@ data class MoveInfoDto(
     var learnedBy: List<NamedResourceApiDto> = listOf(),
     @SerializedName("name")
     var moveName: String = "",
+    @SerializedName("names")
+    val names: List<NameDto>,
     @SerializedName("power")
     var power: Int = 0,
     @SerializedName("pp")

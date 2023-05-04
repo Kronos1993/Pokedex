@@ -47,10 +47,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="4"
                     android:text="@{viewModel.natureInfo.name.toUpperCase().replaceAll(`-`,` `)}"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/drag_handle" />
+                    android:textStyle="bold"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <View

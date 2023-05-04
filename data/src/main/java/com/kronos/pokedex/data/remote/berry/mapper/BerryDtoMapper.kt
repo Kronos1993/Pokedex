@@ -3,12 +3,14 @@ package com.kronos.pokedex.data.remote.berry.mapper
 import com.kronos.pokedex.data.remote.berry.dto.BerryFlavorDto
 import com.kronos.pokedex.data.remote.berry.dto.BerryInfoDto
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
+import com.kronos.pokedex.domian.model.Name
 import com.kronos.pokedex.domian.model.item.BerryFlavor
 import com.kronos.pokedex.domian.model.item.BerryInfo
 
 fun BerryInfoDto.toBerryInfo(): BerryInfo =
     BerryInfo(
         name = name,
+        names = names.map { Name(it.name,it.language) },
         id = id,
         size = size,
         firmness = firmness.toNamedResource(),

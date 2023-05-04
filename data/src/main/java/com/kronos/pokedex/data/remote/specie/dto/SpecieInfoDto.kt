@@ -1,6 +1,7 @@
 package com.kronos.pokedex.data.remote.specie.dto
 
 import com.google.gson.annotations.SerializedName
+import com.kronos.pokedex.data.remote.NameDto
 import com.kronos.pokedex.data.remote.description.FlavorTextEntryDto
 import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
 import com.kronos.pokedex.domian.model.ResourceApi
@@ -30,6 +31,8 @@ data class SpecieInfoDto(
     var isMythical:Boolean = false,
     @SerializedName("name")
     var name:String = "",
+    @SerializedName("names")
+    val names: List<NameDto> = listOf(),
     @SerializedName("varieties")
     var varieties:List<SpecieVarietiesDto> = listOf(),
     @SerializedName("egg_groups")

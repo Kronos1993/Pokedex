@@ -22,6 +22,4 @@ class PokedexApplication:Application(){
         logger.configure()
         exceptionHandler.init(this)
     }
-
-
 }

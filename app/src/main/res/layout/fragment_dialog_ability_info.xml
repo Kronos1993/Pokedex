@@ -24,14 +24,6 @@
                 android:background="@color/backgroundColor"
                 tools:context=".ui.pokemon.list.PokemonListFragment">
 
-                <com.google.android.material.bottomsheet.BottomSheetDragHandleView
-                    android:id="@+id/drag_handle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toStartOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -45,10 +37,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:textSize="@dimen/margin_18"
-                        android:text="@{viewModel.abilityInfo.name.toUpperCase().replaceAll(`-`,` `)}"
-                        app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/drag_handle" />
+                        android:text="@{viewModel.abilityInfo.name.toUpperCase().replaceAll(`-`,` `)}" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

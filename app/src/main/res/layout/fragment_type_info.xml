@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.kronos.pokedex.ui.types.detail.TypeInfoViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.types.detail.TypeInfoDialogFragment">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/margin_5"
+                        app:handle_type="@{viewModel.typeInfo.name}" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/textViewMoveName"
+                        style="@style/Widget.Pokedex.TextView.TextViewHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="4"
+                        android:text="@{viewModel.typeInfo.name.toUpperCase().replaceAll(`-`,` `)}"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/buttonShowPokemon"
+                        android:layout_marginStart="@dimen/margin_5"
+                        android:layout_marginEnd="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:text="Show Pokemon"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5"
+                        android:layout_marginEnd="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:id="@+id/buttonShowMove"
+                        android:text="Show move"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/containerWeakness"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardViewWeakness"
+                        style="@style/Widget.Pokedex.CardView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewDefendingHeader"
+                                style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/defending"
+                                android:layout_marginStart="@dimen/margin_8"
+                                android:textStyle="bold" />
+
+                            <View
+                                handle_visibility="@{viewModel.doubleDamageFrom.size()>0}"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/margin_3"
+                                android:layout_margin="@dimen/margin_5"
+                                android:background="@color/primary_dark" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewDoubleDamageFromHeader"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                handle_visibility="@{viewModel.doubleDamageFrom.size()>0}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/very_weak"
+                                android:layout_marginStart="@dimen/margin_8"
+                                android:textStyle="bold" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                handle_visibility="@{viewModel.doubleDamageFrom.size()>0}"
+                                android:id="@+id/recyclerViewDoubleDamageFrom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:itemCount="3"
+                                tools:listitem="@layout/item_damage_relation" />
+
+                            <View
+                                handle_visibility="@{viewModel.halfDamageFrom.size()>0}"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/margin_3"
+                                android:layout_margin="@dimen/margin_5"
+                                android:background="@color/primary_dark" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewHalfDamageFromHeader"
+                                handle_visibility="@{viewModel.halfDamageFrom.size()>0}"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/very_resistant"
+                                android:layout_marginStart="@dimen/margin_8"
+                                android:textStyle="bold" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                handle_visibility="@{viewModel.halfDamageFrom.size()>0}"
+                                android:id="@+id/recyclerViewHalfDamageFrom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:itemCount="3"
+                                tools:listitem="@layout/item_damage_relation" />
+
+                            <View
+                                handle_visibility="@{viewModel.noDamageFrom.size()>0}"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/margin_3"
+                                android:layout_margin="@dimen/margin_5"
+                                android:background="@color/primary_dark" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewNoDamageFromHeader"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                handle_visibility="@{viewModel.noDamageFrom.size()>0}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/immune"
+                                android:layout_marginStart="@dimen/margin_8"
+                                android:textStyle="bold" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                handle_visibility="@{viewModel.noDamageFrom.size()>0}"
+                                android:id="@+id/recyclerViewNoDamageFrom"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:itemCount="3"
+                                tools:listitem="@layout/item_damage_relation" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardViewStrength"
+                        style="@style/Widget.Pokedex.CardView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewStrengthHeader"
+                                style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_8"
+                                android:text="@string/attacking"
+                                android:textStyle="bold"/>
+
+                            <View
+                                handle_visibility="@{viewModel.doubleDamageTo.size()>0}"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/margin_3"
+                                android:layout_margin="@dimen/margin_5"
+                                android:background="@color/primary_dark" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewDoubleDamageToHeader"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                handle_visibility="@{viewModel.doubleDamageTo.size()>0}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_8"
+                                android:text="@string/super_effective"
+                                android:textStyle="bold"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                handle_visibility="@{viewModel.doubleDamageTo.size()>0}"
+                                android:id="@+id/recyclerViewDoubleDamageTo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:itemCount="3"
+                                tools:listitem="@layout/item_damage_relation" />
+
+                            <View
+                                handle_visibility="@{viewModel.halfDamageTo.size()>0}"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/margin_3"
+                                android:layout_margin="@dimen/margin_5"
+                                android:background="@color/primary_dark"/>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewHalfDamageToHeader"
+                                handle_visibility="@{viewModel.halfDamageTo.size()>0}"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_8"
+                                android:text="@string/not_effective"
+                                android:textStyle="bold"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                handle_visibility="@{viewModel.halfDamageTo.size()>0}"
+                                android:id="@+id/recyclerViewHalfDamageTo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:itemCount="3"
+                                tools:listitem="@layout/item_damage_relation" />
+
+                            <View
+                                handle_visibility="@{viewModel.noDamageTo.size()>0}"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/margin_3"
+                                android:layout_margin="@dimen/margin_5"
+                                android:background="@color/primary_dark"/>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewNoDamageToHeader"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                handle_visibility="@{viewModel.noDamageTo.size()>0}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_8"
+                                android:text="@string/immune"
+                                android:textStyle="bold"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerViewNoDamageTo"
+                                handle_visibility="@{viewModel.noDamageTo.size()>0}"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:itemCount="3"
+                                tools:listitem="@layout/item_damage_relation" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </com.google.android.material.card.MaterialCardView>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
+</layout>

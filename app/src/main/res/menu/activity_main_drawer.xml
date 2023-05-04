@@ -11,6 +11,16 @@
             android:icon="@drawable/ic_pokedex"
             android:title="@string/menu_pokedex" />
         <item
+            android:id="@+id/nav_egg_groups"
+            android:icon="@drawable/ic_pokemon_egg"
+            android:title="@string/menu_egg_groups" />
+
+        <item
+            android:id="@+id/nav_types"
+            android:icon="@drawable/ic_pokedex_app_icon"
+            android:title="@string/menu_types" />
+
+        <item
             android:id="@+id/nav_abilities"
             android:icon="@drawable/ic_eye"
             android:title="@string/menu_abilities" />

@@ -1,15 +1,18 @@
 package com.kronos.pokedex.data.remote.specie.mapper
 
+import com.kronos.pokedex.data.remote.NameDto
 import com.kronos.pokedex.data.remote.description.mapper.toFlavorText
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
 import com.kronos.pokedex.data.remote.specie.dto.SpecieInfoDto
 import com.kronos.pokedex.data.remote.specie.dto.SpecieVarietiesDto
+import com.kronos.pokedex.domian.model.Name
 import com.kronos.pokedex.domian.model.specie.SpecieInfo
 import com.kronos.pokedex.domian.model.specie.SpecieVarieties
 
 fun SpecieInfoDto.toSpecieInfo(): SpecieInfo =
     SpecieInfo(
         name = name,
+        names = names.map { Name(it.name,it.language) },
         baseHappiness = baseHappiness,
         captureRate = captureRate,
         evolutionChain = evolutionChain,

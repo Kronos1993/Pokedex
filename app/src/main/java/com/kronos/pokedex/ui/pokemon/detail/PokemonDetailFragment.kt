@@ -26,8 +26,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 import java.util.*
 
-const val CURRENT_TYPE = "current_type"
-
 @AndroidEntryPoint
 class PokemonDetailFragment : Fragment() {
     private val binding by fragmentBinding<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail)
@@ -48,8 +46,8 @@ class PokemonDetailFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         observeViewModel()
-        initViews()
         initViewModel()
+        initViews()
     }
 
     private fun observeViewModel() {
@@ -58,7 +56,7 @@ class PokemonDetailFragment : Fragment() {
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
 
-    private fun handlePokemonInfo(pokemonInfo: PokemonInfo) {
+    private fun handlePokemonInfo(pokemonInfo: PokemonInfo?) {
         binding.viewPagerPokemonInfo.setCurrentItem(0,true)
     }
 
@@ -117,6 +115,7 @@ class PokemonDetailFragment : Fragment() {
             )
         )
         binding.viewPagerPokemonInfo.adapter = viewModel.pokemonInfoPageAdapter.get()
+        binding.viewPagerPokemonInfo.isSaveEnabled = false
         TabLayoutMediator(binding.tabPokemonData, binding.viewPagerPokemonInfo) { tab, index ->
             tab.text = viewModel.pokemonInfoPageAdapter.get()!!.getPageTitle(index)
             tab.icon = viewModel.pokemonInfoPageAdapter.get()!!.getPageIcon(index)
@@ -124,11 +123,13 @@ class PokemonDetailFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        val bundle = arguments
-        if (bundle?.get(CURRENT_POKEMON) != null) {
-            viewModel.loadPokemonInfo(bundle.get(CURRENT_POKEMON) as NamedResourceApi)
-        } else {
-            findNavController().popBackStack()
+        if(viewModel.pokemonInfo.value == null){
+            val bundle = arguments
+            if (bundle?.get(CURRENT_POKEMON) != null) {
+                viewModel.loadPokemonInfo(bundle.get(CURRENT_POKEMON) as NamedResourceApi)
+            } else {
+                findNavController().popBackStack()
+            }
         }
     }
 
@@ -154,13 +155,13 @@ class PokemonDetailFragment : Fragment() {
         super.onDestroyView()
     }
 
-    override fun onPause() {
+    override fun onDestroy() {
         viewModel.pokemonInfoPageAdapter = WeakReference(null)
         viewModel.pokemonAbilityAdapter = WeakReference(null)
         viewModel.pokemonSpriteAdapter = WeakReference(null)
         viewModel.pokemonStatAdapter = WeakReference(null)
         viewModel.pokemonTypeAdapter = WeakReference(null)
-        viewModel.postPokemonInfo(PokemonInfo())
+        viewModel.postPokemonInfo(null)
         viewModel.postPokemonMoves(listOf())
         viewModel.postPokemonStats(listOf())
         viewModel.postPokemonSprites(listOf())
@@ -168,8 +169,6 @@ class PokemonDetailFragment : Fragment() {
         viewModel.pokemonDescription.set(null)
         viewModel.statsTotal.set(null)
         binding.unbind()
-        super.onPause()
+        super.onDestroy()
     }
-
-
 }
