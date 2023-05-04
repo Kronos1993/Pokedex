@@ -24,6 +24,7 @@ import com.kronos.core.extensions.binding.activityBinding
 import com.kronos.core.util.validatePermission
 import com.kronos.pokedex.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -163,5 +164,11 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        finishAffinity()
+        exitProcess(0)
     }
 }
