@@ -49,7 +49,7 @@ class PokemonDetailViewModel @Inject constructor(
     var logger: ILogger,
 ) : ParentViewModel() {
 
-    private val _pokemonInfo = MutableLiveData<PokemonInfo>()
+    private val _pokemonInfo = MutableLiveData<PokemonInfo?>()
     val pokemonInfo = _pokemonInfo.asLiveData()
 
     private val _pokemonStats = MutableLiveData<List<Stat>>()
@@ -130,7 +130,7 @@ class PokemonDetailViewModel @Inject constructor(
     var showMove = ObservableField<String?>()
     var buttonSelected = ObservableField<String?>()
 
-    fun postPokemonInfo(pokemonInfo: PokemonInfo) {
+    fun postPokemonInfo(pokemonInfo: PokemonInfo?) {
         _pokemonInfo.postValue(pokemonInfo)
     }
 

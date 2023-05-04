@@ -56,7 +56,7 @@ class PokemonDetailFragment : Fragment() {
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
 
-    private fun handlePokemonInfo(pokemonInfo: PokemonInfo) {
+    private fun handlePokemonInfo(pokemonInfo: PokemonInfo?) {
         binding.viewPagerPokemonInfo.setCurrentItem(0,true)
     }
 
@@ -123,11 +123,13 @@ class PokemonDetailFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        val bundle = arguments
-        if (bundle?.get(CURRENT_POKEMON) != null) {
-            viewModel.loadPokemonInfo(bundle.get(CURRENT_POKEMON) as NamedResourceApi)
-        } else {
-            findNavController().popBackStack()
+        if(viewModel.pokemonInfo.value == null){
+            val bundle = arguments
+            if (bundle?.get(CURRENT_POKEMON) != null) {
+                viewModel.loadPokemonInfo(bundle.get(CURRENT_POKEMON) as NamedResourceApi)
+            } else {
+                findNavController().popBackStack()
+            }
         }
     }
 
@@ -159,7 +161,7 @@ class PokemonDetailFragment : Fragment() {
         viewModel.pokemonSpriteAdapter = WeakReference(null)
         viewModel.pokemonStatAdapter = WeakReference(null)
         viewModel.pokemonTypeAdapter = WeakReference(null)
-        viewModel.postPokemonInfo(PokemonInfo())
+        viewModel.postPokemonInfo(null)
         viewModel.postPokemonMoves(listOf())
         viewModel.postPokemonStats(listOf())
         viewModel.postPokemonSprites(listOf())

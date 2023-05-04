@@ -68,47 +68,49 @@ class PokemonInfoFragment : Fragment() {
         }
     }
 
-    private fun handlePokemonInfo(pokemonInfo: PokemonInfo) {
-        Glide.with(requireContext()).load(
-            pokemonInfo.sprites.let {
-                if (!it.frontHome.isNullOrEmpty())
-                    it.frontHome
-                else
-                    it.frontDefault
+    private fun handlePokemonInfo(pokemonInfo: PokemonInfo?) {
+        if (pokemonInfo!=null){
+            Glide.with(requireContext()).load(
+                pokemonInfo.sprites.let {
+                    if (!it.frontHome.isNullOrEmpty())
+                        it.frontHome
+                    else
+                        it.frontDefault
+                }
+            ).into(binding.imageViewPokemon)
+
+            binding.imageViewPokemon.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_IMAGE_URL, pokemonInfo.sprites.let {
+                    if (!it.frontHome.isNullOrEmpty())
+                        it.frontHome
+                    else
+                        it.frontDefault
+                })
+                findNavController().navigate(R.id.action_global_nav_show_image, bundle)
             }
-        ).into(binding.imageViewPokemon)
 
-        binding.imageViewPokemon.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putSerializable(CURRENT_IMAGE_URL, pokemonInfo.sprites.let {
-                if (!it.frontHome.isNullOrEmpty())
-                    it.frontHome
-                else
-                    it.frontDefault
-            })
-            findNavController().navigate(R.id.action_global_nav_show_image, bundle)
+            viewModel.pokemonTypeAdapter.get()?.submitList(pokemonInfo.types)
+            viewModel.pokemonTypeAdapter.get()?.notifyDataSetChanged()
+            if (pokemonInfo.types.size > 1)
+                binding.layoutTypes.recyclerViewPokemonType.layoutManager =
+                    GridLayoutManager(context, 2)
+
+            if (pokemonInfo.specie.eggGroup.size > 1)
+                binding.recyclerViewEggGroup.layoutManager = GridLayoutManager(context,2)
+
+            viewModel.pokemonEggGroupAdapter.get()?.submitList(pokemonInfo.specie.eggGroup)
+            viewModel.pokemonEggGroupAdapter.get()?.notifyDataSetChanged()
+
+            viewModel.pokemonAbilityAdapter.get()?.submitList(pokemonInfo.abilities)
+            viewModel.pokemonAbilityAdapter.get()?.notifyDataSetChanged()
+
+            if (pokemonInfo.abilities.size > 1)
+                binding.layoutAbilities.recyclerViewPokemonAbilities.layoutManager =
+                    GridLayoutManager(context, 2)
+
+            binding.invalidateAll()
         }
-
-        viewModel.pokemonTypeAdapter.get()?.submitList(pokemonInfo.types)
-        viewModel.pokemonTypeAdapter.get()?.notifyDataSetChanged()
-        if (pokemonInfo.types.size > 1)
-            binding.layoutTypes.recyclerViewPokemonType.layoutManager =
-                GridLayoutManager(context, 2)
-
-        if (pokemonInfo.specie.eggGroup.size > 1)
-            binding.recyclerViewEggGroup.layoutManager = GridLayoutManager(context,2)
-
-        viewModel.pokemonEggGroupAdapter.get()?.submitList(pokemonInfo.specie.eggGroup)
-        viewModel.pokemonEggGroupAdapter.get()?.notifyDataSetChanged()
-
-        viewModel.pokemonAbilityAdapter.get()?.submitList(pokemonInfo.abilities)
-        viewModel.pokemonAbilityAdapter.get()?.notifyDataSetChanged()
-
-        if (pokemonInfo.abilities.size > 1)
-            binding.layoutAbilities.recyclerViewPokemonAbilities.layoutManager =
-                GridLayoutManager(context, 2)
-
-        binding.invalidateAll()
 
     }
 
