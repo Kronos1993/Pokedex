@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_nav_pokemon_detail_to_nav_move_info_dialog"
             app:destination="@id/nav_move_info_dialog" />
+        <action
+            android:id="@+id/action_nav_pokemon_detail_to_nav_type_detail"
+            app:destination="@id/nav_type_detail" />
     </fragment>
 
     <fragment
@@ -177,6 +180,16 @@
         android:name="com.kronos.pokedex.ui.types.list.TypeListFragment"
         android:label="@string/menu_types"
         tools:layout="@layout/fragment_type_list">
+        <action
+            android:id="@+id/action_nav_types_to_nav_type_detail"
+            app:destination="@id/nav_type_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_type_detail"
+        android:name="com.kronos.pokedex.ui.types.detail.TypeInfoFragment"
+        android:label="@string/menu_types"
+        tools:layout="@layout/fragment_type_info">
     </fragment>
 
 

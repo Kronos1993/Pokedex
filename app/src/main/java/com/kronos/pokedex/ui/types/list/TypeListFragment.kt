@@ -15,8 +15,6 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentTypeListBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
-import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
-import com.kronos.pokedex.ui.pokedex.CURRENT_POKEDEX
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 import java.util.*
@@ -122,7 +120,7 @@ class TypeListFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_TYPE, t)
                 viewModel.setRecyclerLastPosition(pos)
-                //findNavController().navigate(R.id.action_nav_pokemon_list_to_nav_pokemon_detail, bundle)
+                findNavController().navigate(R.id.action_nav_types_to_nav_type_detail, bundle)
             }
 
         })

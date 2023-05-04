@@ -50,6 +50,7 @@
     <string name="no_egg_groups_found">NO EGG GROUPS FOUND</string>
 
     <string name="menu_types">Types</string>
+    <string name="menu_type_info">Type Detail</string>
     <string name="no_types_found">NO TYPES FOUND</string>
 
 
@@ -105,4 +106,6 @@
     <string name="_turn_upside_down">Turn Upside Down:</string>
     <string name="ev">EV:</string>
     <string name="pokemon_species">Pokemon Species</string>
+    <string name="weak_against">Weak Against</string>
+    <string name="strong_against">Strong Against</string>
 </resources>

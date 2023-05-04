@@ -21,12 +21,12 @@ import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.model.type.Type
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
-import com.kronos.pokedex.ui.pokemon.detail.CURRENT_TYPE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEggGroupAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
-import com.kronos.pokedex.ui.show_image.CURRENT_IMAGE_URL
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonTypeAdapter
+import com.kronos.pokedex.ui.show_image.CURRENT_IMAGE_URL
+import com.kronos.pokedex.ui.types.list.CURRENT_TYPE
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 
@@ -140,9 +140,8 @@ class PokemonInfoFragment : Fragment() {
             AdapterItemClickListener<Type> {
             override fun onItemClick(t: Type, pos: Int) {
                 val bundle = Bundle()
-                bundle.putSerializable(CURRENT_TYPE, t)
-                Toast.makeText(requireContext(), t.name, Toast.LENGTH_SHORT).show()
-                //findNavController().navigate(R.id.action_nav_pokemon_list_to_nav_pokemon_detail, bundle)
+                bundle.putSerializable(CURRENT_TYPE, NamedResourceApi(t.name,""))
+                findNavController().navigate(R.id.action_nav_pokemon_detail_to_nav_type_detail, bundle)
             }
         })
     }
