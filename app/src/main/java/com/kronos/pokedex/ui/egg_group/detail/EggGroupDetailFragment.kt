@@ -86,6 +86,7 @@ class EggGroupDetailFragment : BottomSheetDialogFragment() {
 
     private fun handleEggGroup(eggGroup: EggGroupInfo) {
         handlePokemon(eggGroup.pokemonSpecies)
+        viewModel.getEggGroupName(eggGroup)
     }
 
     private fun handlePokemon(pokemonList:List<NamedResourceApi>) {

@@ -7,18 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.kronos.core.extensions.asLiveData
 import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.interfaces.ILogger
-import com.kronos.pokedex.R
 import com.kronos.pokedex.domian.model.NamedResourceApi
-import com.kronos.pokedex.domian.model.ability.AbilityInfo
-import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
-import com.kronos.pokedex.domian.model.evolution_chain.EvolutionChain
 import com.kronos.pokedex.domian.model.item.ItemInfo
-import com.kronos.pokedex.domian.model.move.MoveInfo
-import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
-import com.kronos.pokedex.domian.model.pokemon.extension.totalStat
-import com.kronos.pokedex.domian.model.specie.SpecieInfo
 import com.kronos.pokedex.domian.repository.*
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
+import com.kronos.pokedex.util.preferences.PreferencesUtil
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -41,6 +34,7 @@ class ItemDetailViewModel @Inject constructor(
     val itemDescription = ObservableField<String?>()
     val itemEffect = ObservableField<String?>()
     val itemLongEffect = ObservableField<String?>()
+    var itemName = ObservableField<String?>()
 
     var pokemonListAdapter: WeakReference<PokemonListAdapter?> = WeakReference(PokemonListAdapter())
 
@@ -69,7 +63,7 @@ class ItemDetailViewModel @Inject constructor(
         var find = false
         var pos = 0
         while (!find && pos < itemInfo.descriptions.size) {
-            if (itemInfo.descriptions[pos].language == "en") {
+            if (itemInfo.descriptions[pos].language == PreferencesUtil.getLanguagePreference(context)) {
                 itemDescription.set(itemInfo.descriptions[pos].description)
                 find = true
             } else
@@ -81,12 +75,30 @@ class ItemDetailViewModel @Inject constructor(
         var find = false
         var pos = 0
         while (!find && pos < itemInfo.effectEntries.size) {
-            if (itemInfo.effectEntries[pos].language == "en") {
+            if (itemInfo.effectEntries[pos].language == PreferencesUtil.getLanguagePreference(context)) {
                 itemEffect.set(itemInfo.effectEntries[pos].shortEffect)
                 itemLongEffect.set(itemInfo.effectEntries[pos].effect)
                 find = true
             } else
                 pos++
         }
+    }
+
+    fun getItemName(item: ItemInfo){
+        if (item.names.isNotEmpty()) {
+            var find = false
+            var pos = 0
+            while (!find && pos < item.names.size) {
+                if (item.names[pos].language.name == PreferencesUtil.getLanguagePreference(
+                        context
+                    )
+                ) {
+                    itemName.set(item.names[pos].name)
+                    find = true
+                } else
+                    pos++
+            }
+        } else
+            itemName.set(item.name)
     }
 }

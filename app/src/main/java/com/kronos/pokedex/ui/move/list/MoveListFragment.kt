@@ -15,7 +15,6 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentMoveListBinding
 import com.kronos.pokedex.domian.model.move.MoveList
-import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
 import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
 import com.kronos.pokedex.ui.move.ShowMoveIn
 import dagger.hilt.android.AndroidEntryPoint
@@ -124,7 +123,9 @@ class MoveListFragment : Fragment() {
             override fun onItemClick(t: MoveList, pos: Int) {
                 if (searchView != null)
                     searchView.clearFocus()
-                viewModel.filterMove("")
+                if (!searchView.query.isNullOrBlank()) {
+                    viewModel.filterMove("")
+                }
                 viewModel.setRecyclerLastPosition(pos)
                 if (!t.move.name.isNullOrEmpty()) {
                     if (findNavController().currentDestination?.id == R.id.nav_move_list) {

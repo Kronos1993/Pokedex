@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.preference.PreferenceManager
 import com.kronos.core.extensions.asLiveData
 import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.interfaces.ILogger
@@ -29,6 +30,7 @@ import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
 import com.kronos.pokedex.ui.stats.PokemonStatsAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonTypeAdapter
+import com.kronos.pokedex.util.preferences.PreferencesUtil
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -242,7 +244,7 @@ class PokemonDetailViewModel @Inject constructor(
                     var find = false
                     var pos = 0
                     while (!find && pos < specie.flavorText.size) {
-                        if (pokemonInfo.specie.flavorText[pos].language == "en") {
+                        if (pokemonInfo.specie.flavorText[pos].language == PreferencesUtil.getLanguagePreference(context)) {
                             pokemonDescription.set(pokemonInfo.specie.flavorText[pos].description)
                             find = true
                         } else
@@ -253,7 +255,7 @@ class PokemonDetailViewModel @Inject constructor(
                     var find = false
                     var pos = 0
                     while (!find && pos < specie.names.size) {
-                        if (specie.names[pos].language.name == "en") {
+                        if (specie.names[pos].language.name == PreferencesUtil.getLanguagePreference(context)) {
                             pokemonName.set(specie.names[pos].name)
                             find = true
                         } else

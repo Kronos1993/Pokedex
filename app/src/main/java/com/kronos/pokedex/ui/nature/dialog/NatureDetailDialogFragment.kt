@@ -27,7 +27,6 @@ import kotlinx.coroutines.withContext
 @AndroidEntryPoint
 class NatureDetailDialogFragment : BottomSheetDialogFragment() {
     private val binding by fragmentBinding<FragmentDialogNatureInfoBinding>(R.layout.fragment_dialog_nature_info)
-    private val viewModelPokemonDetail by activityViewModels<PokemonDetailViewModel>()
     private val viewModel by viewModels<NatureDetailViewModel>()
 
     override fun onCreateView(
@@ -51,6 +50,7 @@ class NatureDetailDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun handleNatureDetail(natureDetail: NatureDetail) {
+        viewModel.getNatureName(natureDetail)
 
     }
 

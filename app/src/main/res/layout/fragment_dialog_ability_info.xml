@@ -37,7 +37,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:textSize="@dimen/margin_18"
-                        android:text="@{viewModel.abilityInfo.name.toUpperCase().replaceAll(`-`,` `)}" />
+                        android:text="@{viewModel.abilityName.toUpperCase().replaceAll(`-`,` `)}" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

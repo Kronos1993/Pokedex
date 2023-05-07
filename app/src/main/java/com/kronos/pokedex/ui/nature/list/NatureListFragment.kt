@@ -113,7 +113,9 @@ class NatureListFragment : Fragment() {
             AdapterItemClickListener<NamedResourceApi> {
             override fun onItemClick(t: NamedResourceApi, pos: Int) {
                 if (searchView != null) searchView.clearFocus()
-                viewModel.filterNature("")
+                if (!searchView.query.isNullOrBlank()) {
+                    viewModel.filterNature("")
+                }
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_NATURE, t)
                 findNavController().navigate(R.id.action_nav_nature_list_to_nav_detail_info_dialog, bundle)

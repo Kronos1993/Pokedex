@@ -2,8 +2,6 @@ package com.kronos.pokedex.ui.items.detail
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
-import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -56,6 +54,7 @@ class ItemDetailFragment : Fragment() {
 
     private fun handleItemInfo(itemInfo: ItemInfo) {
         handlePokemon(itemInfo.heldByPokemon)
+        viewModel.getItemName(itemInfo)
         if (!itemInfo.sprites.defaultImg.isNullOrEmpty()){
             binding.imageViewItemSprite.setOnClickListener {
                 val bundle = Bundle()
@@ -142,18 +141,8 @@ class ItemDetailFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.pokemon_detail, menu)
+        inflater.inflate(R.menu.screen_detail, menu)
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_settings -> {
-                Toast.makeText(requireContext(),"Settings",Toast.LENGTH_SHORT).show()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroyView() {

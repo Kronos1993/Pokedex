@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
@@ -61,6 +60,7 @@ class MoveInfoDialogFragment : BottomSheetDialogFragment() {
     private fun handleMoveInfo(moveInfo: MoveInfo) {
         viewModel.getMoveEffect(moveInfo)
         viewModel.getMoveGameDescription(moveInfo)
+        viewModel.getMoveName(moveInfo)
         viewModel.loadPokemonList(moveInfo)
         binding.imageViewType.invalidate()
         binding.imageViewPriority.invalidate()

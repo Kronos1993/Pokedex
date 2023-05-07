@@ -2,26 +2,16 @@ package com.kronos.pokedex.ui.types.detail
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
-import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.core.util.LoadingDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
-import com.kronos.pokedex.databinding.FragmentItemInfoBinding
 import com.kronos.pokedex.databinding.FragmentTypeInfoBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
-import com.kronos.pokedex.domian.model.item.ItemInfo
-import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
-import com.kronos.pokedex.ui.items.list.CURRENT_ITEM
-import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
-import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
-import com.kronos.pokedex.ui.show_image.CURRENT_IMAGE_URL
 import com.kronos.pokedex.ui.types.list.CURRENT_TYPE
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
@@ -215,18 +205,8 @@ class TypeInfoFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.pokemon_detail, menu)
+        inflater.inflate(R.menu.screen_detail, menu)
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_settings -> {
-                Toast.makeText(requireContext(),"Settings",Toast.LENGTH_SHORT).show()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroyView() {

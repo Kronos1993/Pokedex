@@ -94,7 +94,7 @@ class TypeListFragment : Fragment() {
                     com.kronos.resources.R.color.colorSecondaryVariant
                 )!!.dismiss()
             }
-        }catch (e:IllegalArgumentException){
+        } catch (e: IllegalArgumentException) {
             e.printStackTrace()
         }
 
@@ -106,7 +106,7 @@ class TypeListFragment : Fragment() {
     }
 
     private fun initViews() {
-        binding.layoutTypeList.recyclerViewPokemonType.layoutManager = GridLayoutManager(context,2)
+        binding.layoutTypeList.recyclerViewPokemonType.layoutManager = GridLayoutManager(context, 2)
         binding.layoutTypeList.recyclerViewPokemonType.setHasFixedSize(false)
         if (viewModel.typeListAdapter.get() == null)
             viewModel.typeListAdapter = WeakReference(TypeAdapter())
@@ -115,8 +115,10 @@ class TypeListFragment : Fragment() {
         viewModel.typeListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<NamedResourceApi> {
             override fun onItemClick(t: NamedResourceApi, pos: Int) {
-                if(searchView!=null) searchView.clearFocus()
-                viewModel.filterTypes("")
+                if (searchView != null) searchView.clearFocus()
+                if (!searchView.query.isNullOrBlank()) {
+                    viewModel.filterTypes("")
+                }
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_TYPE, t)
                 viewModel.setRecyclerLastPosition(pos)
@@ -125,15 +127,20 @@ class TypeListFragment : Fragment() {
 
         })
         binding.layoutTypeList.recyclerViewPokemonType.postDelayed({
-            binding.layoutTypeList.recyclerViewPokemonType.smoothScrollToPosition(viewModel.recyclerLastPos.value.let{ it ?: 0 })
+            binding.layoutTypeList.recyclerViewPokemonType.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
+                it ?: 0
+            })
         }, 50)
 
         binding.layoutTypeList.recyclerViewPokemonType.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val visibleItemCount: Int = (recyclerView.layoutManager as GridLayoutManager).childCount
-                val totalItemCount: Int = (recyclerView.layoutManager as GridLayoutManager).itemCount
-                val firstVisibleItemPosition: Int = (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
+                val visibleItemCount: Int =
+                    (recyclerView.layoutManager as GridLayoutManager).childCount
+                val totalItemCount: Int =
+                    (recyclerView.layoutManager as GridLayoutManager).itemCount
+                val firstVisibleItemPosition: Int =
+                    (recyclerView.layoutManager as GridLayoutManager).findFirstVisibleItemPosition()
                 if (!viewModel.loading.value!!) {
                     if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0)
                         viewModel.getMoreTypes()

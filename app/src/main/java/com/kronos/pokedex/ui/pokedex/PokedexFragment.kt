@@ -111,7 +111,9 @@ class PokedexFragment : Fragment() {
             AdapterItemClickListener<NamedResourceApi> {
             override fun onItemClick(t: NamedResourceApi, pos: Int) {
                 if (searchView != null) searchView.clearFocus()
+                if (!searchView.query.isNullOrBlank()) {
                     viewModel.filterPokedex("")
+                }
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_POKEDEX, t)
                 findNavController().navigate(R.id.action_nav_pokedex_to_nav_pokemon_list, bundle)

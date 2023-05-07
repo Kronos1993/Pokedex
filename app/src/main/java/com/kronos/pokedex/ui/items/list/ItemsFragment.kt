@@ -115,7 +115,9 @@ class ItemsFragment : Fragment() {
             AdapterItemClickListener<NamedResourceApi> {
             override fun onItemClick(t: NamedResourceApi, pos: Int) {
                 if (searchView != null) searchView.clearFocus()
-                viewModel.filterItems("")
+                if (!searchView.query.isNullOrBlank()) {
+                    viewModel.filterItems("")
+                }
                 viewModel.setRecyclerLastPosition(pos)
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_ITEM, t)

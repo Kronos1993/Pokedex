@@ -240,6 +240,10 @@
         android:label="@string/menu_type_info"
         tools:layout="@layout/fragment_type_info"/>
 
+    <fragment
+        android:id="@+id/action_settings"
+        android:name="com.kronos.pokedex.ui.settings.SettingsFragment"
+        android:label="@string/action_settings"/>
 
     <action
         android:id="@+id/action_global_nav_show_image"

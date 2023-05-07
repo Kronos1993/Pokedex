@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="4"
-                    android:text="@{viewModel.natureInfo.name.toUpperCase().replaceAll(`-`,` `)}"
+                    android:text="@{viewModel.natureName.toUpperCase().replaceAll(`-`,` `)}"
                     android:textStyle="bold"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
 

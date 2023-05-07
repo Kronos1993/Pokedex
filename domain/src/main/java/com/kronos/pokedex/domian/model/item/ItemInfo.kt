@@ -1,9 +1,6 @@
 package com.kronos.pokedex.domian.model.item
 
-import com.kronos.pokedex.domian.model.EffectEntry
-import com.kronos.pokedex.domian.model.FlavorText
-import com.kronos.pokedex.domian.model.NamedResourceApi
-import com.kronos.pokedex.domian.model.ResourceApi
+import com.kronos.pokedex.domian.model.*
 import com.kronos.pokedex.domian.model.sprite.Sprite
 import java.io.Serializable
 
@@ -19,5 +16,6 @@ data class ItemInfo(
     var heldByPokemon:List<NamedResourceApi> = listOf(),
     var id:Int = 0,
     var name:String = "",
+    var names:List<Name> = listOf(),
     var sprites:Sprite = Sprite()
 ):Serializable

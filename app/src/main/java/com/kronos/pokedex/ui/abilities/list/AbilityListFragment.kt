@@ -118,7 +118,9 @@ class AbilityListFragment : Fragment() {
             AdapterItemClickListener<Ability> {
             override fun onItemClick(t: Ability, pos: Int) {
                 if (searchView != null) searchView.clearFocus()
-                viewModel.filterAbility("")
+                if (!searchView.query.isNullOrBlank()) {
+                    viewModel.filterAbility("")
+                }
                 if (!t.ability.name.isNullOrEmpty()) {
                     if (findNavController().currentDestination?.id == R.id.nav_abilities) {
                         val bundle = Bundle()

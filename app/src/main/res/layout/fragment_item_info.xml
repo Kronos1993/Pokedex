@@ -105,7 +105,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            app:handle_pokemon_name="@{viewModel.itemInfo.name}"
+                            app:handle_pokemon_name="@{viewModel.itemName}"
                             app:layout_constraintBottom_toTopOf="@+id/textViewItemDescription"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />

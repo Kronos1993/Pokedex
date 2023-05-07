@@ -2,7 +2,6 @@ package com.kronos.pokedex.ui.pokemon.detail
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -14,7 +13,6 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonDetailBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
-import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonEvolutionFragment
@@ -136,18 +134,8 @@ class PokemonDetailFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.pokemon_detail, menu)
+        inflater.inflate(R.menu.screen_detail, menu)
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_settings -> {
-                Toast.makeText(requireContext(),"Settings",Toast.LENGTH_SHORT).show()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroyView() {
