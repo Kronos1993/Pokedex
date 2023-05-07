@@ -9,6 +9,7 @@ import android.os.Environment
 import android.os.Handler
 import android.provider.Settings
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
@@ -167,6 +168,15 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (val id: Int = item.itemId) {
+            R.id.action_settings -> findNavController(R.id.nav_host_fragment_content_main).navigate(
+                id
+            )
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {

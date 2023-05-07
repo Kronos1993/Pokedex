@@ -115,4 +115,5 @@
     <string name="not_effective">Not very effective to</string>
     <string name="ineffective">Ineffective to</string>
     <string name="back_to_exit">Press back again to exit</string>
+    <string name="setting_language_summary">This is a limited feature due to pokemon api</string>
 </resources>
