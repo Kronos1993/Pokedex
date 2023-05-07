@@ -19,6 +19,8 @@
 
         <item name="cardViewStyle">@style/Widget.Pokedex.CardView</item>
         <item name="linearProgressIndicatorStyle">@style/Widget.Pokedex.LinearProgressIndicator</item>
+
+        <item name="android:windowAnimationStyle">@style/Theme.Pokedex.ActivityAnimation</item>
     </style>
 
     <style name="Theme.Pokedex.NoActionBar">
@@ -30,6 +32,12 @@
 
     <style name="Theme.Pokedex.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="Theme.Pokedex.ActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
 
     <style name="SpinnerSolid" parent="Widget.AppCompat.Spinner">
         <!--<item name="android:background">@drawable/rounded_text_view_stroke</item>-->
