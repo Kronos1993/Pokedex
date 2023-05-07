@@ -67,6 +67,7 @@
                         android:layout_marginStart="@dimen/margin_5"
                         android:layout_marginEnd="@dimen/margin_5"
                         android:layout_weight="1"
+                        handle_visibility="@{false}"
                         android:text="Show Pokemon"/>
 
                     <com.google.android.material.button.MaterialButton
@@ -76,6 +77,7 @@
                         android:layout_marginEnd="@dimen/margin_5"
                         android:layout_weight="1"
                         android:id="@+id/buttonShowMove"
+                        handle_visibility="@{false}"
                         android:text="Show move"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -266,7 +268,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/margin_8"
-                                android:text="@string/immune"
+                                android:text="@string/ineffective"
                                 android:textStyle="bold"/>
 
                             <androidx.recyclerview.widget.RecyclerView
