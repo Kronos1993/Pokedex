@@ -6,13 +6,16 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.Settings
 import android.view.Menu
+import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -24,6 +27,8 @@ import com.kronos.core.extensions.binding.activityBinding
 import com.kronos.core.util.validatePermission
 import com.kronos.pokedex.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import kotlin.concurrent.timerTask
 import kotlin.system.exitProcess
 
 @AndroidEntryPoint
@@ -32,6 +37,8 @@ class MainActivity : AppCompatActivity() {
     private val binding by activityBinding<ActivityMainBinding>(R.layout.activity_main)
     private var grantedAll = false
     private var grantedFullStorage = false
+    private var isBackPressedOnce = false
+    private var navController:NavController? = null
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -133,7 +140,8 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        if(navController == null)
+            navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
@@ -149,8 +157,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_berries
             ), drawerLayout
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        setupActionBarWithNavController(navController!!, appBarConfiguration)
+        navView.setupWithNavController(navController!!)
         navView.itemIconTintList = null
     }
 
@@ -162,13 +170,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+        if(navController == null)
+            navController = findNavController(R.id.nav_host_fragment_content_main)
+        return navController!!.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    override fun onStop() {
-        super.onStop()
-        finishAffinity()
-        exitProcess(0)
+    override fun onBackPressed() {
+        if (navController?.currentDestination?.id  == navController?.graph?.startDestinationId){
+            if(isBackPressedOnce){
+                finishAffinity()
+                exitProcess(0)
+            }
+            isBackPressedOnce = true
+            Toast.makeText(applicationContext,getString(R.string.back_to_exit),Toast.LENGTH_SHORT).show()
+            Timer().schedule(
+                timerTask {
+                    isBackPressedOnce = false
+                },
+                2000
+            )
+        }else{
+            super.onBackPressed()
+        }
     }
+
 }

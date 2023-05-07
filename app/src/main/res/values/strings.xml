@@ -107,10 +107,12 @@
     <string name="ev">EV:</string>
     <string name="pokemon_species">Pokemon Species</string>
     <string name="defending">Defending</string>
-    <string name="attacking">Attacking</string>
-    <string name="very_weak">Very weak</string>
-    <string name="very_resistant">Very resistant</string>
-    <string name="immune">Immune</string>
-    <string name="super_effective">Super effective</string>
-    <string name="not_effective">Not very effective</string>
+    <string name="attacking">Attacking to</string>
+    <string name="very_weak">Very weak to</string>
+    <string name="very_resistant">Very resistant to</string>
+    <string name="immune">Immune to</string>
+    <string name="super_effective">Super effective to</string>
+    <string name="not_effective">Not very effective to</string>
+    <string name="ineffective">Ineffective to</string>
+    <string name="back_to_exit">Press back again to exit</string>
 </resources>
