@@ -46,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="4"
-                        android:text="@{viewModel.typeInfo.name.toUpperCase().replaceAll(`-`,` `)}"
+                        android:text="@{viewModel.typeName.toUpperCase().replaceAll(`-`,` `)}"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/textViewAbilityViewMore" />
                 </androidx.appcompat.widget.LinearLayoutCompat>

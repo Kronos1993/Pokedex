@@ -12,6 +12,7 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentTypeInfoBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.type.TypeInfo
 import com.kronos.pokedex.ui.types.list.CURRENT_TYPE
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
@@ -56,8 +57,14 @@ class TypeInfoFragment : Fragment() {
         viewModel.halfDamageTo.observe(this.viewLifecycleOwner, ::handleHalfDamageTo)
         viewModel.noDamageTo.observe(this.viewLifecycleOwner, ::handleNoDamageTo)
 
+        viewModel.typeInfo.observe(this.viewLifecycleOwner, ::handleTypeInfo)
+
         viewModel.loading.observe(this.viewLifecycleOwner, ::handleLoading)
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
+    }
+
+    private fun handleTypeInfo(typeInfo: TypeInfo) {
+        viewModel.getTypeName(typeInfo)
     }
 
     private fun handleDoubleDamageFrom(list: List<DamageRelationContainer>?) {

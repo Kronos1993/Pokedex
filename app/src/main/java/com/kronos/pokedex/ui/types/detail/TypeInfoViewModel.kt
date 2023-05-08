@@ -1,18 +1,21 @@
 package com.kronos.pokedex.ui.types.detail
 
 import android.content.Context
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.kronos.core.extensions.asLiveData
 import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.domian.model.type.TypeInfo
 import com.kronos.pokedex.domian.repository.TypeRemoteRepository
 import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
 import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
+import com.kronos.pokedex.util.preferences.PreferencesUtil
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -31,6 +34,8 @@ class TypeInfoViewModel @Inject constructor(
 
     private val _typeInfo = MutableLiveData<TypeInfo>()
     val typeInfo = _typeInfo.asLiveData()
+
+    var typeName = ObservableField<String?>()
 
     var doubleDamageFromAdapter: WeakReference<DamageRelationTypeAdapter?> = WeakReference(DamageRelationTypeAdapter())
     private val _doubleDamageFrom = MutableLiveData<List<DamageRelationContainer>>()
@@ -103,6 +108,7 @@ class TypeInfoViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             loading.postValue(true)
             var typeInfo: TypeInfo? = null
+            typeName.set("")
 
             typeInfo = if(!type.url.isNullOrEmpty()){
                 if (urlProvider.extractIdFromUrl(type.url) != null) {
@@ -127,5 +133,23 @@ class TypeInfoViewModel @Inject constructor(
             postPokemonList(typeInfo.pokemon.mapIndexed { index, namedResourceApi -> PokemonDexEntry(index,namedResourceApi) })
             loading.postValue(false)
         }
+    }
+
+    fun getTypeName(type: TypeInfo){
+        if (type.names.isNotEmpty()) {
+            var find = false
+            var pos = 0
+            while (!find && pos < type.names.size) {
+                if (type.names[pos].language.name == PreferencesUtil.getLanguagePreference(
+                        context
+                    )
+                ) {
+                    typeName.set(type.names[pos].name)
+                    find = true
+                } else
+                    pos++
+            }
+        } else
+            typeName.set(type.name)
     }
 }
