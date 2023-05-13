@@ -22,4 +22,5 @@ data class SpecieInfo(
     var names:List<Name> = listOf(),
     var varieties:List<SpecieVarieties> = listOf(),
     var eggGroup:List<NamedResourceApi> = listOf(),
+    var genera:List<PokemonGenera> = listOf(),
 ): Serializable
