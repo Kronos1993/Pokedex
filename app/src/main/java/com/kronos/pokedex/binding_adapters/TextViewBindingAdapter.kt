@@ -62,7 +62,8 @@ fun setPokemonGenera(view: TextView, genera: String?) {
         if (genera != null) {
             visibility = View.VISIBLE
             view.text = genera.replace("-"," ")
-        }
+        }else
+            view.text = view.context.getString(R.string.unknown)
     }
 }
 
