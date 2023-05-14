@@ -117,5 +117,7 @@
     <string name="ineffective">Ineffective to</string>
     <string name="back_to_exit">Press back again to exit</string>
     <string name="setting_language_summary">This is a limited feature due to pokemon api</string>
+    <string name="dialo_exit_app_title">Close Pokedex</string>
+    <string name="dialo_exit_app_message">Are you sure you want to exit?</string>
 
 </resources>

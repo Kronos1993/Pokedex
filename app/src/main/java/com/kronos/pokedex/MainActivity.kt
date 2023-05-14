@@ -1,6 +1,7 @@
 package com.kronos.pokedex
 
 import android.Manifest
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -13,6 +14,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -185,20 +187,23 @@ class MainActivity : AppCompatActivity() {
         return navController!!.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    override fun onBackPressed() {
-        if (navController?.currentDestination?.id  == navController?.graph?.startDestinationId){
-            if(isBackPressedOnce){
+    private fun showExitDialog(){
+        MaterialAlertDialogBuilder(this,R.style.Pokedex_AlertDialog_RoundShapeTheme)
+            .setTitle(R.string.dialo_exit_app_title)
+            .setMessage(R.string.dialo_exit_app_message)
+            .setPositiveButton(com.kronos.resources.R.string.ok) { _, _ ->
                 finishAffinity()
                 exitProcess(0)
             }
-            isBackPressedOnce = true
-            Toast.makeText(applicationContext,getString(R.string.back_to_exit),Toast.LENGTH_SHORT).show()
-            Timer().schedule(
-                timerTask {
-                    isBackPressedOnce = false
-                },
-                2000
-            )
+            .setNegativeButton(com.kronos.resources.R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create().show();
+    }
+
+    override fun onBackPressed() {
+        if (navController?.currentDestination?.id  == navController?.graph?.startDestinationId){
+            showExitDialog()
         }else{
             super.onBackPressed()
         }
