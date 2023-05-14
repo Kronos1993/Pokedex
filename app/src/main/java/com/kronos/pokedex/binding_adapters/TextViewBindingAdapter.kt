@@ -59,11 +59,7 @@ fun setPokemonType(view: TextView, specie: SpecieInfo?) {
 @BindingAdapter("app:pokemon_genera")
 fun setPokemonGenera(view: TextView, genera: String?) {
     view.run {
-        if (genera != null) {
-            visibility = View.VISIBLE
-            view.text = genera.replace("-"," ")
-        }else
-            view.text = view.context.getString(R.string.unknown)
+        view.text = genera?.replace("-"," ") ?: view.context.getString(R.string.unknown)
     }
 }
 

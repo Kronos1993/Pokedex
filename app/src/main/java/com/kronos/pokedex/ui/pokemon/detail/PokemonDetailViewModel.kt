@@ -136,7 +136,7 @@ class PokemonDetailViewModel @Inject constructor(
         _pokemonInfo.postValue(pokemonInfo)
     }
 
-    private fun postSpecieInfo(specie: SpecieInfo?) {
+    fun postSpecieInfo(specie: SpecieInfo?) {
         _specieInfo.postValue(specie)
     }
 
@@ -214,12 +214,12 @@ class PokemonDetailViewModel @Inject constructor(
 
 
     fun loadPokemonInfo(pokemonList: NamedResourceApi) {
+        pokemonDescription.set(null)
+        pokemonName.set(null)
+        pokemonGenera.set(null)
         viewModelScope.launch (Dispatchers.IO) {
             loading.postValue(true)
             var pokemonInfo: PokemonInfo? = null
-            pokemonDescription.set("")
-            pokemonName.set("")
-            pokemonGenera.set("")
             statsTotal.set(0)
 
             pokemonInfo = if (urlProvider.extractIdFromUrl(pokemonList.url) != null) {
