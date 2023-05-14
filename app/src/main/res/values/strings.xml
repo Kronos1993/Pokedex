@@ -104,13 +104,20 @@
     <string name="_party_type">Party Type:</string>
     <string name="_time_of_the_day">Time of the day:</string>
     <string name="_turn_upside_down">Turn Upside Down:</string>
+    <string name="_evolvesFrom">Evolves From:</string>
     <string name="ev">EV:</string>
     <string name="pokemon_species">Pokemon Species</string>
     <string name="defending">Defending</string>
-    <string name="attacking">Attacking</string>
-    <string name="very_weak">Very weak</string>
-    <string name="very_resistant">Very resistant</string>
-    <string name="immune">Immune</string>
-    <string name="super_effective">Super effective</string>
-    <string name="not_effective">Not very effective</string>
+    <string name="attacking">Attacking to</string>
+    <string name="very_weak">Very weak to</string>
+    <string name="very_resistant">Very resistant to</string>
+    <string name="immune">Immune to</string>
+    <string name="super_effective">Super effective to</string>
+    <string name="not_effective">Not very effective to</string>
+    <string name="ineffective">Ineffective to</string>
+    <string name="back_to_exit">Press back again to exit</string>
+    <string name="setting_language_summary">This is a limited feature due to pokemon api</string>
+    <string name="dialo_exit_app_title">Close Pokedex</string>
+    <string name="dialo_exit_app_message">Are you sure you want to exit?</string>
+
 </resources>

@@ -8,13 +8,13 @@ import com.kronos.core.extensions.asLiveData
 import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.NamedResourceApi
-import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.domian.model.type.Type
 import com.kronos.pokedex.domian.repository.MoveRemoteRepository
 import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
+import com.kronos.pokedex.util.preferences.PreferencesUtil
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -41,6 +41,7 @@ class MoveInfoViewModel @Inject constructor(
     var moveEffect = ObservableField<String?>()
     var moveDescription = ObservableField<String?>()
     var type = ObservableField<Type?>()
+    var moveName = ObservableField<String?>()
 
     var pokemonListAdapter: WeakReference<PokemonListAdapter?> = WeakReference(PokemonListAdapter())
     private val _pokemonList = MutableLiveData<MutableList<PokemonDexEntry>>()
@@ -59,7 +60,7 @@ class MoveInfoViewModel @Inject constructor(
             var find = false
             var pos = 0
             while (!find && pos < moveInfo.moveFlavorText.size) {
-                if (moveInfo.moveFlavorText[pos].language == "en") {
+                if (moveInfo.moveFlavorText[pos].language == PreferencesUtil.getLanguagePreference(context)) {
                     moveDescription.set(moveInfo.moveFlavorText[pos].description)
                     find = true
                 } else
@@ -73,7 +74,7 @@ class MoveInfoViewModel @Inject constructor(
             var find = false
             var pos = 0
             while (!find && pos < moveInfo.effects.size) {
-                if (moveInfo.effects[pos].language == "en") {
+                if (moveInfo.effects[pos].language == PreferencesUtil.getLanguagePreference(context)) {
                     moveShortEffect.set(moveInfo.effects[pos].shortEffect)
                     moveEffect.set(moveInfo.effects[pos].effect)
                     find = true
@@ -81,6 +82,24 @@ class MoveInfoViewModel @Inject constructor(
                     pos++
             }
         }
+    }
+
+    fun getMoveName(moveInfo:MoveInfo){
+        if (moveInfo.names.isNotEmpty()) {
+            var find = false
+            var pos = 0
+            while (!find && pos < moveInfo.names.size) {
+                if (moveInfo.names[pos].language.name == PreferencesUtil.getLanguagePreference(
+                        context
+                    )
+                ) {
+                    moveName.set(moveInfo.names[pos].name)
+                    find = true
+                } else
+                    pos++
+            }
+        } else
+            moveName.set(moveInfo.moveName)
     }
 
     private fun postPokemonList(list: List<PokemonDexEntry>) {
@@ -107,8 +126,6 @@ class MoveInfoViewModel @Inject constructor(
             } else {
                 moveRemoteRepository.getMove(move.name)
             }
-            getMoveEffect(moveInfo)
-            getMoveGameDescription(moveInfo)
             postMoveInfo(moveInfo)
             loadPokemonList(moveInfo)
             loading.postValue(false)

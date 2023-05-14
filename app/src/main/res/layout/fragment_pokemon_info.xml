@@ -108,9 +108,22 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             app:handle_pokemon_name="@{viewModel.pokemonInfo.name}"
-                            app:layout_constraintBottom_toTopOf="@+id/textViewPokemonType"
+                            app:layout_constraintBottom_toTopOf="@+id/textViewPokemonGenera"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/textViewPokemonGenera"
+                            style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_8"
+                            android:layout_marginEnd="@dimen/margin_8"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@+id/textViewPokemonType"
+                            app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
+                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35"
+                            app:pokemon_genera="@{viewModel.pokemonGenera}" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewPokemonType"

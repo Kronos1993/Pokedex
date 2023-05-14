@@ -1,6 +1,7 @@
 package com.kronos.pokedex.ui.egg_group.detail
 
 import android.content.Context
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.kronos.core.extensions.asLiveData
@@ -8,9 +9,9 @@ import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.egg_group.EggGroupInfo
-import com.kronos.pokedex.domian.model.item.ItemInfo
 import com.kronos.pokedex.domian.repository.*
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
+import com.kronos.pokedex.util.preferences.PreferencesUtil
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -29,6 +30,8 @@ class EggGroupDetailViewModel @Inject constructor(
 
     private val _eggGroupInfo = MutableLiveData<EggGroupInfo>()
     val eggGroupInfo = _eggGroupInfo.asLiveData()
+
+    var eggGroupName = ObservableField<String?>()
 
     var pokemonListAdapter: WeakReference<PokemonListAdapter?> = WeakReference(PokemonListAdapter())
 
@@ -51,4 +54,21 @@ class EggGroupDetailViewModel @Inject constructor(
         }
     }
 
+    fun getEggGroupName(eggGroup: EggGroupInfo){
+        if (eggGroup.names.isNotEmpty()) {
+            var find = false
+            var pos = 0
+            while (!find && pos < eggGroup.names.size) {
+                if (eggGroup.names[pos].language.name == PreferencesUtil.getLanguagePreference(
+                        context
+                    )
+                ) {
+                    eggGroupName.set(eggGroup.names[pos].name)
+                    find = true
+                } else
+                    pos++
+            }
+        } else
+            eggGroupName.set(eggGroup.name)
+    }
 }

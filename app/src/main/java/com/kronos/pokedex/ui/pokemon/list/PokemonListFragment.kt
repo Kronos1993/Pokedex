@@ -118,7 +118,9 @@ class PokemonListFragment : Fragment() {
             AdapterItemClickListener<PokemonDexEntry> {
             override fun onItemClick(t: PokemonDexEntry, pos: Int) {
                 if(searchView!=null) searchView.clearFocus()
-                viewModel.filterPokemon("")
+                if (!searchView.query.isNullOrBlank()) {
+                    viewModel.filterPokemon("")
+                }
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_POKEMON, t.pokemon)
                 viewModel.setRecyclerLastPosition(pos)

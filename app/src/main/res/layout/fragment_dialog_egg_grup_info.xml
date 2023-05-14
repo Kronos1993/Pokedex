@@ -45,7 +45,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:textSize="@dimen/margin_18"
-                        android:text="@string/pokemon_species"
+                        android:text="@{viewModel.eggGroupName}"
                         app:textAllCaps="true"/>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -55,6 +55,15 @@
                     android:layout_height="@dimen/margin_3"
                     android:layout_margin="@dimen/margin_5"
                     android:background="@color/primary_dark"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
+                    android:id="@+id/textViewEggGroupPokemonSpecies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/margin_18"
+                    android:text="@string/pokemon_species"
+                    app:textAllCaps="true"/>
 
                 <include
                     android:id="@+id/layout_pokemon_list"

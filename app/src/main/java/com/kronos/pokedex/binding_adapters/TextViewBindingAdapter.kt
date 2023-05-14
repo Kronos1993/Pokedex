@@ -36,8 +36,8 @@ fun setStatName(view: TextView, stat: String) {
 @BindingAdapter("app:pokemon_type")
 fun setPokemonType(view: TextView, specie: SpecieInfo?) {
     view.run {
-        visibility = View.VISIBLE
         if (specie != null) {
+            visibility = View.VISIBLE
             when {
                 specie.isBaby -> {
                     view.text = view.context.getString(R.string.baby_pokemon)
@@ -53,6 +53,17 @@ fun setPokemonType(view: TextView, specie: SpecieInfo?) {
                 }
             }
         }
+    }
+}
+
+@BindingAdapter("app:pokemon_genera")
+fun setPokemonGenera(view: TextView, genera: String?) {
+    view.run {
+        if (genera != null) {
+            visibility = View.VISIBLE
+            view.text = genera.replace("-"," ")
+        }else
+            view.text = view.context.getString(R.string.unknown)
     }
 }
 

@@ -18,6 +18,7 @@ import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.Ability
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
+import com.kronos.pokedex.domian.model.specie.SpecieInfo
 import com.kronos.pokedex.domian.model.type.Type
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
@@ -50,6 +51,7 @@ class PokemonInfoFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.pokemonInfo.observe(this.viewLifecycleOwner, ::handlePokemonInfo)
+        viewModel.specieInfo.observe(this.viewLifecycleOwner, ::handleSpecieInfo)
         viewModel.pokemonSpritesUrl.observe(this.viewLifecycleOwner, ::handlePokemonSprites)
         viewModel.pokemonOtherFormsUrl.observe(this.viewLifecycleOwner, ::handlePokemonOtherForms)
         viewModel.abilityInfo.observe(this.viewLifecycleOwner, ::handleAbilityInfo)
@@ -112,6 +114,12 @@ class PokemonInfoFragment : Fragment() {
             binding.invalidateAll()
         }
 
+    }
+
+    private fun handleSpecieInfo(specie: SpecieInfo?) {
+        viewModel.getPokemonDescription(specie)
+        viewModel.getPokemonGenera(specie)
+        viewModel.getPokemonName(specie)
     }
 
     private fun handlePokemonSprites(sprites: List<Pair<String, String>>) {

@@ -111,7 +111,9 @@ class BerriesFragment : Fragment() {
             AdapterItemClickListener<NamedResourceApi> {
             override fun onItemClick(t: NamedResourceApi, pos: Int) {
                 if (searchView != null) searchView.clearFocus()
+                if (!searchView.query.isNullOrBlank()) {
                     viewModel.filterBerries("")
+                }
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_BERRY, t)
                 findNavController().navigate(R.id.action_nav_berries_to_nav_detail_berry_dialog, bundle)

@@ -1,18 +1,24 @@
 package com.kronos.pokedex
 
 import android.Manifest
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.Settings
 import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -24,6 +30,8 @@ import com.kronos.core.extensions.binding.activityBinding
 import com.kronos.core.util.validatePermission
 import com.kronos.pokedex.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
+import kotlin.concurrent.timerTask
 import kotlin.system.exitProcess
 
 @AndroidEntryPoint
@@ -32,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     private val binding by activityBinding<ActivityMainBinding>(R.layout.activity_main)
     private var grantedAll = false
     private var grantedFullStorage = false
+    private var isBackPressedOnce = false
+    private var navController:NavController? = null
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -133,7 +143,8 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        if(navController == null)
+            navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
@@ -149,8 +160,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_berries
             ), drawerLayout
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        setupActionBarWithNavController(navController!!, appBarConfiguration)
+        navView.setupWithNavController(navController!!)
         navView.itemIconTintList = null
     }
 
@@ -161,14 +172,41 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (val id: Int = item.itemId) {
+            R.id.action_settings -> findNavController(R.id.nav_host_fragment_content_main).navigate(
+                id
+            )
+        }
+        return super.onOptionsItemSelected(item)
     }
 
-    override fun onStop() {
-        super.onStop()
-        finishAffinity()
-        exitProcess(0)
+    override fun onSupportNavigateUp(): Boolean {
+        if(navController == null)
+            navController = findNavController(R.id.nav_host_fragment_content_main)
+        return navController!!.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+    private fun showExitDialog(){
+        MaterialAlertDialogBuilder(this,R.style.Pokedex_AlertDialog_RoundShapeTheme)
+            .setTitle(R.string.dialo_exit_app_title)
+            .setMessage(R.string.dialo_exit_app_message)
+            .setPositiveButton(com.kronos.resources.R.string.ok) { _, _ ->
+                finishAffinity()
+                exitProcess(0)
+            }
+            .setNegativeButton(com.kronos.resources.R.string.cancel) { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create().show();
+    }
+
+    override fun onBackPressed() {
+        if (navController?.currentDestination?.id  == navController?.graph?.startDestinationId){
+            showExitDialog()
+        }else{
+            super.onBackPressed()
+        }
+    }
+
 }

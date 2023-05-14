@@ -37,4 +37,6 @@ data class SpecieInfoDto(
     var varieties:List<SpecieVarietiesDto> = listOf(),
     @SerializedName("egg_groups")
     var eggGroups:List<NamedResourceApiDto> = listOf(),
+    @SerializedName("genera")
+    var genera:List<PokemonGeneraDto> = listOf(),
 )

@@ -6,6 +6,7 @@ import com.kronos.pokedex.data.remote.item.dto.ItemCategoryDto
 import com.kronos.pokedex.data.remote.item.dto.ItemInfoDto
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
 import com.kronos.pokedex.data.remote.sprite.mapper.toSprite
+import com.kronos.pokedex.domian.model.Name
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ResourceApi
 import com.kronos.pokedex.domian.model.item.ItemCategory
@@ -14,6 +15,7 @@ import com.kronos.pokedex.domian.model.item.ItemInfo
 fun ItemInfoDto.toItemInfo(): ItemInfo =
     ItemInfo(
         name = name,
+        names = names.map { Name(it.name,it.language) },
         id = id,
         attributes = attributes.map { it.toNamedResource() },
         sprites = sprites.toSprite(),

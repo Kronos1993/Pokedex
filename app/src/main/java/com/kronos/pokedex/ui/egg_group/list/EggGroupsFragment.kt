@@ -14,8 +14,6 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentEggGroupsBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
-import com.kronos.pokedex.ui.items.ShowItemIn
-import com.kronos.pokedex.ui.items.by_categories.CURRENT_ITEMS
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEggGroupAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
@@ -115,7 +113,9 @@ class EggGroupsFragment : Fragment() {
             AdapterItemClickListener<NamedResourceApi> {
             override fun onItemClick(t: NamedResourceApi, pos: Int) {
                 if (searchView != null) searchView.clearFocus()
-                viewModel.filterEggGroups("")
+                if (!searchView.query.isNullOrBlank()) {
+                    viewModel.filterEggGroups("")
+                }
                 viewModel.setRecyclerLastPosition(pos)
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_EGG_GROUP, t)

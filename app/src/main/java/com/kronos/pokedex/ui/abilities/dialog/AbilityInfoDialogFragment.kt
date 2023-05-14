@@ -61,6 +61,7 @@ class AbilityInfoDialogFragment : BottomSheetDialogFragment() {
         viewModel.getAbilityEffect(abilityInfo)
         viewModel.getAbilityGameDescription(abilityInfo)
         viewModel.loadPokemonList(abilityInfo)
+        viewModel.getAbilityName(abilityInfo)
     }
 
     private fun handlePokemonList(list: MutableList<PokemonDexEntry>?) {
