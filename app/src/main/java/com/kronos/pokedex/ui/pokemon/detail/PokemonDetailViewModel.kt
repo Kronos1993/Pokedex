@@ -136,7 +136,7 @@ class PokemonDetailViewModel @Inject constructor(
         _pokemonInfo.postValue(pokemonInfo)
     }
 
-    fun postSpecieInfo(specie: SpecieInfo?) {
+    private fun postSpecieInfo(specie: SpecieInfo?) {
         _specieInfo.postValue(specie)
     }
 

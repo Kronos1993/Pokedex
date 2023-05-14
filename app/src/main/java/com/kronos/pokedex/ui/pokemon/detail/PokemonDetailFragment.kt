@@ -154,8 +154,12 @@ class PokemonDetailFragment : Fragment() {
         viewModel.postPokemonStats(listOf())
         viewModel.postPokemonSprites(listOf())
         viewModel.postPokemonOtherForms(listOf())
-        viewModel.pokemonDescription.set(null)
+        viewModel.pokemonGenera.set("")
+        viewModel.pokemonName.set("")
+        viewModel.pokemonDescription.set("")
         viewModel.statsTotal.set(null)
+        viewModel.showMove.set(null)
+        viewModel.buttonSelected.set(null)
         binding.unbind()
         super.onDestroy()
     }
