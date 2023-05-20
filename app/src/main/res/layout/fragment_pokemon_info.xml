@@ -200,7 +200,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
-                                app:layout_constraintGuide_percent=".05" />
+                                app:layout_constraintGuide_percent=".01" />
 
                             <androidx.constraintlayout.widget.Guideline
                                 android:id="@+id/guidelineInfo45"
@@ -214,7 +214,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
-                                app:layout_constraintGuide_percent=".95" />
+                                app:layout_constraintGuide_percent=".99" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonBaseExpLabel"

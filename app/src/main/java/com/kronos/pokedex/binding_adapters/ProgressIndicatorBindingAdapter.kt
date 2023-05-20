@@ -41,15 +41,19 @@ fun setProgressColor(view: LinearProgressIndicator, stat: String) {
 fun setProgressColor(view: LinearProgressIndicator, genderPossibility: GenderPossibility?) {
     view.run {
         if (genderPossibility!=null){
-            max = 100
             if (genderPossibility.female!=-1.0 && genderPossibility.male!=-1.0){
                 progress = genderPossibility.male.roundToInt()
                 setIndicatorColor(view.context.getColor(R.color.gender_background_male_color))
                 trackColor = view.context.getColor(R.color.gender_background_female_color)
             }else{
-                setIndicatorColor(view.context.getColor(R.color.gender_indeterminate))
+                progress = 0
+                trackColor = view.context.getColor(R.color.gender_indeterminate)
             }
+        }else{
+            progress = 0
+            trackColor = view.context.getColor(R.color.gender_indeterminate)
         }
+
     }
 }
 

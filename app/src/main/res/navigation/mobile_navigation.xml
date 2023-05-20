@@ -248,4 +248,14 @@
     <action
         android:id="@+id/action_global_nav_show_image"
         app:destination="@id/nav_show_image" />
+
+
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.kronos.pokedex.ui.about.AboutFragment"
+        android:label="@string/menu_about"
+        tools:layout="@layout/fragment_about">
+    </fragment>
+
+
 </navigation>

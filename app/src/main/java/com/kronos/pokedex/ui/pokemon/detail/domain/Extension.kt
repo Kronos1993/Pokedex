@@ -20,6 +20,11 @@ fun GenderPossibility.getPossibilities(genderRate:Int){
                 this.female = 12.5
                 this.genderless = false
             }
+            2 -> {
+                this.male = 75.0
+                this.female = 25.0
+                this.genderless = false
+            }
             4 -> {
                 this.male = 50.0
                 this.female = 50.0
