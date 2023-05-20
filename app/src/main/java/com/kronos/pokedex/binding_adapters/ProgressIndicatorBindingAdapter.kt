@@ -5,7 +5,9 @@ import android.view.animation.Transformation
 import androidx.databinding.BindingAdapter
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.kronos.pokedex.R
+import com.kronos.pokedex.ui.pokemon.detail.domain.GenderPossibility
 import kotlin.math.abs
+import kotlin.math.roundToInt
 
 
 @BindingAdapter("app:set_progress_color")
@@ -31,6 +33,27 @@ fun setProgressColor(view: LinearProgressIndicator, stat: String) {
                 view.setIndicatorColor(view.context.getColor(R.color.speed_color))
             }
         }
+    }
+}
+
+
+@BindingAdapter("app:set_gender_rate")
+fun setProgressColor(view: LinearProgressIndicator, genderPossibility: GenderPossibility?) {
+    view.run {
+        if (genderPossibility!=null){
+            if (genderPossibility.female!=-1.0 && genderPossibility.male!=-1.0){
+                progress = genderPossibility.male.roundToInt()
+                setIndicatorColor(view.context.getColor(R.color.gender_background_male_color))
+                trackColor = view.context.getColor(R.color.gender_background_female_color)
+            }else{
+                progress = 0
+                trackColor = view.context.getColor(R.color.gender_indeterminate)
+            }
+        }else{
+            progress = 0
+            trackColor = view.context.getColor(R.color.gender_indeterminate)
+        }
+
     }
 }
 

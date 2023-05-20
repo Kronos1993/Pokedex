@@ -54,7 +54,6 @@
     <string name="no_types_found">NO TYPES FOUND</string>
 
 
-
     <string name="level">LEVEL:</string>
     <string name="method">METHOD:</string>
     <string name="game_description">GAME DESCRIPTION</string>
@@ -84,7 +83,7 @@
     <string name="base_happiness">Base Happiness:</string>
     <string name="growth_rate">Growth Rate:</string>
     <string name="habitat">Habitat:</string>
-    <string name="egg_groups">EGG GROUPS</string>
+    <string name="breeding">BREEDING</string>
     <string name="abilities">ABILITIES</string>
     <string name="sprites">SPRITES</string>
     <string name="other_forms">OTHER FORMS</string>
@@ -119,5 +118,25 @@
     <string name="setting_language_summary">This is a limited feature due to pokemon api</string>
     <string name="dialo_exit_app_title">Close Pokedex</string>
     <string name="dialo_exit_app_message">Are you sure you want to exit?</string>
+    <string name="lower_happiness">Lower than normal</string>
+    <string name="normal_happiness">Normal</string>
+    <string name="high_happiness">High than normal</string>
+    <string name="male_50">50%</string>
+    <string name="male_100">100%</string>
+    <string name="male_87">87.5%</string>
+    <string name="male_25">25%</string>
+    <string name="egg_groups">Egg Groups</string>
+    <string name="gender_rate">Gender Rate</string>
+    <string name="_hatch_counter">Hatch Counter:</string>
+    <string name="hatch_counter_value">%1$d cycles (%2$d steps)</string>
+    <string name="_capture_rate">Capture Rate:</string>
+    <string name="capture_rate_value">%1$d (%2$.1f%% full HP with a pokeball)</string>
+    <string name="genderless">Genderless</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_description">"The \"Pokedex\" app is an Android application that allows users to browse information about different Pokemon species.\nThe app retrieves its data from the official Pokemon API<b>(https://pokeapi.co/)</b>, which provides a comprehensive catalog of Pokemon with detailed information such as stats, abilities, and evolutions."</string>
+    <string name="programmer_group">Programmer Info</string>
+    <string name="menu_about">About</string>
+    <string name="app_data_group">App Version</string>
 
 </resources>

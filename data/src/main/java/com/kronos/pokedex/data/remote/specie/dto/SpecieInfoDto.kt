@@ -19,6 +19,10 @@ data class SpecieInfoDto(
     var description:List<FlavorTextEntryDto> = listOf(),
     @SerializedName("growth_rate")
     var growthRate:NamedResourceApiDto = NamedResourceApiDto(),
+    @SerializedName("gender_rate")
+    var genderRate:Int = -1,
+    @SerializedName("hatch_counter")
+    var hatchCounter:Int = -1,
     @SerializedName("habitat")
     var habitat:NamedResourceApiDto = NamedResourceApiDto(),
     @SerializedName("has_gender_differences")

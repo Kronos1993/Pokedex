@@ -61,21 +61,47 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent=".5" />
+                app:layout_constraintGuide_percent=".5"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewEvolutionDetailEvolveFromLabel"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="@string/_evolvesFrom"
+                android:textAlignment="textEnd"
+                android:textStyle="bold"
+                app:handle_visibility="@{false}"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewEvolutionDetailEvolveFrom"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_text="@{evolutionChain.species.name}"
+                app:handle_visibility="@{false}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailEvolveFromLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"
+                app:layout_constraintTop_toTopOf="@+id/textViewEvolutionDetailEvolveFromLabel" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewEvolutionDetailTriggerLabel"
                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5"
                 android:text="@string/_trigger"
                 android:textAlignment="textEnd"
                 android:textStyle="bold"
                 app:handle_visibility="@{evolutionDetail.trigger!=null}"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewEvolutionDetailEvolveFromLabel" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewEvolutionDetailTrigger"

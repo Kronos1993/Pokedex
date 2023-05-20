@@ -157,8 +157,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_nature_list,
                 R.id.nav_items,
                 R.id.nav_categories_items,
-                R.id.nav_berries
-            ), drawerLayout
+                R.id.nav_berries,
+                R.id.nav_about
+                ), drawerLayout
         )
         setupActionBarWithNavController(navController!!, appBarConfiguration)
         navView.setupWithNavController(navController!!)

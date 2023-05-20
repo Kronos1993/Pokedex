@@ -24,6 +24,10 @@
     <color name="sdefense_color">#4A5D67</color>
     <color name="speed_color">#77E1EF</color>
 
+    <color name="gender_indeterminate">#C8C8C8</color>
+    <color name="gender_background_female_color">#AB47BC</color>
+    <color name="gender_background_male_color">#42A5F5</color>
+
     <color name="berry_potency_min">#FFE082</color>
     <color name="berry_potency_med">#FFCC80</color>
     <color name="berry_potency_hight">#FFAB91</color>
