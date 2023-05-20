@@ -3,6 +3,7 @@
 
     <!-- General -->
     <color name="about_background_color">#FFFFFF</color>
+    <color name="about_separator_color">#333333</color>
     <color name="about_item_icon_color">#313131</color>
 
     <!-- Social -->
