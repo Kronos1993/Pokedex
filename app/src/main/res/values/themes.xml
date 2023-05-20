@@ -163,4 +163,10 @@
         <item name="trackColor">@color/backgroundColorPrimary</item>
     </style>
 
+    <style name="Widget.Pokedex.Pokemon.Gender.LinearProgressIndicator" parent="Widget.MaterialComponents.LinearProgressIndicator">
+        <item name="trackThickness">24dp</item>
+        <item name="trackCornerRadius">2dp</item>
+        <item name="trackColor">@color/gender_indeterminate</item>
+    </style>
+
 </resources>

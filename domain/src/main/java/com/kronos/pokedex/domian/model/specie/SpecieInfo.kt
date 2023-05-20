@@ -9,6 +9,8 @@ import java.io.Serializable
 data class SpecieInfo(
     var baseHappiness:Int = 0,
     var captureRate:Int = 0,
+    var genderRate:Int = -1,
+    var hatchCounter:Int = -1,
     var evolutionChain: ResourceApi? = ResourceApi(),
     var evolvesFrom:NamedResourceApi? = NamedResourceApi(),
     var flavorText:List<FlavorText> = listOf(),

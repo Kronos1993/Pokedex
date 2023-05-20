@@ -81,8 +81,8 @@
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_margin="@dimen/margin_5"
-                            android:scaleType="center"
                             android:adjustViewBounds="true"
+                            android:scaleType="center"
                             app:layout_constraintBottom_toTopOf="@+id/textViewPokemonDescription"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase35"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase1"
@@ -96,10 +96,10 @@
                             android:layout_marginStart="@dimen/margin_8"
                             android:layout_marginEnd="@dimen/margin_8"
                             android:text="@{`#`+ viewModel.pokemonInfo.id}"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toTopOf="@+id/textViewPokemonName"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
+                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewPokemonName"
@@ -256,8 +256,8 @@
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                app:handle_pokemon_height="@{viewModel.pokemonInfo.height}"
                                 android:textStyle="bold"
+                                app:handle_pokemon_height="@{viewModel.pokemonInfo.height}"
                                 app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonHeightLabel"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
@@ -279,8 +279,8 @@
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                app:handle_pokemon_weight="@{viewModel.pokemonInfo.weight}"
                                 android:textStyle="bold"
+                                app:handle_pokemon_weight="@{viewModel.pokemonInfo.weight}"
                                 app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonWeightLabel"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
@@ -302,8 +302,8 @@
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="@{String.valueOf(viewModel.pokemonInfo.specie.baseHappiness)}"
                                 android:textStyle="bold"
+                                app:handle_base_happiness="@{viewModel.pokemonInfo.specie.baseHappiness}"
                                 app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonHappinessLabel"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
@@ -372,45 +372,223 @@
                     app:layout_constraintTop_toBottomOf="@id/containerBasicInfo">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/textViewPokemonEggGroupHeader"
+                        android:id="@+id/textViewPokemonlBreedingHeader"
                         style="@style/Widget.Pokedex.TextView.TextViewSegmentHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/egg_groups"
-                        handle_visibility="@{viewModel.pokemonInfo.specie.eggGroup.size()>0}"
+                        android:text="@string/breeding"
                         android:textStyle="bold" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardViewPokemonDetailBreeding"
+                        style="@style/Widget.Pokedex.CardView"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        handle_visibility="@{viewModel.pokemonInfo.specie.eggGroup.size()>0}">
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                        app:layout_constraintStart_toStartOf="@+id/guideline1"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineEggGroup1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".01" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            handle_visibility="@{viewModel.pokemonInfo.specie.eggGroup.size()>0}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
-                        <androidx.constraintlayout.widget.Guideline
-                            android:id="@+id/guidelineEggGroup9"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            app:layout_constraintGuide_percent=".99" />
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guidelineEggGroup1"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".01" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recycler_view_egg_group"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/guidelineEggGroup9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineEggGroup1"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:itemCount="2"
-                            tools:listitem="@layout/item_egg_group" />
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guidelineEggGroup4"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".4" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                            <androidx.constraintlayout.widget.Guideline
+                                android:id="@+id/guidelineEggGroup9"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:layout_constraintGuide_percent=".99" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewPokemonEggGroupLabel"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                handle_visibility="@{viewModel.pokemonInfo.specie.eggGroup.size()>0}"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/egg_groups"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineEggGroup4"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineEggGroup1"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recycler_view_egg_group"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineEggGroup9"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineEggGroup1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonEggGroupLabel"
+                                tools:itemCount="2"
+                                tools:listitem="@layout/item_egg_group" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewPokemonHatchCounterRateLabel"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_5"
+                                android:text="@string/_hatch_counter"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineEggGroup4"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineEggGroup1"
+                                app:layout_constraintTop_toBottomOf="@+id/recycler_view_egg_group" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewPokemonHatchCounterRate"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                app:handle_hatch_counter="@{viewModel.pokemonInfo.specie}"
+                                app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonHatchCounterRateLabel"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineEggGroup9"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineEggGroup4"
+                                app:layout_constraintTop_toTopOf="@+id/textViewPokemonHatchCounterRateLabel" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewPokemonCaptureRateLabel"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_5"
+                                android:text="@string/_capture_rate"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineEggGroup4"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineEggGroup1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonHatchCounterRateLabel" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewPokemonCaptureRate"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                app:handle_capture_rate="@{viewModel.pokemonInfo.specie}"
+                                app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonCaptureRateLabel"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineEggGroup9"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineEggGroup4"
+                                app:layout_constraintTop_toTopOf="@+id/textViewPokemonCaptureRateLabel" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/textViewPokemonGenderRateLabel"
+                                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_5"
+                                android:text="@string/gender_rate"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineEggGroup4"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineEggGroup1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonCaptureRateLabel" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintEnd_toStartOf="@+id/guidelineEggGroup9"
+                                app:layout_constraintStart_toStartOf="@+id/guidelineEggGroup1"
+                                app:layout_constraintTop_toBottomOf="@+id/textViewPokemonGenderRateLabel">
+
+                                <com.google.android.material.progressindicator.LinearProgressIndicator
+                                    android:id="@+id/progressIndicatorPokemonGenderRate"
+                                    style="@style/Widget.Pokedex.Pokemon.Gender.LinearProgressIndicator"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:indeterminate="false"
+                                    android:max="100"
+                                    android:layout_marginTop="@dimen/margin_5"
+                                    android:layout_marginBottom="@dimen/margin_5"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:set_gender_rate="@{viewModel.pokemonGenderPossibility}" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/textViewPokemonGenderRateMaleLabel"
+                                    style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                    handle_visibility="@{viewModel.pokemonGenderPossibility.male>0}"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_10"
+                                    android:text="@{String.valueOf(viewModel.pokemonGenderPossibility.male)+`%`}"
+                                    android:textAlignment="center"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="@+id/progressIndicatorPokemonGenderRate"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="@+id/progressIndicatorPokemonGenderRate" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/appCompatImageView2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    handle_visibility="@{viewModel.pokemonGenderPossibility.male>0}"
+                                    app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonGenderRateMaleLabel"
+                                    app:layout_constraintStart_toEndOf="@+id/textViewPokemonGenderRateMaleLabel"
+                                    app:layout_constraintTop_toTopOf="@+id/textViewPokemonGenderRateMaleLabel"
+                                    app:srcCompat="@drawable/ic_male" />
+
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/textViewPokemonGenderlessLabel"
+                                    style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                    handle_visibility="@{viewModel.pokemonGenderPossibility.genderless}"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/genderless"
+                                    android:textAlignment="center"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="@+id/progressIndicatorPokemonGenderRate"
+                                    app:layout_constraintEnd_toEndOf="@+id/progressIndicatorPokemonGenderRate"
+                                    app:layout_constraintStart_toStartOf="@+id/progressIndicatorPokemonGenderRate"
+                                    app:layout_constraintTop_toTopOf="@+id/progressIndicatorPokemonGenderRate" />
+
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/textViewPokemonGenderRateFemaleLabel"
+                                    style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                    handle_visibility="@{viewModel.pokemonGenderPossibility.female>0}"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{String.valueOf(viewModel.pokemonGenderPossibility.female)+`%`}"
+                                    android:textAlignment="center"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="@+id/progressIndicatorPokemonGenderRate"
+                                    app:layout_constraintEnd_toStartOf="@+id/appCompatImageView3"
+                                    app:layout_constraintTop_toTopOf="@+id/progressIndicatorPokemonGenderRate" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/appCompatImageView3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    handle_visibility="@{viewModel.pokemonGenderPossibility.female>0}"
+                                    android:layout_marginEnd="@dimen/margin_10"
+                                    app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonGenderRateFemaleLabel"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="@+id/textViewPokemonGenderRateFemaleLabel"
+                                    app:srcCompat="@drawable/ic_female" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 

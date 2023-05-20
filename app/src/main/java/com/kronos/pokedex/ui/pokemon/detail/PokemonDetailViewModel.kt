@@ -24,6 +24,8 @@ import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
 import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.pokedex.ui.pokemon.detail.adapter.*
+import com.kronos.pokedex.ui.pokemon.detail.domain.GenderPossibility
+import com.kronos.pokedex.ui.pokemon.detail.domain.getPossibilities
 import com.kronos.pokedex.ui.stats.PokemonStatsAdapter
 import com.kronos.pokedex.util.preferences.PreferencesUtil
 import com.kronos.webclient.UrlProvider
@@ -128,6 +130,7 @@ class PokemonDetailViewModel @Inject constructor(
     var pokemonName = ObservableField<String?>()
 
     var pokemonGenera = ObservableField<String?>()
+    var pokemonGenderPossibility = ObservableField<GenderPossibility?>()
 
     var showMove = ObservableField<String?>()
     var buttonSelected = ObservableField<String?>()
@@ -217,6 +220,7 @@ class PokemonDetailViewModel @Inject constructor(
         pokemonDescription.set(null)
         pokemonName.set(null)
         pokemonGenera.set(null)
+        pokemonGenderPossibility.set(GenderPossibility())
         viewModelScope.launch (Dispatchers.IO) {
             loading.postValue(true)
             var pokemonInfo: PokemonInfo? = null
@@ -231,6 +235,9 @@ class PokemonDetailViewModel @Inject constructor(
             var specie = pokemonSpecieRemoteRepository.getSpecieInfo(pokemonInfo.id)
 
             if (specie != null && !specie.name.isNullOrEmpty()) {
+                var genderPossibility = GenderPossibility()
+                genderPossibility.getPossibilities(specie.genderRate)
+                pokemonGenderPossibility.set(genderPossibility)
                 if (!specie.evolutionChain?.url.isNullOrEmpty()) {
                     var evolChain = pokemonEvolutionChainRemoteRepository.getEvolutionChain(
                         urlProvider.extractIdFromUrl(specie.evolutionChain.let {

@@ -6,6 +6,8 @@ import androidx.databinding.BindingAdapter
 import com.kronos.pokedex.R
 import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.specie.SpecieInfo
+import com.kronos.pokedex.domian.model.specie.getCaptureRate
+import com.kronos.pokedex.domian.model.specie.getHatchCounter
 
 @BindingAdapter("app:set_stat_name")
 fun setStatName(view: TextView, stat: String) {
@@ -218,6 +220,46 @@ fun setHatesFlavor(view: TextView, hatesFlavor: String?) {
 fun setLikesFlavor(view: TextView, likesFlavor: String?) {
     view.run {
         view.text = likesFlavor?.uppercase() ?: view.context.getString(R.string.none).uppercase()
+    }
+}
+
+@BindingAdapter("app:handle_base_happiness")
+fun setBaseHappiness(view: TextView, baseHappiness: Int?) {
+    view.run {
+        if(baseHappiness !=null)
+            text = when{
+                0 <= baseHappiness && baseHappiness < 50 -> {
+                    view.context.getString(R.string.lower_happiness)
+                }
+                50 <= baseHappiness && baseHappiness < 100 -> {
+                    view.context.getString(R.string.normal_happiness)
+                }
+                baseHappiness >= 100 -> {
+                    view.context.getString(R.string.high_happiness)
+                }
+                else -> {view.context.getString(R.string.unknown)}
+            }
+    }
+}
+
+@BindingAdapter("app:handle_capture_rate")
+fun setCaptureRate(view: TextView, specie: SpecieInfo?) {
+    view.run {
+        text = if(specie !=null){
+            view.context.getString(R.string.capture_rate_value).format(specie.captureRate,specie.getCaptureRate())
+        }
+        else
+            view.context.getString(R.string.unknown)
+    }
+}
+
+@BindingAdapter("app:handle_hatch_counter")
+fun setHatchCounter(view: TextView, specie: SpecieInfo?) {
+    view.run {
+        text = if(specie !=null)
+            String.format(view.context.getString(R.string.hatch_counter_value),specie.hatchCounter,specie.getHatchCounter())
+        else
+            view.context.getString(R.string.unknown)
     }
 }
 
