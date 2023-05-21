@@ -72,7 +72,6 @@
                 android:text="@string/_evolvesFrom"
                 android:textAlignment="textEnd"
                 android:textStyle="bold"
-                app:handle_visibility="@{false}"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineLabelDivider"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -83,8 +82,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_5"
-                app:handle_text="@{evolutionChain.species.name}"
-                app:handle_visibility="@{false}"
+                app:handle_text="@{evolutionChain.evolvesFrom}"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewEvolutionDetailEvolveFromLabel"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/guidelineLabelDivider"

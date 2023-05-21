@@ -375,6 +375,7 @@ class PokemonDetailViewModel @Inject constructor(
             var i = ChainLink()
             for (item in chain?.evolvesTo!!) {
                 i = item
+                item.evolvesFrom = chain.species.name
                 evoList.add(item)
             }
             handleEvolutionChain(evoList, i)

@@ -4,6 +4,7 @@ import com.kronos.pokedex.domian.model.NamedResourceApi
 import java.io.Serializable
 
 data class ChainLink (
+    var evolvesFrom: String = "",
     var evolutionDetails:List<EvolutionDetail> = listOf(),
     var evolvesTo:List<ChainLink> = listOf(),
     var isBaby:Boolean = false,
