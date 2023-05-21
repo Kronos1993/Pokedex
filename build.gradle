@@ -2,9 +2,9 @@
 buildscript {
 
     ext {
-        versionCompileSdk = 32
+        versionCompileSdk = 33
         versionMinSdk = 24
-        versionTargetSdk = 32
+        versionTargetSdk = 33
         versionApacheCommonsIo = '2.5'
         kotlin_version = "1.6.10"
         material_version = "1.8.0"

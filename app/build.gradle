@@ -12,7 +12,7 @@ android {
     hilt {
         enableExperimentalClasspathAggregation = true
     }
-    compileSdk 32
+    compileSdk versionCompileSdk
 
     defaultConfig {
         applicationId "com.kronos.pokedex"
