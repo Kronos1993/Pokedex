@@ -102,6 +102,11 @@ class ItemsFragment : Fragment() {
     private fun handleItems(list: List<NamedResourceApi>) {
         viewModel.itemListAdapter.get()?.submitList(list)
         viewModel.itemListAdapter.get()?.notifyDataSetChanged()
+        binding.recyclerViewItemsList.postDelayed({
+            binding.recyclerViewItemsList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
+                it ?: 0
+            })
+        }, 150)
     }
 
     private fun initViews() {
