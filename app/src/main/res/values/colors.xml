@@ -61,5 +61,6 @@
     <color name="black_20">#202020</color>
     <color name="bill_background">#FFF</color>
 
+    <color name="selected_pokemon">#F8E962</color>
 
 </resources>

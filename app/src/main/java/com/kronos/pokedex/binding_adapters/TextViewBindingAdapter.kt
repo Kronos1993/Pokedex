@@ -2,6 +2,7 @@ package com.kronos.pokedex.binding_adapters
 
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.kronos.pokedex.R
 import com.kronos.pokedex.domian.model.move.MoveInfo
@@ -260,6 +261,16 @@ fun setHatchCounter(view: TextView, specie: SpecieInfo?) {
             String.format(view.context.getString(R.string.hatch_counter_value),specie.hatchCounter,specie.getHatchCounter())
         else
             view.context.getString(R.string.unknown)
+    }
+}
+
+@BindingAdapter("app:is_current_pokemon")
+fun isCurrentPokemon(view: TextView, is_current_pokemon: Boolean) {
+    view.run {
+        if(is_current_pokemon)
+            view.setTextColor(ContextCompat.getColor(view.context,R.color.selected_pokemon))
+        else
+            view.setTextColor(ContextCompat.getColor(view.context, com.kronos.resources.R.color.blackText))
     }
 }
 

@@ -41,6 +41,8 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:layout_margin="@dimen/margin_5"
+            android:textStyle="bold"
+            app:is_current_pokemon="@{evolutionChain.currentSelected}"
             app:handle_pokemon_name="@{evolutionChain.species.name}"
             app:layout_constraintEnd_toEndOf="@+id/imageViewEvolutionForm"
             app:layout_constraintStart_toStartOf="@+id/imageViewEvolutionForm"
@@ -61,7 +63,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent=".5"/>
+                app:layout_constraintGuide_begin="196dp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewEvolutionDetailEvolveFromLabel"

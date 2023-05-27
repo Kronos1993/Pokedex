@@ -238,19 +238,6 @@ class PokemonDetailViewModel @Inject constructor(
                 var genderPossibility = GenderPossibility()
                 genderPossibility.getPossibilities(specie.genderRate)
                 pokemonGenderPossibility.set(genderPossibility)
-                if (!specie.evolutionChain?.url.isNullOrEmpty()) {
-                    var evolChain = pokemonEvolutionChainRemoteRepository.getEvolutionChain(
-                        urlProvider.extractIdFromUrl(specie.evolutionChain.let {
-                            if (it != null && !it.url.isNullOrEmpty())
-                                it.url
-                            else
-                                "0"
-                        })
-                    )
-                    postPokemonEvolutionChain(evolChain)
-                    var evoList = mutableListOf(evolChain.chain!!)
-                    postPokemonEvolutionChainList(handleEvolutionChain(evoList, evolChain.chain!!))
-                }
                 pokemonInfo.specie = specie
                 postSpecieInfo(specie)
 
@@ -367,16 +354,43 @@ class PokemonDetailViewModel @Inject constructor(
         }
     }
 
+    fun getPokemonEvolution(){
+        viewModelScope.launch (Dispatchers.IO){
+            if (!pokemonInfo.value?.specie?.evolutionChain?.url.isNullOrEmpty()) {
+                var evolChain = pokemonEvolutionChainRemoteRepository.getEvolutionChain(
+                    urlProvider.extractIdFromUrl(pokemonInfo.value?.specie?.evolutionChain.let {
+                        if (it != null && !it.url.isNullOrEmpty())
+                            it.url
+                        else
+                            "0"
+                    })
+                )
+                postPokemonEvolutionChain(evolChain)
+                var evoList = mutableListOf(evolChain.chain!!)
+                postPokemonEvolutionChainList(handleEvolutionChain(evoList, evolChain.chain!!))
+            }
+        }
+    }
+
     private fun handleEvolutionChain(
         evoList: MutableList<ChainLink>,
         chain: ChainLink
     ): MutableList<ChainLink> {
+        if (evoList.size==1){
+            evoList[0].run {
+                if(pokemonInfo.value?.name.equals(this.species.name))
+                    this.isCurrentSelected = true
+                this
+            }
+        }
         return if (chain?.evolvesTo!!.isNotEmpty()) {
             var i = ChainLink()
             for (item in chain?.evolvesTo!!) {
                 i = item
-                item.evolvesFrom = chain.species.name
-                evoList.add(item)
+                i.evolvesFrom = chain.species.name
+                if(pokemonInfo.value?.name.equals(i.species.name))
+                    i.isCurrentSelected = true
+                evoList.add(i)
             }
             handleEvolutionChain(evoList, i)
         } else {
