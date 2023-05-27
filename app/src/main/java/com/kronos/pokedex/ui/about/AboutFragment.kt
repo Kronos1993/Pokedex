@@ -10,6 +10,7 @@ import com.kronos.pokedex.R
 import dagger.hilt.android.AndroidEntryPoint
 import mehdi.sakout.aboutpage.AboutPage
 import mehdi.sakout.aboutpage.Element
+import java.util.*
 
 
 @AndroidEntryPoint
@@ -22,7 +23,7 @@ class AboutFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return AboutPage(context)
+        return AboutPage(requireContext())
             .isRTL(false)
             .setImage(R.drawable.ic_pokedex_app_icon)
             .setDescription(getString(R.string.app_description))
@@ -30,11 +31,17 @@ class AboutFragment : Fragment() {
             .addEmail("mguerral1993@gmail.com", "Email")
             .addGitHub("Kronos1993","GitHub")
             .addGroup(getString(R.string.app_data_group))
-            .addItem(Element(getAppVersion(),R.drawable.ic_pokemon_info))
+            .addItem(Element(getAppVersion(), R.drawable.ic_pokemon_info))
+            .addItem(Element(getCopyRight(), R.drawable.ic_copyright))
             .create()
     }
 
-    fun getAppVersion(): String {
+    private fun getCopyRight(): String {
+        return String.format(getString(R.string.copy_right), Calendar.getInstance().get(Calendar.YEAR));
+    }
+
+
+    private fun getAppVersion(): String {
         try {
             val packageInfo = context?.packageManager?.getPackageInfo("com.kronos.pokedex", 0)
             return packageInfo?.versionName.toString()

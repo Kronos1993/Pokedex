@@ -28,7 +28,7 @@ fun ChainLinkDto.toChainLink(): ChainLink =
 fun EvolutionChainDto.toEvolutionChain(): EvolutionChain =
     EvolutionChain(
         id = id,
-        babyFriggerItem = babyFriggerItem?.let{
+        babyTriggerItem = babyFriggerItem?.let{
             it.toNamedResource()
         }?:NamedResourceApi(),
         chain = chain?.let{

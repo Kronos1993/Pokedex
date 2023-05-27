@@ -132,11 +132,5 @@
     <string name="_capture_rate">Capture Rate:</string>
     <string name="capture_rate_value">%1$d (%2$.1f%% full HP with a pokeball)</string>
     <string name="genderless">Genderless</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="app_description">"The \"Pokedex\" app is an Android application that allows users to browse information about different Pokemon species.\nThe app retrieves its data from the official Pokemon API<b>(https://pokeapi.co/)</b>, which provides a comprehensive catalog of Pokemon with detailed information such as stats, abilities, and evolutions."</string>
-    <string name="programmer_group">Programmer Info</string>
-    <string name="menu_about">About</string>
-    <string name="app_data_group">App Version</string>
 
 </resources>

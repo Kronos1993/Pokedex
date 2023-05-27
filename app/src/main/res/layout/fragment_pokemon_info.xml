@@ -82,7 +82,6 @@
                             android:layout_height="0dp"
                             android:layout_margin="@dimen/margin_5"
                             android:adjustViewBounds="true"
-                            android:scaleType="center"
                             app:layout_constraintBottom_toTopOf="@+id/textViewPokemonDescription"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase35"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase1"

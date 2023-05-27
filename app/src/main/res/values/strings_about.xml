@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_description">"The \"Pokedex\" app allows users to browse information about different Pokemon species.\nThe app retrieves its data from the official Pokemon API<b>(https://pokeapi.co/)</b>, which provides a detailed information such as stats, abilities, and evolutions."</string>
+    <string name="programmer_group">Programmer Info</string>
+    <string name="menu_about">About</string>
+    <string name="app_data_group">App Version</string>
+    <string name="copy_right" translatable="false">Copyrights © %1$d Kronos Tech.</string>
+</resources>

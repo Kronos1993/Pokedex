@@ -21,7 +21,6 @@
         <item name="linearProgressIndicatorStyle">@style/Widget.Pokedex.LinearProgressIndicator</item>
 
         <item name="android:windowAnimationStyle">@style/Theme.Pokedex.ActivityAnimation</item>
-        <item name="aboutStyle">@style/Widget.App.AboutPage</item>
     </style>
 
     <style name="Theme.Pokedex.NoActionBar">
@@ -170,15 +169,5 @@
         <item name="trackColor">@color/gender_indeterminate</item>
     </style>
 
-    <style name="Widget.App.AboutPage" parent="about_About">
-        <item name="aboutBackground">@color/about_background_color</item>
-        <item name="aboutElementIconTint">@color/about_item_icon_color</item>
-        <item name="aboutSeparatorColor">@color/about_separator_color</item>
-        <item name="aboutDescriptionTextAppearance">@style/TextAppearance.App.AboutPage.Description</item>
-    </style>
-
-    <style name="TextAppearance.App.AboutPage.Description" parent="about_descriptionTextAppearance.Dark">
-        <item name="android:textStyle">normal</item>
-    </style>
 
 </resources>

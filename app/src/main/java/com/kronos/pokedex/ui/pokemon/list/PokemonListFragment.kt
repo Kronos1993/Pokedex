@@ -17,6 +17,9 @@ import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.ui.pokedex.CURRENT_POKEDEX
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.runBlocking
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -105,6 +108,9 @@ class PokemonListFragment : Fragment() {
         binding.layoutPokemonList.pokemonList = list
         viewModel.pokemonListAdapter.get()?.submitList(list)
         viewModel.pokemonListAdapter.get()?.notifyDataSetChanged()
+        binding.layoutPokemonList.recyclerViewPokemonList.postDelayed({
+            binding.layoutPokemonList.recyclerViewPokemonList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let{ it ?: 0 })
+        }, 150)
     }
 
     private fun initViews() {
@@ -128,9 +134,6 @@ class PokemonListFragment : Fragment() {
             }
 
         })
-        binding.layoutPokemonList.recyclerViewPokemonList.postDelayed({
-            binding.layoutPokemonList.recyclerViewPokemonList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let{ it ?: 0 })
-        }, 50)
     }
 
     private fun initViewModel() {
