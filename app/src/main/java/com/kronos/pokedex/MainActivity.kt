@@ -155,7 +155,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_abilities,
                 R.id.nav_move_list,
                 R.id.nav_nature_list,
-                R.id.nav_items,
                 R.id.nav_categories_items,
                 R.id.nav_berries,
                 R.id.nav_about
