@@ -227,8 +227,8 @@ fun setLikesFlavor(view: TextView, likesFlavor: String?) {
 @BindingAdapter("app:handle_base_happiness")
 fun setBaseHappiness(view: TextView, baseHappiness: Int?) {
     view.run {
-        if(baseHappiness !=null)
-            text = when{
+        if (baseHappiness != null)
+            text = when {
                 0 <= baseHappiness && baseHappiness < 50 -> {
                     view.context.getString(R.string.lower_happiness)
                 }
@@ -238,8 +238,11 @@ fun setBaseHappiness(view: TextView, baseHappiness: Int?) {
                 baseHappiness >= 100 -> {
                     view.context.getString(R.string.high_happiness)
                 }
-                else -> {view.context.getString(R.string.unknown)}
+                else -> {
+                    view.context.getString(R.string.unknown)
+                }
             }
+        else view.context.getString(R.string.unknown)
     }
 }
 
