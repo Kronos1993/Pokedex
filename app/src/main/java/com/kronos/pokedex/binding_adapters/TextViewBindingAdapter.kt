@@ -242,7 +242,7 @@ fun setBaseHappiness(view: TextView, baseHappiness: Int?) {
                     view.context.getString(R.string.unknown)
                 }
             }
-        else view.context.getString(R.string.unknown)
+        else text = view.context.getString(R.string.unknown)
     }
 }
 
