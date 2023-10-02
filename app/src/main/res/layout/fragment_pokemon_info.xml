@@ -135,7 +135,7 @@
                             app:layout_constraintBottom_toTopOf="@+id/layoutTypes"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35"
-                            app:pokemon_type="@{viewModel.pokemonInfo.specie}" />
+                            app:pokemon_type="@{viewModel.pokemonInfo.specieInfo}" />
 
                         <include
                             android:id="@+id/layoutTypes"
@@ -302,7 +302,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
-                                app:handle_base_happiness="@{viewModel.pokemonInfo.specie.baseHappiness}"
+                                app:handle_base_happiness="@{viewModel.pokemonInfo.specieInfo.baseHappiness}"
                                 app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonHappinessLabel"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
@@ -325,7 +325,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
-                                app:handle_text="@{viewModel.pokemonInfo.specie.growthRate.name}"
+                                app:handle_text="@{viewModel.pokemonInfo.specieInfo.growthRate.name}"
                                 app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonGrowthRateLabel"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
@@ -350,7 +350,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
-                                app:handle_text="@{viewModel.pokemonInfo.specie.habitat.name}"
+                                app:handle_text="@{viewModel.pokemonInfo.specieInfo.habitat.name}"
                                 app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonHabitatLabel"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineInfo9"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineInfo45"
@@ -363,7 +363,7 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/containerEggGroups"
-                    handle_visibility="@{viewModel.pokemonInfo.specie.eggGroup.size()>0}"
+                    handle_visibility="@{viewModel.pokemonInfo.specieInfo.eggGroup.size()>0}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -452,7 +452,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
-                                app:handle_hatch_counter="@{viewModel.pokemonInfo.specie}"
+                                app:handle_hatch_counter="@{viewModel.pokemonInfo.specieInfo}"
                                 app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonHatchCounterRateLabel"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineEggGroup9"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineEggGroup4"
@@ -476,7 +476,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
-                                app:handle_capture_rate="@{viewModel.pokemonInfo.specie}"
+                                app:handle_capture_rate="@{viewModel.pokemonInfo.specieInfo}"
                                 app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonCaptureRateLabel"
                                 app:layout_constraintEnd_toStartOf="@+id/guidelineEggGroup9"
                                 app:layout_constraintStart_toStartOf="@+id/guidelineEggGroup4"

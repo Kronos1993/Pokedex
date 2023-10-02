@@ -1,5 +1,6 @@
 package com.kronos.pokedex.domian.model.pokemon
 
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.Ability
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.model.specie.SpecieInfo
@@ -19,5 +20,6 @@ data class PokemonInfo(
     val stats:List<Stat> = listOf(),
     val sprites:Sprite = Sprite(),
     val moves:List<MoveList> = listOf(),
-    var specie: SpecieInfo = SpecieInfo(),
+    var specieInfo: SpecieInfo = SpecieInfo(),
+    var specie: NamedResourceApi = NamedResourceApi(),
 ): Serializable

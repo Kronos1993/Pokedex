@@ -48,7 +48,7 @@ class PokemonRemoteDatasourceImpl @Inject constructor(
             try{
                 pokemonApi.getPokemonInfo(pokemonId).execute().let {
                     if (it.isSuccessful && it.body() != null) {
-                        it.body()!!.toPokemonInfo()
+                        it.body()!!.toPokemonInfo(specieRemoteRepository.getSpecieInfo(it.body()!!.specie.name))
                     } else {
                         PokemonInfo()
                     }

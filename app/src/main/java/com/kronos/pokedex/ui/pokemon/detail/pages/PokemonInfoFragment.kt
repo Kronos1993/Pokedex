@@ -3,7 +3,6 @@ package com.kronos.pokedex.ui.pokemon.detail.pages
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -98,10 +97,10 @@ class PokemonInfoFragment : Fragment() {
                 binding.layoutTypes.recyclerViewPokemonType.layoutManager =
                     GridLayoutManager(context, 2)
 
-            if (pokemonInfo.specie.eggGroup.size > 1)
+            if (pokemonInfo.specieInfo.eggGroup.size > 1)
                 binding.recyclerViewEggGroup.layoutManager = GridLayoutManager(context,2)
 
-            viewModel.pokemonEggGroupAdapter.get()?.submitList(pokemonInfo.specie.eggGroup)
+            viewModel.pokemonEggGroupAdapter.get()?.submitList(pokemonInfo.specieInfo.eggGroup)
             viewModel.pokemonEggGroupAdapter.get()?.notifyDataSetChanged()
 
             viewModel.pokemonAbilityAdapter.get()?.submitList(pokemonInfo.abilities)

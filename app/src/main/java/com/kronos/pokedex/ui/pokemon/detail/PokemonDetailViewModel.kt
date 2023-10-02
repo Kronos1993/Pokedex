@@ -232,18 +232,17 @@ class PokemonDetailViewModel @Inject constructor(
                 pokemonRemoteRepository.getPokemonInfo(pokemonList.name)
             }
 
-            var specie = pokemonSpecieRemoteRepository.getSpecieInfo(pokemonInfo.id)
+            //var specie = pokemonSpecieRemoteRepository.getSpecieInfo(pokemonInfo.id)
 
-            if (specie != null && !specie.name.isNullOrEmpty()) {
+            if (pokemonInfo.specieInfo != null && !pokemonInfo.specieInfo.name.isNullOrEmpty()) {
                 var genderPossibility = GenderPossibility()
-                genderPossibility.getPossibilities(specie.genderRate)
+                genderPossibility.getPossibilities(pokemonInfo.specieInfo.genderRate)
                 pokemonGenderPossibility.set(genderPossibility)
-                pokemonInfo.specie = specie
-                postSpecieInfo(specie)
+                postSpecieInfo(pokemonInfo.specieInfo)
 
             }else{
                 pokemonName.set(pokemonInfo.name)
-                pokemonInfo.specie = SpecieInfo()
+                pokemonInfo.specieInfo = SpecieInfo()
                 postPokemonEvolutionChain(EvolutionChain())
                 postPokemonEvolutionChainList(listOf())
             }
@@ -287,7 +286,7 @@ class PokemonDetailViewModel @Inject constructor(
             postPokemonSprites(pokemonSprite)
 
             var pokemonOtherForms = mutableListOf<Pair<String, String>>()
-            specie.varieties.forEach {
+            pokemonInfo.specieInfo.varieties.forEach {
                 if (!it.pokemon.name.isNullOrEmpty() && pokemonInfo.name != it.pokemon.name) {
                     pokemonOtherForms.add(
                         Pair(
@@ -356,9 +355,9 @@ class PokemonDetailViewModel @Inject constructor(
 
     fun getPokemonEvolution(){
         viewModelScope.launch (Dispatchers.IO){
-            if (!pokemonInfo.value?.specie?.evolutionChain?.url.isNullOrEmpty()) {
+            if (!pokemonInfo.value?.specieInfo?.evolutionChain?.url.isNullOrEmpty()) {
                 var evolChain = pokemonEvolutionChainRemoteRepository.getEvolutionChain(
-                    urlProvider.extractIdFromUrl(pokemonInfo.value?.specie?.evolutionChain.let {
+                    urlProvider.extractIdFromUrl(pokemonInfo.value?.specieInfo?.evolutionChain.let {
                         if (it != null && !it.url.isNullOrEmpty())
                             it.url
                         else

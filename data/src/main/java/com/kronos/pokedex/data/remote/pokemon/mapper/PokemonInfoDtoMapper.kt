@@ -3,6 +3,7 @@ package com.kronos.pokedex.data.remote.pokemon.mapper
 import com.kronos.pokedex.data.remote.ability.mapper.toAbility
 import com.kronos.pokedex.data.remote.move.mapper.toMoveList
 import com.kronos.pokedex.data.remote.pokemon.dto.PokemonInfoDto
+import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
 import com.kronos.pokedex.data.remote.sprite.mapper.toSprite
 import com.kronos.pokedex.data.remote.stat.mapper.toStat
 import com.kronos.pokedex.data.remote.type.mapper.toType
@@ -30,7 +31,8 @@ fun PokemonInfoDto.toPokemonInfo(): PokemonInfo =
         moves = moves.map {
             it.toMoveList()
         },
-        specie = SpecieInfo()
+        specieInfo = SpecieInfo(),
+        specie = specie.toNamedResource()
     )
 
 fun PokemonInfoDto.toPokemonInfo(specieInfo:SpecieInfo): PokemonInfo =
@@ -53,5 +55,5 @@ fun PokemonInfoDto.toPokemonInfo(specieInfo:SpecieInfo): PokemonInfo =
         moves = moves.map {
             it.toMoveList()
         },
-        specie = specieInfo
+        specieInfo = specieInfo
     )
