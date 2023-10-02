@@ -14,6 +14,7 @@
         style="@style/Widget.Pokedex.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:handle_berry_potency_description="@{flavor}"
         app:handle_berry_potency="@{flavor.potency}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
