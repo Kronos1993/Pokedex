@@ -139,7 +139,7 @@ class PokemonListFragment : Fragment() {
     private fun initViewModel() {
         val bundle = arguments
         if (bundle?.get(CURRENT_POKEDEX) != null) {
-            viewModel.getPokemons((bundle.get(CURRENT_POKEDEX) as NamedResourceApi).name)
+            viewModel.getPokemons((bundle.get(CURRENT_POKEDEX) as NamedResourceApi))
         } else {
             findNavController().popBackStack()
         }

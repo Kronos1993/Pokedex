@@ -7,6 +7,7 @@ import com.kronos.core.extensions.asLiveData
 import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.LoggerType
 import com.kronos.logger.interfaces.ILogger
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.domian.repository.PokedexRemoteRepository
 import com.kronos.webclient.UrlProvider
@@ -15,6 +16,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
@@ -75,15 +77,25 @@ class PokemonListViewModel @Inject constructor(
         }
     }
 
-    fun getPokemons(pokedex: String) {
+    fun getPokemons(pokedex: NamedResourceApi) {
         loading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            var call = async {
-                val responseList = pokedexRemoteRepository.getPokedex(pokedex)
-                postPokemonList(responseList.pokemons)
-                postOriginalPokemonList(responseList.pokemons)
+            try {
+                var id = urlProvider.extractIdFromUrl(pokedex.url)
+                var call = async {
+                    val responseList = pokedexRemoteRepository.getPokedex(id)
+                    postPokemonList(responseList.pokemons)
+                    postOriginalPokemonList(responseList.pokemons)
+                }
+                call.await()
+            }catch (e:Exception){
+                var call = async {
+                    val responseList = pokedexRemoteRepository.getPokedex(pokedex.name)
+                    postPokemonList(responseList.pokemons)
+                    postOriginalPokemonList(responseList.pokemons)
+                }
+                call.await()
             }
-            call.await()
         }
     }
 
