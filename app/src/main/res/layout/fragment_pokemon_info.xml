@@ -363,6 +363,7 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/containerEggGroups"
+                    handle_visibility="@{viewModel.pokemonInfo.specie.eggGroup.size()>0}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -388,7 +389,6 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            handle_visibility="@{viewModel.pokemonInfo.specie.eggGroup.size()>0}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent">
 
@@ -416,7 +416,6 @@
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/textViewPokemonEggGroupLabel"
                                 style="@style/Widget.Pokedex.TextView.TextViewSmall"
-                                handle_visibility="@{viewModel.pokemonInfo.specie.eggGroup.size()>0}"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="@string/egg_groups"
