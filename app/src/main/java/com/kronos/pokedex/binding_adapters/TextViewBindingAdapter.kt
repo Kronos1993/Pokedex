@@ -69,7 +69,7 @@ fun setPokemonGenera(view: TextView, genera: String?) {
 @BindingAdapter("app:handle_text")
 fun transformText(view: TextView, text: String?) {
     view.run {
-        if (text != null) {
+        if (!text.isNullOrEmpty()) {
             var textMod = text.replace(Regex("-"), " ")
             textMod = replaceNewLine(textMod)
             if (textMod.length > 1) {
@@ -143,7 +143,7 @@ fun setPokemonName(view: TextView, pokemonName: String?) {
 fun setPokedexName(view: TextView, pokedexName: String?) {
     view.run {
         if (pokedexName != null) {
-            var name = pokedexName.replace(Regex("updated"), "").replace(Regex("extended"), "")
+            var name = pokedexName.replace(Regex("updated-"), "").replace(Regex("extended-"), "").replace(Regex("letsgo-"), "")
                 .replace(Regex("-"), " ")
             view.text = if (name.length > 1) {
                 name.uppercase()
@@ -242,7 +242,7 @@ fun setBaseHappiness(view: TextView, baseHappiness: Int?) {
                     view.context.getString(R.string.unknown)
                 }
             }
-        else view.context.getString(R.string.unknown)
+        else text = view.context.getString(R.string.unknown)
     }
 }
 

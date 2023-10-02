@@ -48,9 +48,15 @@ class PokedexViewModel  @Inject constructor(
         }
         list.forEach {
             if(!(pokelist as ArrayList).contains(it)){
-                //if(!it.name.equals("hoenn",true) && !it.name.equals("johto",false) && !it.name.contains("original-") && !it.name.contains("conquest-gallery") && !it.name.contains("letsgo-kanto"))
-                if(!it.name.contains("conquest-gallery"))
+                if(!it.name.contains("updated-") && !it.name.contains("extended-") && !it.name.contains("letsgo-") && !it.name.contains("conquest-gallery"))
                     pokelist.add(it)
+                else{
+                    for ((index, value) in pokelist.withIndex()) {
+                        if(it.name.contains(value.name.replace("original-","").replace("letsgo-",""))){
+                            pokelist[index] = it
+                        }
+                    }
+                }
             }
         }
         _pokedexList.postValue(pokelist)

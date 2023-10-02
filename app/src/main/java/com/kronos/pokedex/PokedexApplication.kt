@@ -4,6 +4,7 @@ import android.app.Application
 import com.kronos.logger.exception.ExceptionHandler
 import com.kronos.logger.interfaces.ILogger
 import dagger.hilt.android.HiltAndroidApp
+import java.lang.Exception
 import javax.inject.Inject
 
 
@@ -19,7 +20,11 @@ class PokedexApplication:Application(){
 
     override fun onCreate() {
         super.onCreate()
-        logger.configure()
-        exceptionHandler.init(this)
+        try {
+            exceptionHandler.init(this)
+            logger.configure()
+        }catch (e:Exception){
+        }
+
     }
 }

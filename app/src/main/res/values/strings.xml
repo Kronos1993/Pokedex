@@ -106,8 +106,8 @@
     <string name="_evolvesFrom">Evolves From:</string>
     <string name="ev">EV:</string>
     <string name="pokemon_species">Pokemon Species</string>
-    <string name="defending">Defending</string>
-    <string name="attacking">Attacking to</string>
+    <string name="defending">Defending is:</string>
+    <string name="attacking">Attacking is:</string>
     <string name="very_weak">Very weak to</string>
     <string name="very_resistant">Very resistant to</string>
     <string name="immune">Immune to</string>
@@ -133,4 +133,9 @@
     <string name="capture_rate_value">%1$d (%2$.1f%% full HP with a pokeball)</string>
     <string name="genderless">Genderless</string>
 
+
+    <string name="berry_potency_none">None flavor of %1$s</string>
+    <string name="berry_potency_low">Low flavor of %1$s</string>
+    <string name="berry_potency_medium">Medium flavor of %1$s</string>
+    <string name="berry_potency_high">High flavor of %1$s</string>
 </resources>
