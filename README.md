@@ -8,9 +8,9 @@ Demo App using Kotlin,View Binding, Retrofit, Dependency Injection and Pokemon A
 This is a demo app.
 
 The "Pokedex" app is an Android application that allows users to browse information about different Pokemon species.
-The app retrieves its data from the official Pokemon API(https://pokeapi.co/), which provides a comprehensive catalog of Pokemon with detailed information such as stats, abilities, and evolutions.
+The app retrieves its data from the official Pokemon API(https://pokeapi.com/), which provides a comprehensive catalog of Pokemon with detailed information such as stats, abilities, and evolutions.
 
-To interact with the Pokemon API, the app uses Retrofit, a widely-used library for consuming RESTful web services in Android applications.
+To interact with the Pokemon API, the app uses Retrofit, a widely-used library for consuming RESTfull web services in Android applications.
 Retrofit provides a convenient and efficient way to handle network requests and parse JSON responses into Kotlin objects.
 
 For the presentation layer, the app follows the Model-View-ViewModel (MVVM) pattern, which provides a clean separation between the user interface and the business logic.
