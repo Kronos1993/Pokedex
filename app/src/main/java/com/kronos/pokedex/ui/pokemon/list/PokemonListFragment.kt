@@ -134,10 +134,6 @@ class PokemonListFragment : Fragment() {
             }
 
         })
-
-        binding.layoutPokemonList.btnRefresh.setOnClickListener {
-            viewModel.getPokemons(viewModel.currentPokedex.value!!)
-        }
     }
 
     private fun initViewModel() {

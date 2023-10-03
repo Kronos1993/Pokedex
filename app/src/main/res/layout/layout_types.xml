@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/margin_8"
             android:layout_marginEnd="@dimen/margin_8"
-            tools:itemCount="10"
+            tools:itemCount="2"
             tools:listitem="@layout/item_type" />
 
         <com.google.android.material.textview.MaterialTextView

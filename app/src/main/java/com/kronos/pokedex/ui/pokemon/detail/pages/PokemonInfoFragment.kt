@@ -110,6 +110,13 @@ class PokemonInfoFragment : Fragment() {
                 binding.layoutAbilities.recyclerViewPokemonAbilities.layoutManager =
                     GridLayoutManager(context, 2)
 
+            binding.layoutAbilities.run{
+                abilities = pokemonInfo.abilities
+            }
+            binding.layoutTypes.run{
+                types = pokemonInfo.types
+            }
+
             viewModel.getPokemonEvolution()
 
             binding.invalidateAll()
