@@ -103,6 +103,9 @@ class TypeListFragment : Fragment() {
     private fun handleTypeList(list: List<NamedResourceApi>) {
         viewModel.typeListAdapter.get()?.submitList(list)
         viewModel.typeListAdapter.get()?.notifyDataSetChanged()
+        binding.layoutTypeList.run {
+            types = list
+        }
     }
 
     private fun initViews() {
@@ -147,6 +150,11 @@ class TypeListFragment : Fragment() {
                 }
             }
         })
+
+        binding.layoutTypeList.btnRefresh.setOnClickListener {
+            if (viewModel.typeOriginalList.value.isNullOrEmpty())
+                viewModel.getTypes()
+        }
     }
 
     private fun initViewModel() {

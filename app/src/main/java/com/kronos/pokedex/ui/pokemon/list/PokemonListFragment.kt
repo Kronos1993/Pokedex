@@ -105,7 +105,7 @@ class PokemonListFragment : Fragment() {
     }
 
     private fun handlePokemonList(list: List<PokemonDexEntry>) {
-        binding.layoutPokemonList.pokemonList = list
+        binding.layoutPokemonList.run { pokemonList = list }
         viewModel.pokemonListAdapter.get()?.submitList(list)
         viewModel.pokemonListAdapter.get()?.notifyDataSetChanged()
         binding.layoutPokemonList.recyclerViewPokemonList.postDelayed({
@@ -134,6 +134,10 @@ class PokemonListFragment : Fragment() {
             }
 
         })
+
+        binding.layoutPokemonList.btnRefresh.setOnClickListener {
+            viewModel.getPokemons(viewModel.currentPokedex.value!!)
+        }
     }
 
     private fun initViewModel() {

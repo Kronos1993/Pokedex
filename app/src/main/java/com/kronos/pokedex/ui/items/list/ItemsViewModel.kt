@@ -37,6 +37,9 @@ class ItemsViewModel @Inject constructor(
     private val _origen = MutableLiveData<ShowItemIn?>()
     val origen = _origen.asLiveData()
 
+    private val _itemCategory = MutableLiveData<NamedResourceApi?>()
+    val itemCategory = _itemCategory.asLiveData()
+
     var itemListAdapter: WeakReference<ItemListAdapter?> = WeakReference(ItemListAdapter())
 
     private val _limit = MutableLiveData<Int>()
@@ -95,6 +98,7 @@ class ItemsViewModel @Inject constructor(
 
     fun getItemsByCategories(itemCategory:NamedResourceApi) {
         loading.value = true
+        _itemCategory.value = itemCategory
         viewModelScope.launch(Dispatchers.IO) {
             var call = async {
                 val itemCategory = if (urlProvider.extractIdFromUrl(itemCategory.url) != null) {

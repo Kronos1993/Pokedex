@@ -138,6 +138,11 @@ class ItemCategoriesFragment : Fragment() {
                 }
             }
         })
+
+        binding.btnRefresh.setOnClickListener {
+            if (viewModel.itemCategory.value.isNullOrEmpty())
+                viewModel.getItemCategories()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

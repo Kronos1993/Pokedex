@@ -128,6 +128,11 @@ class EggGroupsFragment : Fragment() {
                 it ?: 0
             })
         }, 50)
+
+        binding.btnRefresh.setOnClickListener {
+            if(viewModel.eggGroupList.value.isNullOrEmpty())
+                viewModel.getEggGroups()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -162,7 +167,8 @@ class EggGroupsFragment : Fragment() {
         viewModel.setOffset(viewModel.offset.value.let {
             it ?: resources.getInteger(R.integer.def_offset)
         })
-        viewModel.getEggGroups()
+        if(viewModel.eggGroupList.value.isNullOrEmpty())
+            viewModel.getEggGroups()
     }
 
     override fun onDestroyView() {

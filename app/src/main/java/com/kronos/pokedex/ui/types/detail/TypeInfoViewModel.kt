@@ -8,7 +8,6 @@ import com.kronos.core.extensions.asLiveData
 import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.NamedResourceApi
-import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.domian.model.type.TypeInfo
 import com.kronos.pokedex.domian.repository.TypeRemoteRepository
@@ -91,17 +90,16 @@ class TypeInfoViewModel @Inject constructor(
     }
 
     private fun postMoveList(list: List<NamedResourceApi>) {
+        var moveList =  mutableListOf<NamedResourceApi>()
         if (_moveList.value != null) {
-            var movelist = _moveList.value!!
-            list.forEach {
-                if (!(movelist as ArrayList).contains(it)) {
-                    movelist.add(it)
-                }
-            }
-            _moveList.postValue(movelist as MutableList<NamedResourceApi>?)
-        } else {
-            _moveList.postValue(list as MutableList<NamedResourceApi>?)
+            moveList = _moveList.value!!
         }
+        list.forEach {
+            if (!(moveList as ArrayList).contains(it)) {
+                moveList.add(it)
+            }
+        }
+        _moveList.postValue(moveList as MutableList<NamedResourceApi>?)
     }
 
     fun loadTypeInfo(type: NamedResourceApi) {

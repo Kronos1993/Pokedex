@@ -159,6 +159,11 @@ class MoveListFragment : Fragment() {
                 }
             }
         })
+
+        binding.layoutMoveList.btnRefresh.setOnClickListener {
+            if (viewModel.moveOriginalList.value.isNullOrEmpty())
+                viewModel.getMoves()
+        }
     }
 
     private fun initViewModel() {

@@ -104,6 +104,9 @@ class AbilityListFragment : Fragment() {
     private fun handleAbilitiesList(list: List<Ability>) {
         viewModel.abilityAdapter.get()?.submitList(list)
         viewModel.abilityAdapter.get()?.notifyDataSetChanged()
+        binding.layoutAbilityList.run {
+            abilities = list
+        }
     }
 
     private fun initViews() {
@@ -156,6 +159,10 @@ class AbilityListFragment : Fragment() {
                 }
             }
         })
+        binding.layoutAbilityList.btnRefresh.setOnClickListener {
+            if (viewModel.abilityOriginalList.value.isNullOrEmpty())
+                viewModel.getAbilities()
+        }
     }
 
     private fun initViewModel() {

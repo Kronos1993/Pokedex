@@ -153,6 +153,16 @@ class ItemsFragment : Fragment() {
                 }
             })
         }
+
+        binding.btnRefresh.setOnClickListener {
+            if (viewModel.origen.value == ShowItemIn.ITEM_LIST){
+                if(viewModel.itemList.value.isNullOrEmpty()){
+                    viewModel.getItems()
+                }
+            }else{
+                viewModel.getItemsByCategories(viewModel.itemCategory.value!!)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

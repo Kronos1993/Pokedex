@@ -33,6 +33,9 @@ class PokemonListViewModel @Inject constructor(
 
     private val _pokemonOriginalList = MutableLiveData<MutableList<PokemonDexEntry>>()
 
+    private val _currentPokedex = MutableLiveData<NamedResourceApi>()
+    val currentPokedex = _currentPokedex.asLiveData()
+
     private val _limit = MutableLiveData<Int>()
     val limit = _limit.asLiveData()
 
@@ -45,17 +48,16 @@ class PokemonListViewModel @Inject constructor(
     var pokemonListAdapter: WeakReference<PokemonListAdapter?> = WeakReference(PokemonListAdapter())
 
     private fun postPokemonList(list: List<PokemonDexEntry>) {
+        var pokelist = mutableListOf<PokemonDexEntry>()
         if (_pokemonList.value != null) {
-            var pokelist = _pokemonList.value!!
-            list.forEach {
-                if (!(pokelist as ArrayList).contains(it)) {
-                    pokelist.add(it)
-                }
-            }
-            _pokemonList.postValue(pokelist as MutableList<PokemonDexEntry>?)
-        } else {
-            _pokemonList.postValue(list as MutableList<PokemonDexEntry>?)
+            pokelist = _pokemonList.value!!
         }
+        list.forEach {
+            if (!(pokelist as ArrayList).contains(it)) {
+                pokelist.add(it)
+            }
+        }
+        _pokemonList.postValue(pokelist as MutableList<PokemonDexEntry>?)
         loading.postValue(false)
     }
 
@@ -64,21 +66,21 @@ class PokemonListViewModel @Inject constructor(
     }
 
     private fun postOriginalPokemonList(list: List<PokemonDexEntry>) {
+        var pokelist = mutableListOf<PokemonDexEntry>()
         if (_pokemonOriginalList.value != null) {
-            var pokelist = _pokemonOriginalList.value!!
-            list.forEach {
-                if (!(pokelist as ArrayList).contains(it)) {
-                    pokelist.add(it)
-                }
-            }
-            _pokemonOriginalList.postValue(pokelist as MutableList<PokemonDexEntry>?)
-        } else {
-            _pokemonOriginalList.postValue(list as MutableList<PokemonDexEntry>?)
+            pokelist = _pokemonOriginalList.value!!
         }
+        list.forEach {
+            if (!(pokelist as ArrayList).contains(it)) {
+                pokelist.add(it)
+            }
+        }
+        _pokemonOriginalList.postValue(pokelist as MutableList<PokemonDexEntry>?)
     }
 
     fun getPokemons(pokedex: NamedResourceApi) {
         loading.value = true
+        _currentPokedex.value = pokedex
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 var id = urlProvider.extractIdFromUrl(pokedex.url)

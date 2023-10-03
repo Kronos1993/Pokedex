@@ -46,17 +46,16 @@ class TypeListViewModel @Inject constructor(
     var typeListAdapter: WeakReference<TypeAdapter?> = WeakReference(TypeAdapter())
 
     private fun postTypes(list: List<NamedResourceApi>) {
+        var typeList = mutableListOf<NamedResourceApi>()
         if (_typeList.value != null) {
-            var typelist = _typeList.value!!
-            list.forEach {
-                if (!(typelist as ArrayList).contains(it)) {
-                    typelist.add(it)
-                }
-            }
-            _typeList.postValue(typelist as MutableList<NamedResourceApi>?)
-        } else {
-            _typeList.postValue(list as MutableList<NamedResourceApi>?)
+            typeList = _typeList.value!!
         }
+        list.forEach {
+            if (!(typeList as ArrayList).contains(it)) {
+                typeList.add(it)
+            }
+        }
+        _typeList.postValue(typeList as MutableList<NamedResourceApi>?)
         loading.postValue(false)
     }
 
@@ -65,17 +64,16 @@ class TypeListViewModel @Inject constructor(
     }
 
     private fun postOriginalTypeList(list: List<NamedResourceApi>) {
+        var typeList = mutableListOf<NamedResourceApi>()
         if (_typeOriginalList.value != null) {
-            var pokelist = _typeOriginalList.value!!
-            list.forEach {
-                if (!(pokelist as ArrayList).contains(it)) {
-                    pokelist.add(it)
-                }
-            }
-            _typeOriginalList.postValue(pokelist as MutableList<NamedResourceApi>?)
-        } else {
-            _typeOriginalList.postValue(list as MutableList<NamedResourceApi>?)
+            typeList = _typeOriginalList.value!!
         }
+        list.forEach {
+            if (!(typeList as ArrayList).contains(it)) {
+                typeList.add(it)
+            }
+        }
+        _typeOriginalList.postValue(typeList as MutableList<NamedResourceApi>?)
     }
 
     fun getTypes() {
