@@ -3,15 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="types"
-            type="java.util.List" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -25,29 +16,5 @@
             tools:itemCount="2"
             tools:listitem="@layout/item_type" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text_no_types"
-            style="@style/Widget.Pokedex.TextView.TextViewNormal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/no_types_found"
-            android:textAlignment="center"
-            android:textSize="@dimen/text_20"
-            app:handle_visibility="@{types.size()==0}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_refresh"
-            style="@style/Widget.Pokedex.Button.IconOnly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:handle_visibility="@{types.size()==0}"
-            app:icon="@drawable/ic_refresh"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_no_types" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

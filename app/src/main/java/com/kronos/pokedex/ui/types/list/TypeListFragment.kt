@@ -63,14 +63,14 @@ class TypeListFragment : Fragment() {
         if (hashtable["error"] != null) {
             if (hashtable["error"]!!.isNotEmpty()) {
                 show(
-                    binding.layoutTypeList.recyclerViewPokemonType,
+                    binding.recyclerViewPokemonType,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_error_background
                 )
             } else {
                 show(
-                    binding.layoutTypeList.recyclerViewPokemonType,
+                    binding.recyclerViewPokemonType,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_success_background
@@ -103,18 +103,15 @@ class TypeListFragment : Fragment() {
     private fun handleTypeList(list: List<NamedResourceApi>) {
         viewModel.typeListAdapter.get()?.submitList(list)
         viewModel.typeListAdapter.get()?.notifyDataSetChanged()
-        binding.layoutTypeList.run {
-            types = list
-        }
     }
 
     private fun initViews() {
-        binding.layoutTypeList.recyclerViewPokemonType.layoutManager = GridLayoutManager(context, 2)
-        binding.layoutTypeList.recyclerViewPokemonType.setHasFixedSize(false)
+        binding.recyclerViewPokemonType.layoutManager = GridLayoutManager(context, 2)
+        binding.recyclerViewPokemonType.setHasFixedSize(false)
         if (viewModel.typeListAdapter.get() == null)
             viewModel.typeListAdapter = WeakReference(TypeAdapter())
         viewModel.typeListAdapter.get()?.setUrlProvider(viewModel.urlProvider)
-        binding.layoutTypeList.recyclerViewPokemonType.adapter = viewModel.typeListAdapter.get()
+        binding.recyclerViewPokemonType.adapter = viewModel.typeListAdapter.get()
         viewModel.typeListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<NamedResourceApi> {
             override fun onItemClick(t: NamedResourceApi, pos: Int) {
@@ -129,13 +126,13 @@ class TypeListFragment : Fragment() {
             }
 
         })
-        binding.layoutTypeList.recyclerViewPokemonType.postDelayed({
-            binding.layoutTypeList.recyclerViewPokemonType.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
+        binding.recyclerViewPokemonType.postDelayed({
+            binding.recyclerViewPokemonType.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
                 it ?: 0
             })
         }, 50)
 
-        binding.layoutTypeList.recyclerViewPokemonType.addOnScrollListener(object :
+        binding.recyclerViewPokemonType.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount: Int =
@@ -151,7 +148,7 @@ class TypeListFragment : Fragment() {
             }
         })
 
-        binding.layoutTypeList.btnRefresh.setOnClickListener {
+        binding.btnRefresh.setOnClickListener {
             if (viewModel.typeOriginalList.value.isNullOrEmpty())
                 viewModel.getTypes()
         }

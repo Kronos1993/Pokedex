@@ -64,14 +64,14 @@ class AbilityListFragment : Fragment() {
         if (hashtable["error"] != null) {
             if (hashtable["error"]!!.isNotEmpty()) {
                 show(
-                    binding.layoutAbilityList.recyclerViewPokemonAbilities,
+                    binding.recyclerViewPokemonAbilities,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_error_background
                 )
             } else {
                 show(
-                    binding.layoutAbilityList.recyclerViewPokemonAbilities,
+                    binding.recyclerViewPokemonAbilities,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_success_background
@@ -104,18 +104,15 @@ class AbilityListFragment : Fragment() {
     private fun handleAbilitiesList(list: List<Ability>) {
         viewModel.abilityAdapter.get()?.submitList(list)
         viewModel.abilityAdapter.get()?.notifyDataSetChanged()
-        binding.layoutAbilityList.run {
-            abilities = list
-        }
     }
 
     private fun initViews() {
-        binding.layoutAbilityList.recyclerViewPokemonAbilities.layoutManager =
+        binding.recyclerViewPokemonAbilities.layoutManager =
             GridLayoutManager(context, 2)
-        binding.layoutAbilityList.recyclerViewPokemonAbilities.setHasFixedSize(false)
+        binding.recyclerViewPokemonAbilities.setHasFixedSize(false)
         if (viewModel.abilityAdapter.get() == null)
             viewModel.abilityAdapter = WeakReference(PokemonAbilityAdapter())
-        binding.layoutAbilityList.recyclerViewPokemonAbilities.adapter =
+        binding.recyclerViewPokemonAbilities.adapter =
             viewModel.abilityAdapter.get()
         viewModel.abilityAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<Ability> {
@@ -138,13 +135,13 @@ class AbilityListFragment : Fragment() {
             }
 
         })
-        binding.layoutAbilityList.recyclerViewPokemonAbilities.postDelayed({
-            binding.layoutAbilityList.recyclerViewPokemonAbilities.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
+        binding.recyclerViewPokemonAbilities.postDelayed({
+            binding.recyclerViewPokemonAbilities.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
                 it ?: 0
             })
         }, 50)
 
-        binding.layoutAbilityList.recyclerViewPokemonAbilities.addOnScrollListener(object :
+        binding.recyclerViewPokemonAbilities.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount: Int =
@@ -159,7 +156,7 @@ class AbilityListFragment : Fragment() {
                 }
             }
         })
-        binding.layoutAbilityList.btnRefresh.setOnClickListener {
+        binding.btnRefresh.setOnClickListener {
             if (viewModel.abilityOriginalList.value.isNullOrEmpty())
                 viewModel.getAbilities()
         }
