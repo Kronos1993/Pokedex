@@ -1,10 +1,13 @@
 package com.kronos.pokedex.binding_adapters
 
+import android.os.Build
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import com.google.android.material.card.MaterialCardView
 import com.kronos.pokedex.R
+import com.kronos.pokedex.domian.model.item.BerryFlavor
 import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.specie.SpecieInfo
 import com.kronos.pokedex.domian.model.specie.getCaptureRate
@@ -278,3 +281,12 @@ fun isCurrentPokemon(view: TextView, is_current_pokemon: Boolean) {
 }
 
 fun replaceNewLine(text :String) = text.replace(Regex("\n"), " ")
+
+@BindingAdapter("handle_move_full_description")
+fun handleMoveFullDescription(view: TextView, description: String?) = view.run {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (description != null) {
+            view.tooltipText = description
+        }
+    }
+}

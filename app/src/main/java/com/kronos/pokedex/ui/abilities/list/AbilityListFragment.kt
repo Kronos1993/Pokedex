@@ -15,6 +15,7 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentAbilityListBinding
 import com.kronos.pokedex.domian.model.ability.Ability
+import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
@@ -55,10 +56,23 @@ class AbilityListFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.abilityList.observe(this.viewLifecycleOwner, ::handleAbilitiesList)
+        viewModel.abilityInfo.observe(this.viewLifecycleOwner, ::handleAbilityInfo)
         viewModel.loading.observe(this.viewLifecycleOwner, ::handleLoading)
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
 
+    private fun handleAbilityInfo(abilityInfo: AbilityInfo) {
+        if (!abilityInfo.name.isNullOrEmpty()) {
+            if (findNavController().currentDestination?.id == R.id.nav_abilities) {
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_ABILITY, abilityInfo)
+                findNavController().navigate(
+                    R.id.action_nav_ability_list_to_nav_ability_info_dialog,
+                    bundle
+                )
+            }
+        }
+    }
 
     private fun handleError(hashtable: Hashtable<String, String>) {
         if (hashtable["error"] != null) {
@@ -122,15 +136,7 @@ class AbilityListFragment : Fragment() {
                     viewModel.filterAbility("")
                 }
                 if (!t.ability.name.isNullOrEmpty()) {
-                    if (findNavController().currentDestination?.id == R.id.nav_abilities) {
-                        val bundle = Bundle()
-                        bundle.putSerializable(CURRENT_ABILITY, t.ability)
-                        findNavController().navigate(
-                            R.id.action_nav_ability_list_to_nav_ability_info_dialog,
-                            bundle
-                        )
-                    }
-
+                    viewModel.loadAbilityInfo(t.ability)
                 }
             }
 
@@ -206,6 +212,7 @@ class AbilityListFragment : Fragment() {
 
     override fun onPause() {
         binding.unbind()
+        viewModel.postAbilityInfo(AbilityInfo())
         super.onPause()
     }
 

@@ -31,5 +31,6 @@
     <dimen name="card_radius">8dp</dimen>
 
     <dimen name="size_40">40dp</dimen>
+    <dimen name="size_60">60dp</dimen>
     <dimen name="size_100">100dp</dimen>
 </resources>

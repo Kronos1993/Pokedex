@@ -1,27 +1,22 @@
 package com.kronos.pokedex.ui.move.dialog
 
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.pokedex.R
-import com.kronos.pokedex.databinding.FragmentDialogMoveInfoBinding
+import com.kronos.pokedex.databinding.FragmentMoveInfoBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
 import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.pokedex.ui.move.list.CURRENT_MOVE
-import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
 import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,9 +26,8 @@ import kotlinx.coroutines.withContext
 import java.lang.ref.WeakReference
 
 @AndroidEntryPoint
-class MoveInfoDialogFragment : BottomSheetDialogFragment() {
-    private val binding by fragmentBinding<FragmentDialogMoveInfoBinding>(R.layout.fragment_dialog_move_info)
-    private val viewModelPokemonDetail by activityViewModels<PokemonDetailViewModel>()
+class MoveInfoDialogFragment : Fragment() {
+    private val binding by fragmentBinding<FragmentMoveInfoBinding>(R.layout.fragment_move_info)
     private val viewModel by viewModels<MoveInfoViewModel>()
 
     override fun onCreateView(
@@ -43,11 +37,39 @@ class MoveInfoDialogFragment : BottomSheetDialogFragment() {
     ) = binding.run {
         viewModel = this@MoveInfoDialogFragment.viewModel
         lifecycleOwner = this@MoveInfoDialogFragment.viewLifecycleOwner
-        setListeners()
-        setObservers()
+        setHasOptionsMenu(true)
         root
     }
 
+    override fun onResume() {
+        super.onResume()
+        setListeners()
+        setObservers()
+        init()
+    }
+    
+    private fun init(){
+        val bundle = arguments
+        if (bundle?.get(CURRENT_MOVE) != null) {
+            when {
+                bundle.get(CURRENT_MOVE) is MoveInfo -> {
+                    viewModel.postMoveInfo((bundle.get(CURRENT_MOVE) as MoveInfo))
+                    viewModel.postOrigen(ShowMoveIn.POKEMON_DETAIL)
+                    initView()
+                }
+                bundle.get(CURRENT_MOVE) is NamedResourceApi -> {
+                    viewModel.loadMoveInfo((bundle.get(CURRENT_MOVE) as NamedResourceApi))
+                    viewModel.postOrigen(ShowMoveIn.MOVE_LIST)
+                    initView()
+                }
+                else -> goBack()
+            }
+        } else {
+            goBack()
+        }
+
+    }
+    
     private fun setListeners() {
 
     }
@@ -72,41 +94,6 @@ class MoveInfoDialogFragment : BottomSheetDialogFragment() {
         viewModel.pokemonListAdapter.get()?.notifyDataSetChanged()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setUpDialog()
-    }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.setCancelable(false)
-        dialog.setCanceledOnTouchOutside(true)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        return dialog
-    }
-
-    private fun setUpDialog() {
-        this.isCancelable = true
-        val bundle = arguments
-        if (bundle?.get(CURRENT_MOVE) != null) {
-            when {
-                bundle.get(CURRENT_MOVE) is MoveInfo -> {
-                    viewModel.postMoveInfo((bundle.get(CURRENT_MOVE) as MoveInfo))
-                    viewModel.postOrigen(ShowMoveIn.POKEMON_DETAIL)
-                    initView()
-                }
-                bundle.get(CURRENT_MOVE) is NamedResourceApi -> {
-                    viewModel.loadMoveInfo((bundle.get(CURRENT_MOVE) as NamedResourceApi))
-                    viewModel.postOrigen(ShowMoveIn.MOVE_LIST)
-                    initView()
-                }
-                else -> hideDialog()
-            }
-        } else {
-            hideDialog()
-        }
-
-    }
-
     private fun initView() {
         binding.layoutPokemonList.recyclerViewPokemonList.layoutManager =
             GridLayoutManager(context, 2)
@@ -119,27 +106,20 @@ class MoveInfoDialogFragment : BottomSheetDialogFragment() {
         viewModel.pokemonListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<PokemonDexEntry> {
             override fun onItemClick(t: PokemonDexEntry, pos: Int) {
-                if (viewModel.origen.value == ShowMoveIn.POKEMON_DETAIL) {
-                    viewModelPokemonDetail.loadPokemonInfo(t.pokemon)
-                    hideDialog()
-                } else if (viewModel.origen.value == ShowMoveIn.MOVE_LIST) {
-                    dismiss()
-                    val bundle = Bundle()
-                    bundle.putSerializable(CURRENT_POKEMON, t.pokemon)
-                    findNavController().navigate(
-                        R.id.action_nav_move_info_dialog_to_nav_pokemon_detail,
-                        bundle
-                    )
-                }
-
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_POKEMON, t.pokemon)
+                findNavController().navigate(
+                    R.id.action_nav_move_info_dialog_to_nav_pokemon_detail,
+                    bundle
+                )
             }
         })
     }
 
-    private fun hideDialog() {
+    private fun goBack() {
         lifecycleScope.launch {
             withContext(Dispatchers.Main) {
-                findNavController().navigateUp()
+                findNavController().popBackStack()
             }
         }
     }

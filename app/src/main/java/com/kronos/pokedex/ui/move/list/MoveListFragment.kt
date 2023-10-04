@@ -14,6 +14,7 @@ import com.kronos.core.util.LoadingDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentMoveListBinding
+import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
 import com.kronos.pokedex.ui.move.ShowMoveIn
@@ -56,10 +57,23 @@ class MoveListFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.moveList.observe(this.viewLifecycleOwner, ::handleMoveList)
+        viewModel.moveInfo.observe(this.viewLifecycleOwner, ::handleMoveInfo)
         viewModel.loading.observe(this.viewLifecycleOwner, ::handleLoading)
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
 
+    private fun handleMoveInfo(moveInfo: MoveInfo) {
+        if (!moveInfo.moveName.isNullOrEmpty()){
+            if (findNavController().currentDestination?.id == R.id.nav_move_list) {
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_MOVE, moveInfo)
+                findNavController().navigate(
+                    R.id.action_nav_move_list_to_nav_move_info_dialog,
+                    bundle
+                )
+            }
+        }
+    }
 
     private fun handleError(hashtable: Hashtable<String, String>) {
         if (hashtable["error"] != null) {
@@ -125,15 +139,7 @@ class MoveListFragment : Fragment() {
                 }
                 viewModel.setRecyclerLastPosition(pos)
                 if (!t.move.name.isNullOrEmpty()) {
-                    if (findNavController().currentDestination?.id == R.id.nav_move_list) {
-                        val bundle = Bundle()
-                        bundle.putSerializable(CURRENT_MOVE, t.move)
-                        findNavController().navigate(
-                            R.id.action_nav_move_list_to_nav_move_info_dialog,
-                            bundle
-                        )
-                    }
-
+                    viewModel.loadMoveInfo(t.move)
                 }
             }
 
@@ -201,6 +207,7 @@ class MoveListFragment : Fragment() {
 
     override fun onPause() {
         binding.unbind()
+        viewModel.postMoveInfo(MoveInfo())
         super.onPause()
     }
 

@@ -7,7 +7,10 @@ import com.kronos.core.extensions.asLiveData
 import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.LoggerType
 import com.kronos.logger.interfaces.ILogger
+import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.Ability
+import com.kronos.pokedex.domian.model.ability.AbilityInfo
+import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.repository.AbilityRemoteRepository
 import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
 import com.kronos.webclient.UrlProvider
@@ -32,6 +35,9 @@ class AbilityListViewModel @Inject constructor(
 
     private val _abilityOriginalList = MutableLiveData<MutableList<Ability>>()
     val abilityOriginalList = _abilityOriginalList.asLiveData()
+
+    private val _abilityInfo = MutableLiveData<AbilityInfo>()
+    val abilityInfo = _abilityInfo.asLiveData()
 
     private val _limit = MutableLiveData<Int>()
     val limit = _limit.asLiveData()
@@ -62,6 +68,10 @@ class AbilityListViewModel @Inject constructor(
 
     private fun postAbilityListFiltered(list: List<Ability>) {
         _abilityList.postValue(list as MutableList<Ability>?)
+    }
+
+    fun postAbilityInfo(abilityInfo: AbilityInfo) {
+        _abilityInfo.postValue(abilityInfo)
     }
 
     private fun postOriginalAbilityList(list: List<Ability>) {
@@ -116,6 +126,21 @@ class AbilityListViewModel @Inject constructor(
                 setOffset(offset.value!! + limit.value!!)
                 getAbilities()
             }
+        }
+    }
+
+    fun loadAbilityInfo(ability: NamedResourceApi) {
+        viewModelScope.launch(Dispatchers.IO) {
+            loading.postValue(true)
+            var abilityInfo: AbilityInfo? = null
+
+            abilityInfo = if (urlProvider.extractIdFromUrl(ability.url) != null) {
+                abilityRemoteRepository.getAbility(urlProvider.extractIdFromUrl(ability.url))
+            } else {
+                abilityRemoteRepository.getAbility(ability.name)
+            }
+            postAbilityInfo(abilityInfo)
+            loading.postValue(false)
         }
     }
 

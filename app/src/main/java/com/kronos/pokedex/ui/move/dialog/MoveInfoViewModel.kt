@@ -133,9 +133,11 @@ class MoveInfoViewModel @Inject constructor(
     }
 
     fun loadPokemonList(moveInfo: MoveInfo){
-        var pokemonEntry = moveInfo.learnedBy.map {
-            PokemonDexEntry(urlProvider.extractIdFromUrl(it.url), it)
+        viewModelScope.launch(Dispatchers.IO) {
+            var pokemonEntry = moveInfo.learnedBy.map {
+                PokemonDexEntry(urlProvider.extractIdFromUrl(it.url), it)
+            }
+            postPokemonList(pokemonEntry)
         }
-        postPokemonList(pokemonEntry)
     }
 }
