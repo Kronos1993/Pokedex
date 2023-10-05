@@ -61,6 +61,7 @@ class BerryInfoDialogFragment : BottomSheetDialogFragment() {
         viewModel.getBerryName(berryInfo)
         viewModel.berryFlavorListAdapter.get()?.submitList(berryInfo.flavors)
         viewModel.berryFlavorListAdapter.get()?.notifyDataSetChanged()
+        initView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,8 +80,10 @@ class BerryInfoDialogFragment : BottomSheetDialogFragment() {
         this.isCancelable = true
         val bundle = arguments
         if (bundle?.get(CURRENT_BERRY) != null) {
-            viewModel.loadBerryInfo((bundle.get(CURRENT_BERRY) as NamedResourceApi))
-            initView()
+            if(bundle.get(CURRENT_BERRY) is NamedResourceApi)
+                viewModel.loadBerryInfo((bundle.get(CURRENT_BERRY) as NamedResourceApi))
+            else
+                viewModel.postBerryInfo((bundle.get(CURRENT_BERRY) as BerryInfo))
         } else {
             hideDialog()
         }

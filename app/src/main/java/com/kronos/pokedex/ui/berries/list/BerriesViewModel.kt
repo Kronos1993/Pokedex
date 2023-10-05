@@ -8,7 +8,9 @@ import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.LoggerType
 import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.item.BerryInfo
 import com.kronos.pokedex.domian.repository.BerryRemoteRepository
+import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +23,7 @@ import javax.inject.Inject
 class BerriesViewModel @Inject constructor(
     @ApplicationContext val context: Context,
     private var berryRemoteRepository: BerryRemoteRepository,
+    var urlProvider: UrlProvider,
     var logger: ILogger,
 ) : ParentViewModel() {
 
@@ -29,6 +32,9 @@ class BerriesViewModel @Inject constructor(
 
     private val _berryOriginalList = MutableLiveData<MutableList<NamedResourceApi>>()
     val berryOriginalList = _berryOriginalList.asLiveData()
+
+    private val _berryInfoSelected = MutableLiveData<BerryInfo>()
+    val berryInfoSelected = _berryInfoSelected.asLiveData()
 
     var berryListAdapter: WeakReference<BerryListAdapter?> = WeakReference(BerryListAdapter())
 
@@ -69,6 +75,10 @@ class BerriesViewModel @Inject constructor(
         loading.postValue(false)
     }
 
+    fun postBerryInfoSelected(berryInfo: BerryInfo) {
+        _berryInfoSelected.postValue(berryInfo)
+    }
+
     fun getBerries() {
         loading.value = true
         viewModelScope.launch(Dispatchers.IO) {
@@ -88,6 +98,21 @@ class BerriesViewModel @Inject constructor(
                 setOffset(offset.value!! + limit.value!!)
                 getBerries()
             }
+        }
+    }
+
+    fun loadBerryInfo(berry: NamedResourceApi) {
+        viewModelScope.launch(Dispatchers.IO) {
+            loading.postValue(true)
+            var berryInfo: BerryInfo? = null
+
+            berryInfo = if (urlProvider.extractIdFromUrl(berry.url) != null) {
+                berryRemoteRepository.getBerry(urlProvider.extractIdFromUrl(berry.url))
+            } else {
+                berryRemoteRepository.getBerry((berry.name))
+            }
+            postBerryInfoSelected(berryInfo)
+            loading.postValue(false)
         }
     }
 
