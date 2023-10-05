@@ -12,7 +12,6 @@ import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.core.util.LoadingDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
-import com.kronos.pokedex.binding_adapters.handleEggGroup
 import com.kronos.pokedex.databinding.FragmentEggGroupsBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.egg_group.EggGroupInfo
@@ -105,11 +104,14 @@ class EggGroupsFragment : Fragment() {
         viewModel.eggGroupAdapter.get()?.notifyDataSetChanged()
     }
 
-    private fun handleEggGroup(eggGroupInfo: EggGroupInfo){
-        val bundle = Bundle()
-        bundle.putSerializable(CURRENT_EGG_GROUP, eggGroupInfo)
-        findNavController().navigate(R.id.action_nav_egg_groups_to_nav_egg_group_detail, bundle)
+    private fun handleEggGroup(eggGroupInfo: EggGroupInfo) {
+        if (!eggGroupInfo.name.isNullOrEmpty()) {
+            val bundle = Bundle()
+            bundle.putSerializable(CURRENT_EGG_GROUP, eggGroupInfo)
+            findNavController().navigate(R.id.action_nav_egg_groups_to_nav_egg_group_detail, bundle)
+        }
     }
+
     private fun initViews() {
         binding.recyclerViewEggGroupList.layoutManager = GridLayoutManager(context, 2)
         binding.recyclerViewEggGroupList.setHasFixedSize(false)
@@ -136,7 +138,7 @@ class EggGroupsFragment : Fragment() {
         }, 50)
 
         binding.btnRefresh.setOnClickListener {
-            if(viewModel.eggGroupList.value.isNullOrEmpty())
+            if (viewModel.eggGroupList.value.isNullOrEmpty())
                 viewModel.getEggGroups()
         }
     }
@@ -173,7 +175,7 @@ class EggGroupsFragment : Fragment() {
         viewModel.setOffset(viewModel.offset.value.let {
             it ?: resources.getInteger(R.integer.def_offset)
         })
-        if(viewModel.eggGroupList.value.isNullOrEmpty())
+        if (viewModel.eggGroupList.value.isNullOrEmpty())
             viewModel.getEggGroups()
     }
 

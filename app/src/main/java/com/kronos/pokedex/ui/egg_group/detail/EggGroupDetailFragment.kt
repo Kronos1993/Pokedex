@@ -127,9 +127,13 @@ class EggGroupDetailFragment : BottomSheetDialogFragment() {
 
     override fun onDestroyView() {
         binding.unbind()
+        super.onDestroyView()
+    }
+
+    override fun onPause() {
         viewModel.postEggGroupInfo(EggGroupInfo())
         viewModel.pokemonListAdapter = WeakReference(null)
-        super.onDestroyView()
+        super.onPause()
     }
 
 }
