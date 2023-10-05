@@ -14,6 +14,7 @@ import com.kronos.core.util.LoadingDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentMoveListBinding
+import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
 import com.kronos.pokedex.ui.move.ShowMoveIn
@@ -56,23 +57,36 @@ class MoveListFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.moveList.observe(this.viewLifecycleOwner, ::handleMoveList)
+        viewModel.moveInfo.observe(this.viewLifecycleOwner, ::handleMoveInfo)
         viewModel.loading.observe(this.viewLifecycleOwner, ::handleLoading)
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
 
+    private fun handleMoveInfo(moveInfo: MoveInfo) {
+        if (!moveInfo.moveName.isNullOrEmpty()){
+            if (findNavController().currentDestination?.id == R.id.nav_move_list) {
+                val bundle = Bundle()
+                bundle.putSerializable(CURRENT_MOVE, moveInfo)
+                findNavController().navigate(
+                    R.id.action_nav_move_list_to_nav_move_info_dialog,
+                    bundle
+                )
+            }
+        }
+    }
 
     private fun handleError(hashtable: Hashtable<String, String>) {
         if (hashtable["error"] != null) {
             if (hashtable["error"]!!.isNotEmpty()) {
                 show(
-                    binding.layoutMoveList.recyclerViewMoves,
+                    binding.recyclerViewMoves,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_error_background
                 )
             } else {
                 show(
-                    binding.layoutMoveList.recyclerViewMoves,
+                    binding.recyclerViewMoves,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_success_background
@@ -105,18 +119,15 @@ class MoveListFragment : Fragment() {
     private fun handleMoveList(list: List<MoveList>) {
         viewModel.moveAdapter.get()?.submitList(list)
         viewModel.moveAdapter.get()?.notifyDataSetChanged()
-        binding.layoutMoveList.run {
-            moves = list
-        }
     }
 
     private fun initViews() {
-        binding.layoutMoveList.recyclerViewMoves.layoutManager =
+        binding.recyclerViewMoves.layoutManager =
             GridLayoutManager(context, 2)
-        binding.layoutMoveList.recyclerViewMoves.setHasFixedSize(false)
+        binding.recyclerViewMoves.setHasFixedSize(false)
         if (viewModel.moveAdapter.get() == null)
             viewModel.moveAdapter = WeakReference(PokemonMoveListAdapter(ShowMoveIn.MOVE_LIST))
-        binding.layoutMoveList.recyclerViewMoves.adapter =
+        binding.recyclerViewMoves.adapter =
             viewModel.moveAdapter.get()
         viewModel.moveAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<MoveList> {
@@ -128,26 +139,18 @@ class MoveListFragment : Fragment() {
                 }
                 viewModel.setRecyclerLastPosition(pos)
                 if (!t.move.name.isNullOrEmpty()) {
-                    if (findNavController().currentDestination?.id == R.id.nav_move_list) {
-                        val bundle = Bundle()
-                        bundle.putSerializable(CURRENT_MOVE, t.move)
-                        findNavController().navigate(
-                            R.id.action_nav_move_list_to_nav_move_info_dialog,
-                            bundle
-                        )
-                    }
-
+                    viewModel.loadMoveInfo(t.move)
                 }
             }
 
         })
-        binding.layoutMoveList.recyclerViewMoves.postDelayed({
-            binding.layoutMoveList.recyclerViewMoves.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
+        binding.recyclerViewMoves.postDelayed({
+            binding.recyclerViewMoves.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
                 it ?: 0
             })
         }, 50)
 
-        binding.layoutMoveList.recyclerViewMoves.addOnScrollListener(object :
+        binding.recyclerViewMoves.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount: Int = (recyclerView.layoutManager as GridLayoutManager).childCount
@@ -159,6 +162,11 @@ class MoveListFragment : Fragment() {
                 }
             }
         })
+
+        binding.btnRefresh.setOnClickListener {
+            if (viewModel.moveOriginalList.value.isNullOrEmpty())
+                viewModel.getMoves()
+        }
     }
 
     private fun initViewModel() {
@@ -199,6 +207,7 @@ class MoveListFragment : Fragment() {
 
     override fun onPause() {
         binding.unbind()
+        viewModel.postMoveInfo(MoveInfo())
         super.onPause()
     }
 

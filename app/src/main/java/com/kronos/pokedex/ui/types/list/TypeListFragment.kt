@@ -15,6 +15,7 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentTypeListBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.type.TypeInfo
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 import java.util.*
@@ -54,6 +55,7 @@ class TypeListFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.typeList.observe(this.viewLifecycleOwner, ::handleTypeList)
+        viewModel.typeInfoSelected.observe(this.viewLifecycleOwner, ::handleTypeInfoSelected)
         viewModel.loading.observe(this.viewLifecycleOwner, ::handleLoading)
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
@@ -63,14 +65,14 @@ class TypeListFragment : Fragment() {
         if (hashtable["error"] != null) {
             if (hashtable["error"]!!.isNotEmpty()) {
                 show(
-                    binding.layoutTypeList.recyclerViewPokemonType,
+                    binding.recyclerViewPokemonType,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_error_background
                 )
             } else {
                 show(
-                    binding.layoutTypeList.recyclerViewPokemonType,
+                    binding.recyclerViewPokemonType,
                     hashtable["error"].orEmpty(),
                     com.kronos.resources.R.color.snack_bar_white,
                     com.kronos.resources.R.color.snack_bar_success_background
@@ -105,13 +107,21 @@ class TypeListFragment : Fragment() {
         viewModel.typeListAdapter.get()?.notifyDataSetChanged()
     }
 
+    private fun handleTypeInfoSelected(typeInfo: TypeInfo) {
+        if (!typeInfo.name.isNullOrEmpty()){
+            val bundle = Bundle()
+            bundle.putSerializable(CURRENT_TYPE, typeInfo)
+            findNavController().navigate(R.id.action_nav_types_to_nav_type_detail, bundle)
+        }
+    }
+
     private fun initViews() {
-        binding.layoutTypeList.recyclerViewPokemonType.layoutManager = GridLayoutManager(context, 2)
-        binding.layoutTypeList.recyclerViewPokemonType.setHasFixedSize(false)
+        binding.recyclerViewPokemonType.layoutManager = GridLayoutManager(context, 2)
+        binding.recyclerViewPokemonType.setHasFixedSize(false)
         if (viewModel.typeListAdapter.get() == null)
             viewModel.typeListAdapter = WeakReference(TypeAdapter())
         viewModel.typeListAdapter.get()?.setUrlProvider(viewModel.urlProvider)
-        binding.layoutTypeList.recyclerViewPokemonType.adapter = viewModel.typeListAdapter.get()
+        binding.recyclerViewPokemonType.adapter = viewModel.typeListAdapter.get()
         viewModel.typeListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<NamedResourceApi> {
             override fun onItemClick(t: NamedResourceApi, pos: Int) {
@@ -119,20 +129,18 @@ class TypeListFragment : Fragment() {
                 if (!searchView.query.isNullOrBlank()) {
                     viewModel.filterTypes("")
                 }
-                val bundle = Bundle()
-                bundle.putSerializable(CURRENT_TYPE, t)
                 viewModel.setRecyclerLastPosition(pos)
-                findNavController().navigate(R.id.action_nav_types_to_nav_type_detail, bundle)
+                viewModel.loadTypeInfo(t)
             }
 
         })
-        binding.layoutTypeList.recyclerViewPokemonType.postDelayed({
-            binding.layoutTypeList.recyclerViewPokemonType.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
+        binding.recyclerViewPokemonType.postDelayed({
+            binding.recyclerViewPokemonType.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
                 it ?: 0
             })
         }, 50)
 
-        binding.layoutTypeList.recyclerViewPokemonType.addOnScrollListener(object :
+        binding.recyclerViewPokemonType.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val visibleItemCount: Int =
@@ -147,6 +155,11 @@ class TypeListFragment : Fragment() {
                 }
             }
         })
+
+        binding.btnRefresh.setOnClickListener {
+            if (viewModel.typeOriginalList.value.isNullOrEmpty())
+                viewModel.getTypes()
+        }
     }
 
     private fun initViewModel() {
@@ -191,6 +204,7 @@ class TypeListFragment : Fragment() {
     }
 
     override fun onPause() {
+        viewModel.postTypeInfoSelected(TypeInfo())
         binding.unbind()
         super.onPause()
     }

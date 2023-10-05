@@ -14,6 +14,7 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentEggGroupsBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.egg_group.EggGroupInfo
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEggGroupAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
@@ -53,6 +54,7 @@ class EggGroupsFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.eggGroupList.observe(this.viewLifecycleOwner, ::handleItems)
+        viewModel.eggGroupInfoSelected.observe(this.viewLifecycleOwner, ::handleEggGroup)
         viewModel.loading.observe(this.viewLifecycleOwner, ::handleLoading)
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
@@ -102,6 +104,14 @@ class EggGroupsFragment : Fragment() {
         viewModel.eggGroupAdapter.get()?.notifyDataSetChanged()
     }
 
+    private fun handleEggGroup(eggGroupInfo: EggGroupInfo) {
+        if (!eggGroupInfo.name.isNullOrEmpty()) {
+            val bundle = Bundle()
+            bundle.putSerializable(CURRENT_EGG_GROUP, eggGroupInfo)
+            findNavController().navigate(R.id.action_nav_egg_groups_to_nav_egg_group_detail, bundle)
+        }
+    }
+
     private fun initViews() {
         binding.recyclerViewEggGroupList.layoutManager = GridLayoutManager(context, 2)
         binding.recyclerViewEggGroupList.setHasFixedSize(false)
@@ -117,9 +127,7 @@ class EggGroupsFragment : Fragment() {
                     viewModel.filterEggGroups("")
                 }
                 viewModel.setRecyclerLastPosition(pos)
-                val bundle = Bundle()
-                bundle.putSerializable(CURRENT_EGG_GROUP, t)
-                findNavController().navigate(R.id.action_nav_egg_groups_to_nav_egg_group_detail, bundle)
+                viewModel.loadEggGroupInfo(t)
             }
         })
 
@@ -128,6 +136,11 @@ class EggGroupsFragment : Fragment() {
                 it ?: 0
             })
         }, 50)
+
+        binding.btnRefresh.setOnClickListener {
+            if (viewModel.eggGroupList.value.isNullOrEmpty())
+                viewModel.getEggGroups()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -162,7 +175,8 @@ class EggGroupsFragment : Fragment() {
         viewModel.setOffset(viewModel.offset.value.let {
             it ?: resources.getInteger(R.integer.def_offset)
         })
-        viewModel.getEggGroups()
+        if (viewModel.eggGroupList.value.isNullOrEmpty())
+            viewModel.getEggGroups()
     }
 
     override fun onDestroyView() {
@@ -171,6 +185,7 @@ class EggGroupsFragment : Fragment() {
     }
 
     override fun onPause() {
+        viewModel.postEggGroupInfoSelected(EggGroupInfo())
         binding.unbind()
         super.onPause()
     }

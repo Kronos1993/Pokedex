@@ -132,6 +132,11 @@ class BerriesFragment : Fragment() {
                 }
             }
         })
+
+        binding.btnRefresh.setOnClickListener {
+            if (viewModel.berryList.value.isNullOrEmpty())
+                viewModel.getBerries()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

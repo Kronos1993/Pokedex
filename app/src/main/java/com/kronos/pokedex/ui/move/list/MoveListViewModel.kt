@@ -7,6 +7,8 @@ import com.kronos.core.extensions.asLiveData
 import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.LoggerType
 import com.kronos.logger.interfaces.ILogger
+import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.repository.MoveRemoteRepository
 import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
@@ -35,6 +37,9 @@ class MoveListViewModel @Inject constructor(
     private val _moveOriginalList = MutableLiveData<MutableList<MoveList>>()
     val moveOriginalList = _moveOriginalList.asLiveData()
 
+    private val _moveInfo = MutableLiveData<MoveInfo>()
+    val moveInfo = _moveInfo.asLiveData()
+
     private val _limit = MutableLiveData<Int>()
     val limit = _limit.asLiveData()
 
@@ -60,6 +65,10 @@ class MoveListViewModel @Inject constructor(
             _moveList.postValue(list as MutableList<MoveList>?)
         }
         loading.postValue(false)
+    }
+
+    fun postMoveInfo(moveInfo: MoveInfo) {
+        _moveInfo.postValue(moveInfo)
     }
 
     private fun postMoveListFiltered(list: List<MoveList>) {
@@ -118,6 +127,21 @@ class MoveListViewModel @Inject constructor(
                 setOffset(offset.value!! + limit.value!!)
                 getMoves()
             }
+        }
+    }
+
+    fun loadMoveInfo(move: NamedResourceApi) {
+        viewModelScope.launch(Dispatchers.IO) {
+            loading.postValue(true)
+            var moveInfo: MoveInfo? = null
+
+            moveInfo = if (urlProvider.extractIdFromUrl(move.url) != null) {
+                moveRemoteRepository.getMove(urlProvider.extractIdFromUrl(move.url))
+            } else {
+                moveRemoteRepository.getMove(move.name)
+            }
+            postMoveInfo(moveInfo)
+            loading.postValue(false)
         }
     }
 

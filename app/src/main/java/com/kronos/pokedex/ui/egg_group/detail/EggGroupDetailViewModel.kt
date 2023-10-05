@@ -42,9 +42,7 @@ class EggGroupDetailViewModel @Inject constructor(
     fun loadEggGroupInfo(eggGroup: NamedResourceApi) {
         viewModelScope.launch(Dispatchers.IO) {
             loading.postValue(true)
-            var eggGroupInfo: EggGroupInfo? = null
-
-            eggGroupInfo = if (urlProvider.extractIdFromUrl(eggGroup.url) != null) {
+            var eggGroupInfo: EggGroupInfo = if (urlProvider.extractIdFromUrl(eggGroup.url) != null) {
                 eggGroupRemoteRepository.getEggGroup(urlProvider.extractIdFromUrl(eggGroup.url))
             } else {
                 eggGroupRemoteRepository.getEggGroup(eggGroup.name)

@@ -1,6 +1,7 @@
 package com.kronos.pokedex.ui.nature.list
 
 import android.content.Context
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.kronos.core.extensions.asLiveData
@@ -8,7 +9,9 @@ import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.LoggerType
 import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.nature.NatureDetail
 import com.kronos.pokedex.domian.repository.NatureRemoteRepository
+import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +24,7 @@ import javax.inject.Inject
 class NatureListViewModel @Inject constructor(
     @ApplicationContext val context: Context,
     var natureRemoteRepository: NatureRemoteRepository,
+    var urlProvider: UrlProvider,
     var logger: ILogger,
 ) : ParentViewModel()  {
 
@@ -29,6 +33,9 @@ class NatureListViewModel @Inject constructor(
 
     private val _natureOriginalList = MutableLiveData<MutableList<NamedResourceApi>>()
     val natureOriginalList = _natureOriginalList.asLiveData()
+
+    private val _natureInfoSelected = MutableLiveData<NatureDetail>()
+    val natureInfoSelected = _natureInfoSelected.asLiveData()
 
     var natureListAdapter: WeakReference<NatureListAdapter?> = WeakReference(NatureListAdapter())
 
@@ -41,7 +48,7 @@ class NatureListViewModel @Inject constructor(
     private var _total = MutableLiveData<Int>()
     val total = _total.asLiveData()
 
-    private fun postNature(list: List<NamedResourceApi>) {
+    private fun postNatures(list: List<NamedResourceApi>) {
         var naturelist = mutableListOf<NamedResourceApi>()
         if(_natureList.value!=null){
             naturelist = _natureList.value!!
@@ -55,7 +62,7 @@ class NatureListViewModel @Inject constructor(
         loading.postValue(false)
     }
 
-    private fun postNatureOriginalList(list: List<NamedResourceApi>) {
+    private fun postNaturesOriginalList(list: List<NamedResourceApi>) {
         var naturelist = mutableListOf<NamedResourceApi>()
         if(_natureOriginalList.value!=null){
             naturelist = _natureOriginalList.value!!
@@ -69,14 +76,18 @@ class NatureListViewModel @Inject constructor(
         loading.postValue(false)
     }
 
+    fun postNatureInfo(natureInfo: NatureDetail) {
+        _natureInfoSelected.postValue(natureInfo)
+    }
+
     fun getNatures() {
         loading.value = true
         viewModelScope.launch(Dispatchers.IO) {
             var call  = async {
                 val responseList = natureRemoteRepository.list(limit.value!!,offset.value!!)
                 _total.postValue(responseList.count)
-                postNature(responseList.results)
-                postNatureOriginalList(responseList.results)
+                postNatures(responseList.results)
+                postNaturesOriginalList(responseList.results)
             }
             call.await()
         }
@@ -88,6 +99,21 @@ class NatureListViewModel @Inject constructor(
                 setOffset(offset.value!! + limit.value!!)
                 getNatures()
             }
+        }
+    }
+
+    fun loadNatureInfo(nature: NamedResourceApi) {
+        viewModelScope.launch(Dispatchers.IO) {
+            loading.postValue(true)
+            var natureDetail: NatureDetail? = null
+
+            natureDetail = if (urlProvider.extractIdFromUrl(nature.url) != null) {
+                natureRemoteRepository.getNature(urlProvider.extractIdFromUrl(nature.url))
+            } else {
+                natureRemoteRepository.getNature(nature.name)
+            }
+            postNatureInfo(natureDetail)
+            loading.postValue(false)
         }
     }
 

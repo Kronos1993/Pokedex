@@ -25,17 +25,18 @@
 
     <string name="menu_move_list">Moves</string>
     <string name="move_info">Move</string>
-    <string name="no_moves">No Moves</string>
+    <string name="no_moves_found">NO MOVES FOUND</string>
     <string name="move_physical">PHYSICAL</string>
     <string name="move_special">SPECIAL</string>
     <string name="move_status">STATUS</string>
 
     <string name="menu_abilities">Abilities</string>
     <string name="ability_info">Ability</string>
+    <string name="no_abilities_found">NO ABILITIES FOUND</string>
 
     <string name="menu_nature_list">Natures</string>
     <string name="nature_info">Nature</string>
-    <string name="no_natures">No Natures</string>
+    <string name="no_natures_found">NO NATURES FOUND</string>
 
     <string name="menu_items">Items</string>
     <string name="no_items_found">NO ITEMS FOUND</string>

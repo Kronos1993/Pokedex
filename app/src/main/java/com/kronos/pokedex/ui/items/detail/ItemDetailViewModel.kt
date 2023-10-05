@@ -18,7 +18,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.HashMap
 
 @HiltViewModel
 class ItemDetailViewModel @Inject constructor(
@@ -46,16 +48,24 @@ class ItemDetailViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             loading.postValue(true)
             var itemInfo: ItemInfo? = null
-
-            itemInfo = if (urlProvider.extractIdFromUrl(item.url) != null) {
-                itemRemoteRepository.getItem(urlProvider.extractIdFromUrl(item.url))
-            } else {
-                itemRemoteRepository.getItem(item.name)
+            try {
+                itemInfo = if (urlProvider.extractIdFromUrl(item.url) != null) {
+                    itemRemoteRepository.getItem(urlProvider.extractIdFromUrl(item.url))
+                } else {
+                    itemRemoteRepository.getItem(item.name)
+                }
+                getItemDescription(itemInfo)
+                getItemEffect(itemInfo)
+                postItemInfo(itemInfo)
+            }catch (e:Exception){
+                e.printStackTrace()
+                val err: Hashtable<String, String> = Hashtable()
+                err["error"] = e.toString()
+                //error.postValue(err)
+            }finally {
+                loading.postValue(false)
             }
-            getItemDescription(itemInfo)
-            getItemEffect(itemInfo)
-            postItemInfo(itemInfo)
-            loading.postValue(false)
+
         }
     }
 

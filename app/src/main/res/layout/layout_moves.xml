@@ -45,7 +45,7 @@
             style="@style/Widget.Pokedex.TextView.TextViewNormal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/no_moves"
+            android:text="@string/no_moves_found"
             android:textAlignment="center"
             app:textAllCaps="true"
             android:textSize="@dimen/text_20"

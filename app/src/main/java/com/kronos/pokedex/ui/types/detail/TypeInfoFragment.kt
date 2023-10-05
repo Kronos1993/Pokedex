@@ -140,7 +140,10 @@ class TypeInfoFragment : Fragment() {
     private fun initViewModel() {
         val bundle = arguments
         if (bundle?.get(CURRENT_TYPE) != null) {
-            viewModel.loadTypeInfo(bundle.get(CURRENT_TYPE) as NamedResourceApi)
+            if (bundle.get(CURRENT_TYPE) is NamedResourceApi)
+                viewModel.loadTypeInfo(bundle.get(CURRENT_TYPE) as NamedResourceApi)
+            else
+                viewModel.postAll(bundle.get(CURRENT_TYPE) as TypeInfo)
         } else {
             findNavController().popBackStack()
         }

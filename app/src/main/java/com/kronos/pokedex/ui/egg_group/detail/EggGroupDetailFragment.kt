@@ -74,7 +74,10 @@ class EggGroupDetailFragment : BottomSheetDialogFragment() {
         this.isCancelable = true
         val bundle = arguments
         if (bundle?.get(CURRENT_EGG_GROUP) != null) {
-            viewModel.loadEggGroupInfo((bundle.get(CURRENT_EGG_GROUP) as NamedResourceApi))
+            if(bundle.get(CURRENT_EGG_GROUP) is NamedResourceApi)
+                viewModel.loadEggGroupInfo((bundle.get(CURRENT_EGG_GROUP) as NamedResourceApi))
+            else
+                viewModel.postEggGroupInfo((bundle.get(CURRENT_EGG_GROUP) as EggGroupInfo))
         } else {
             hideDialog()
         }
@@ -124,9 +127,13 @@ class EggGroupDetailFragment : BottomSheetDialogFragment() {
 
     override fun onDestroyView() {
         binding.unbind()
+        super.onDestroyView()
+    }
+
+    override fun onPause() {
         viewModel.postEggGroupInfo(EggGroupInfo())
         viewModel.pokemonListAdapter = WeakReference(null)
-        super.onDestroyView()
+        super.onPause()
     }
 
 }

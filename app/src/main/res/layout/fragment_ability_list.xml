@@ -15,15 +15,42 @@
         android:layout_height="match_parent"
         tools:context=".ui.pokemon.list.PokemonListFragment">
 
-        <include
-            android:id="@+id/layout_ability_list"
-            layout="@layout/layout_abilities"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPokemonAbilities"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_pokemon_ability" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text_no_abilities"
+            style="@style/Widget.Pokedex.TextView.TextViewNormal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_abilities_found"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_20"
+            app:handle_visibility="@{viewModel.abilityList.size()==0}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_refresh"
+            style="@style/Widget.Pokedex.Button.IconOnly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:handle_visibility="@{viewModel.abilityList.size()==0}"
+            app:icon="@drawable/ic_refresh"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_no_abilities" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

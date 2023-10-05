@@ -132,6 +132,11 @@ class PokedexFragment : Fragment() {
                 }
             }
         })
+
+        binding.btnRefresh.setOnClickListener {
+            if (viewModel.pokedexList.value.isNullOrEmpty())
+                viewModel.getPokedex()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

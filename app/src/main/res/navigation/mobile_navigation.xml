@@ -17,7 +17,8 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </fragment>
 
     <fragment
@@ -33,7 +34,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/nav_pokemon_list"
-            app:popUpToInclusive="false" />
+            app:launchSingleTop="true"/>
     </fragment>
 
     <fragment
@@ -43,17 +44,28 @@
         tools:layout="@layout/fragment_pokemon_detail">
         <action
             android:id="@+id/action_nav_pokemon_detail_to_nav_ability_info_dialog_fragment"
-            app:destination="@id/nav_ability_info_dialog" />
+            app:destination="@id/nav_ability_info_dialog"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_pokemon_detail_to_nav_move_info_dialog"
-            app:destination="@id/nav_move_info_dialog" />
+            app:destination="@id/nav_move_info_dialog"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
         <action
             android:id="@+id/action_nav_pokemon_detail_to_nav_type_detail"
             app:destination="@id/nav_type_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </fragment>
 
     <fragment
@@ -63,21 +75,28 @@
         tools:layout="@layout/layout_abilities">
         <action
             android:id="@+id/action_nav_ability_list_to_nav_ability_info_dialog"
-            app:destination="@id/nav_ability_info_dialog" />
+            app:destination="@id/nav_ability_info_dialog"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </fragment>
-    <dialog
+    <fragment
         android:id="@+id/nav_ability_info_dialog"
         android:name="com.kronos.pokedex.ui.abilities.dialog.AbilityInfoDialogFragment"
         android:label="@string/ability_info"
-        tools:layout="@layout/fragment_dialog_ability_info">
+        tools:layout="@layout/fragment_ability_info">
         <action
             android:id="@+id/action_nav_ability_info_dialog_to_nav_pokemon_detail"
             app:destination="@id/nav_pokemon_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </dialog>
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/nav_pokemon_list" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_move_list"
@@ -86,21 +105,28 @@
         tools:layout="@layout/fragment_nature_list">
         <action
             android:id="@+id/action_nav_move_list_to_nav_move_info_dialog"
-            app:destination="@id/nav_move_info_dialog" />
+            app:destination="@id/nav_move_info_dialog"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </fragment>
-    <dialog
+    <fragment
         android:id="@+id/nav_move_info_dialog"
         android:name="com.kronos.pokedex.ui.move.dialog.MoveInfoDialogFragment"
         android:label="@string/move_info"
-        tools:layout="@layout/fragment_dialog_move_info">
+        tools:layout="@layout/fragment_move_info">
         <action
             android:id="@+id/action_nav_move_info_dialog_to_nav_pokemon_detail"
             app:destination="@id/nav_pokemon_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </dialog>
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/nav_pokemon_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_nature_list"
@@ -109,11 +135,16 @@
         tools:layout="@layout/fragment_nature_list">
         <action
             android:id="@+id/action_nav_nature_list_to_nav_detail_info_dialog"
-            app:destination="@id/nav_detail_info_dialog" />
+            app:destination="@id/nav_nature_detail_info_dialog"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </fragment>
 
     <dialog
-        android:id="@+id/nav_detail_info_dialog"
+        android:id="@+id/nav_nature_detail_info_dialog"
         android:name="com.kronos.pokedex.ui.nature.dialog.NatureDetailDialogFragment"
         android:label="@string/nature_info"
         tools:layout="@layout/fragment_dialog_nature_info" />
@@ -125,7 +156,12 @@
         tools:layout="@layout/fragment_berries">
         <action
             android:id="@+id/action_nav_berries_to_nav_detail_berry_dialog"
-            app:destination="@id/nav_detail_berry_dialog" />
+            app:destination="@id/nav_detail_berry_dialog"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </fragment>
 
     <dialog
@@ -139,7 +175,8 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </dialog>
 
     <fragment
@@ -153,7 +190,8 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </fragment>
 
     <fragment
@@ -167,7 +205,8 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </fragment>
 
     <fragment
@@ -181,13 +220,13 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </fragment>
 
     <dialog
         android:id="@+id/nav_show_image"
         android:name="com.kronos.pokedex.ui.show_image.ShowImageDialogFragment"
-        android:label=""
         tools:layout="@layout/fragment_dialog_show_image" />
 
 
@@ -202,13 +241,13 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </fragment>
 
     <dialog
         android:id="@+id/nav_egg_group_detail"
         android:name="com.kronos.pokedex.ui.egg_group.detail.EggGroupDetailFragment"
-        android:label=""
         tools:layout="@layout/fragment_dialog_egg_grup_info">
         <action
             android:id="@+id/action_nav_egg_group_detail_to_nav_pokemon_detail"
@@ -216,7 +255,8 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </dialog>
 
 
@@ -231,7 +271,8 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:launchSingleTop="true"/>
     </fragment>
 
     <fragment

@@ -45,7 +45,7 @@
             style="@style/Widget.Pokedex.TextView.TextViewNormal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/no_natures"
+            android:text="@string/no_natures_found"
             app:textAllCaps="true"
             android:textAlignment="center"
             android:textSize="@dimen/text_20"
@@ -54,6 +54,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_refresh"
+            style="@style/Widget.Pokedex.Button.IconOnly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:handle_visibility="@{natures.size()==0}"
+            app:icon="@drawable/ic_refresh"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_no_natures" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

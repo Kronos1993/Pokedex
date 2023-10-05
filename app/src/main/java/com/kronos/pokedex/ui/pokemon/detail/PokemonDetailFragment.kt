@@ -144,6 +144,11 @@ class PokemonDetailFragment : Fragment() {
     }
 
     override fun onDestroy() {
+        binding.unbind()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
         viewModel.pokemonInfoPageAdapter = WeakReference(null)
         viewModel.pokemonAbilityAdapter = WeakReference(null)
         viewModel.pokemonSpriteAdapter = WeakReference(null)
@@ -162,6 +167,6 @@ class PokemonDetailFragment : Fragment() {
         viewModel.postPokemonInfo(null)
         viewModel.postSpecieInfo(null)
         binding.unbind()
-        super.onDestroy()
+        super.onPause()
     }
 }

@@ -28,7 +28,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             style="@style/Widget.Pokedex.TextView.TextViewNormal"
-            android:id="@+id/text_no_berries"
+            android:id="@+id/text_no_items"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -43,6 +43,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_refresh"
+            style="@style/Widget.Pokedex.Button.IconOnly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:handle_visibility="@{viewModel.itemList.size()==0}"
+            app:icon="@drawable/ic_refresh"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_no_items" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

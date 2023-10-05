@@ -10,6 +10,7 @@ import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
+import com.kronos.pokedex.domian.model.type.TypeInfo
 import com.kronos.pokedex.domian.repository.TypeRemoteRepository
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,6 +35,9 @@ class TypeListViewModel @Inject constructor(
     private val _typeOriginalList = MutableLiveData<MutableList<NamedResourceApi>>()
     val typeOriginalList = _typeOriginalList.asLiveData()
 
+    private val _typeInfoSelected = MutableLiveData<TypeInfo>()
+    val typeInfoSelected = _typeInfoSelected.asLiveData()
+
     private val _limit = MutableLiveData<Int>()
     val limit = _limit.asLiveData()
 
@@ -46,18 +50,21 @@ class TypeListViewModel @Inject constructor(
     var typeListAdapter: WeakReference<TypeAdapter?> = WeakReference(TypeAdapter())
 
     private fun postTypes(list: List<NamedResourceApi>) {
+        var typeList = mutableListOf<NamedResourceApi>()
         if (_typeList.value != null) {
-            var typelist = _typeList.value!!
-            list.forEach {
-                if (!(typelist as ArrayList).contains(it)) {
-                    typelist.add(it)
-                }
-            }
-            _typeList.postValue(typelist as MutableList<NamedResourceApi>?)
-        } else {
-            _typeList.postValue(list as MutableList<NamedResourceApi>?)
+            typeList = _typeList.value!!
         }
+        list.forEach {
+            if (!(typeList as ArrayList).contains(it)) {
+                typeList.add(it)
+            }
+        }
+        _typeList.postValue(typeList as MutableList<NamedResourceApi>?)
         loading.postValue(false)
+    }
+
+    fun postTypeInfoSelected(type: TypeInfo) {
+        _typeInfoSelected.postValue(type)
     }
 
     private fun postTypeListFiltered(list: List<NamedResourceApi>) {
@@ -65,17 +72,16 @@ class TypeListViewModel @Inject constructor(
     }
 
     private fun postOriginalTypeList(list: List<NamedResourceApi>) {
+        var typeList = mutableListOf<NamedResourceApi>()
         if (_typeOriginalList.value != null) {
-            var pokelist = _typeOriginalList.value!!
-            list.forEach {
-                if (!(pokelist as ArrayList).contains(it)) {
-                    pokelist.add(it)
-                }
-            }
-            _typeOriginalList.postValue(pokelist as MutableList<NamedResourceApi>?)
-        } else {
-            _typeOriginalList.postValue(list as MutableList<NamedResourceApi>?)
+            typeList = _typeOriginalList.value!!
         }
+        list.forEach {
+            if (!(typeList as ArrayList).contains(it)) {
+                typeList.add(it)
+            }
+        }
+        _typeOriginalList.postValue(typeList as MutableList<NamedResourceApi>?)
     }
 
     fun getTypes() {
@@ -97,6 +103,23 @@ class TypeListViewModel @Inject constructor(
                 setOffset(offset.value!! + limit.value!!)
                 getTypes()
             }
+        }
+    }
+
+    fun loadTypeInfo(type: NamedResourceApi) {
+        viewModelScope.launch(Dispatchers.IO) {
+            loading.postValue(true)
+            var typeInfo: TypeInfo = if(!type.url.isNullOrEmpty()){
+                if (urlProvider.extractIdFromUrl(type.url) != null) {
+                    typeRemoteRepository.getTypeInfo(urlProvider.extractIdFromUrl(type.url))
+                } else {
+                    typeRemoteRepository.getTypeInfo(type.name)
+                }
+            }else{
+                typeRemoteRepository.getTypeInfo(type.name)
+            }
+            postTypeInfoSelected(typeInfo)
+            loading.postValue(false)
         }
     }
 
