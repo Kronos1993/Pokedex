@@ -183,6 +183,7 @@ class EggGroupsFragment : Fragment() {
     }
 
     override fun onPause() {
+        viewModel.postEggGroupInfoSelected(EggGroupInfo())
         binding.unbind()
         super.onPause()
     }

@@ -179,9 +179,9 @@ class NatureListFragment : Fragment() {
     }
 
     override fun onPause() {
+        viewModel.postNatureInfo(NatureDetail())
         binding.unbind()
         super.onPause()
     }
-
 
 }
