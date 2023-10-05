@@ -8,6 +8,7 @@ import com.kronos.core.view_model.ParentViewModel
 import com.kronos.logger.LoggerType
 import com.kronos.logger.interfaces.ILogger
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.egg_group.EggGroupInfo
 import com.kronos.pokedex.domian.repository.EggGroupRemoteRepository
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEggGroupAdapter
 import com.kronos.webclient.UrlProvider
@@ -32,6 +33,9 @@ class EggGroupsViewModel @Inject constructor(
 
     private val _eggGroupOriginalList = MutableLiveData<MutableList<NamedResourceApi>>()
     val eggGroupOriginalList = _eggGroupOriginalList.asLiveData()
+
+    private val _eggGroupInfoSelected = MutableLiveData<EggGroupInfo>()
+    val eggGroupInfoSelected = _eggGroupInfoSelected.asLiveData()
 
     var eggGroupAdapter: WeakReference<PokemonEggGroupAdapter?> = WeakReference(PokemonEggGroupAdapter())
 
@@ -58,6 +62,10 @@ class EggGroupsViewModel @Inject constructor(
         loading.postValue(false)
     }
 
+    fun postEggGroupInfoSelected(eggGroup: EggGroupInfo) {
+        _eggGroupInfoSelected.postValue(eggGroup)
+    }
+
     private fun postEggGroupOriginalList(list: List<NamedResourceApi>) {
         var itemslist = mutableListOf<NamedResourceApi>()
         if (_eggGroupOriginalList.value != null) {
@@ -82,6 +90,21 @@ class EggGroupsViewModel @Inject constructor(
                 postEggGroupOriginalList(responseList.results)
             }
             call.await()
+        }
+    }
+
+    fun loadEggGroupInfo(eggGroup: NamedResourceApi) {
+        viewModelScope.launch(Dispatchers.IO) {
+            loading.postValue(true)
+            var eggGroupInfo: EggGroupInfo? = null
+
+            eggGroupInfo = if (urlProvider.extractIdFromUrl(eggGroup.url) != null) {
+                eggGroupRemoteRepository.getEggGroup(urlProvider.extractIdFromUrl(eggGroup.url))
+            } else {
+                eggGroupRemoteRepository.getEggGroup(eggGroup.name)
+            }
+            postEggGroupInfoSelected(eggGroupInfo)
+            loading.postValue(false)
         }
     }
 

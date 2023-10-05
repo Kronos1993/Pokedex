@@ -51,7 +51,7 @@ class NatureDetailDialogFragment : BottomSheetDialogFragment() {
 
     private fun handleNatureDetail(natureDetail: NatureDetail) {
         viewModel.getNatureName(natureDetail)
-
+        initView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,15 +70,16 @@ class NatureDetailDialogFragment : BottomSheetDialogFragment() {
         this.isCancelable = true
         val bundle = arguments
         if (bundle?.get(CURRENT_NATURE) != null) {
-            viewModel.loadNatureInfo((bundle.get(CURRENT_NATURE) as NamedResourceApi))
-            initView()
+            if ((bundle.get(CURRENT_NATURE) is NamedResourceApi))
+                viewModel.loadNatureInfo((bundle.get(CURRENT_NATURE) as NamedResourceApi))
+            else
+                viewModel.postNatureInfo((bundle.get(CURRENT_NATURE) as NatureDetail))
         } else {
             hideDialog()
         }
     }
 
     private fun initView() {
-
     }
 
     private fun hideDialog() {

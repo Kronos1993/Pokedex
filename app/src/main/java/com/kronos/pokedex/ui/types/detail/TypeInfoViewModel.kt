@@ -70,9 +70,7 @@ class TypeInfoViewModel @Inject constructor(
     val moveList = _moveList.asLiveData()
 
     private fun postTypeInfo(type: TypeInfo) {
-        viewModelScope.run {
-            _typeInfo.postValue(type)
-        }
+        _typeInfo.postValue(type)
     }
 
     private fun postPokemonList(list: List<PokemonDexEntry>) {
@@ -117,20 +115,24 @@ class TypeInfoViewModel @Inject constructor(
             }else{
                 typeRemoteRepository.getTypeInfo(type.name)
             }
-            postTypeInfo(typeInfo)
-
-            _doubleDamageFrom.postValue(typeInfo.damageRelations.doubleDamageFrom.map { DamageRelationContainer(it.name,"x2") })
-            _halfDamageFrom.postValue(typeInfo.damageRelations.halfDamageFrom.map { DamageRelationContainer(it.name,"x1/2") })
-            _noDamageFrom.postValue(typeInfo.damageRelations.noDamageFrom.map { DamageRelationContainer(it.name,"x0") })
-
-            _doubleDamageTo.postValue(typeInfo.damageRelations.doubleDamageTo.map { DamageRelationContainer(it.name,"x2") })
-            _halfDamageTo.postValue(typeInfo.damageRelations.halfDamageTo.map { DamageRelationContainer(it.name,"x1/2") })
-            _noDamageTo.postValue(typeInfo.damageRelations.noDamageTo.map { DamageRelationContainer(it.name,"x0") })
-
-            postMoveList(typeInfo.moves)
-            postPokemonList(typeInfo.pokemon.mapIndexed { index, namedResourceApi -> PokemonDexEntry(index,namedResourceApi) })
+            postAll(typeInfo)
             loading.postValue(false)
         }
+    }
+
+    public fun postAll(typeInfo: TypeInfo) {
+        postTypeInfo(typeInfo)
+
+        _doubleDamageFrom.postValue(typeInfo.damageRelations.doubleDamageFrom.map { DamageRelationContainer(it.name,"x2") })
+        _halfDamageFrom.postValue(typeInfo.damageRelations.halfDamageFrom.map { DamageRelationContainer(it.name,"x1/2") })
+        _noDamageFrom.postValue(typeInfo.damageRelations.noDamageFrom.map { DamageRelationContainer(it.name,"x0") })
+
+        _doubleDamageTo.postValue(typeInfo.damageRelations.doubleDamageTo.map { DamageRelationContainer(it.name,"x2") })
+        _halfDamageTo.postValue(typeInfo.damageRelations.halfDamageTo.map { DamageRelationContainer(it.name,"x1/2") })
+        _noDamageTo.postValue(typeInfo.damageRelations.noDamageTo.map { DamageRelationContainer(it.name,"x0") })
+
+        postMoveList(typeInfo.moves)
+        postPokemonList(typeInfo.pokemon.mapIndexed { index, namedResourceApi -> PokemonDexEntry(index,namedResourceApi) })
     }
 
     fun getTypeName(type: TypeInfo){

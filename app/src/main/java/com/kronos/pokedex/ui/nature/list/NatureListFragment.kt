@@ -15,6 +15,7 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentNatureListBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.nature.NatureDetail
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 import java.util.*
@@ -54,12 +55,18 @@ class NatureListFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.natureList.observe(this.viewLifecycleOwner, ::handleNatureList)
+        viewModel.natureInfoSelected.observe(this.viewLifecycleOwner, ::handleNatureDetail)
         viewModel.loading.observe(this.viewLifecycleOwner, ::handleLoading)
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
 
+    private fun handleNatureDetail(natureDetail: NatureDetail) {
+        val bundle = Bundle()
+        bundle.putSerializable(CURRENT_NATURE, natureDetail)
+        findNavController().navigate(R.id.action_nav_nature_list_to_nav_detail_info_dialog, bundle)
+    }
 
-    private fun handleError(hashtable: Hashtable<String, String>) {
+        private fun handleError(hashtable: Hashtable<String, String>) {
         if (hashtable["error"] != null) {
             if (hashtable["error"]!!.isNotEmpty()) {
                 show(
@@ -116,9 +123,7 @@ class NatureListFragment : Fragment() {
                 if (!searchView.query.isNullOrBlank()) {
                     viewModel.filterNature("")
                 }
-                val bundle = Bundle()
-                bundle.putSerializable(CURRENT_NATURE, t)
-                findNavController().navigate(R.id.action_nav_nature_list_to_nav_detail_info_dialog, bundle)
+                viewModel.loadNatureInfo(t)
             }
         })
 
