@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.pokedex.R
-import com.kronos.pokedex.databinding.FragmentDialogBerryInfoBindingImpl
+import com.kronos.pokedex.databinding.FragmentDialogBerryInfoBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.item.BerryInfo
 import com.kronos.pokedex.ui.berries.list.CURRENT_BERRY
@@ -27,7 +27,7 @@ import java.lang.ref.WeakReference
 
 @AndroidEntryPoint
 class BerryInfoDialogFragment : BottomSheetDialogFragment() {
-    private val binding by fragmentBinding<FragmentDialogBerryInfoBindingImpl>(R.layout.fragment_dialog_berry_info)
+    private val binding by fragmentBinding<FragmentDialogBerryInfoBinding>(R.layout.fragment_dialog_berry_info)
     private val viewModel by viewModels<BerryInfoViewModel>()
 
     override fun onCreateView(
