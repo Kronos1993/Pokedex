@@ -37,7 +37,7 @@ class AboutFragment : Fragment() {
     }
 
     private fun getCopyRight(): String {
-        return String.format(getString(R.string.copy_right), Calendar.getInstance().get(Calendar.YEAR));
+        return String.format(getString(R.string.copy_right), 2023);
     }
 
 
