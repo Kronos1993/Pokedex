@@ -166,20 +166,20 @@ class PokemonDetailFragment : Fragment() {
         viewModel.postPokemonSprites(listOf())
         viewModel.postPokemonOtherForms(listOf())
         viewModel.postAbilityInfo(AbilityInfo())
-        /*****************************************/
+        /********************************/
         /***Pokemon evolution fragment***/
         viewModel.postPokemonEvolutionChainList(listOf())
-        /*****************************************/
+        /****************************/
         /***Pokemon moves fragment***/
         viewModel.postPokemonMoves(listOf())
         viewModel.postMoveInfo(MoveInfo())
         viewModel.showMove.set(null)
-        /*****************************************/
+        /****************************/
         /***Pokemon stats fragment***/
         viewModel.postPokemonStats(listOf())
         viewModel.statsTotal.set(null)
         viewModel.pokemonStatAdapter = WeakReference(null)
-        /*****************************************/
+        /****************************/
         super.onPause()
     }
 }
