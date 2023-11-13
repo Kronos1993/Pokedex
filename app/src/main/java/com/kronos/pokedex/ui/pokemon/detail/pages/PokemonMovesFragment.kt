@@ -50,6 +50,7 @@ class PokemonMovesFragment : Fragment() {
             if (findNavController().currentDestination?.id == R.id.nav_pokemon_detail) {
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_MOVE, moveInfo)
+                viewModel.postMoveInfo(MoveInfo())
                 findNavController().navigate(R.id.action_nav_pokemon_detail_to_nav_move_info_dialog, bundle)
             }
         }
