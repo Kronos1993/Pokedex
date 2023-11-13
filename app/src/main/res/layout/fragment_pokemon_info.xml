@@ -139,8 +139,8 @@
 
                         <include
                             android:id="@+id/layoutTypes"
-                            layout="@layout/layout_types"
                             handle_visibility="@{viewModel.pokemonInfo.types.size()>0}"
+                            layout="@layout/layout_types"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             app:layout_constraintBottom_toTopOf="@id/textViewPokemonDescription"
@@ -507,10 +507,10 @@
                                     style="@style/Widget.Pokedex.Pokemon.Gender.LinearProgressIndicator"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:indeterminate="false"
-                                    android:max="100"
                                     android:layout_marginTop="@dimen/margin_5"
                                     android:layout_marginBottom="@dimen/margin_5"
+                                    android:indeterminate="false"
+                                    android:max="100"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -533,9 +533,9 @@
 
                                 <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/appCompatImageView2"
+                                    handle_visibility="@{viewModel.pokemonGenderPossibility.male>0}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    handle_visibility="@{viewModel.pokemonGenderPossibility.male>0}"
                                     app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonGenderRateMaleLabel"
                                     app:layout_constraintStart_toEndOf="@+id/textViewPokemonGenderRateMaleLabel"
                                     app:layout_constraintTop_toTopOf="@+id/textViewPokemonGenderRateMaleLabel"
@@ -572,9 +572,9 @@
 
                                 <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/appCompatImageView3"
+                                    handle_visibility="@{viewModel.pokemonGenderPossibility.female>0}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    handle_visibility="@{viewModel.pokemonGenderPossibility.female>0}"
                                     android:layout_marginEnd="@dimen/margin_10"
                                     app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonGenderRateFemaleLabel"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -593,10 +593,10 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/containerAbility"
+                    handle_visibility="@{viewModel.pokemonInfo.abilities.size()>0}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    handle_visibility="@{viewModel.pokemonInfo.abilities.size()>0}"
                     app:layout_constraintEnd_toStartOf="@+id/guideline9"
                     app:layout_constraintStart_toStartOf="@+id/guideline1"
                     app:layout_constraintTop_toBottomOf="@id/containerEggGroups">

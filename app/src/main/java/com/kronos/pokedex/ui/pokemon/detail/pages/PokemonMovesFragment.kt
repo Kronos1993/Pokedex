@@ -1,6 +1,7 @@
 package com.kronos.pokedex.ui.pokemon.detail.pages
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -49,6 +50,7 @@ class PokemonMovesFragment : Fragment() {
             if (findNavController().currentDestination?.id == R.id.nav_pokemon_detail) {
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_MOVE, moveInfo)
+                viewModel.postMoveInfo(MoveInfo())
                 findNavController().navigate(R.id.action_nav_pokemon_detail_to_nav_move_info_dialog, bundle)
             }
         }
@@ -56,7 +58,7 @@ class PokemonMovesFragment : Fragment() {
 
     private fun handlePokemonMoves(pokemonMoves: List<MoveList>) {
         viewModel.moveByPokemonAdapter.get()?.submitList(pokemonMoves)
-        viewModel.moveByPokemonAdapter.get()?.notifyDataSetChanged()
+        viewModel.moveByPokemonAdapter.get()?.notifyItemRangeChanged(0,pokemonMoves.size)
         binding.layoutMove.run {
             moves = pokemonMoves
         }
@@ -87,7 +89,6 @@ class PokemonMovesFragment : Fragment() {
 
     override fun onPause() {
         binding.unbind()
-        viewModel.postMoveInfo(MoveInfo())
         super.onPause()
     }
 }
