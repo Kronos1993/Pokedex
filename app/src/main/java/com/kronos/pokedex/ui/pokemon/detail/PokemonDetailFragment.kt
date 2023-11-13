@@ -95,15 +95,15 @@ class PokemonDetailFragment : Fragment() {
                     com.kronos.resources.R.color.colorSecondaryVariant
                 )!!.dismiss()
             }
-        }catch (e:Exception){}
+        }catch (_:Exception){}
 
     }
 
     private fun initViews() {
-        var pageInfo = Triple("Info",PokemonInfoFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_info))
-        var pageEvo = Triple("Evolution",PokemonEvolutionFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_evolution))
-        var pageStats = Triple("Stats",PokemonStatsFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_stats))
-        var pageMoves = Triple("Moves",PokemonMovesFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_tm))
+        val pageInfo = Triple("Info",PokemonInfoFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_info))
+        val pageEvo = Triple("Evolution",PokemonEvolutionFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_evolution))
+        val pageStats = Triple("Stats",PokemonStatsFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_stats))
+        val pageMoves = Triple("Moves",PokemonMovesFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_tm))
 
         viewModel.pokemonInfoPageAdapter = WeakReference(
             PokemonInfoPageAdapter(
@@ -137,7 +137,7 @@ class PokemonDetailFragment : Fragment() {
         menu.clear()
         // Inflate the menu; this adds items to the action bar if it is present.
         inflater.inflate(R.menu.screen_detail, menu)
-        super.onCreateOptionsMenu(menu, inflater);
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onDestroyView() {
@@ -146,6 +146,12 @@ class PokemonDetailFragment : Fragment() {
     }
 
     override fun onDestroy() {
+        binding.unbind()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        binding.unbind()
         /***Pokemon info fragment***/
         viewModel.pokemonInfoPageAdapter = WeakReference(null)
         viewModel.pokemonAbilityAdapter = WeakReference(null)
@@ -160,26 +166,20 @@ class PokemonDetailFragment : Fragment() {
         viewModel.postPokemonSprites(listOf())
         viewModel.postPokemonOtherForms(listOf())
         viewModel.postAbilityInfo(AbilityInfo())
-        /*****************************************/
+        /********************************/
         /***Pokemon evolution fragment***/
         viewModel.postPokemonEvolutionChainList(listOf())
-        /*****************************************/
+        /****************************/
         /***Pokemon moves fragment***/
         viewModel.postPokemonMoves(listOf())
         viewModel.postMoveInfo(MoveInfo())
         viewModel.showMove.set(null)
-        /*****************************************/
+        /****************************/
         /***Pokemon stats fragment***/
         viewModel.postPokemonStats(listOf())
         viewModel.statsTotal.set(null)
         viewModel.pokemonStatAdapter = WeakReference(null)
-        /*****************************************/
-        binding.unbind()
-        super.onDestroy()
-    }
-
-    override fun onPause() {
-        binding.unbind()
+        /****************************/
         super.onPause()
     }
 }
