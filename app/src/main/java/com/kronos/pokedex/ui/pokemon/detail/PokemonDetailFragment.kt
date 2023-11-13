@@ -13,6 +13,8 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonDetailBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.ability.AbilityInfo
+import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonEvolutionFragment
@@ -144,28 +146,39 @@ class PokemonDetailFragment : Fragment() {
     }
 
     override fun onDestroy() {
+        /***Pokemon info fragment***/
+        viewModel.pokemonInfoPageAdapter = WeakReference(null)
+        viewModel.pokemonAbilityAdapter = WeakReference(null)
+        viewModel.pokemonSpriteAdapter = WeakReference(null)
+        viewModel.pokemonTypeAdapter = WeakReference(null)
+        viewModel.pokemonGenera.set(null)
+        viewModel.pokemonName.set(null)
+        viewModel.pokemonDescription.set(null)
+        viewModel.buttonSelected.set(null)
+        viewModel.postPokemonInfo(null)
+        viewModel.postSpecieInfo(null)
+        viewModel.postPokemonSprites(listOf())
+        viewModel.postPokemonOtherForms(listOf())
+        viewModel.postAbilityInfo(AbilityInfo())
+        /*****************************************/
+        /***Pokemon evolution fragment***/
+        viewModel.postPokemonEvolutionChainList(listOf())
+        /*****************************************/
+        /***Pokemon moves fragment***/
+        viewModel.postPokemonMoves(listOf())
+        viewModel.postMoveInfo(MoveInfo())
+        viewModel.showMove.set(null)
+        /*****************************************/
+        /***Pokemon stats fragment***/
+        viewModel.postPokemonStats(listOf())
+        viewModel.statsTotal.set(null)
+        viewModel.pokemonStatAdapter = WeakReference(null)
+        /*****************************************/
         binding.unbind()
         super.onDestroy()
     }
 
     override fun onPause() {
-        viewModel.pokemonInfoPageAdapter = WeakReference(null)
-        viewModel.pokemonAbilityAdapter = WeakReference(null)
-        viewModel.pokemonSpriteAdapter = WeakReference(null)
-        viewModel.pokemonStatAdapter = WeakReference(null)
-        viewModel.pokemonTypeAdapter = WeakReference(null)
-        viewModel.postPokemonMoves(listOf())
-        viewModel.postPokemonStats(listOf())
-        viewModel.postPokemonSprites(listOf())
-        viewModel.postPokemonOtherForms(listOf())
-        viewModel.pokemonGenera.set(null)
-        viewModel.pokemonName.set(null)
-        viewModel.pokemonDescription.set(null)
-        viewModel.statsTotal.set(null)
-        viewModel.showMove.set(null)
-        viewModel.buttonSelected.set(null)
-        viewModel.postPokemonInfo(null)
-        viewModel.postSpecieInfo(null)
         binding.unbind()
         super.onPause()
     }

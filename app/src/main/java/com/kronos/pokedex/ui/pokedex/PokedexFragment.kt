@@ -98,7 +98,7 @@ class PokedexFragment : Fragment() {
 
     private fun handlePokedexList(list: List<NamedResourceApi>) {
         viewModel.pokedexListAdapter.get()?.submitList(list)
-        viewModel.pokedexListAdapter.get()?.notifyDataSetChanged()
+        viewModel.pokedexListAdapter.get()?.notifyItemRangeChanged(0,list.size)
     }
 
     private fun initViews() {

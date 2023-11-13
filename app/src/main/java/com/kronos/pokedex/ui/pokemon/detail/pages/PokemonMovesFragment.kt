@@ -1,6 +1,7 @@
 package com.kronos.pokedex.ui.pokemon.detail.pages
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -56,7 +57,7 @@ class PokemonMovesFragment : Fragment() {
 
     private fun handlePokemonMoves(pokemonMoves: List<MoveList>) {
         viewModel.moveByPokemonAdapter.get()?.submitList(pokemonMoves)
-        viewModel.moveByPokemonAdapter.get()?.notifyDataSetChanged()
+        viewModel.moveByPokemonAdapter.get()?.notifyItemRangeChanged(0,pokemonMoves.size)
         binding.layoutMove.run {
             moves = pokemonMoves
         }
@@ -87,7 +88,6 @@ class PokemonMovesFragment : Fragment() {
 
     override fun onPause() {
         binding.unbind()
-        viewModel.postMoveInfo(MoveInfo())
         super.onPause()
     }
 }

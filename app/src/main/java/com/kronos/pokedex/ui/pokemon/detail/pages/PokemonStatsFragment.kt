@@ -1,6 +1,7 @@
 package com.kronos.pokedex.ui.pokemon.detail.pages
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -41,7 +42,7 @@ class PokemonStatsFragment : Fragment() {
 
     private fun handlePokemonStats(pokemonStats: List<Stat>) {
         viewModel.pokemonStatAdapter.get()?.submitList(pokemonStats)
-        viewModel.pokemonStatAdapter.get()?.notifyDataSetChanged()
+        viewModel.pokemonStatAdapter.get()?.notifyItemRangeChanged(0,pokemonStats.size)
     }
 
     private fun initViews() {

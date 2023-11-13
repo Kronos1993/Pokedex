@@ -195,7 +195,7 @@ class PokemonDetailViewModel @Inject constructor(
         _pokemonEvolutionChain.postValue(evolutionChain)
     }
 
-    private fun postPokemonEvolutionChainList(evolutionChainList: List<ChainLink>) {
+    fun postPokemonEvolutionChainList(evolutionChainList: List<ChainLink>) {
         _pokemonEvolutionList.postValue(evolutionChainList)
     }
 

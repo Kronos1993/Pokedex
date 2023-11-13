@@ -98,7 +98,7 @@ class PokemonListFragment : Fragment() {
                     com.kronos.resources.R.color.colorSecondaryVariant
                 )!!.dismiss()
             }
-        }catch (e:IllegalArgumentException){
+        } catch (e: IllegalArgumentException) {
             e.printStackTrace()
         }
 
@@ -107,30 +107,37 @@ class PokemonListFragment : Fragment() {
     private fun handlePokemonList(list: List<PokemonDexEntry>) {
         binding.layoutPokemonList.run { pokemonList = list }
         viewModel.pokemonListAdapter.get()?.submitList(list)
-        viewModel.pokemonListAdapter.get()?.notifyDataSetChanged()
+        viewModel.pokemonListAdapter.get()?.notifyItemRangeChanged(0, list.size)
         binding.layoutPokemonList.recyclerViewPokemonList.postDelayed({
-            binding.layoutPokemonList.recyclerViewPokemonList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let{ it ?: 0 })
+            binding.layoutPokemonList.recyclerViewPokemonList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
+                it ?: 0
+            })
         }, 150)
     }
 
     private fun initViews() {
-        binding.layoutPokemonList.recyclerViewPokemonList.layoutManager = GridLayoutManager(context,2)
+        binding.layoutPokemonList.recyclerViewPokemonList.layoutManager =
+            GridLayoutManager(context, 2)
         binding.layoutPokemonList.recyclerViewPokemonList.setHasFixedSize(false)
         if (viewModel.pokemonListAdapter.get() == null)
             viewModel.pokemonListAdapter = WeakReference(PokemonListAdapter())
         viewModel.pokemonListAdapter.get()?.setUrlProvider(viewModel.urlProvider)
-        binding.layoutPokemonList.recyclerViewPokemonList.adapter = viewModel.pokemonListAdapter.get()
+        binding.layoutPokemonList.recyclerViewPokemonList.adapter =
+            viewModel.pokemonListAdapter.get()
         viewModel.pokemonListAdapter.get()?.setAdapterItemClick(object :
             AdapterItemClickListener<PokemonDexEntry> {
             override fun onItemClick(t: PokemonDexEntry, pos: Int) {
-                if(searchView!=null) searchView.clearFocus()
+                if (searchView != null) searchView.clearFocus()
                 if (!searchView.query.isNullOrBlank()) {
                     viewModel.filterPokemon("")
                 }
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_POKEMON, t.pokemon)
                 viewModel.setRecyclerLastPosition(pos)
-                findNavController().navigate(R.id.action_nav_pokemon_list_to_nav_pokemon_detail, bundle)
+                findNavController().navigate(
+                    R.id.action_nav_pokemon_list_to_nav_pokemon_detail,
+                    bundle
+                )
             }
 
         })
