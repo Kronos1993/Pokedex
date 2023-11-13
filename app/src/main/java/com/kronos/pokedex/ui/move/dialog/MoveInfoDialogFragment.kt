@@ -22,6 +22,7 @@ import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.lang.ref.WeakReference
 
@@ -89,9 +90,13 @@ class MoveInfoDialogFragment : Fragment() {
     }
 
     private fun handlePokemonList(list: MutableList<PokemonDexEntry>?) {
-        binding.layoutPokemonList.pokemonList = list
-        viewModel.pokemonListAdapter.get()?.submitList(list)
-        viewModel.pokemonListAdapter.get()?.notifyDataSetChanged()
+        runBlocking{
+            binding.layoutPokemonList.run {
+                pokemonList = list
+            }
+            viewModel.pokemonListAdapter.get()?.submitList(list)
+            viewModel.pokemonListAdapter.get()?.notifyItemRangeChanged(0,list!!.size)
+        }
     }
 
     private fun initView() {

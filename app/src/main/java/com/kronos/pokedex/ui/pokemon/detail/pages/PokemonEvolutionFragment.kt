@@ -1,6 +1,7 @@
 package com.kronos.pokedex.ui.pokemon.detail.pages
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -40,7 +41,7 @@ class PokemonEvolutionFragment : Fragment() {
 
     private fun handlePokemonEvolution(list: List<ChainLink>) {
         viewModel.evolutionPokemonAdapter.get()?.submitList(list)
-        viewModel.evolutionPokemonAdapter.get()?.notifyDataSetChanged()
+        viewModel.evolutionPokemonAdapter.get()?.notifyItemRangeChanged(0,list.size)
         binding.invalidateAll()
     }
 
@@ -59,7 +60,6 @@ class PokemonEvolutionFragment : Fragment() {
             AdapterItemClickListener<ChainLink> {
             override fun onItemClick(t: ChainLink, pos: Int) {
                 viewModel.loadPokemonInfo(t.species)
-
             }
         })
 

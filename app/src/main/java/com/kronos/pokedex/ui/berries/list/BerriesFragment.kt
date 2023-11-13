@@ -15,6 +15,7 @@ import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentBerriesBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
+import com.kronos.pokedex.domian.model.item.BerryInfo
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 import java.util.*
@@ -53,6 +54,7 @@ class BerriesFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.berryList.observe(this.viewLifecycleOwner, ::handleBerries)
+        viewModel.berryInfoSelected.observe(this.viewLifecycleOwner, ::handleBerrieInfoSelected)
         viewModel.loading.observe(this.viewLifecycleOwner, ::handleLoading)
         viewModel.error.observe(this.viewLifecycleOwner, ::handleError)
     }
@@ -101,6 +103,14 @@ class BerriesFragment : Fragment() {
         viewModel.berryListAdapter.get()?.notifyDataSetChanged()
     }
 
+    private fun handleBerrieInfoSelected(berryInfo: BerryInfo) {
+        if(!berryInfo.name.isNullOrEmpty()){
+            val bundle = Bundle()
+            bundle.putSerializable(CURRENT_BERRY, berryInfo)
+            findNavController().navigate(R.id.action_nav_berries_to_nav_detail_berry_dialog, bundle)
+        }
+    }
+
     private fun initViews() {
         binding.recyclerViewBerryList.layoutManager = GridLayoutManager(context,2)
         binding.recyclerViewBerryList.setHasFixedSize(false)
@@ -114,9 +124,7 @@ class BerriesFragment : Fragment() {
                 if (!searchView.query.isNullOrBlank()) {
                     viewModel.filterBerries("")
                 }
-                val bundle = Bundle()
-                bundle.putSerializable(CURRENT_BERRY, t)
-                findNavController().navigate(R.id.action_nav_berries_to_nav_detail_berry_dialog, bundle)
+                viewModel.loadBerryInfo(t)
             }
         })
 
@@ -177,6 +185,7 @@ class BerriesFragment : Fragment() {
     }
 
     override fun onPause() {
+        viewModel.postBerryInfoSelected(BerryInfo())
         binding.unbind()
         super.onPause()
     }

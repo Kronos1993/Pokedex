@@ -1,6 +1,7 @@
 package com.kronos.pokedex.ui.pokemon.detail.pages
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -92,7 +93,7 @@ class PokemonInfoFragment : Fragment() {
             }
 
             viewModel.pokemonTypeAdapter.get()?.submitList(pokemonInfo.types)
-            viewModel.pokemonTypeAdapter.get()?.notifyDataSetChanged()
+            viewModel.pokemonTypeAdapter.get()?.notifyItemRangeChanged(0,pokemonInfo.types.size)
             if (pokemonInfo.types.size > 1)
                 binding.layoutTypes.recyclerViewPokemonType.layoutManager =
                     GridLayoutManager(context, 2)
@@ -101,10 +102,10 @@ class PokemonInfoFragment : Fragment() {
                 binding.recyclerViewEggGroup.layoutManager = GridLayoutManager(context,2)
 
             viewModel.pokemonEggGroupAdapter.get()?.submitList(pokemonInfo.specieInfo.eggGroup)
-            viewModel.pokemonEggGroupAdapter.get()?.notifyDataSetChanged()
+            viewModel.pokemonEggGroupAdapter.get()?.notifyItemRangeChanged(0,pokemonInfo.specieInfo.eggGroup.size)
 
             viewModel.pokemonAbilityAdapter.get()?.submitList(pokemonInfo.abilities)
-            viewModel.pokemonAbilityAdapter.get()?.notifyDataSetChanged()
+            viewModel.pokemonAbilityAdapter.get()?.notifyItemRangeChanged(0,pokemonInfo.abilities.size)
 
             if (pokemonInfo.abilities.size > 1)
                 binding.layoutAbilities.recyclerViewPokemonAbilities.layoutManager =
@@ -125,12 +126,12 @@ class PokemonInfoFragment : Fragment() {
 
     private fun handlePokemonSprites(sprites: List<Pair<String, String>>) {
         viewModel.pokemonSpriteAdapter.get()?.submitList(sprites)
-        viewModel.pokemonSpriteAdapter.get()?.notifyDataSetChanged()
+        viewModel.pokemonSpriteAdapter.get()?.notifyItemRangeChanged(0,sprites.size)
     }
 
     private fun handlePokemonOtherForms(sprites: List<Pair<String, String>>) {
         viewModel.pokemonOtherFormsAdapter.get()?.submitList(sprites)
-        viewModel.pokemonOtherFormsAdapter.get()?.notifyDataSetChanged()
+        viewModel.pokemonOtherFormsAdapter.get()?.notifyItemRangeChanged(0,sprites.size)
     }
 
     private fun initViews() {
@@ -229,7 +230,6 @@ class PokemonInfoFragment : Fragment() {
 
     override fun onPause() {
         binding.unbind()
-        viewModel.postAbilityInfo(AbilityInfo())
         super.onPause()
     }
 }
