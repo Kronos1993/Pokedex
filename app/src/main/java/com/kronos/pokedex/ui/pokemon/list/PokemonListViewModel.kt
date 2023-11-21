@@ -84,39 +84,35 @@ class PokemonListViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 var id = urlProvider.extractIdFromUrl(pokedex.url)
-                var call = async {
-                    val responseList = pokedexRemoteRepository.getPokedex(id)
-                    postPokemonList(responseList.pokemons)
-                    postOriginalPokemonList(responseList.pokemons)
-                }
-                call.await()
+                val responseList = pokedexRemoteRepository.getPokedex(id)
+                postPokemonList(responseList.pokemons)
+                postOriginalPokemonList(responseList.pokemons)
             }catch (e:Exception){
-                var call = async {
-                    val responseList = pokedexRemoteRepository.getPokedex(pokedex.name)
-                    postPokemonList(responseList.pokemons)
-                    postOriginalPokemonList(responseList.pokemons)
-                }
-                call.await()
+                val responseList = pokedexRemoteRepository.getPokedex(pokedex.name)
+                postPokemonList(responseList.pokemons)
+                postOriginalPokemonList(responseList.pokemons)
             }
         }
     }
 
     fun filterPokemon(pokemonName: String) {
-        if (pokemonName.isNotEmpty()) {
-            // creating a new array list to filter our data.
-            val filteredList: ArrayList<PokemonDexEntry> = ArrayList()
-            // running a for loop to compare elements.
-            for (item in _pokemonOriginalList.value!!) {
-                // checking if the entered string matched with any item of our recycler view.
-                if (item.pokemon.name.lowercase().contains(pokemonName.lowercase())) {
-                    // if the item is matched we are
-                    // adding it to our filtered list.
-                    filteredList.add(item)
+        viewModelScope.launch(Dispatchers.IO) {
+            if (pokemonName.isNotEmpty()) {
+                // creating a new array list to filter our data.
+                val filteredList: ArrayList<PokemonDexEntry> = ArrayList()
+                // running a for loop to compare elements.
+                for (item in _pokemonOriginalList.value!!) {
+                    // checking if the entered string matched with any item of our recycler view.
+                    if (item.pokemon.name.lowercase().contains(pokemonName.lowercase())) {
+                        // if the item is matched we are
+                        // adding it to our filtered list.
+                        filteredList.add(item)
+                    }
                 }
+                postPokemonListFiltered(filteredList)
+            } else {
+                postPokemonListFiltered(_pokemonOriginalList.value!!)
             }
-            postPokemonListFiltered(filteredList)
-        } else {
-            postPokemonListFiltered(_pokemonOriginalList.value!!)
         }
     }
 

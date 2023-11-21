@@ -45,8 +45,12 @@ class PokemonInfoFragment : Fragment() {
         viewModel = this@PokemonInfoFragment.viewModel
         lifecycleOwner = this@PokemonInfoFragment.viewLifecycleOwner
         initViews()
-        observeViewModel()
         root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        observeViewModel()
     }
 
     private fun observeViewModel() {
@@ -62,6 +66,7 @@ class PokemonInfoFragment : Fragment() {
             if (findNavController().currentDestination?.id == R.id.nav_pokemon_detail) {
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_ABILITY, abilityInfo)
+                viewModel.postAbilityInfo(AbilityInfo())
                 findNavController().navigate(
                     R.id.action_nav_pokemon_detail_to_nav_ability_info_dialog_fragment,
                     bundle

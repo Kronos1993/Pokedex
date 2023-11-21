@@ -217,12 +217,12 @@ class PokemonDetailViewModel @Inject constructor(
 
 
     fun loadPokemonInfo(pokemonList: NamedResourceApi) {
-        pokemonDescription.set(null)
-        pokemonName.set(null)
-        pokemonGenera.set(null)
-        pokemonGenderPossibility.set(GenderPossibility())
         viewModelScope.launch (Dispatchers.IO) {
             loading.postValue(true)
+            pokemonDescription.set(null)
+            pokemonName.set(null)
+            pokemonGenera.set(null)
+            pokemonGenderPossibility.set(GenderPossibility())
             var pokemonInfo: PokemonInfo? = null
             statsTotal.set(0)
 
@@ -448,6 +448,50 @@ class PokemonDetailViewModel @Inject constructor(
                 _movesOther.value?.let { postPokemonMoves(it) }
             }
         }
+    }
+
+    fun destroyViewModel(){
+        /***Pokemon info fragment***/
+        pokemonInfoPageAdapter = WeakReference(null)
+        pokemonTypeAdapter = WeakReference(null)
+        pokemonEggGroupAdapter = WeakReference(null)
+        pokemonAbilityAdapter = WeakReference(null)
+        pokemonSpriteAdapter = WeakReference(null)
+        pokemonOtherFormsAdapter = WeakReference(null)
+        evolutionPokemonAdapter = WeakReference(null)
+        pokemonDescription.set(null)
+        pokemonName.set(null)
+        pokemonGenera.set(null)
+        pokemonGenderPossibility.set(null)
+        _pokemonInfo.value = null
+        _specieInfo.value = null
+        _pokemonSpritesUrl.value = listOf()
+        _pokemonOtherFormsUrl.value = listOf()
+        _abilityInfo.value = AbilityInfo()
+        /********************************/
+        /***Pokemon evolution fragment***/
+        _pokemonEvolutionChain.value = EvolutionChain()
+        _pokemonEvolutionList.value = listOf()
+        /****************************/
+        /***Pokemon moves fragment***/
+        _pokemonMovesToShow.value = listOf()
+        _moveInfo.value = MoveInfo()
+        moveByPokemonAdapter = WeakReference(null)
+        _allMoves.value = listOf()
+        _movesLevelUp.value = listOf()
+        _movesTutor.value = listOf()
+        _movesTM.value = listOf()
+        _movesEgg.value = listOf()
+        _movesOther.value = listOf()
+        _moveInfo.value = MoveInfo()
+        showMove.set(null)
+        buttonSelected.set(null)
+        /****************************/
+        /***Pokemon stats fragment***/
+        pokemonStatAdapter = WeakReference(null)
+        statsTotal.set(null)
+        _pokemonStats.value = listOf()
+        /****************************/
     }
 
 }
