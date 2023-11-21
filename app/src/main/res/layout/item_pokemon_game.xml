@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="pokemonGame"
+            type="com.kronos.pokedex.domian.model.game.Game" />
+
+    </data>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Pokedex.CardView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardViewPokemonEvolutionChain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewGame"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="@dimen/margin_5"
+                android:src="@drawable/ic_game_boy_color_pokemon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewGameName"
+                style="@style/Widget.Pokedex.TextView.TextViewHeader"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_10"
+                android:textStyle="bold"
+                android:text="@{pokemonGame.name.toUpperCase()}"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewGame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewGame"
+                app:layout_constraintTop_toTopOf="@+id/imageViewGame" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

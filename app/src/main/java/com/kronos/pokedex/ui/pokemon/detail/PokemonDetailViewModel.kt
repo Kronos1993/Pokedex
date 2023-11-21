@@ -12,6 +12,7 @@ import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
 import com.kronos.pokedex.domian.model.evolution_chain.EvolutionChain
+import com.kronos.pokedex.domian.model.game.Game
 import com.kronos.pokedex.domian.model.move.MoveDetail
 import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.move.MoveList
@@ -95,6 +96,9 @@ class PokemonDetailViewModel @Inject constructor(
     private val _moveInfo = MutableLiveData<MoveInfo>()
     val moveInfo = _moveInfo.asLiveData()
 
+    private val _pokemonGames = MutableLiveData<List<Game>>()
+    val pokemonGames = _pokemonGames.asLiveData()
+
     var pokemonInfoPageAdapter: WeakReference<PokemonInfoPageAdapter?> = WeakReference(null)
 
     var pokemonTypeAdapter: WeakReference<PokemonTypeAdapter?> = WeakReference(PokemonTypeAdapter())
@@ -121,6 +125,10 @@ class PokemonDetailViewModel @Inject constructor(
 
     var evolutionPokemonAdapter: WeakReference<PokemonEvolutionChainAdapter?> = WeakReference(
         PokemonEvolutionChainAdapter()
+    )
+
+    var pokemonGamesAdapter: WeakReference<PokemonGameAdapter?> = WeakReference(
+        PokemonGameAdapter()
     )
 
     var statsTotal = ObservableField<Int?>()
@@ -215,6 +223,9 @@ class PokemonDetailViewModel @Inject constructor(
         _moveInfo.postValue(moveInfo)
     }
 
+    fun postPokemonGames(list: List<Game>) {
+        _pokemonGames.postValue(list)
+    }
 
     fun loadPokemonInfo(pokemonList: NamedResourceApi) {
         viewModelScope.launch (Dispatchers.IO) {
@@ -251,6 +262,7 @@ class PokemonDetailViewModel @Inject constructor(
             postPokemonMoves(pokemonInfo.moves)
             groupMoves(pokemonInfo.moves)
             postPokemonStats(pokemonInfo.stats)
+            postPokemonGames(pokemonInfo.games)
 
             var pokemonSprite = mutableListOf<Pair<String, String>>()
             pokemonInfo.sprites.frontHome.let {
@@ -491,6 +503,10 @@ class PokemonDetailViewModel @Inject constructor(
         pokemonStatAdapter = WeakReference(null)
         statsTotal.set(null)
         _pokemonStats.value = listOf()
+        /****************************/
+        /***Pokemon games fragment***/
+        pokemonGamesAdapter = WeakReference(null)
+        _pokemonGames.value = listOf()
         /****************************/
     }
 
