@@ -34,6 +34,7 @@ import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonTypeAdapter
 import com.kronos.pokedex.ui.pokemon.detail.domain.GenderPossibility
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonEvolutionFragment
+import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonGamesFragment
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonInfoFragment
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonMovesFragment
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonStatsFragment
@@ -121,13 +122,14 @@ class PokemonDetailFragment : Fragment() {
         val pageEvo = Triple("Evolution",PokemonEvolutionFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_evolution))
         val pageStats = Triple("Stats",PokemonStatsFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_stats))
         val pageMoves = Triple("Moves",PokemonMovesFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_tm))
+        val pageGames = Triple("Games",PokemonGamesFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_game_boy))
 
         viewModel.pokemonInfoPageAdapter = WeakReference(
             PokemonInfoPageAdapter(
                 childFragmentManager,
                 lifecycle,
                 mutableListOf(
-                    pageInfo,pageEvo,pageStats,pageMoves
+                    pageInfo,pageEvo,pageStats,pageMoves,pageGames
                 )
             )
         )
