@@ -30,8 +30,12 @@ class PokemonStatsFragment : Fragment() {
         viewModel = this@PokemonStatsFragment.viewModel
         lifecycleOwner = this@PokemonStatsFragment.viewLifecycleOwner
         initViews()
-        observeViewModel()
         root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        observeViewModel()
     }
 
     private fun observeViewModel() {

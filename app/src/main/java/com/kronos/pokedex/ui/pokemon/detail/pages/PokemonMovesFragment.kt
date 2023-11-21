@@ -18,6 +18,7 @@ import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
 import com.kronos.pokedex.ui.move.list.CURRENT_MOVE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEvolutionChainAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 
@@ -36,8 +37,12 @@ class PokemonMovesFragment : Fragment() {
         viewModel = this@PokemonMovesFragment.viewModel
         lifecycleOwner = this@PokemonMovesFragment.viewLifecycleOwner
         initViews()
-        observeViewModel()
         root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        observeViewModel()
     }
 
     private fun observeViewModel() {

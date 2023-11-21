@@ -31,8 +31,12 @@ class PokemonEvolutionFragment : Fragment() {
         viewModel = this@PokemonEvolutionFragment.viewModel
         lifecycleOwner = this@PokemonEvolutionFragment.viewLifecycleOwner
         initViews()
-        observeViewModel()
         root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        observeViewModel()
     }
 
     private fun observeViewModel() {
