@@ -41,14 +41,15 @@ class PokemonListFragment : Fragment() {
     ) = binding.run {
         viewModel = this@PokemonListFragment.viewModel
         lifecycleOwner = this@PokemonListFragment.viewLifecycleOwner
+        initViews()
         setHasOptionsMenu(true)
         root
     }
 
     override fun onResume() {
         super.onResume()
+
         initViewModel()
-        initViews()
         setListeners()
         observeViewModel()
     }

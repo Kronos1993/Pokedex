@@ -3,10 +3,13 @@ package com.kronos.pokedex.ui.pokemon.detail
 import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
+import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
+import com.kronos.core.extensions.asLiveData
 import com.kronos.core.extensions.binding.fragmentBinding
 import com.kronos.core.util.LoadingDialog
 import com.kronos.core.util.show
@@ -14,14 +17,29 @@ import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonDetailBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ability.AbilityInfo
+import com.kronos.pokedex.domian.model.evolution_chain.ChainLink
+import com.kronos.pokedex.domian.model.evolution_chain.EvolutionChain
 import com.kronos.pokedex.domian.model.move.MoveInfo
+import com.kronos.pokedex.domian.model.move.MoveList
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
+import com.kronos.pokedex.domian.model.specie.SpecieInfo
+import com.kronos.pokedex.domian.model.stat.Stat
+import com.kronos.pokedex.ui.abilities.PokemonAbilityAdapter
+import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
+import com.kronos.pokedex.ui.move.ShowMoveIn
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEggGroupAdapter
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEvolutionChainAdapter
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonSpriteAdapter
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonTypeAdapter
+import com.kronos.pokedex.ui.pokemon.detail.domain.GenderPossibility
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonEvolutionFragment
+import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonGamesFragment
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonInfoFragment
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonMovesFragment
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonStatsFragment
 import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
+import com.kronos.pokedex.ui.stats.PokemonStatsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 import java.util.*
@@ -104,13 +122,14 @@ class PokemonDetailFragment : Fragment() {
         val pageEvo = Triple("Evolution",PokemonEvolutionFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_evolution))
         val pageStats = Triple("Stats",PokemonStatsFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_stats))
         val pageMoves = Triple("Moves",PokemonMovesFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_tm))
+        val pageGames = Triple("Games",PokemonGamesFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_game_boy))
 
         viewModel.pokemonInfoPageAdapter = WeakReference(
             PokemonInfoPageAdapter(
                 childFragmentManager,
                 lifecycle,
                 mutableListOf(
-                    pageInfo,pageEvo,pageStats,pageMoves
+                    pageInfo,pageEvo,pageStats,pageMoves,pageGames
                 )
             )
         )
@@ -152,34 +171,7 @@ class PokemonDetailFragment : Fragment() {
 
     override fun onPause() {
         binding.unbind()
-        /***Pokemon info fragment***/
-        viewModel.pokemonInfoPageAdapter = WeakReference(null)
-        viewModel.pokemonAbilityAdapter = WeakReference(null)
-        viewModel.pokemonSpriteAdapter = WeakReference(null)
-        viewModel.pokemonTypeAdapter = WeakReference(null)
-        viewModel.pokemonGenera.set(null)
-        viewModel.pokemonName.set(null)
-        viewModel.pokemonDescription.set(null)
-        viewModel.buttonSelected.set(null)
-        viewModel.postPokemonInfo(null)
-        viewModel.postSpecieInfo(null)
-        viewModel.postPokemonSprites(listOf())
-        viewModel.postPokemonOtherForms(listOf())
-        viewModel.postAbilityInfo(AbilityInfo())
-        /********************************/
-        /***Pokemon evolution fragment***/
-        viewModel.postPokemonEvolutionChainList(listOf())
-        /****************************/
-        /***Pokemon moves fragment***/
-        viewModel.postPokemonMoves(listOf())
-        viewModel.postMoveInfo(MoveInfo())
-        viewModel.showMove.set(null)
-        /****************************/
-        /***Pokemon stats fragment***/
-        viewModel.postPokemonStats(listOf())
-        viewModel.statsTotal.set(null)
-        viewModel.pokemonStatAdapter = WeakReference(null)
-        /****************************/
+        viewModel.destroyViewModel()
         super.onPause()
     }
 }

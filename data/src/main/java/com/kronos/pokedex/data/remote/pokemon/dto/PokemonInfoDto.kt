@@ -8,6 +8,7 @@ package com.kronos.pokedex.data.remote.pokemon.dto
 import com.google.gson.annotations.SerializedName
 import com.kronos.pokedex.data.remote.NameDto
 import com.kronos.pokedex.data.remote.ability.dto.AbilityDto
+import com.kronos.pokedex.data.remote.game.dto.GameIndexDto
 import com.kronos.pokedex.data.remote.move.dto.MoveListDto
 import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
 import com.kronos.pokedex.data.remote.specie.dto.SpecieInfoDto
@@ -43,6 +44,7 @@ data class PokemonInfoDto(
     val moves:List<MoveListDto> = listOf(),
     @SerializedName("species")
     val specie: NamedResourceApiDto = NamedResourceApiDto(),
+    @SerializedName("game_indices")
+    val gameIndices: List<GameIndexDto> = listOf(),
     val specieInfoDto: SpecieInfoDto = SpecieInfoDto(),
-
     )
