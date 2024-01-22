@@ -61,9 +61,11 @@ class NatureListFragment : Fragment() {
     }
 
     private fun handleNatureDetail(natureDetail: NatureDetail) {
-        val bundle = Bundle()
-        bundle.putSerializable(CURRENT_NATURE, natureDetail)
-        findNavController().navigate(R.id.action_nav_nature_list_to_nav_detail_info_dialog, bundle)
+        if(!natureDetail.name.isNullOrEmpty()){
+            val bundle = Bundle()
+            bundle.putSerializable(CURRENT_NATURE, natureDetail)
+            findNavController().navigate(R.id.action_nav_nature_list_to_nav_detail_info_dialog, bundle)
+        }
     }
 
         private fun handleError(hashtable: Hashtable<String, String>) {

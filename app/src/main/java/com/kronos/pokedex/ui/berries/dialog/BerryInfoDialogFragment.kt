@@ -56,12 +56,16 @@ class BerryInfoDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun handleBerryInfo(berryInfo: BerryInfo) {
-        Glide.with(requireContext()).load(viewModel.urlProvider.getItemImageUrl(berryInfo.itemResource.name)).placeholder(
-            R.drawable.ic_berries).into(binding.imageViewBerry)
-        viewModel.getBerryName(berryInfo)
-        viewModel.berryFlavorListAdapter.get()?.submitList(berryInfo.flavors)
-        viewModel.berryFlavorListAdapter.get()?.notifyDataSetChanged()
-        initView()
+        if(!berryInfo.name.isNullOrEmpty()){
+            Glide.with(requireContext()).load(viewModel.urlProvider.getItemImageUrl(berryInfo.itemResource.name)).placeholder(
+                R.drawable.ic_berries).into(binding.imageViewBerry)
+            viewModel.getBerryName(berryInfo)
+            viewModel.berryFlavorListAdapter.get()?.submitList(berryInfo.flavors)
+            viewModel.berryFlavorListAdapter.get()?.notifyDataSetChanged()
+            initView()
+        }else{
+            hideDialog()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

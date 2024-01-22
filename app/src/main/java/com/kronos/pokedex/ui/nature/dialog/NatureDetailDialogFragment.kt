@@ -50,8 +50,12 @@ class NatureDetailDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun handleNatureDetail(natureDetail: NatureDetail) {
-        viewModel.getNatureName(natureDetail)
-        initView()
+        if(!natureDetail.name.isNullOrEmpty()){
+            viewModel.getNatureName(natureDetail)
+            initView()
+        }else{
+            hideDialog()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
