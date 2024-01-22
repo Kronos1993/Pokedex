@@ -147,6 +147,11 @@
         <item name="android:textSize">@dimen/text_12</item>
     </style>
 
+    <style name="Widget.Pokedex.TextView.TextViewSmallWhite" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/whiteText</item>
+        <item name="android:textSize">@dimen/text_12</item>
+    </style>
+
     <style name="Widget.Pokedex.TextView.TextViewNormalDialog" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/dialog_text_color</item>
         <item name="android:maxLines">1</item>
@@ -165,7 +170,7 @@
 
     <style name="Widget.Pokedex.Pokemon.Gender.LinearProgressIndicator" parent="Widget.MaterialComponents.LinearProgressIndicator">
         <item name="trackThickness">24dp</item>
-        <item name="trackCornerRadius">2dp</item>
+        <item name="android:radius">25dp</item>
         <item name="trackColor">@color/gender_indeterminate</item>
     </style>
 

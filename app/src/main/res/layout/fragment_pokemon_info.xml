@@ -519,7 +519,7 @@
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/textViewPokemonGenderRateMaleLabel"
-                                    style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                    style="@style/Widget.Pokedex.TextView.TextViewSmallWhite"
                                     handle_visibility="@{viewModel.pokemonGenderPossibility.male>0}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -559,7 +559,7 @@
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/textViewPokemonGenderRateFemaleLabel"
-                                    style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                                    style="@style/Widget.Pokedex.TextView.TextViewSmallWhite"
                                     handle_visibility="@{viewModel.pokemonGenderPossibility.female>0}"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"

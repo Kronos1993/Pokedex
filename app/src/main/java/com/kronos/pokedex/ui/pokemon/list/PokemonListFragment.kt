@@ -48,7 +48,6 @@ class PokemonListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
         initViewModel()
         setListeners()
         observeViewModel()
@@ -109,11 +108,6 @@ class PokemonListFragment : Fragment() {
         binding.layoutPokemonList.run { pokemonList = list }
         viewModel.pokemonListAdapter.get()?.submitList(list)
         viewModel.pokemonListAdapter.get()?.notifyItemRangeChanged(0, list.size)
-        binding.layoutPokemonList.recyclerViewPokemonList.postDelayed({
-            binding.layoutPokemonList.recyclerViewPokemonList.smoothScrollToPosition(viewModel.recyclerLastPos.value.let {
-                it ?: 0
-            })
-        }, 150)
     }
 
     private fun initViews() {
