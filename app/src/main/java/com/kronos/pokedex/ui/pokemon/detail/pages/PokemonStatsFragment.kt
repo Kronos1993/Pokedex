@@ -1,7 +1,6 @@
 package com.kronos.pokedex.ui.pokemon.detail.pages
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -12,7 +11,7 @@ import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonStatsBinding
 import com.kronos.pokedex.domian.model.stat.Stat
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
-import com.kronos.pokedex.ui.stats.PokemonStatsAdapter
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonStatsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 
@@ -48,6 +47,7 @@ class PokemonStatsFragment : Fragment() {
     private fun handlePokemonStats(pokemonStats: List<Stat>) {
         viewModel.pokemonStatAdapter.get()?.submitList(pokemonStats)
         viewModel.pokemonStatAdapter.get()?.notifyItemRangeChanged(0,pokemonStats.size)
+        viewModel.pokemonStatAdapter.get()?.setMaxStat(viewModel.statsTotal.get()?:0)
     }
 
     private fun initViews() {
@@ -59,7 +59,6 @@ class PokemonStatsFragment : Fragment() {
         binding.recyclerViewPokemonStats.setHasFixedSize(false)
         if (viewModel.pokemonStatAdapter.get() == null)
             viewModel.pokemonStatAdapter = WeakReference(PokemonStatsAdapter())
-        viewModel.pokemonStatAdapter.get()?.setMaxStat(viewModel.statsTotal.get()?:0)
         binding.recyclerViewPokemonStats.adapter = viewModel.pokemonStatAdapter.get()
     }
 

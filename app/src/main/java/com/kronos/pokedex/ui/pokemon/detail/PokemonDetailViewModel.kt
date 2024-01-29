@@ -27,7 +27,7 @@ import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.pokedex.ui.pokemon.detail.adapter.*
 import com.kronos.pokedex.ui.pokemon.detail.domain.GenderPossibility
 import com.kronos.pokedex.ui.pokemon.detail.domain.getPossibilities
-import com.kronos.pokedex.ui.stats.PokemonStatsAdapter
+import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonStatsAdapter
 import com.kronos.pokedex.util.preferences.PreferencesUtil
 import com.kronos.webclient.UrlProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -143,10 +143,10 @@ class PokemonDetailViewModel @Inject constructor(
     private var showMove = ObservableField<String?>()
     private var buttonSelected = ObservableField<String?>()
 
-    private var currentTab = 0;
+    private var currentTab = ObservableField<Int?>()
 
     public fun setCurrentTab(tab:Int){
-        currentTab = tab
+        currentTab.set(tab)
     }
 
     public fun getCurrentTab() = currentTab
@@ -243,6 +243,7 @@ class PokemonDetailViewModel @Inject constructor(
             pokemonGenera.set(null)
             pokemonGenderPossibility.set(GenderPossibility())
             statsTotal.set(0)
+            currentTab.set(0)
 
             val pokemonInfo: PokemonInfo? = if (urlProvider.extractIdFromUrl(pokemonList.url) != null) {
                 pokemonRemoteRepository.getPokemonInfo(urlProvider.extractIdFromUrl(pokemonList.url))
