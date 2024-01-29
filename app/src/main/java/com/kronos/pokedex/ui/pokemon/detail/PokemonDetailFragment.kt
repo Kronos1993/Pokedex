@@ -41,6 +41,8 @@ import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonStatsFragment
 import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
 import com.kronos.pokedex.ui.stats.PokemonStatsAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -75,7 +77,9 @@ class PokemonDetailFragment : Fragment() {
     }
 
     private fun handlePokemonInfo(pokemonInfo: PokemonInfo?) {
-        binding.viewPagerPokemonInfo.setCurrentItem(0,true)
+        runBlocking(Dispatchers.IO){
+            binding.viewPagerPokemonInfo.setCurrentItem(viewModel.getCurrentTab(),true)
+        }
     }
 
     private fun handleError(hashtable: Hashtable<String, String>) {
@@ -133,6 +137,7 @@ class PokemonDetailFragment : Fragment() {
                 )
             )
         )
+
         binding.viewPagerPokemonInfo.adapter = viewModel.pokemonInfoPageAdapter.get()
         binding.viewPagerPokemonInfo.isSaveEnabled = false
         TabLayoutMediator(binding.tabPokemonData, binding.viewPagerPokemonInfo) { tab, index ->

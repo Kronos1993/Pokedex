@@ -143,6 +143,14 @@ class PokemonDetailViewModel @Inject constructor(
     private var showMove = ObservableField<String?>()
     private var buttonSelected = ObservableField<String?>()
 
+    private var currentTab = 0;
+
+    public fun setCurrentTab(tab:Int){
+        currentTab = tab
+    }
+
+    public fun getCurrentTab() = currentTab
+
     private fun postPokemonInfo(pokemonInfo: PokemonInfo?) {
         _pokemonInfo.postValue(pokemonInfo)
     }
@@ -308,7 +316,6 @@ class PokemonDetailViewModel @Inject constructor(
                 }
             }
             postPokemonOtherForms(pokemonOtherForms)
-
             statsTotal.set(pokemonInfo.totalStat())
             loading.postValue(false)
         }

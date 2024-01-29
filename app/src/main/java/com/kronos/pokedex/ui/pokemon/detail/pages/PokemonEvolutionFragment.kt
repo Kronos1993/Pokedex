@@ -37,6 +37,7 @@ class PokemonEvolutionFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         observeViewModel()
+        viewModel.setCurrentTab(1)
     }
 
     private fun observeViewModel() {
@@ -50,6 +51,7 @@ class PokemonEvolutionFragment : Fragment() {
     }
 
     private fun initViews() {
+        viewModel.getPokemonEvolution()
         initRecyclerPokemonEvolution()
     }
 

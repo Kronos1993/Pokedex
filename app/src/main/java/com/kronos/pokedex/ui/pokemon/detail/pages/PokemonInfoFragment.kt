@@ -51,6 +51,7 @@ class PokemonInfoFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         observeViewModel()
+        viewModel.setCurrentTab(0)
     }
 
     private fun observeViewModel() {
@@ -115,8 +116,6 @@ class PokemonInfoFragment : Fragment() {
             if (pokemonInfo.abilities.size > 1)
                 binding.layoutAbilities.recyclerViewPokemonAbilities.layoutManager =
                     GridLayoutManager(context, 2)
-
-            viewModel.getPokemonEvolution()
 
             binding.invalidateAll()
         }
