@@ -1,4 +1,9 @@
-package com.kronos.pokedex.ui.stats
+/*
+ * Kronos Tech. Copyright (c) 2024.
+ *
+ */
+
+package com.kronos.pokedex.ui.pokemon.detail.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

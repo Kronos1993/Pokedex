@@ -37,6 +37,8 @@ class PokemonEvolutionFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         observeViewModel()
+        viewModel.setCurrentTab(1)
+        viewModel.getPokemonEvolution()
     }
 
     private fun observeViewModel() {
@@ -46,7 +48,7 @@ class PokemonEvolutionFragment : Fragment() {
     private fun handlePokemonEvolution(list: List<ChainLink>) {
         viewModel.evolutionPokemonAdapter.get()?.submitList(list)
         viewModel.evolutionPokemonAdapter.get()?.notifyItemRangeChanged(0,list.size)
-        binding.invalidateAll()
+        //binding.invalidateAll()
     }
 
     private fun initViews() {
