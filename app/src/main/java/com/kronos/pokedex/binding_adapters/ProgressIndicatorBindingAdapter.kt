@@ -1,5 +1,8 @@
 package com.kronos.pokedex.binding_adapters
 
+import android.animation.ObjectAnimator
+import android.os.Handler
+import android.os.Looper
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import androidx.databinding.BindingAdapter
@@ -58,10 +61,11 @@ fun setProgressColor(view: LinearProgressIndicator, genderPossibility: GenderPos
 }
 
 @BindingAdapter("app:animate_progress")
-fun animateProgress(view: LinearProgressIndicator, stat: Int) {
+fun animateProgress(view: LinearProgressIndicator, progress: Int) {
     view.run {
-        val mProgressAnimation = ProgressBarAnimation(view, 10000)
-        mProgressAnimation.setProgress(progress);
+        val progressAnimator = ObjectAnimator.ofInt(this, "progress", 0, progress)
+        progressAnimator.duration = 1000
+        progressAnimator.start()
     }
 }
 
