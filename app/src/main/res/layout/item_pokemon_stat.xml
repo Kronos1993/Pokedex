@@ -51,7 +51,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:set_max_progress="@{statTotal}"
-                android:progress="@{pokemonStat.baseStat}"
+                app:animate_progress="@{pokemonStat.baseStat}"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewPokemonStatName"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineStatsEffortStart"
                 app:layout_constraintStart_toStartOf="@+id/guidelineStatsDivider"

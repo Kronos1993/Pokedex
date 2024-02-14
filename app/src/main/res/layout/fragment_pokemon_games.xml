@@ -41,7 +41,7 @@
                 android:textAlignment="center"
                 android:textSize="@dimen/text_20"
                 app:textAllCaps="true"
-                app:handle_visibility="@{viewModel.pokemonGames.size==0 || viewModel.pokemonEvolutionList == null}"
+                app:handle_visibility="@{viewModel.pokemonGames.size==0}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
