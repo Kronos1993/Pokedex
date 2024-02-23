@@ -141,8 +141,6 @@ class PokemonDetailViewModel @Inject constructor(
     var pokemonGenderPossibility = ObservableField<GenderPossibility?>()
 
     private var showMove = ObservableField<String?>()
-    private var buttonSelected = ObservableField<String?>()
-
     private var currentTab = ObservableField<Int?>()
 
     public fun setCurrentTab(tab:Int){
@@ -150,6 +148,8 @@ class PokemonDetailViewModel @Inject constructor(
     }
 
     public fun getCurrentTab() = currentTab
+
+    public fun getShowMove() = showMove
 
     private fun postPokemonInfo(pokemonInfo: PokemonInfo?) {
         _pokemonInfo.postValue(pokemonInfo)
@@ -175,7 +175,6 @@ class PokemonDetailViewModel @Inject constructor(
         val tm = mutableListOf<MoveList>()
         val egg = mutableListOf<MoveList>()
         val other = mutableListOf<MoveList>()
-
         var moveDetail: MoveDetail?
         for (move in moves){
             if (move.moveDetails.isNotEmpty()){
@@ -244,6 +243,7 @@ class PokemonDetailViewModel @Inject constructor(
             pokemonGenderPossibility.set(GenderPossibility())
             statsTotal.set(0)
             currentTab.set(0)
+            showMove.set("all")
 
             val pokemonInfo: PokemonInfo? = if (urlProvider.extractIdFromUrl(pokemonList.url) != null) {
                 pokemonRemoteRepository.getPokemonInfo(urlProvider.extractIdFromUrl(pokemonList.url))
@@ -374,6 +374,7 @@ class PokemonDetailViewModel @Inject constructor(
 
     fun getPokemonEvolution(){
         viewModelScope.launch (Dispatchers.IO){
+            loading.postValue(true)
             if (!pokemonInfo.value?.specieInfo?.evolutionChain?.url.isNullOrEmpty()) {
                 val evolChain = pokemonEvolutionChainRemoteRepository.getEvolutionChain(
                     urlProvider.extractIdFromUrl(pokemonInfo.value?.specieInfo?.evolutionChain.let {
@@ -387,6 +388,7 @@ class PokemonDetailViewModel @Inject constructor(
                 val evoList = mutableListOf(evolChain.chain!!)
                 postPokemonEvolutionChainList(handleEvolutionChain(evoList, evolChain.chain!!))
             }
+            loading.postValue(false)
         }
     }
 
@@ -443,6 +445,8 @@ class PokemonDetailViewModel @Inject constructor(
     }
 
     fun setShowMove(move: String) {
+        if(move != showMove.get())
+            showMove.set(move)
         when(move){
             "all"->{
                 _allMoves.value?.let { postPokemonMoves(it) }
@@ -498,9 +502,7 @@ class PokemonDetailViewModel @Inject constructor(
         _movesTM.value = listOf()
         _movesEgg.value = listOf()
         _movesOther.value = listOf()
-        _moveInfo.value = MoveInfo()
         showMove.set(null)
-        buttonSelected.set(null)
         /****************************/
         /***Pokemon stats fragment***/
         pokemonStatAdapter = WeakReference(null)

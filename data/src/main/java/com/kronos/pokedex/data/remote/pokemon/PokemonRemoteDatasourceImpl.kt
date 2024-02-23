@@ -1,6 +1,5 @@
 package com.kronos.pokedex.data.remote.pokemon
 
-import android.util.Log
 import com.kronos.pokedex.data.data_source.pokemon.PokemonRemoteDataSource
 import com.kronos.pokedex.data.remote.pokemon.api.PokemonApi
 import com.kronos.pokedex.data.remote.pokemon.dto.PokemonInfoDto
@@ -21,11 +20,11 @@ class PokemonRemoteDatasourceImpl @Inject constructor(
 ) : PokemonRemoteDataSource {
 
     override suspend fun listPokemon(limit:Int, offset:Int): ResponseList<NamedResourceApi> {
-        var result: ResponseList<NamedResourceApi> =
+        val result: ResponseList<NamedResourceApi> =
             try{
                 pokemonApi.list(limit,offset).execute().let {
                     if (it.isSuccessful && it.body() != null) {
-                        var response = it.body()!!
+                        val response = it.body()!!
                         ResponseList(response.count,response.next,response.results.map { it.toNamedResource() })
                     } else {
                         ResponseList()
@@ -35,16 +34,15 @@ class PokemonRemoteDatasourceImpl @Inject constructor(
                 e.printStackTrace()
                 ResponseList()
             }
-        Log.e(PokemonRemoteDatasourceImpl::javaClass.name, "pokemon list: ${result.results}")
         return result
     }
 
-    override fun listPokemon(limit: Int,offset: Int, callback: Any) {
-        pokemonApi.list(limit, offset).enqueue(callback as Callback<ResponseListDto<NamedResourceApiDto>>)
+    override fun listPokemon(limit: Int,offset: Int, callback: Callback<ResponseListDto<NamedResourceApiDto>>) {
+        pokemonApi.list(limit, offset).enqueue(callback)
     }
 
     override suspend fun getPokemonInfo(pokemonId: Int): PokemonInfo {
-        var result: PokemonInfo =
+        val result: PokemonInfo =
             try{
                 pokemonApi.getPokemonInfo(pokemonId).execute().let {
                     if (it.isSuccessful && it.body() != null) {
@@ -57,12 +55,11 @@ class PokemonRemoteDatasourceImpl @Inject constructor(
                 e.printStackTrace()
                 PokemonInfo()
             }
-        Log.e(PokemonRemoteDatasourceImpl::javaClass.name, "pokemon: $result")
         return result
     }
 
     override suspend fun getPokemonInfo(pokemonName: String): PokemonInfo {
-        var result: PokemonInfo =
+        val result: PokemonInfo =
             try{
                 pokemonApi.getPokemonInfo(pokemonName).execute().let {
                     if (it.isSuccessful && it.body() != null) {
@@ -75,16 +72,15 @@ class PokemonRemoteDatasourceImpl @Inject constructor(
                 e.printStackTrace()
                 PokemonInfo()
             }
-        Log.e(PokemonRemoteDatasourceImpl::javaClass.name, "pokemon: $result")
         return result
     }
 
-    override fun getPokemonInfo(pokemonId: Int, callback: Any) {
-        pokemonApi.getPokemonInfo(pokemonId).enqueue(callback as Callback<PokemonInfoDto>)
+    override fun getPokemonInfo(pokemonId: Int, callback: Callback<PokemonInfoDto>) {
+        pokemonApi.getPokemonInfo(pokemonId).enqueue(callback)
     }
 
-    override fun getPokemonInfo(pokemonName: String, callback: Any) {
-        pokemonApi.getPokemonInfo(pokemonName).enqueue(callback as Callback<PokemonInfoDto>)
+    override fun getPokemonInfo(pokemonName: String, callback: Callback<PokemonInfoDto>) {
+        pokemonApi.getPokemonInfo(pokemonName).enqueue(callback)
     }
 
 }

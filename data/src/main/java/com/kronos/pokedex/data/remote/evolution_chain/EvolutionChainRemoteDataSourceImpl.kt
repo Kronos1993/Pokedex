@@ -1,6 +1,5 @@
 package com.kronos.pokedex.data.remote.evolution_chain
 
-import android.util.Log
 import com.kronos.pokedex.data.data_source.evolution_chain.EvolutionChainRemoteDataSource
 import com.kronos.pokedex.data.remote.evolution_chain.api.EvolutionChainApi
 import com.kronos.pokedex.data.remote.evolution_chain.mapper.toEvolutionChain
@@ -15,11 +14,11 @@ class EvolutionChainRemoteDataSourceImpl @Inject constructor(
 ) : EvolutionChainRemoteDataSource {
 
     override suspend fun list(limit: Int, offset: Int): ResponseList<NamedResourceApi> {
-        var result: ResponseList<NamedResourceApi> =
+        val result: ResponseList<NamedResourceApi> =
             try {
                 evolutionChainApi.list(limit, offset).execute().let {
                     if (it.isSuccessful && it.body() != null) {
-                        var response = it.body()!!
+                        val response = it.body()!!
                         ResponseList(response.count, response.next, response.results.map {
                             it.toNamedResource()
                         })
@@ -31,12 +30,11 @@ class EvolutionChainRemoteDataSourceImpl @Inject constructor(
                 e.printStackTrace()
                 ResponseList()
             }
-        Log.e(EvolutionChainRemoteDataSourceImpl::javaClass.name, "evo chain list: ${result.results}")
         return result
     }
 
     override suspend fun getEvolutionChain(chainId: Int): EvolutionChain {
-        var result: EvolutionChain =
+        val result: EvolutionChain =
             try {
                 evolutionChainApi.getEvolutionChain(chainId).execute().let {
                     if (it.isSuccessful && it.body() != null) {
@@ -49,7 +47,6 @@ class EvolutionChainRemoteDataSourceImpl @Inject constructor(
                 e.printStackTrace()
                 EvolutionChain()
             }
-        Log.e(EvolutionChainRemoteDataSourceImpl::javaClass.name, "evo chain: $result")
         return result
     }
 
