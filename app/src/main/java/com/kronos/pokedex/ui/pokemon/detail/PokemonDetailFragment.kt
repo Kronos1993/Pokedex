@@ -148,12 +148,12 @@ class PokemonDetailFragment : Fragment() {
 
     override fun onDestroy() {
         binding.unbind()
+        viewModel.destroyViewModel()
         super.onDestroy()
     }
 
     override fun onPause() {
         binding.unbind()
-        viewModel.destroyViewModel()
         super.onPause()
     }
 }
