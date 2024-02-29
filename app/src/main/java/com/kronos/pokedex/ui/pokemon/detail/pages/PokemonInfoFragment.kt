@@ -1,7 +1,6 @@
 package com.kronos.pokedex.ui.pokemon.detail.pages
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -63,7 +62,7 @@ class PokemonInfoFragment : Fragment() {
     }
 
     private fun handleAbilityInfo(abilityInfo: AbilityInfo) {
-        if (!abilityInfo.name.isNullOrEmpty()) {
+        if (abilityInfo.name.isNotEmpty()) {
             if (findNavController().currentDestination?.id == R.id.nav_pokemon_detail) {
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_ABILITY, abilityInfo)
@@ -80,31 +79,24 @@ class PokemonInfoFragment : Fragment() {
         if (pokemonInfo!=null){
             Glide.with(requireContext()).load(
                 pokemonInfo.sprites.let {
-                    if (!it.frontHome.isNullOrEmpty())
-                        it.frontHome
-                    else
-                        it.frontDefault
+                    it.frontHome.ifEmpty { it.frontDefault }
                 }
             ).into(binding.imageViewPokemon)
 
             binding.imageViewPokemon.setOnClickListener {
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_IMAGE_URL, pokemonInfo.sprites.let {
-                    if (!it.frontHome.isNullOrEmpty())
-                        it.frontHome
-                    else
-                        it.frontDefault
+                    it.frontHome.ifEmpty { it.frontDefault }
                 })
                 findNavController().navigate(R.id.action_global_nav_show_image, bundle)
             }
 
             viewModel.pokemonTypeAdapter.get()?.submitList(pokemonInfo.types)
             viewModel.pokemonTypeAdapter.get()?.notifyItemRangeChanged(0,pokemonInfo.types.size)
-            if (pokemonInfo.types.size > 1)
+
                 binding.layoutTypes.recyclerViewPokemonType.layoutManager =
                     GridLayoutManager(context, 2)
 
-            if (pokemonInfo.specieInfo.eggGroup.size > 1)
                 binding.recyclerViewEggGroup.layoutManager = GridLayoutManager(context,2)
 
             viewModel.pokemonEggGroupAdapter.get()?.submitList(pokemonInfo.specieInfo.eggGroup)
@@ -113,7 +105,6 @@ class PokemonInfoFragment : Fragment() {
             viewModel.pokemonAbilityAdapter.get()?.submitList(pokemonInfo.abilities)
             viewModel.pokemonAbilityAdapter.get()?.notifyItemRangeChanged(0,pokemonInfo.abilities.size)
 
-            if (pokemonInfo.abilities.size > 1)
                 binding.layoutAbilities.recyclerViewPokemonAbilities.layoutManager =
                     GridLayoutManager(context, 2)
 

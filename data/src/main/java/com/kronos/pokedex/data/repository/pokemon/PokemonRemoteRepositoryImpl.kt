@@ -1,10 +1,12 @@
 package com.kronos.pokedex.data.repository.pokemon
 
 import com.kronos.pokedex.data.data_source.pokemon.PokemonRemoteDataSource
+import com.kronos.pokedex.data.remote.pokemon.dto.PokemonInfoDto
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ResponseList
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.repository.PokemonRemoteRepository
+import retrofit2.Callback
 import javax.inject.Inject
 
 class PokemonRemoteRepositoryImpl@Inject constructor(
@@ -15,7 +17,7 @@ class PokemonRemoteRepositoryImpl@Inject constructor(
     }
 
     override fun getPokemonInfo(pokemonId: Int, callback: Any) {
-        return pokemonRemoteDataSource.getPokemonInfo(pokemonId, callback)
+        return pokemonRemoteDataSource.getPokemonInfo(pokemonId, callback as Callback<PokemonInfoDto>)
     }
 
     override suspend fun getPokemonInfo(pokemonId: Int): PokemonInfo {
@@ -27,6 +29,6 @@ class PokemonRemoteRepositoryImpl@Inject constructor(
     }
 
     override fun getPokemonInfo(pokemonName: String, callback: Any) {
-        return pokemonRemoteDataSource.getPokemonInfo(pokemonName,callback)
+        return pokemonRemoteDataSource.getPokemonInfo(pokemonName,callback as Callback<PokemonInfoDto>)
     }
 }
