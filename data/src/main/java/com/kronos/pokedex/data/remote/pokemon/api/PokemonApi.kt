@@ -1,5 +1,6 @@
 package com.kronos.pokedex.data.remote.pokemon.api
 
+import com.kronos.pokedex.data.remote.pokemon.dto.EncounterDto
 import com.kronos.pokedex.data.remote.pokemon.dto.PokemonInfoDto
 import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
 import com.kronos.pokedex.data.remote.response_list.ResponseListDto
@@ -18,5 +19,11 @@ interface PokemonApi {
 
     @GET("pokemon/{pokemon}")
     fun getPokemonInfo(@Path("pokemon")pokemonId:Int): Call<PokemonInfoDto>
+
+    @GET("pokemon/{pokemon}/encounters")
+    fun getPokemonEncountersInfo(@Path("pokemon")pokemonId:Int): Call<List<EncounterDto>>
+
+    @GET("pokemon/{pokemon}/encounters")
+    fun getPokemonEncountersInfo(@Path("pokemon")pokemon:String): Call<List<EncounterDto>>
 }
 

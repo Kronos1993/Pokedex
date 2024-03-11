@@ -2,6 +2,7 @@ package com.kronos.pokedex.domian.repository
 
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ResponseList
+import com.kronos.pokedex.domian.model.pokemon.Encounter
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 
 
@@ -15,4 +16,8 @@ interface PokemonRemoteRepository {
     suspend fun getPokemonInfo(pokemonName: String):PokemonInfo
 
     fun getPokemonInfo(pokemonName: String,callback:Any)
+
+    suspend fun getPokemonEncountersInfo(pokemonId: Int): List<Encounter>
+
+    suspend fun getPokemonEncountersInfo(pokemon: String):List<Encounter>
 }

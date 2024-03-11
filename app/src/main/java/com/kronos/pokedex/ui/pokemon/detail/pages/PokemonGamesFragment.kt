@@ -36,7 +36,7 @@ class PokemonGamesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         observeViewModel()
-        viewModel.setCurrentTab(4)
+        viewModel.setCurrentTab(5)
     }
 
     private fun observeViewModel() {

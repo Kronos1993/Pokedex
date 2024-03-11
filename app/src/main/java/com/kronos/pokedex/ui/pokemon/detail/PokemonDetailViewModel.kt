@@ -16,6 +16,7 @@ import com.kronos.pokedex.domian.model.game.Game
 import com.kronos.pokedex.domian.model.move.MoveDetail
 import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.move.MoveList
+import com.kronos.pokedex.domian.model.pokemon.Encounter
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.model.pokemon.extension.totalStat
 import com.kronos.pokedex.domian.model.specie.SpecieInfo
@@ -41,7 +42,6 @@ import javax.inject.Inject
 class PokemonDetailViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private var pokemonRemoteRepository: PokemonRemoteRepository,
-    private var pokemonSpecieRemoteRepository: SpecieRemoteRepository,
     private var pokemonEvolutionChainRemoteRepository: EvolutionChainRemoteRepository,
     private var abilityRemoteRepository: AbilityRemoteRepository,
     private var moveRemoteRepository: MoveRemoteRepository,
@@ -62,22 +62,16 @@ class PokemonDetailViewModel @Inject constructor(
     val pokemonMovesToShow = _pokemonMovesToShow.asLiveData()
 
     private val _allMoves = MutableLiveData<List<MoveList>>()
-    val allMoves = _allMoves.asLiveData()
 
     private val _movesLevelUp = MutableLiveData<List<MoveList>>()
-    val movesLevelUp = _movesLevelUp.asLiveData()
 
     private val _movesTutor = MutableLiveData<List<MoveList>>()
-    val movesTutor = _movesTutor.asLiveData()
 
     private val _movesTM = MutableLiveData<List<MoveList>>()
-    val movesTM = _movesTM.asLiveData()
 
     private val _movesEgg = MutableLiveData<List<MoveList>>()
-    val movesEgg = _movesEgg.asLiveData()
 
     private val _movesOther = MutableLiveData<List<MoveList>>()
-    val movesOther = _movesOther.asLiveData()
 
     private val _pokemonEvolutionChain = MutableLiveData<EvolutionChain>()
 
@@ -98,6 +92,9 @@ class PokemonDetailViewModel @Inject constructor(
 
     private val _pokemonGames = MutableLiveData<List<Game>>()
     val pokemonGames = _pokemonGames.asLiveData()
+
+    private val _pokemonEncounterList = MutableLiveData<List<Encounter>>()
+    val pokemonEncounterList = _pokemonEncounterList.asLiveData()
 
     var pokemonInfoPageAdapter: WeakReference<PokemonInfoPageAdapter?> = WeakReference(null)
 
@@ -131,6 +128,10 @@ class PokemonDetailViewModel @Inject constructor(
         PokemonGameAdapter()
     )
 
+    var pokemonEncounterItemAdapter: WeakReference<PokemonEncounterItemAdapter?> = WeakReference(
+        PokemonEncounterItemAdapter()
+    )
+
     var statsTotal = ObservableField<Int?>()
 
     var pokemonDescription = ObservableField<String?>()
@@ -143,13 +144,11 @@ class PokemonDetailViewModel @Inject constructor(
     private var showMove = ObservableField<String?>()
     private var currentTab = ObservableField<Int?>()
 
-    public fun setCurrentTab(tab:Int){
+    fun setCurrentTab(tab:Int){
         currentTab.set(tab)
     }
 
-    public fun getCurrentTab() = currentTab
-
-    public fun getShowMove() = showMove
+    fun getCurrentTab() = currentTab
 
     private fun postPokemonInfo(pokemonInfo: PokemonInfo?) {
         _pokemonInfo.postValue(pokemonInfo)
@@ -234,6 +233,10 @@ class PokemonDetailViewModel @Inject constructor(
         _pokemonGames.postValue(list)
     }
 
+    private fun postPokemonEncounters(list: List<Encounter>) {
+        _pokemonEncounterList.postValue(list)
+    }
+
     fun loadPokemonInfo(pokemonList: NamedResourceApi) {
         viewModelScope.launch (Dispatchers.IO) {
             loading.postValue(true)
@@ -245,15 +248,11 @@ class PokemonDetailViewModel @Inject constructor(
             currentTab.set(0)
             showMove.set("all")
 
-            val pokemonInfo: PokemonInfo? = if (urlProvider.extractIdFromUrl(pokemonList.url) != null) {
-                pokemonRemoteRepository.getPokemonInfo(urlProvider.extractIdFromUrl(pokemonList.url))
-            } else {
-                pokemonRemoteRepository.getPokemonInfo(pokemonList.name)
-            }
+            val pokemonInfo: PokemonInfo = pokemonRemoteRepository.getPokemonInfo(urlProvider.extractIdFromUrl(pokemonList.url))
 
             //var specie = pokemonSpecieRemoteRepository.getSpecieInfo(pokemonInfo.id)
 
-            if (pokemonInfo!!.specieInfo != null && pokemonInfo.specieInfo.name.isNotEmpty()) {
+            if (pokemonInfo.specieInfo.name.isNotEmpty()) {
                 val genderPossibility = GenderPossibility()
                 genderPossibility.getPossibilities(pokemonInfo.specieInfo.genderRate)
                 pokemonGenderPossibility.set(genderPossibility)
@@ -392,6 +391,17 @@ class PokemonDetailViewModel @Inject constructor(
         }
     }
 
+    fun getPokemonEncounters(){
+        viewModelScope.launch (Dispatchers.IO){
+            loading.postValue(true)
+            if (pokemonInfo.value?.name?.isNotEmpty() == true) {
+                val encounters = pokemonRemoteRepository.getPokemonEncountersInfo(pokemonInfo.value!!.id)
+                postPokemonEncounters(encounters)
+            }
+            loading.postValue(false)
+        }
+    }
+
     private fun handleEvolutionChain(
         evoList: MutableList<ChainLink>,
         chain: ChainLink
@@ -421,11 +431,7 @@ class PokemonDetailViewModel @Inject constructor(
     fun loadAbilityInfo(ability: NamedResourceApi) {
         viewModelScope.launch(Dispatchers.IO) {
             loading.postValue(true)
-            val abilityInfo = if (urlProvider.extractIdFromUrl(ability.url) != null) {
-                abilityRemoteRepository.getAbility(urlProvider.extractIdFromUrl(ability.url))
-            } else {
-                abilityRemoteRepository.getAbility(ability.name)
-            }
+            val abilityInfo = abilityRemoteRepository.getAbility(urlProvider.extractIdFromUrl(ability.url))
             postAbilityInfo(abilityInfo)
             loading.postValue(false)
         }
@@ -434,11 +440,7 @@ class PokemonDetailViewModel @Inject constructor(
     fun loadMoveInfo(move: NamedResourceApi) {
         viewModelScope.launch(Dispatchers.IO) {
             loading.postValue(true)
-            val moveInfo = if (urlProvider.extractIdFromUrl(move.url) != null) {
-                moveRemoteRepository.getMove(urlProvider.extractIdFromUrl(move.url))
-            } else {
-                moveRemoteRepository.getMove(move.name)
-            }
+            val moveInfo = moveRemoteRepository.getMove(urlProvider.extractIdFromUrl(move.url))
             postMoveInfo(moveInfo)
             loading.postValue(false)
         }
@@ -478,6 +480,7 @@ class PokemonDetailViewModel @Inject constructor(
         pokemonSpriteAdapter = WeakReference(null)
         pokemonOtherFormsAdapter = WeakReference(null)
         evolutionPokemonAdapter = WeakReference(null)
+        pokemonEncounterItemAdapter = WeakReference(null)
         pokemonDescription.set(null)
         pokemonName.set(null)
         pokemonGenera.set(null)
@@ -502,6 +505,7 @@ class PokemonDetailViewModel @Inject constructor(
         _movesTM.value = listOf()
         _movesEgg.value = listOf()
         _movesOther.value = listOf()
+        _pokemonEncounterList.value = listOf()
         showMove.set(null)
         /****************************/
         /***Pokemon stats fragment***/

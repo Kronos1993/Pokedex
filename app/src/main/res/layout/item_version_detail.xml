@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="versionDetail"
+            type="com.kronos.pokedex.domian.model.pokemon.VersionDetail" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewPokemonVersionDetail"
+        style="@style/Widget.Pokedex.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".5" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewEncounterMethod"
+                style="@style/Widget.Pokedex.TextView.TextViewHeader"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_pokemon_name="@{versionDetail.encounterDetail.method.name}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewEncounterVersionLabel"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@string/game_version"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewEncounterMethod" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewEncounterVersion"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                app:handle_pokemon_name="@{versionDetail.version.name}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEncounterVersionLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/textViewEncounterVersionLabel" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewEncounterMinLevelLabel"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@string/min_level"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewEncounterVersionLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewEncounterMinLevel"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{String.valueOf(versionDetail.encounterDetail.maxLevel)}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEncounterMinLevelLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/textViewEncounterMinLevelLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewEncounterMaxLevelLabel"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@string/max_level"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewEncounterMinLevelLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewEncounterMaxLevel"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{String.valueOf(versionDetail.encounterDetail.maxLevel)}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEncounterMaxLevelLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/textViewEncounterMaxLevelLabel" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewEncounterMaxChanceLabel"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@string/max_chance"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewEncounterMaxLevelLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewEncounterMaxChance"
+                style="@style/Widget.Pokedex.TextView.TextViewSmall"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_5"
+                android:text="@{String.valueOf(versionDetail.encounterDetail.chance)}"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEncounterMaxChanceLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/textViewEncounterMaxChanceLabel" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
