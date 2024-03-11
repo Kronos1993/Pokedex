@@ -139,4 +139,8 @@
     <string name="berry_potency_low">Low flavor of %1$s</string>
     <string name="berry_potency_medium">Medium flavor of %1$s</string>
     <string name="berry_potency_high">High flavor of %1$s</string>
+    <string name="min_level">Min Level:</string>
+    <string name="max_level">Max Level:</string>
+    <string name="max_chance">Max Chance:</string>
+    <string name="game_version">Game Version:</string>
 </resources>

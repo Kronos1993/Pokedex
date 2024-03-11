@@ -1,7 +1,6 @@
 package com.kronos.pokedex.ui.pokemon.detail.pages
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -37,7 +36,7 @@ class PokemonEvolutionFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         observeViewModel()
-        viewModel.setCurrentTab(1)
+        viewModel.setCurrentTab(2)
         viewModel.getPokemonEvolution()
     }
 

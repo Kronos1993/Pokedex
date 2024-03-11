@@ -15,6 +15,7 @@ import com.kronos.pokedex.databinding.FragmentPokemonDetailBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonInfoPageAdapter
+import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonEncounterFragment
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonEvolutionFragment
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonGamesFragment
 import com.kronos.pokedex.ui.pokemon.detail.pages.PokemonInfoFragment
@@ -100,6 +101,7 @@ class PokemonDetailFragment : Fragment() {
 
     private fun initViews() {
         val pageInfo = Triple("Info",PokemonInfoFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_info))
+        val pageEncounters = Triple("Encounter",PokemonEncounterFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_map))
         val pageEvo = Triple("Evolution",PokemonEvolutionFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_evolution))
         val pageStats = Triple("Stats",PokemonStatsFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_stats))
         val pageMoves = Triple("Moves",PokemonMovesFragment(),ContextCompat.getDrawable(requireContext(), R.drawable.ic_pokemon_tm))
@@ -110,7 +112,7 @@ class PokemonDetailFragment : Fragment() {
                 childFragmentManager,
                 lifecycle,
                 mutableListOf(
-                    pageInfo,pageEvo,pageStats,pageMoves,pageGames
+                    pageInfo,pageEncounters,pageEvo,pageStats,pageMoves,pageGames
                 )
             )
         )

@@ -1,7 +1,6 @@
 package com.kronos.pokedex.ui.pokemon.detail.pages
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -14,11 +13,10 @@ import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonMovesBinding
 import com.kronos.pokedex.domian.model.move.MoveInfo
 import com.kronos.pokedex.domian.model.move.MoveList
-import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.pokedex.ui.move.PokemonMoveListAdapter
+import com.kronos.pokedex.ui.move.ShowMoveIn
 import com.kronos.pokedex.ui.move.list.CURRENT_MOVE
 import com.kronos.pokedex.ui.pokemon.detail.PokemonDetailViewModel
-import com.kronos.pokedex.ui.pokemon.detail.adapter.PokemonEvolutionChainAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 
@@ -43,7 +41,7 @@ class PokemonMovesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         observeViewModel()
-        viewModel.setCurrentTab(3)
+        viewModel.setCurrentTab(4)
     }
 
     private fun observeViewModel() {
@@ -52,7 +50,7 @@ class PokemonMovesFragment : Fragment() {
     }
 
     private fun handleMoveInfo(moveInfo: MoveInfo) {
-        if (!moveInfo.moveName.isNullOrEmpty()){
+        if (moveInfo.moveName.isNotEmpty()){
             if (findNavController().currentDestination?.id == R.id.nav_pokemon_detail) {
                 val bundle = Bundle()
                 bundle.putSerializable(CURRENT_MOVE, moveInfo)

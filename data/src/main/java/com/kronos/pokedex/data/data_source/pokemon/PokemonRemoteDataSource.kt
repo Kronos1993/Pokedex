@@ -4,6 +4,7 @@ import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
 import com.kronos.pokedex.data.remote.response_list.ResponseListDto
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ResponseList
+import com.kronos.pokedex.domian.model.pokemon.Encounter
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import retrofit2.Callback
 
@@ -20,4 +21,8 @@ interface PokemonRemoteDataSource {
     fun getPokemonInfo(pokemonId: Int = 1,callback: Callback<PokemonInfoDto>)
 
     fun getPokemonInfo(pokemonName: String,callback:Callback<PokemonInfoDto>)
+
+    suspend fun getPokemonEncountersInfo(pokemonId: Int = 1): List<Encounter>
+
+    suspend fun getPokemonEncountersInfo(pokemon: String): List<Encounter>
 }

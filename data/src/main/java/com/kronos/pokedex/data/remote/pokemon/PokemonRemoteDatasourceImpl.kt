@@ -3,12 +3,14 @@ package com.kronos.pokedex.data.remote.pokemon
 import com.kronos.pokedex.data.data_source.pokemon.PokemonRemoteDataSource
 import com.kronos.pokedex.data.remote.pokemon.api.PokemonApi
 import com.kronos.pokedex.data.remote.pokemon.dto.PokemonInfoDto
+import com.kronos.pokedex.data.remote.pokemon.mapper.toEncounter
 import com.kronos.pokedex.data.remote.pokemon.mapper.toPokemonInfo
 import com.kronos.pokedex.data.remote.response_list.NamedResourceApiDto
 import com.kronos.pokedex.data.remote.response_list.ResponseListDto
 import com.kronos.pokedex.data.remote.response_list.mapper.toNamedResource
 import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.ResponseList
+import com.kronos.pokedex.domian.model.pokemon.Encounter
 import com.kronos.pokedex.domian.model.pokemon.PokemonInfo
 import com.kronos.pokedex.domian.repository.SpecieRemoteRepository
 import retrofit2.Callback
@@ -81,6 +83,44 @@ class PokemonRemoteDatasourceImpl @Inject constructor(
 
     override fun getPokemonInfo(pokemonName: String, callback: Callback<PokemonInfoDto>) {
         pokemonApi.getPokemonInfo(pokemonName).enqueue(callback)
+    }
+
+    override suspend fun getPokemonEncountersInfo(pokemonId: Int): List<Encounter> {
+        val result: List<Encounter> =
+            try{
+                pokemonApi.getPokemonEncountersInfo(pokemonId).execute().let { response ->
+                    if (response.isSuccessful && response.body() != null) {
+                        response.body()!!.map {
+                            it.toEncounter()
+                        }
+                    } else {
+                        listOf()
+                    }
+                }
+            }catch (e:Exception){
+                e.printStackTrace()
+                listOf()
+            }
+        return result
+    }
+
+    override suspend fun getPokemonEncountersInfo(pokemon: String): List<Encounter> {
+        val result: List<Encounter> =
+            try{
+                pokemonApi.getPokemonEncountersInfo(pokemon).execute().let { response ->
+                    if (response.isSuccessful && response.body() != null) {
+                        response.body()!!.map {
+                            it.toEncounter()
+                        }
+                    } else {
+                        listOf()
+                    }
+                }
+            }catch (e:Exception){
+                e.printStackTrace()
+                listOf()
+            }
+        return result
     }
 
 }
