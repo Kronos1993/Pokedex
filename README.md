@@ -1,4 +1,5 @@
 <img alt="Pokedex Logo" height="96" src="pokeball_icon.png" width="96"/>
+
 # Pokedex
 #### Copyright &copy; 2023 by Kronos
 
