@@ -1,4 +1,4 @@
-![Pokedex Logo](pokebal icon.png)
+![Pokedex Logo](pokeball_icon.png)
 # Pokedex
 #### Copyright &copy; 2023 by Kronos
 
