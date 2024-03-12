@@ -47,7 +47,7 @@ class PokemonEncounterFragment : Fragment() {
     private fun handlePokemonEncounters(list: List<Encounter>) {
         viewModel.pokemonEncounterItemAdapter.get()?.submitList(list)
         viewModel.pokemonEncounterItemAdapter.get()?.notifyItemRangeChanged(0,list.size)
-        //binding.invalidateAll()
+        binding.invalidateAll()
     }
 
     private fun initViews() {
