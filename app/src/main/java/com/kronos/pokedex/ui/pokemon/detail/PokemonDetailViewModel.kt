@@ -480,7 +480,6 @@ class PokemonDetailViewModel @Inject constructor(
         pokemonSpriteAdapter = WeakReference(null)
         pokemonOtherFormsAdapter = WeakReference(null)
         evolutionPokemonAdapter = WeakReference(null)
-        pokemonEncounterItemAdapter = WeakReference(null)
         pokemonDescription.set(null)
         pokemonName.set(null)
         pokemonGenera.set(null)
@@ -490,6 +489,10 @@ class PokemonDetailViewModel @Inject constructor(
         _pokemonSpritesUrl.value = listOf()
         _pokemonOtherFormsUrl.value = listOf()
         _abilityInfo.value = AbilityInfo()
+        /********************************/
+        /***Pokemon encounter fragment***/
+        pokemonEncounterItemAdapter = WeakReference(null)
+        _pokemonEncounterList.value = listOf()
         /********************************/
         /***Pokemon evolution fragment***/
         _pokemonEvolutionChain.value = EvolutionChain()
@@ -505,7 +508,6 @@ class PokemonDetailViewModel @Inject constructor(
         _movesTM.value = listOf()
         _movesEgg.value = listOf()
         _movesOther.value = listOf()
-        _pokemonEncounterList.value = listOf()
         showMove.set(null)
         /****************************/
         /***Pokemon stats fragment***/

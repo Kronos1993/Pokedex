@@ -33,7 +33,7 @@
                 tools:listitem="@layout/item_pokemon_encounter" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text_no_natures"
+                android:id="@+id/text_no_encounters"
                 style="@style/Widget.Pokedex.TextView.TextViewNormal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                 android:textAlignment="center"
                 android:textSize="@dimen/text_20"
                 app:textAllCaps="true"
-                app:handle_visibility="@{viewModel.pokemonEncounterList.size==0 || viewModel.pokemonEncounterList == null}"
+                app:handle_visibility="@{viewModel.pokemonEncounterList.size == 0}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

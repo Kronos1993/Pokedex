@@ -34,6 +34,7 @@ class PokemonEncounterItemAdapter : ListAdapter<Encounter, PokemonEncounterItemA
         holder.bind(currentPokemonEncounter)
         val encounterAdapter = EncounterVersionItemAdapter()
         encounterAdapter.submitList(currentPokemonEncounter.versionDetails)
+        encounterAdapter.notifyItemRangeChanged(0,currentPokemonEncounter.versionDetails.size)
         holder.binding.recyclerViewVersionDetail.adapter = encounterAdapter
         holder.binding.recyclerViewVersionDetail.layoutManager = LinearLayoutManager(holder.binding.recyclerViewVersionDetail.context)
         holder.binding.recyclerViewVersionDetail.setHasFixedSize(false)
