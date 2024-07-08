@@ -1,16 +1,21 @@
 package com.kronos.pokedex.ui.nature.list
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
-import com.kronos.core.util.LoadingDialog
+import com.kronos.core.util.getProgressDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentNatureListBinding
@@ -18,7 +23,7 @@ import com.kronos.pokedex.domian.model.NamedResourceApi
 import com.kronos.pokedex.domian.model.nature.NatureDetail
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
-import java.util.*
+import java.util.Hashtable
 
 const val CURRENT_NATURE = "current_nature"
 
@@ -30,6 +35,7 @@ class NatureListFragment : Fragment() {
     private val viewModel by viewModels<NatureListViewModel>()
 
     lateinit var searchView: SearchView
+    private var progressDialog: SweetAlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +45,11 @@ class NatureListFragment : Fragment() {
         viewModel = this@NatureListFragment.viewModel
         lifecycleOwner = this@NatureListFragment.viewLifecycleOwner
         setHasOptionsMenu(true)
+        progressDialog = getProgressDialog(
+            requireContext(),
+            com.kronos.resources.R.string.loading_dialog_text,
+            com.kronos.resources.R.color.colorPrimary
+        )
         root
     }
 
@@ -91,17 +102,9 @@ class NatureListFragment : Fragment() {
     private fun handleLoading(b: Boolean) {
         try{
             if (b) {
-                LoadingDialog.getProgressDialog(
-                    requireContext(),
-                    R.string.loading_dialog_text,
-                    com.kronos.resources.R.color.colorSecondaryVariant
-                )!!.show()
+                progressDialog?.show()
             } else {
-                LoadingDialog.getProgressDialog(
-                    requireContext(),
-                    R.string.loading_dialog_text,
-                    com.kronos.resources.R.color.colorSecondaryVariant
-                )!!.dismiss()
+                progressDialog?.dismiss()
             }
         }catch (e:Exception){}
     }

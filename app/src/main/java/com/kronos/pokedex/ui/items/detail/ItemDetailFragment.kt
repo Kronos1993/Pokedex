@@ -1,14 +1,18 @@
 package com.kronos.pokedex.ui.items.detail
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
-import com.kronos.core.util.LoadingDialog
+import com.kronos.core.util.getProgressDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentItemInfoBinding
@@ -21,13 +25,14 @@ import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
 import com.kronos.pokedex.ui.show_image.CURRENT_IMAGE_URL
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
-import java.util.*
+import java.util.Hashtable
 
 @AndroidEntryPoint
 class ItemDetailFragment : Fragment() {
     private val binding by fragmentBinding<FragmentItemInfoBinding>(R.layout.fragment_item_info)
 
     private val viewModel by activityViewModels<ItemDetailViewModel>()
+    private var progressDialog: SweetAlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +42,11 @@ class ItemDetailFragment : Fragment() {
         viewModel = this@ItemDetailFragment.viewModel
         lifecycleOwner = this@ItemDetailFragment.viewLifecycleOwner
         setHasOptionsMenu(true)
+        progressDialog = getProgressDialog(
+            requireContext(),
+            com.kronos.resources.R.string.loading_dialog_text,
+            com.kronos.resources.R.color.colorPrimary
+        )
         root
     }
 
@@ -88,17 +98,9 @@ class ItemDetailFragment : Fragment() {
     private fun handleLoading(b: Boolean) {
         try{
             if (b) {
-                LoadingDialog.getProgressDialog(
-                    requireContext(),
-                    R.string.loading_dialog_text,
-                    com.kronos.resources.R.color.colorSecondaryVariant
-                )!!.show()
+                progressDialog?.show()
             } else {
-                LoadingDialog.getProgressDialog(
-                    requireContext(),
-                    R.string.loading_dialog_text,
-                    com.kronos.resources.R.color.colorSecondaryVariant
-                )!!.dismiss()
+                progressDialog?.dismiss()
             }
         }catch (e:Exception){}
 

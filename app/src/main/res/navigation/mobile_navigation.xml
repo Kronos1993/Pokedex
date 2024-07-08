@@ -16,9 +16,9 @@
             app:destination="@id/nav_pokemon_list"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -31,10 +31,10 @@
             app:destination="@id/nav_pokemon_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/nav_pokemon_list"
-            app:launchSingleTop="true"/>
+            app:popUpTo="@id/nav_pokemon_list" />
     </fragment>
 
     <fragment
@@ -55,17 +55,17 @@
             app:destination="@id/nav_move_info_dialog"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_pokemon_detail_to_nav_type_detail"
             app:destination="@id/nav_type_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -78,9 +78,9 @@
             app:destination="@id/nav_ability_info_dialog"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/nav_ability_info_dialog"
@@ -108,9 +108,9 @@
             app:destination="@id/nav_move_info_dialog"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/nav_move_info_dialog"
@@ -138,9 +138,9 @@
             app:destination="@id/nav_nature_detail_info_dialog"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <dialog
@@ -159,9 +159,9 @@
             app:destination="@id/nav_detail_berry_dialog"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <dialog
@@ -174,9 +174,9 @@
             app:destination="@id/nav_item_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </dialog>
 
     <fragment
@@ -189,9 +189,9 @@
             app:destination="@id/nav_item_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -204,9 +204,9 @@
             app:destination="@id/nav_pokemon_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -219,9 +219,9 @@
             app:destination="@id/nav_items"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <dialog
@@ -240,9 +240,9 @@
             app:destination="@id/nav_egg_group_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <dialog
@@ -254,9 +254,9 @@
             app:destination="@id/nav_pokemon_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </dialog>
 
 
@@ -270,21 +270,21 @@
             app:destination="@id/nav_type_detail"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:launchSingleTop="true"/>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_type_detail"
         android:name="com.kronos.pokedex.ui.types.detail.TypeInfoFragment"
         android:label="@string/menu_type_info"
-        tools:layout="@layout/fragment_type_info"/>
+        tools:layout="@layout/fragment_type_info" />
 
     <fragment
         android:id="@+id/action_settings"
         android:name="com.kronos.pokedex.ui.settings.SettingsFragment"
-        android:label="@string/action_settings"/>
+        android:label="@string/action_settings" />
 
     <action
         android:id="@+id/action_global_nav_show_image"
@@ -295,8 +295,7 @@
         android:id="@+id/nav_about"
         android:name="com.kronos.pokedex.ui.about.AboutFragment"
         android:label="@string/menu_about"
-        tools:layout="@layout/fragment_about">
-    </fragment>
+        tools:layout="@layout/fragment_about"></fragment>
 
 
 </navigation>

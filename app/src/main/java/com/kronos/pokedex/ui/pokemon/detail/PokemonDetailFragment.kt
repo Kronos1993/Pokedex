@@ -6,9 +6,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.google.android.material.tabs.TabLayoutMediator
 import com.kronos.core.extensions.binding.fragmentBinding
-import com.kronos.core.util.LoadingDialog
+import com.kronos.core.util.getProgressDialog
 import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentPokemonDetailBinding
@@ -31,6 +32,7 @@ class PokemonDetailFragment : Fragment() {
     private val binding by fragmentBinding<FragmentPokemonDetailBinding>(R.layout.fragment_pokemon_detail)
 
     private val viewModel by activityViewModels<PokemonDetailViewModel>()
+    private var progressDialog: SweetAlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +42,11 @@ class PokemonDetailFragment : Fragment() {
         viewModel = this@PokemonDetailFragment.viewModel
         lifecycleOwner = this@PokemonDetailFragment.viewLifecycleOwner
         setHasOptionsMenu(true)
+        progressDialog = getProgressDialog(
+            requireContext(),
+            com.kronos.resources.R.string.loading_dialog_text,
+            com.kronos.resources.R.color.colorPrimary
+        )
         root
     }
 
@@ -83,17 +90,9 @@ class PokemonDetailFragment : Fragment() {
     private fun handleLoading(b: Boolean) {
         try{
             if (b) {
-                LoadingDialog.getProgressDialog(
-                    requireContext(),
-                    R.string.loading_dialog_text,
-                    com.kronos.resources.R.color.colorSecondaryVariant
-                )!!.show()
+                progressDialog?.show()
             } else {
-                LoadingDialog.getProgressDialog(
-                    requireContext(),
-                    R.string.loading_dialog_text,
-                    com.kronos.resources.R.color.colorSecondaryVariant
-                )!!.dismiss()
+                progressDialog?.dismiss()
             }
         }catch (_:Exception){}
 

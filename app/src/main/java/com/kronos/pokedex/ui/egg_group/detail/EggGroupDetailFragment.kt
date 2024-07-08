@@ -2,10 +2,10 @@ package com.kronos.pokedex.ui.egg_group.detail
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.*
-import android.widget.Toast
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -13,28 +13,19 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.kronos.core.adapters.AdapterItemClickListener
 import com.kronos.core.extensions.binding.fragmentBinding
-import com.kronos.core.util.LoadingDialog
-import com.kronos.core.util.show
 import com.kronos.pokedex.R
 import com.kronos.pokedex.databinding.FragmentDialogEggGrupInfoBinding
 import com.kronos.pokedex.domian.model.NamedResourceApi
-import com.kronos.pokedex.domian.model.ability.AbilityInfo
 import com.kronos.pokedex.domian.model.egg_group.EggGroupInfo
-import com.kronos.pokedex.domian.model.item.ItemInfo
 import com.kronos.pokedex.domian.model.pokemon.PokemonDexEntry
-import com.kronos.pokedex.ui.abilities.ShowAbilityIn
-import com.kronos.pokedex.ui.abilities.list.CURRENT_ABILITY
 import com.kronos.pokedex.ui.egg_group.list.CURRENT_EGG_GROUP
-import com.kronos.pokedex.ui.items.list.CURRENT_ITEM
 import com.kronos.pokedex.ui.pokemon.list.CURRENT_POKEMON
 import com.kronos.pokedex.ui.pokemon.list.PokemonListAdapter
-import com.kronos.pokedex.ui.show_image.CURRENT_IMAGE_URL
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.ref.WeakReference
-import java.util.*
 
 @AndroidEntryPoint
 class EggGroupDetailFragment : BottomSheetDialogFragment() {
