@@ -143,4 +143,9 @@
     <string name="max_level">Max Level:</string>
     <string name="max_chance">Max Chance:</string>
     <string name="game_version">Game Version:</string>
+    <string name="egg">EGG</string>
+    <string name="lv">LV</string>
+    <string name="tut">TUT</string>
+    <string name="tm">TM</string>
+    <string name="other">OTHER</string>
 </resources>

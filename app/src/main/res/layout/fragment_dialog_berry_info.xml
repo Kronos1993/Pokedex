@@ -13,7 +13,7 @@
             type="com.kronos.pokedex.ui.berries.dialog.BerryInfoViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         style="@style/Widget.Pokedex.BottomSheetDialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -218,6 +218,6 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-    </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

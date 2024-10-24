@@ -8,7 +8,7 @@
             type="com.kronos.pokedex.domian.model.NamedResourceApi" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewPokedex"
         style="@style/Widget.Pokedex.CardView"
         android:layout_width="match_parent"
@@ -44,5 +44,5 @@
                 app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

@@ -26,8 +26,7 @@
                android:layout_width="0dp"
                android:layout_height="wrap_content"
                app:singleSelection="true"
-               android:paddingStart="@dimen/margin_5"
-               android:paddingEnd="@dimen/margin_5"
+               android:layout_margin="@dimen/margin_5"
                app:checkedButton="@id/buttonEgg"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
@@ -45,8 +44,9 @@
 
                <com.google.android.material.button.MaterialButton
                    android:id="@+id/buttonEgg"
-                   style="@style/Widget.Pokedex.OutlinedButton"
-                   android:text="Egg"
+                   style="@style/Widget.Pokedex.Button.Outlined.IconOnly"
+                   android:text="@string/egg"
+                   app:icon="@drawable/ic_pokemon_egg"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
@@ -57,8 +57,9 @@
                    android:id="@+id/buttonLevel"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   style="@style/Widget.Pokedex.OutlinedButton"
-                   android:text="LV"
+                   style="@style/Widget.Pokedex.Button.Outlined.IconOnly"
+                   android:text="@string/lv"
+                   app:icon="@drawable/ic_level"
                    android:layout_weight="1"
                    android:onClick="@{()->viewModel.setShowMove(`level-up`)}"/>
                <!--app:icon="@drawable/ic_level"-->
@@ -67,8 +68,9 @@
                    android:id="@+id/buttonTutor"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   style="@style/Widget.Pokedex.OutlinedButton"
-                   android:text="TUT"
+                   style="@style/Widget.Pokedex.Button.Outlined.IconOnly"
+                   android:text="@string/tut"
+                   app:icon="@drawable/ic_tutor"
                    android:layout_weight="1"
                    android:onClick="@{()->viewModel.setShowMove(`tutor`)}" />
                <!--app:icon="@drawable/ic_tutor"-->
@@ -77,16 +79,17 @@
                    android:id="@+id/buttonTM"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   style="@style/Widget.Pokedex.OutlinedButton"
-                   android:text="TM"
+                   style="@style/Widget.Pokedex.Button.Outlined.IconOnly"
+                   android:text="@string/tm"
                    android:layout_weight="1"
+                   app:icon="@drawable/ic_move"
                    android:onClick="@{()->viewModel.setShowMove(`tm`)}" />
                <!--app:icon="@drawable/ic_move"-->
 
                <com.google.android.material.button.MaterialButton
                    android:id="@+id/buttonOtherMethodMoves"
-                   style="@style/Widget.Pokedex.OutlinedButton"
-                   android:text="OTHER"
+                   style="@style/Widget.Pokedex.Button.Outlined.IconOnly"
+                   android:text="@string/other"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
