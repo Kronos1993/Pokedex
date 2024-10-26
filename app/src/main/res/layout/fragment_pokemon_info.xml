@@ -95,7 +95,6 @@
                             android:layout_marginStart="@dimen/margin_8"
                             android:layout_marginEnd="@dimen/margin_8"
                             android:text="@{`#`+ viewModel.pokemonInfo.id}"
-                            app:layout_constraintBottom_toTopOf="@+id/textViewPokemonName"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -107,9 +106,9 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             app:handle_pokemon_name="@{viewModel.pokemonInfo.name}"
-                            app:layout_constraintBottom_toTopOf="@+id/textViewPokemonGenera"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
-                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
+                            app:layout_constraintStart_toStartOf="@+id/guidelineBase35"
+                            app:layout_constraintTop_toBottomOf="@+id/textViewPokemonPokedexEntry" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewPokemonGenera"
@@ -119,9 +118,9 @@
                             android:layout_marginStart="@dimen/margin_8"
                             android:layout_marginEnd="@dimen/margin_8"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toTopOf="@+id/textViewPokemonType"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35"
+                            app:layout_constraintTop_toBottomOf="@+id/textViewPokemonName"
                             app:pokemon_genera="@{viewModel.pokemonGenera}" />
 
                         <com.google.android.material.textview.MaterialTextView
@@ -132,18 +131,17 @@
                             android:layout_marginStart="@dimen/margin_8"
                             android:layout_marginEnd="@dimen/margin_8"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toTopOf="@+id/layoutTypes"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35"
+                            app:layout_constraintTop_toBottomOf="@id/textViewPokemonGenera"
                             app:pokemon_type="@{viewModel.pokemonInfo.specieInfo}" />
 
                         <include
                             android:id="@+id/layoutTypes"
-                            handle_visibility="@{viewModel.pokemonInfo.types.size()>0}"
                             layout="@layout/layout_types"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toTopOf="@id/textViewPokemonDescription"
+                            app:layout_constraintTop_toBottomOf="@id/textViewPokemonType"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase35" />
 
@@ -158,6 +156,7 @@
                             android:singleLine="false"
                             android:textStyle="bold"
                             app:handle_pokemon_description="@{viewModel.pokemonDescription}"
+                            app:layout_constraintTop_toBottomOf="@id/layoutTypes"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/guidelineBase9"
                             app:layout_constraintStart_toStartOf="@+id/guidelineBase1" />
