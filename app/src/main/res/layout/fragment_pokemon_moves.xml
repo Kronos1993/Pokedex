@@ -26,21 +26,21 @@
                android:layout_width="0dp"
                android:layout_height="wrap_content"
                app:singleSelection="true"
+               app:checkedButton="@id/buttonAllMoves"
                android:layout_margin="@dimen/margin_5"
-               app:checkedButton="@id/buttonEgg"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toTopOf="parent">
 
-               <!--<com.google.android.material.button.MaterialButton
+               <com.google.android.material.button.MaterialButton
                    android:id="@+id/buttonAllMoves"
-                   style="@style/Widget.Pokedex.OutlinedButton"
-                   android:text="All"
+                   style="@style/Widget.Pokedex.Button.Outlined.IconOnly"
+                   app:icon="@drawable/ic_all_move"
+                   android:text="@string/all"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_weight="1"
-                   android:onClick="@{()->viewModel.setShowMove(`all`)}"/>-->
-               <!--app:icon="@drawable/ic_all_move"-->
+                   android:onClick="@{()->viewModel.setShowMove(`all`)}"/>
 
                <com.google.android.material.button.MaterialButton
                    android:id="@+id/buttonEgg"
